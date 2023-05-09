@@ -68,8 +68,8 @@ const useRenderPolyline = (e: L.Map | null) => {
         if (drawCoords.length === 0) {
           dispatch(
             updateDrawInfo({
-              time: '0000',
-              dist: '0000',
+              time: '0',
+              dist: '0',
             })
           );
         }

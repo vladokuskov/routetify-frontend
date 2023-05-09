@@ -19,20 +19,17 @@ const Draw = () => {
 
   return (
     <StyledSidebarSectionContent>
-      
       <Button
         variant="iconWithText"
         text="Road"
         onClick={() => handleDrawChange('Road')}
-
-      
+        full="true"
       />
       <Button
         variant="iconWithText"
         text="Hand"
         onClick={() => handleDrawChange('Hand')}
-
-      
+        full="true"
       />
     </StyledSidebarSectionContent>
   );

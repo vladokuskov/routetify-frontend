@@ -86,9 +86,9 @@ const GlobalStyle = createGlobalStyle`
   }
 
   button {
+    background-color: transparent;
     transition: 0.2s;
     border: none;
-    background-color: transparent;
     cursor: pointer;
     text-decoration: none;
     margin: 0;

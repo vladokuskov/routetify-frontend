@@ -10,7 +10,7 @@ interface DrawState {
 }
 
 const initialState = {
-  drawInfo: { time: '0000', dist: '0000' },
+  drawInfo: { time: '0', dist: '0' },
   drawCoords: [], // Coords that used for rendering Markers & polyline
   exportCoords: [], // Coords that are saved under the hood and user can export them
   drawCoordsDeleted: [], // Coords that are deleted

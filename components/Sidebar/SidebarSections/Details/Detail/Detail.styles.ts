@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 
 const StyledDetailContainer = styled.div`
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--font-roboto), sans-serif;
   width: 100%;
   display: flex;
   align-items: center;
@@ -11,6 +11,7 @@ const StyledDetailContainer = styled.div`
   background-color: #e3e0cf;
   border-radius: 8px;
   padding: 0.2rem;
+  min-width: 5rem;
 `;
 
 const StyledDetailTitle = styled.h4`

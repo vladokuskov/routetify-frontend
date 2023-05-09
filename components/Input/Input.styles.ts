@@ -34,7 +34,7 @@ const StyledInputMainWrapper = styled.div<TInput>`
 `;
 
 const StyledInput = styled.input<TInput>`
-  font-family: 'Roboto';
+  font-family: var(--font-roboto), sans-serif;
   width: 100%;
   margin: 0;
   padding: 0;

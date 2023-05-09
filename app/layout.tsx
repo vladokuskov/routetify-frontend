@@ -1,11 +1,18 @@
 import { siteConfig } from '@/config/site';
 import StyledComponentsRegistry from '@/lib/registry';
 import { Providers } from '@/redux/provider';
-import { Roboto } from 'next/font/google';
+import { Inter, Roboto } from 'next/font/google';
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
   subsets: ['latin'],
+  variable: '--font-roboto',
+});
+
+const inter = Inter({
+  weight: ['300', '400', '500', '700'],
+  subsets: ['latin'],
+  variable: '--font-inter',
 });
 
 export const metadata = {
@@ -47,7 +54,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head />
-      <body className={roboto.className} suppressHydrationWarning={true}>
+      <body
+        className={`${roboto.variable} ${inter.variable}`}
+        suppressHydrationWarning={true}
+      >
         <StyledComponentsRegistry>
           <Providers>{children}</Providers>
         </StyledComponentsRegistry>

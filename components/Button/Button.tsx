@@ -1,25 +1,23 @@
-
 import { StyledButton, StyledIcon, StyledText } from './Button.styles';
-import { TButton } from './Button.types';
+import { Button } from './Button.types';
 
 const Button = ({
   variant = 'text',
   icon,
   text,
   onClick,
-  disabled = false,
-}: TButton) => {
+  isDisabled = 'false',
+  full = 'false',
+}: Button) => {
   return (
     <StyledButton
       variant={variant}
       onClick={onClick}
       title={text}
-      disabled={disabled}
+      disabled={isDisabled === 'true' ? true : false}
+      full={full}
     >
-      {icon && (
-        <StyledIcon>
-        </StyledIcon>
-      )}
+      {icon && <StyledIcon></StyledIcon>}
       {text && <StyledText>{text}</StyledText>}
     </StyledButton>
   );

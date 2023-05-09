@@ -1,13 +1,16 @@
 import { css, styled } from 'styled-components';
-import { TButton } from './Button.types';
+import { Button } from './Button.types';
 
-const StyledButton = styled.button<TButton>`
+const StyledButton = styled.button<Button>`
+  font-family: var(--font-roboto), sans-serif;
   border: none;
   cursor: pointer;
   font-size: 16px;
   padding: 8px 16px;
-  font-family: 'Roboto', sans-serif;
   font-weight: 500;
+
+  width: ${({ full }) => (full === 'true' ? '100%' : 'auto')};
+
   ${({ variant }) =>
     variant === 'text' &&
     css`
@@ -37,7 +40,7 @@ const StyledButton = styled.button<TButton>`
 
       &:hover,
       &:focus {
-        background-color: #bed2c7;
+        background-color: #add5bf;
       }
 
       &:active {

@@ -1,13 +1,11 @@
 'use-client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState } from 'react';
 
 import 'leaflet/dist/leaflet.css';
 
 import * as L from 'leaflet';
 
-//Hooks import
-import { useAppSelector } from '@/redux/hooks';
 import GetPositionByDragging from './GetDragPosition';
 import useUpdateMapView from '../../../hooks/updateMapView';
 import useRenderRouting from '../../../hooks/renderRouting';

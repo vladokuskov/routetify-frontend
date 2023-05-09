@@ -1,9 +1,9 @@
 import { styled } from 'styled-components';
 
 const StyledGeocoderContainer = styled.div`
+  font-family: var(--font-roboto), sans-serif;
   position: relative;
   width: 100%;
-  font-family: 'Roboto', sans-serif;
 `;
 
 const StyledGeocoderResultsContainer = styled.ul`

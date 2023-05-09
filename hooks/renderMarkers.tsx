@@ -1,10 +1,6 @@
 import { useAppSelector } from '../redux/hooks';
 import { useEffect } from 'react';
 
-import startMarker from '../assets/map/start-marker.svg';
-import midMarker from '../assets/map/mid-marker.svg';
-import finishMarker from '../assets/map/finish-marker.svg';
-
 import * as L from 'leaflet';
 
 const useRenderMarkers = (e: L.Map | null) => {
@@ -19,7 +15,7 @@ const useRenderMarkers = (e: L.Map | null) => {
           return L.marker(coords, {
             alt: '',
             icon: L.icon({
-              iconUrl: startMarker,
+              iconUrl: 'map/start-marker.svg',
               iconSize: [33, 33],
               iconAnchor: [6, 25],
             }),
@@ -30,7 +26,7 @@ const useRenderMarkers = (e: L.Map | null) => {
           return L.marker(coords, {
             alt: '',
             icon: L.icon({
-              iconUrl: midMarker,
+              iconUrl: 'map/mid-marker.svg',
               iconSize: [18, 18],
             }),
             draggable: false,
@@ -40,7 +36,7 @@ const useRenderMarkers = (e: L.Map | null) => {
           return L.marker(coords, {
             alt: '',
             icon: L.icon({
-              iconUrl: finishMarker,
+              iconUrl: 'map/finish-marker.svg',
               iconSize: [33, 33],
               iconAnchor: [13, 32],
             }),

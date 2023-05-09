@@ -71,17 +71,9 @@ export default function MapControls() {
     }
   }, [isLocationFetching]);
 
-  useEffect(() => {
-    handleDelete();
-  }, [location]);
-
   return (
     <StyledMapControls>
       <button
-        className="map-controls--button"
-        title="Undo action [Q]"
-        aria-label="Undo action [Q]"
-        disabled={drawCoords.length === 0 || drawType === 'None'}
         onClick={() => dispatch(undoDrawCoords(null))}
       >
         Undo

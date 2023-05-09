@@ -1,8 +1,10 @@
-import { useState, useMemo } from 'react';
+'use-client';
+
+import { useState, useMemo, useEffect } from 'react';
 
 import 'leaflet/dist/leaflet.css';
 
-import * as L from 'leaflet'; // Leaflet import
+import * as L from 'leaflet';
 
 //Hooks import
 import { useAppSelector } from '@/redux/hooks';
@@ -22,22 +24,17 @@ import LocationMarker from './LocationMarker';
 import useFitBoundsOnClick from '../../../hooks/fitBounds';
 
 const LeafletMap = () => {
-  const [map, setMap] = useState<L.Map | null>(null); // Create map Ref with state
+  const [map, setMap] = useState<L.Map | null>(null);
 
-  //---Hooks---
   useClickedCoords(map);
   useUpdateMapView(map);
   useRenderRouting(map);
   useRenderPolyline(map);
   useRenderMarkers(map);
   useFitBoundsOnClick(map);
-  //---HooksEnd---
 
-  const geocoderCoords = useAppSelector((state) => state.geocoderReducer); // Coords that can change map center
-  const layer = useAppSelector((state) => state.controlsReducer);
-
-  const mapWrapper = useMemo(
-    () => (
+  return (
+    <>
       <MapContainer
         attributionControl={false}
         zoomControl={false}
@@ -52,11 +49,8 @@ const LeafletMap = () => {
         <LocationMarker />
         <ZoomControl position="bottomright" />
       </MapContainer>
-    ),
-    [geocoderCoords, layer.layer]
+    </>
   );
-
-  return <>{mapWrapper}</>;
 };
 
-export { LeafletMap };
+export default LeafletMap;

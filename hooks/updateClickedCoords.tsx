@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { updateDrawCoords } from '../redux/map';
+import { updateDrawCoords } from '../redux/features/map';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 
 const useClickedCoords = (e: L.Map | null) => {

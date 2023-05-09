@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from 'react';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 
-import { updateDrawInfo, updateExportCoords } from '../redux/map';
+import { updateDrawInfo, updateExportCoords } from '../redux/features/map';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 
 const useRenderRouting = (e: L.Map | null) => {

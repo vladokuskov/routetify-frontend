@@ -5,7 +5,7 @@ import GeoUtil from 'leaflet-geometryutil';
 
 import * as L from 'leaflet';
 
-import { updateDrawInfo, updateExportCoords } from '../redux/map';
+import { updateDrawInfo, updateExportCoords } from '../redux/features/map';
 
 const useRenderPolyline = (e: L.Map | null) => {
   const drawCoords = useAppSelector((state) => state.draw.drawCoords);

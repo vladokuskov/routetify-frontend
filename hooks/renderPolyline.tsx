@@ -9,6 +9,7 @@ import {
   updateDrawInfo,
   updateExportCoords,
 } from '../redux/features/drawSlice';
+import { DrawType } from '@/types/global/index.types';
 
 const useRenderPolyline = (e: L.Map | null) => {
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords);
@@ -42,10 +43,10 @@ const useRenderPolyline = (e: L.Map | null) => {
 
     if (e) {
       // If Draw type is 'Hand' add polyline to map
-      if (drawPolyline && drawType === 'Hand') {
+      if (drawPolyline && drawType === DrawType.Hand) {
         drawPolyline.addTo(e);
         dispatch(updateExportCoords(drawCoords));
-      } else if (drawPolyline && drawType === 'Road') {
+      } else if (drawPolyline && drawType === DrawType.Road) {
         drawPolyline.remove();
       }
     }
@@ -54,7 +55,7 @@ const useRenderPolyline = (e: L.Map | null) => {
   useEffect(() => {
     if (!drawPolyline) return;
 
-    if (drawPolyline && drawType === 'Hand') {
+    if (drawPolyline && drawType === DrawType.Hand) {
       // Calculate polyline avg time and avg distance with GeoUtil
       const polylineDist = GeoUtil.accumulatedLengths(drawPolyline);
       for (let i = 0; i < polylineDist.length; i++) {

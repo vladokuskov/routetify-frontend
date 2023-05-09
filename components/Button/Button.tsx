@@ -1,3 +1,4 @@
+import Icon from '../Icon/Icon';
 import { StyledButton, StyledIcon, StyledText } from './Button.styles';
 import { Button } from './Button.types';
 
@@ -17,7 +18,11 @@ const Button = ({
       disabled={isDisabled === 'true' ? true : false}
       full={full}
     >
-      {icon && <StyledIcon></StyledIcon>}
+      {icon && variant !== 'text' && (
+        <StyledIcon>
+          <Icon svg={icon} />
+        </StyledIcon>
+      )}
       {text && <StyledText>{text}</StyledText>}
     </StyledButton>
   );

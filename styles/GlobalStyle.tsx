@@ -22,8 +22,8 @@ const GlobalStyle = createGlobalStyle`
     box-shadow: none;
   }
   *:focus-visible {
-    outline: 3px solid #a3d168;
-    outline-offset: .2rem;
+    outline: 3px solid #5E8D81;
+    outline-offset: .1rem;
     box-shadow: none;
     border-radius: 4px;
   }

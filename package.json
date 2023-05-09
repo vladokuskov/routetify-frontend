@@ -28,6 +28,7 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
+    "@svgr/webpack": "^8.0.1",
     "@types/downloadjs": "^1.4.3",
     "@types/leaflet": "^1.9.3",
     "@types/leaflet-routing-machine": "^3.2.4",

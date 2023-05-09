@@ -8,6 +8,7 @@ import {
   updateExportCoords,
 } from '../redux/features/drawSlice';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import { DrawType } from '@/types/global/index.types';
 
 const useRenderRouting = (e: L.Map | null) => {
   const [routingMachine, setRoutingMachine] = useState<L.Control | null>(null);
@@ -69,10 +70,10 @@ const useRenderRouting = (e: L.Map | null) => {
 
     if (e) {
       // Create routing machine when draw type is 'Road'
-      if (routingMachine && drawType === 'Road') {
+      if (routingMachine && drawType === DrawType.Road) {
         e.removeControl(routingMachine);
         routingMachine.addTo(e);
-      } else if (routingMachine && drawType === 'Hand') {
+      } else if (routingMachine && drawType === DrawType.Hand) {
         e.removeControl(routingMachine);
       }
     }

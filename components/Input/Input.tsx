@@ -1,19 +1,20 @@
-
-
+import Icon from '../Icon/Icon';
 import {
   StyledInput,
   StyledInputButton,
   StyledInputIcon,
   StyledInputMainWrapper,
 } from './Input.styles';
-import { TInput } from './Input.types';
+import { Input } from './Input.types';
+
+import ClearIcon from '../../assets/icons/x.svg';
+import SearchIcon from '../../assets/icons/search.svg';
+import LoadingIcon from '../../assets/icons/loader.svg';
 
 const Input = ({
   variant,
   label,
   value,
-  required,
-  isPassShowed,
   icon,
   full = 'false',
   onChange,
@@ -22,12 +23,21 @@ const Input = ({
   name,
   fieldType = 'text',
   loading = 'false',
-}: TInput) => {
+}: Input) => {
   return (
     <StyledInputMainWrapper variant={variant} full={full}>
       {variant === 'search' && (
         <StyledInputIcon variant={variant} className="icon">
-         
+          {loading === 'true' && (
+            <Icon
+              svg={LoadingIcon}
+              height="23"
+              spin={loading === 'true' ? 'true' : 'false'}
+            />
+          )}
+          {loading === 'false' && value?.length === 0 && (
+            <Icon svg={SearchIcon} height="23" />
+          )}
         </StyledInputIcon>
       )}
       <StyledInput
@@ -35,10 +45,8 @@ const Input = ({
         type={
           fieldType === 'email'
             ? 'email'
-            : fieldType === 'password' && !isPassShowed
+            : fieldType === 'password'
             ? 'password'
-            : fieldType === 'password' && isPassShowed
-            ? 'text'
             : fieldType === 'number'
             ? 'number'
             : 'text'
@@ -48,7 +56,6 @@ const Input = ({
         variant={variant}
         title={label ? label : ''}
         onChange={onChange}
-        required={required}
         placeholder={placeholder}
       />
       {variant === 'search' && value?.length !== 0 && loading !== 'true' && (
@@ -58,7 +65,7 @@ const Input = ({
           variant={variant}
           title={variant === 'search' ? 'Clear' : ''}
         >
-        
+          <Icon svg={ClearIcon} height="20" />
         </StyledInputButton>
       )}
     </StyledInputMainWrapper>

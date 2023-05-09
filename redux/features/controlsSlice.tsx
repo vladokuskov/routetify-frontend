@@ -1,7 +1,8 @@
+import { DrawType } from '@/types/global/index.types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface ControlsState {
-  draw: string;
+  draw: DrawType;
   layer: string;
   isFitBounds: boolean;
   isLocationFound: boolean;
@@ -10,7 +11,7 @@ interface ControlsState {
 }
 
 const initialState = {
-  draw: 'None',
+  draw: DrawType.None,
   layer: 'default',
   isLocationFound: false,
   isFitBounds: false,

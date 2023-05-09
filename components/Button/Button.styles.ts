@@ -11,6 +11,10 @@ const StyledButton = styled.button<Button>`
 
   width: ${({ full }) => (full === 'true' ? '100%' : 'auto')};
 
+  &:disabled {
+    cursor: default;
+  }
+
   ${({ variant }) =>
     variant === 'text' &&
     css`
@@ -45,6 +49,10 @@ const StyledButton = styled.button<Button>`
 
       &:active {
         background-color: #a2c3b1;
+      }
+
+      &:disabled {
+        background-color: #bdc8c2;
       }
     `};
 `;

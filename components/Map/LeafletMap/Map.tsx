@@ -41,6 +41,7 @@ const LeafletMap = () => {
         minZoom={2}
         scrollWheelZoom={true}
         ref={setMap}
+        style={{ cursor: 'crosshair' }}
       >
         <StyleMap />
         <GetPositionByDragging />

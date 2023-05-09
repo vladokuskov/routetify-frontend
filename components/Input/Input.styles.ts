@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
-import { TInput } from './Input.types';
+import { Input } from './Input.types';
 
-const StyledInputMainWrapper = styled.div<TInput>`
+const StyledInputMainWrapper = styled.div<Input>`
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -33,7 +33,7 @@ const StyledInputMainWrapper = styled.div<TInput>`
   }
 `;
 
-const StyledInput = styled.input<TInput>`
+const StyledInput = styled.input<Input>`
   font-family: var(--font-roboto), sans-serif;
   width: 100%;
   margin: 0;
@@ -52,7 +52,7 @@ const StyledInput = styled.input<TInput>`
   ${({ variant }) =>
     variant === 'search' &&
     css`
-      padding: 0.35rem 1.7rem 0.35rem 0.3rem;
+      padding: 0.35rem 2rem 0.35rem 0.3rem;
       border: 2px solid transparent;
       border-radius: 0.5rem;
     `}
@@ -90,20 +90,29 @@ const StyledInput = styled.input<TInput>`
   }
 `;
 
-const StyledInputButton = styled.button<TInput>`
+const StyledInputButton = styled.button<Input>`
   position: absolute;
-  padding: 0 0.5rem;
+  padding: 0.2rem;
   border-radius: 0.25rem;
 
   ${({ variant }) =>
     variant === 'search' &&
     css`
       color: #5a5a5a;
-      right: 0;
+      right: 0.2rem;
+
+      &:hover,
+      &:focus {
+        opacity: 0.8;
+      }
+
+      &:active {
+        opacity: 1;
+      }
     `}
 `;
 
-const StyledInputIcon = styled.span<TInput>`
+const StyledInputIcon = styled.span<Input>`
   transition: 0.2s;
   position: absolute;
   left: 0.5rem;
@@ -112,7 +121,7 @@ const StyledInputIcon = styled.span<TInput>`
     variant === 'search' &&
     css`
       left: auto;
-      right: 0.4rem;
+      right: 0.36rem;
       color: #5a5a5ab3;
     `}
 `;

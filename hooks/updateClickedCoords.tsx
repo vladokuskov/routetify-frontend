@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { updateDrawCoords } from '../redux/features/drawSlice';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { DrawType } from '@/types/global/index.types';
 
 const useClickedCoords = (e: L.Map | null) => {
   const drawType = useAppSelector((state) => state.controlsReducer.draw);
@@ -18,8 +19,8 @@ const useClickedCoords = (e: L.Map | null) => {
     // Check if 'Hand' or 'Road' is active and update clicked coords state only if
     // one of those is active
     if (e) {
-      if (drawType === 'None') return;
-      if (drawType === 'Hand' || 'Road') {
+      if (drawType === DrawType.None) return;
+      if (drawType === DrawType.Hand || drawType === DrawType.Road) {
         e.on('click', (e: { latlng: { lat: number; lng: number } }) => {
           setClickedCoords({ lat: e.latlng.lat, lng: e.latlng.lng });
         });
@@ -32,9 +33,9 @@ const useClickedCoords = (e: L.Map | null) => {
 
     // When clicked coords state is updating, change draw coords and draw markers and route on map
 
-    if (clickedCoords && drawType === 'Road') {
+    if (clickedCoords && drawType === DrawType.Road) {
       dispatch(updateDrawCoords(clickedCoords));
-    } else if (clickedCoords && drawType === 'Hand') {
+    } else if (clickedCoords && drawType === DrawType.Hand) {
       dispatch(updateDrawCoords(clickedCoords));
     } else {
       setClickedCoords(null);

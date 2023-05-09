@@ -1,0 +1,35 @@
+{
+  "name": "cycroute",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "@types/node": "20.1.1",
+    "@types/react": "18.2.6",
+    "@types/react-dom": "18.2.4",
+    "downloadjs": "^1.4.7",
+    "eslint": "8.40.0",
+    "eslint-config-next": "13.4.1",
+    "leaflet": "^1.9.3",
+    "leaflet-geometryutil": "^0.10.2",
+    "leaflet-routing-machine": "^3.2.12",
+    "next": "13.4.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-redux": "^8.0.5",
+    "styled-components": "^6.0.0-rc.1",
+    "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.9.3",
+    "@types/leaflet-routing-machine": "^3.2.4",
+    "eslint-config-prettier": "^8.8.0",
+    "prettier": "^2.8.8"
+  }
+}

@@ -1,4 +1,4 @@
-<img align='center' src="public/browserlogo.svg" width="100px">
+<!-- <img align='center' src="public/browserlogo.svg" width="100px"> -->
 
 ![Commits](https://img.shields.io/github/commit-activity/m/swappnet/cycroute)
 [![Website cycroute.netlify.app](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://cycroute.netlify.app/)

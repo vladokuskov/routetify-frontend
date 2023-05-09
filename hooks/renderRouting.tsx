@@ -3,22 +3,26 @@ import { useRef, useState, useEffect } from 'react';
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 
-import { updateDrawInfo, updateExportCoords } from '../redux/features/map';
+import {
+  updateDrawInfo,
+  updateExportCoords,
+} from '../redux/features/drawSlice';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 
 const useRenderRouting = (e: L.Map | null) => {
   const [routingMachine, setRoutingMachine] = useState<L.Control | null>(null);
   const RoutingMachineRef = useRef<L.Control | null>(null);
 
-  // Import api key for mapbox api from env
   let key = process.env.NEXT_PUBLIC_MAPBOX_API;
 
   const dispatch = useAppDispatch();
 
-  const lineColor = useAppSelector((state) => state.controls.colorPicker.color);
-  const drawCoords = useAppSelector((state) => state.draw.drawCoords);
-  const drawType = useAppSelector((state) => state.controls.draw);
-  const drawInfo = useAppSelector((state) => state.draw.drawInfo);
+  const lineColor = useAppSelector(
+    (state) => state.controlsReducer.colorPicker.color
+  );
+  const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords);
+  const drawType = useAppSelector((state) => state.controlsReducer.draw);
+  const drawInfo = useAppSelector((state) => state.drawReducer.drawInfo);
 
   useEffect(() => {
     if (!e) return;

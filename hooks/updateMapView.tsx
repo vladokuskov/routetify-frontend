@@ -2,7 +2,7 @@ import { useAppSelector } from '../redux/hooks';
 import { useEffect } from 'react';
 
 const useUpdateMapView = (e: L.Map | null) => {
-  const geocoderCoords = useAppSelector((state) => state.geocoder);
+  const geocoderCoords = useAppSelector((state) => state.geocoderReducer);
 
   useEffect(() => {
     if (!e) return;

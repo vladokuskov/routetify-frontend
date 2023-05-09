@@ -8,7 +8,7 @@ import finishMarker from '../assets/map/finish-marker.svg';
 import * as L from 'leaflet';
 
 const useRenderMarkers = (e: L.Map | null) => {
-  const drawCoords = useAppSelector((state) => state.draw.drawCoords);
+  const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords);
 
   useEffect((): ReturnType<L.Map | any> => {
     const markersLayer = L.layerGroup();

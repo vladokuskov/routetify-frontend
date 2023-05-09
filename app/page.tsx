@@ -1,3 +1,5 @@
+'use client';
+
 export default function Home() {
-  return <>Test home12</>;
+  return <></>;
 }

@@ -1,23 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export interface IGeocoder {
+export interface GeocoderState {
   lat: number;
   lng: number;
   zoom?: number;
 }
 
-// Coords that used for map view, or center props in MapContainer
-const initialState: IGeocoder = {
+const initialState = {
   lat: 50.45,
   lng: 30.5241,
   zoom: 9,
-};
+} as GeocoderState;
 
-export const geocoder = createSlice({
-  name: 'geocoderLatLng',
+export const geocoderReducer = createSlice({
+  name: 'geocoder',
   initialState,
   reducers: {
-    addLatLng: (state, action: PayloadAction<IGeocoder>) => {
+    addLatLng: (state, action: PayloadAction<GeocoderState>) => {
       return {
         ...state,
         lat: action.payload.lat,
@@ -28,5 +27,5 @@ export const geocoder = createSlice({
   },
 });
 
-export const { addLatLng } = geocoder.actions;
-export default geocoder.reducer;
+export const { addLatLng } = geocoderReducer.actions;
+export default geocoderReducer.reducer;

@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface IControls {
-  // Declare types for initial state
+interface ControlsState {
   draw: string;
   layer: string;
   isFitBounds: boolean;
@@ -10,7 +9,7 @@ interface IControls {
   currentCoords: { lat: number; lng: number };
 }
 
-const initialState: IControls = {
+const initialState = {
   draw: 'None',
   layer: 'default',
   isLocationFound: false,
@@ -20,55 +19,48 @@ const initialState: IControls = {
     lat: 50.45,
     lng: 30.5241,
   },
-};
+} as ControlsState;
 
-export const controls = createSlice({
+export const controlsReducer = createSlice({
   name: 'controls',
   initialState,
   reducers: {
-    // Is map should fit bounds of the route
     changeFitBounds: (state, action: PayloadAction<boolean>) => {
       return {
         ...state,
         isFitBounds: action.payload,
       };
     },
-    // Is location is found or not
     changeLocationStatus: (state, action: PayloadAction<boolean>) => {
       return {
         ...state,
         isLocationFound: action.payload,
       };
     },
-    // Display color picker
     showColorPicker: (state, action: PayloadAction<boolean>) => {
       return {
         ...state,
         colorPicker: { ...state.colorPicker, isOpen: action.payload },
       };
     },
-    // Change route color
     changeLineColor: (state, action: PayloadAction<string>) => {
       return {
         ...state,
         colorPicker: { ...state.colorPicker, color: action.payload },
       };
     },
-    // Change Draw type - possible types are 'Hand' or 'Road', default 'None'
     changeDraw: (state, action) => {
       return {
         ...state,
         draw: action.payload,
       };
     },
-    // Change map tile layer, possible values are 'default' or 'satellite'
     changeLayer: (state, action: PayloadAction<string>) => {
       return {
         ...state,
         layer: action.payload,
       };
     },
-    // Change current LatLng, center of the map
     changeCurrentCoords: (
       state,
       action: PayloadAction<{
@@ -94,5 +86,5 @@ export const {
   showColorPicker,
   changeLocationStatus,
   changeFitBounds,
-} = controls.actions;
-export default controls.reducer;
+} = controlsReducer.actions;
+export default controlsReducer.reducer;

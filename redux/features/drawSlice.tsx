@@ -1,7 +1,7 @@
 import { DrawCoords } from '@/types/models/drawCoords.types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface IDraw {
+interface DrawState {
   drawInfo: { time: string; dist: string };
   drawCoords: DrawCoords[];
   exportCoords: DrawCoords[];
@@ -9,15 +9,15 @@ interface IDraw {
   drawCoordsFuture: DrawCoords[];
 }
 
-const initialState: IDraw = {
-  drawInfo: { time: '0000', dist: '0000' }, // Value that displayed on Details section
+const initialState = {
+  drawInfo: { time: '0000', dist: '0000' },
   drawCoords: [], // Coords that used for rendering Markers & polyline
   exportCoords: [], // Coords that are saved under the hood and user can export them
   drawCoordsDeleted: [], // Coords that are deleted
   drawCoordsFuture: [], // Coords that can be recovered
-};
+} as DrawState;
 
-export const draw = createSlice({
+export const drawReducer = createSlice({
   name: 'draw',
   initialState,
   reducers: {
@@ -116,5 +116,5 @@ export const {
   undoDrawCoords,
   redoDrawCoords,
   updateExportCoords,
-} = draw.actions;
-export default draw.reducer;
+} = drawReducer.actions;
+export default drawReducer.reducer;

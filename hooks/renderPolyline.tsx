@@ -5,12 +5,17 @@ import GeoUtil from 'leaflet-geometryutil';
 
 import * as L from 'leaflet';
 
-import { updateDrawInfo, updateExportCoords } from '../redux/features/map';
+import {
+  updateDrawInfo,
+  updateExportCoords,
+} from '../redux/features/drawSlice';
 
 const useRenderPolyline = (e: L.Map | null) => {
-  const drawCoords = useAppSelector((state) => state.draw.drawCoords);
-  const drawType = useAppSelector((state) => state.controls.draw);
-  const lineColor = useAppSelector((state) => state.controls.colorPicker.color);
+  const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords);
+  const drawType = useAppSelector((state) => state.controlsReducer.draw);
+  const lineColor = useAppSelector(
+    (state) => state.controlsReducer.colorPicker.color
+  );
 
   const dispatch = useAppDispatch();
   const [drawPolyline, setDrawPolyline] = useState<L.Polyline | null>(null);

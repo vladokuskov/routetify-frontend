@@ -1,13 +1,13 @@
-import geocoder from './features/geocoder';
-import controls from './features/controls';
-import draw from './features/map';
 import { configureStore } from '@reduxjs/toolkit';
+import geocoderReducer from './features/geocoderSlice';
+import controlsReducer from './features/controlsSlice';
+import drawReducer from './features/drawSlice';
 
 export const store = configureStore({
   reducer: {
-    geocoder,
-    controls,
-    draw,
+    geocoderReducer,
+    controlsReducer,
+    drawReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

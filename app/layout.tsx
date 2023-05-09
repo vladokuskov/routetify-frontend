@@ -1,5 +1,5 @@
+import StyledComponentsRegistry from '@/lib/registry';
 import { Providers } from '@/redux/provider';
-import GlobalStyle from '@/styles/GlobalStyle';
 import { Roboto } from 'next/font/google';
 
 const roboto = Roboto({
@@ -20,11 +20,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={roboto.className}>
-        <Providers>
-          {children}
-          <GlobalStyle />
-        </Providers>
+      <body className={roboto.className} suppressHydrationWarning={true}>
+        <StyledComponentsRegistry>
+          <Providers>{children}</Providers>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { updateDrawCoords } from '../redux/features/map';
+import { updateDrawCoords } from '../redux/features/drawSlice';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 
 const useClickedCoords = (e: L.Map | null) => {
-  const drawType = useAppSelector((state) => state.controls.draw);
+  const drawType = useAppSelector((state) => state.controlsReducer.draw);
   const dispatch = useAppDispatch();
 
   // Creating state for clicked coords ( map )

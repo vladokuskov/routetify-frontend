@@ -53,7 +53,6 @@ const Geocoder = () => {
         currentCoords: {
           lat: lat,
           lng: lon,
-          zoom: 12,
         },
       })
     );

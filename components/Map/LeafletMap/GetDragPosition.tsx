@@ -1,7 +1,9 @@
-import { changeCurrentCoords, changeLocationStatus } from '@/redux/features/controlsSlice';
+import {
+  changeCurrentCoords,
+  changeLocationStatus,
+} from '@/redux/features/controlsSlice';
 import { useAppDispatch } from '@/redux/hooks';
 import { useMapEvents } from 'react-leaflet';
-
 
 function GetPositionByDragging() {
   const dispatch = useAppDispatch();
@@ -12,7 +14,6 @@ function GetPositionByDragging() {
           currentCoords: {
             lat: e.target.getCenter().lat,
             lng: e.target.getCenter().lng,
-            zoom: e.target.getZoom(),
           },
         })
       );

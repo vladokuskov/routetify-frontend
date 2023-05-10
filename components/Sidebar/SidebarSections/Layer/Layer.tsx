@@ -1,19 +1,22 @@
-import { changeLayer } from "@/redux/features/controlsSlice";
-import { addLatLng } from "@/redux/features/geocoderSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-
+import { changeLayer } from '@/redux/features/controlsSlice';
+import { addLatLng } from '@/redux/features/geocoderSlice';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { StyledSidebarSectionContent } from '../../SidebarSection/SidebarSection.styles';
+import { Button } from '@/components/Button/Button';
 
 const Layer = () => {
-  const layer = useAppSelector((state) => state.controlsReducer);
+  const layer = useAppSelector((state) => state.controlsReducer.layer);
+  const currentCoords = useAppSelector(
+    (state) => state.controlsReducer.currentCoords
+  );
   const dispatch = useAppDispatch();
 
   const handleLayerChange = (e: string) => {
-    // Handle layer change by conditions
     if (e === 'toDefault') {
       dispatch(
         addLatLng({
-          lat: layer.currentCoords.lat,
-          lng: layer.currentCoords.lng,
+          lat: currentCoords.lat,
+          lng: currentCoords.lng,
         })
       );
       window.scrollTo(0, 0);
@@ -21,8 +24,8 @@ const Layer = () => {
     } else if (e === 'toSatellite') {
       dispatch(
         addLatLng({
-          lat: layer.currentCoords.lat,
-          lng: layer.currentCoords.lng,
+          lat: currentCoords.lat,
+          lng: currentCoords.lng,
         })
       );
       dispatch(changeLayer('satellite'));
@@ -31,14 +34,22 @@ const Layer = () => {
   };
 
   return (
-    <>
-      <div>
-        <button onClick={() => handleLayerChange('toDefault')}>Default</button>
-        <button onClick={() => handleLayerChange('toSatellite')}>
-          Satellite
-        </button>
-      </div>
-    </>
+    <StyledSidebarSectionContent>
+      <Button
+        variant="iconWithText"
+        text="Default"
+        onClick={() => handleLayerChange('toDefault')}
+        full="true"
+        isDisabled={layer === 'default' ? 'true' : 'false'}
+      />
+      <Button
+        variant="iconWithText"
+        text="Satellite"
+        onClick={() => handleLayerChange('toSatellite')}
+        full="true"
+        isDisabled={layer === 'satellite' ? 'true' : 'false'}
+      />
+    </StyledSidebarSectionContent>
   );
 };
 

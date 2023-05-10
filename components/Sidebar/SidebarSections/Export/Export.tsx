@@ -2,8 +2,8 @@ import { useAppSelector } from '@/redux/hooks';
 import { useState } from 'react';
 import downloadjs from 'downloadjs';
 import { DrawCoords } from '@/types/models/drawCoords.types';
-
-
+import { StyledSidebarSectionContent } from '../../SidebarSection/SidebarSection.styles';
+import { Button } from '@/components/Button/Button';
 
 const date = new Date();
 const current_date = `${date.getFullYear()}-${
@@ -17,13 +17,14 @@ enum ExportType {
 }
 
 const Export = () => {
-  const exportCoords = useAppSelector((state) => state.drawReducer.exportCoords);
+  const exportCoords = useAppSelector(
+    (state) => state.drawReducer.exportCoords
+  );
 
   const [filename, setFilename] = useState<string>('');
-  const [exportType, setExportType] = useState(ExportType.none); // none, gpx, kml
 
   // Function that generate gpx file with dynamic filenames and coords
-  const generateGPX = (coords: DrawCoords[]) => {
+  const generateGPX = async (coords: DrawCoords[]) => {
     let gpx = `<?xml version="1.0" encoding="UTF-8"?>
   <gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd http://www.topografix.com/GPX/gpx_style/0/2 http://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:gpx_style="http://www.topografix.com/GPX/gpx_style/0/2" version="1.1" creator="https://cycroute.netlify.app/">
   <metadata>
@@ -59,8 +60,7 @@ const Export = () => {
     return gpx;
   };
 
-  // Function that generate kml file with dynamic filenames and coords
-  const generateKML = (coords: DrawCoords[]) => {
+  const generateKML = async (coords: DrawCoords[]) => {
     let kml = `<?xml version="1.0" encoding="UTF-8"?>
     <kml xmlns="http://www.opengis.net/kml/2.2">
       <Document>
@@ -109,109 +109,51 @@ const Export = () => {
     return kml;
   };
 
-  const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
+  const handleGpxDownload = async () => {
+    const gpx = await generateGPX(exportCoords);
 
-  const handleFilename = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Change file name when user type in input
-    setFilename(e.target.value);
+    downloadjs(
+      gpx,
+      `${
+        filename.length === 0 || !filename
+          ? `new_route_${current_date}`
+          : filename
+      }.gpx`,
+      'application/gpx+xml'
+    );
   };
 
-  const handleExport = () => {
-    setIsFormOpen(true);
-  };
+  const handleKmlDownload = async () => {
+    const kml = await generateKML(exportCoords);
 
-  const handleDownload = () => {
-    const kml = generateKML(exportCoords);
-    const gpx = generateGPX(exportCoords);
-
-    if (exportCoords) {
-      if (exportType === ExportType.none) {
-        return null;
-      }
-      if (exportType === ExportType.gpx) {
-        downloadjs(
-          gpx,
-          `${
-            filename.length === 0 || !filename
-              ? `new_route_${current_date}`
-              : filename
-          }.gpx`,
-          'application/gpx+xml'
-        );
-      }
-      if (exportType === ExportType.kml) {
-        downloadjs(
-          kml,
-          `${
-            filename.length === 0 || !filename
-              ? `new_route_${current_date}`
-              : filename
-          }.kml`,
-          'application/vnd.google-earth.kml+xml'
-        );
-      }
-
-      setIsFormOpen(false);
-      setFilename('');
-    }
+    downloadjs(
+      kml,
+      `${
+        filename.length === 0 || !filename
+          ? `new_route_${current_date}`
+          : filename
+      }.kml`,
+      'application/vnd.google-earth.kml+xml'
+    );
   };
 
   return (
-    <>
-      <div>
-        <button onClick={() => setExportType(ExportType.gpx)}>GPX</button>
-        <button onClick={() => setExportType(ExportType.kml)}>KML</button>
-        <button
-          className={
-            exportCoords.length === 0 || exportType === 0 || isFormOpen
-              ? 'content-export--button disabled-export'
-              : 'content-export--button'
-          }
-          title={`Export as ${exportType === 1 ? 'GPX' : 'KML'}`}
-          aria-label={`Export as ${exportType === 1 ? 'GPX' : 'KML'}`}
-          onClick={handleExport}
-          disabled={exportCoords.length === 0 || exportType === 0 || isFormOpen}
-        >
-          Export as {exportType === 0 ? '' : exportType === 1 ? 'GPX' : 'KML'}
-        </button>
-        {isFormOpen && (
-          <div className="content-export-download--wrapper">
-            <p className="content-export-download--title">Choose name</p>
-            <form className="download-form">
-              <div
-                role="button"
-                title="Close download window"
-                aria-label="Close download windows"
-                className="download-form--close"
-                tabIndex={0}
-                onClick={() => setIsFormOpen(false)}
-              >
-                <i className="gg-close"></i>
-              </div>
-              <input
-                className="download-form--input"
-                title="Choose file name"
-                onChange={handleFilename}
-                name="filename"
-                value={filename}
-                placeholder={`new_route_${current_date}`}
-                aria-label="Choose file name"
-                tabIndex={0}
-              />
-              <button
-                className="download-form--submit"
-                title={`Download ${exportType === 1 ? 'GPX' : 'KML'}`}
-                aria-label={`Download ${exportType === 1 ? 'GPX' : 'KML'}`}
-                onClick={handleDownload}
-                tabIndex={0}
-              >
-                Download
-              </button>
-            </form>
-          </div>
-        )}
-      </div>
-    </>
+    <StyledSidebarSectionContent>
+      <Button
+        variant="iconWithText"
+        text="GPX"
+        onClick={handleGpxDownload}
+        full="true"
+        isDisabled={exportCoords.length === 0 ? 'true' : 'false'}
+      />
+      <Button
+        variant="iconWithText"
+        text="KML"
+        onClick={handleKmlDownload}
+        full="true"
+        isDisabled={exportCoords.length === 0 ? 'true' : 'false'}
+      />
+    </StyledSidebarSectionContent>
   );
 };
 

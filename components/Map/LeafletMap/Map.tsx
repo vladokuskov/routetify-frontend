@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 import 'leaflet/dist/leaflet.css';
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 
 import * as L from 'leaflet';
 
@@ -14,9 +15,7 @@ import useRenderPolyline from '../../../hooks/renderPolyline';
 import useRenderMarkers from '../../../hooks/renderMarkers';
 
 import StyleMap from './TileLayer';
-import { MapContainer, ZoomControl } from 'react-leaflet';
-
-import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
+import { MapContainer } from 'react-leaflet';
 
 import LocationMarker from './LocationMarker';
 import useFitBoundsOnClick from '../../../hooks/fitBounds';
@@ -46,7 +45,6 @@ const LeafletMap = () => {
         <StyleMap />
         <GetPositionByDragging />
         <LocationMarker />
-        <ZoomControl position="bottomright" />
       </MapContainer>
     </>
   );

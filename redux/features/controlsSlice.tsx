@@ -1,24 +1,25 @@
-import { DrawType } from '@/types/global/index.types';
+import { DrawType, LocationStatus } from '@/types/global/index.types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface ControlsState {
   draw: DrawType;
-  layer: string;
+  layer: 'default' | 'satellite';
   isFitBounds: boolean;
-  isLocationFound: boolean;
+  location: LocationStatus;
   colorPicker: { color: string; isOpen: boolean };
-  currentCoords: { lat: number; lng: number };
+  currentCoords: { lat: number; lng: number; zoom: number };
 }
 
 const initialState = {
   draw: DrawType.None,
   layer: 'default',
-  isLocationFound: false,
+  location: LocationStatus.idle,
   isFitBounds: false,
   colorPicker: { color: '#00ACC1', isOpen: false },
   currentCoords: {
     lat: 50.45,
     lng: 30.5241,
+    zoom: 12,
   },
 } as ControlsState;
 
@@ -32,10 +33,10 @@ export const controlsReducer = createSlice({
         isFitBounds: action.payload,
       };
     },
-    changeLocationStatus: (state, action: PayloadAction<boolean>) => {
+    changeLocationStatus: (state, action: PayloadAction<LocationStatus>) => {
       return {
         ...state,
-        isLocationFound: action.payload,
+        location: action.payload,
       };
     },
     showColorPicker: (state, action: PayloadAction<boolean>) => {
@@ -56,7 +57,7 @@ export const controlsReducer = createSlice({
         draw: action.payload,
       };
     },
-    changeLayer: (state, action: PayloadAction<string>) => {
+    changeLayer: (state, action: PayloadAction<'default' | 'satellite'>) => {
       return {
         ...state,
         layer: action.payload,
@@ -65,7 +66,7 @@ export const controlsReducer = createSlice({
     changeCurrentCoords: (
       state,
       action: PayloadAction<{
-        currentCoords: { lat: number; lng: number };
+        currentCoords: { lat: number; lng: number; zoom: number };
       }>
     ) => {
       return {
@@ -73,6 +74,7 @@ export const controlsReducer = createSlice({
         currentCoords: {
           lat: action.payload.currentCoords.lat,
           lng: action.payload.currentCoords.lng,
+          zoom: action.payload.currentCoords.zoom,
         },
       };
     },

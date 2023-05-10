@@ -15,6 +15,7 @@ import {
   changeLocationStatus,
 } from '@/redux/features/controlsSlice';
 import { useAppDispatch } from '@/redux/hooks';
+import { LocationStatus } from '@/types/global/index.types';
 
 const Geocoder = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -57,7 +58,7 @@ const Geocoder = () => {
       })
     );
 
-    dispatch(changeLocationStatus(false));
+    dispatch(changeLocationStatus(LocationStatus.idle));
 
     if (display_name) {
       setGeocoderValue(display_name);

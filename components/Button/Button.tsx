@@ -10,6 +10,7 @@ const Button = ({
   isDisabled = 'false',
   full = 'false',
   status,
+  loading,
 }: Button) => {
   return (
     <StyledButton
@@ -20,7 +21,9 @@ const Button = ({
       full={full}
       status={status}
     >
-      {icon && variant !== 'text' && <Icon svg={icon} />}
+      {icon && variant !== 'text' && (
+        <Icon svg={icon} spin={loading === 'true' ? 'true' : 'false'} />
+      )}
       {text && variant !== 'icon' && <StyledText>{text}</StyledText>}
     </StyledButton>
   );

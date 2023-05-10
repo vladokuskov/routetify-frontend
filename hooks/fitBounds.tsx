@@ -14,7 +14,7 @@ const useFitBoundsOnClick = (e: L.Map | null) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (e && isFitBounds) {
+    if (e && isFitBounds && drawCoords.length !== 0) {
       e.fitBounds(drawCoords as L.LatLngBoundsExpression);
       dispatch(changeFitBounds(false));
     }

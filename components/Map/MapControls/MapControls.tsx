@@ -8,7 +8,6 @@ import { StyledMapControls } from './MapControls.styles';
 
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 
-import { useState } from 'react';
 import {
   changeCurrentCoords,
   changeFitBounds,
@@ -23,19 +22,21 @@ import DeleteIcon from '../../../assets/icons/delete.svg';
 import RedoIcon from '../../../assets/icons/redo.svg';
 import UndoIcon from '../../../assets/icons/undo.svg';
 import FitIcon from '../../../assets/icons/fit.svg';
+import LoadingIcon from '../../../assets/icons/loader.svg';
 import { DrawType, LocationStatus } from '@/types/global/index.types';
 
 export default function MapControls() {
-  const [locationStatus, setLocationStatus] = useState<LocationStatus>(
-    LocationStatus.idle
-  );
   const dispatch = useAppDispatch();
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords);
+
   const drawCoordsDeleted = useAppSelector(
     (state) => state.drawReducer.drawCoordsDeleted
   );
   const drawCoordsFuture = useAppSelector(
     (state) => state.drawReducer.drawCoordsFuture
+  );
+  const locationStatus = useAppSelector(
+    (state) => state.controlsReducer.location
   );
   const drawType = useAppSelector((state) => state.controlsReducer.draw);
 
@@ -43,21 +44,21 @@ export default function MapControls() {
     dispatch(deleteDrawCoords(null));
     dispatch(
       updateDrawInfo({
-        time: '0000',
-        dist: '0000',
+        time: '0',
+        dist: '0',
       })
     );
   };
 
   const handleRouteFit = () => {
     dispatch(changeFitBounds(true));
-    dispatch(changeLocationStatus(false));
+    dispatch(changeLocationStatus(LocationStatus.idle));
   };
 
   const getLocation = async () => {
     try {
       if (navigator.geolocation) {
-        setLocationStatus(LocationStatus.fetching);
+        dispatch(changeLocationStatus(LocationStatus.fetching));
         navigator.geolocation.getCurrentPosition(
           (position) => {
             const geoPoint = {
@@ -65,22 +66,22 @@ export default function MapControls() {
               lng: position.coords.longitude,
               zoom: 16,
             };
-            setLocationStatus(LocationStatus.success);
+
             if (geoPoint) {
               dispatch(addLatLng(geoPoint));
 
               dispatch(changeCurrentCoords({ currentCoords: geoPoint }));
 
-              dispatch(changeLocationStatus(true));
+              dispatch(changeLocationStatus(LocationStatus.success));
             }
           },
           (error) => {
-            setLocationStatus(LocationStatus.error);
+            dispatch(changeLocationStatus(LocationStatus.error));
           }
         );
       }
     } catch (error) {
-      setLocationStatus(LocationStatus.error);
+      dispatch(changeLocationStatus(LocationStatus.error));
       return null;
     }
   };
@@ -120,6 +121,7 @@ export default function MapControls() {
           handleDelete();
         }}
         isDisabled={drawCoords.length === 0 ? 'true' : 'false'}
+        status="danger"
       />
 
       <Button
@@ -133,11 +135,12 @@ export default function MapControls() {
       <Button
         variant="icon"
         text="Location"
+        loading={locationStatus === LocationStatus.fetching ? 'true' : 'false'}
         icon={
           locationStatus === LocationStatus.success
             ? LocationFilledIcon
             : locationStatus === LocationStatus.fetching
-            ? LocationIcon
+            ? LoadingIcon
             : LocationIcon
         }
         onClick={getLocation}

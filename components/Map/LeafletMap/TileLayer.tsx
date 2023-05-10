@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { TileLayer } from 'react-leaflet'
 import { useAppSelector } from '@/redux/hooks'
 
-function StyleMap() {
+const StyleMap = () => {
   const [mapUrl, setMapUrl] = useState<string>(
     'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
   )

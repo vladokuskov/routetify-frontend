@@ -2,12 +2,17 @@ import {
   changeCurrentCoords,
   changeLocationStatus,
 } from '@/redux/features/controlsSlice'
-import { useAppDispatch } from '@/redux/hooks'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { LocationStatus } from '@/types/global/index.types'
 import { useMapEvents } from 'react-leaflet'
 
-function GetPositionByDragging() {
+const GetPositionByDragging = () => {
   const dispatch = useAppDispatch()
+
+  const locationStatus = useAppSelector(
+    (state) => state.controlsReducer.location,
+  )
+
   useMapEvents({
     drag: (e: L.LeafletEvent) => {
       dispatch(
@@ -21,7 +26,13 @@ function GetPositionByDragging() {
       )
     },
     dragstart: () => {
-      dispatch(changeLocationStatus(LocationStatus.idle))
+      dispatch(
+        changeLocationStatus(
+          locationStatus === LocationStatus.fetching
+            ? LocationStatus.fetching
+            : LocationStatus.idle,
+        ),
+      )
     },
   })
   return null

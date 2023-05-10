@@ -5,7 +5,7 @@ import { useAppSelector } from '@/redux/hooks'
 import { LatLngExpression } from 'leaflet'
 import { LocationStatus } from '@/types/global/index.types'
 
-function LocationMarker() {
+const LocationMarker = () => {
   const [position, setPosition] = useState<LatLngExpression | null>(null)
 
   const locationStatus = useAppSelector(

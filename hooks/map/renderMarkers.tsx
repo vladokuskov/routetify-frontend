@@ -1,4 +1,4 @@
-import { useAppSelector } from '../redux/hooks'
+import { useAppSelector } from '../../redux/hooks'
 import { useEffect } from 'react'
 
 import * as L from 'leaflet'

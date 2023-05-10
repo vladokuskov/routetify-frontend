@@ -8,17 +8,17 @@ import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'
 import * as L from 'leaflet'
 
 import GetPositionByDragging from './GetDragPosition'
-import useUpdateMapView from '../../../hooks/updateMapView'
-import useRenderRouting from '../../../hooks/renderRouting'
-import useClickedCoords from '../../../hooks/updateClickedCoords'
-import useRenderPolyline from '../../../hooks/renderPolyline'
-import useRenderMarkers from '../../../hooks/renderMarkers'
+import useUpdateMapView from '../../../hooks/map/updateMapView'
+import useRenderRouting from '../../../hooks/map/renderRouting'
+import useClickedCoords from '../../../hooks/map/updateClickedCoords'
+import useRenderPolyline from '../../../hooks/map/renderPolyline'
+import useRenderMarkers from '../../../hooks/map/renderMarkers'
 
 import StyleMap from './TileLayer'
 import { MapContainer } from 'react-leaflet'
 
 import LocationMarker from './LocationMarker'
-import useFitBoundsOnClick from '../../../hooks/fitBounds'
+import useFitBoundsOnClick from '../../../hooks/map/fitBounds'
 
 const LeafletMap = () => {
   const [map, setMap] = useState<L.Map | null>(null)

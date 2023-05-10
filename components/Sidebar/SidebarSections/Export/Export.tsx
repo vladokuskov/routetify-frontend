@@ -10,12 +10,6 @@ const current_date = `${date.getFullYear()}-${
   date.getMonth() + 1
 }-${date.getDate()}_${date.getHours()}:${date.getMinutes()}`
 
-enum ExportType {
-  none,
-  gpx,
-  kml,
-}
-
 const Export = () => {
   const exportCoords = useAppSelector((state) => state.drawReducer.exportCoords)
 

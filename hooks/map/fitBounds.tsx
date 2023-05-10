@@ -2,8 +2,8 @@ import { useEffect } from 'react'
 
 import * as L from 'leaflet'
 
-import { useAppSelector, useAppDispatch } from '../redux/hooks'
-import { changeFitBounds } from '../redux/features/controlsSlice'
+import { useAppSelector, useAppDispatch } from '../../redux/hooks'
+import { changeFitBounds } from '../../redux/features/controlsSlice'
 
 const useFitBoundsOnClick = (e: L.Map | null) => {
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
@@ -15,7 +15,7 @@ const useFitBoundsOnClick = (e: L.Map | null) => {
 
   useEffect(() => {
     if (e && isFitBounds && drawCoords.length !== 0) {
-      e.fitBounds(drawCoords as L.LatLngBoundsExpression)
+      e.fitBounds(drawCoords as any)
       dispatch(changeFitBounds(false))
     }
   }, [isFitBounds, drawCoords])

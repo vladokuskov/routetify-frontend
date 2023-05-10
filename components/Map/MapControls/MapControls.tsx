@@ -25,7 +25,7 @@ import FitIcon from '../../../assets/icons/fit.svg'
 import LoadingIcon from '../../../assets/icons/loader.svg'
 import { DrawType, LocationStatus } from '@/types/global/index.types'
 
-export default function MapControls() {
+const MapControls = () => {
   const dispatch = useAppDispatch()
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
 
@@ -155,3 +155,5 @@ export default function MapControls() {
     </StyledMapControls>
   )
 }
+
+export default MapControls

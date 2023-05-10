@@ -122,6 +122,7 @@ const StyledInputIcon = styled.span<Input>`
     css`
       left: auto;
       right: 0.36rem;
+      top: 0.4rem;
       color: #5a5a5ab3;
     `}
 `;

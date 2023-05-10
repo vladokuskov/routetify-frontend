@@ -7,6 +7,9 @@ const spinKeyFrame = keyframes`
 `;
 
 const StyledIconWrapper = styled.span<{ spin: IBoolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   svg {
     ${({ spin }) =>
       spin === 'true' &&

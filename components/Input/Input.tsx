@@ -31,12 +31,11 @@ const Input = ({
           {loading === 'true' && (
             <Icon
               svg={LoadingIcon}
-              height="23"
               spin={loading === 'true' ? 'true' : 'false'}
             />
           )}
           {loading === 'false' && value?.length === 0 && (
-            <Icon svg={SearchIcon} height="23" />
+            <Icon svg={SearchIcon} />
           )}
         </StyledInputIcon>
       )}
@@ -65,7 +64,7 @@ const Input = ({
           variant={variant}
           title={variant === 'search' ? 'Clear' : ''}
         >
-          <Icon svg={ClearIcon} height="20" />
+          <Icon svg={ClearIcon} />
         </StyledInputButton>
       )}
     </StyledInputMainWrapper>

@@ -21,14 +21,32 @@ const StyledButton = styled.button<Button>`
       background-color: transparent;
       color: #333;
     `}
-  ${({ variant }) =>
+  ${({ variant, status }) =>
     variant === 'icon' &&
     css`
-      background-color: #333;
-      color: #fff;
+      background-color: #f8f6f6;
+      color: #3b6d52;
+      border-radius: 50%;
+      padding: 0.4rem;
 
-      &:hover {
-        background-color: #555;
+      -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.28);
+      -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.28);
+      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.28);
+
+      &:hover,
+      &:focus {
+        background-color: #f8f6f6;
+        color: #5d9b7a;
+      }
+
+      &:active {
+        background-color: #f8f6f6;
+        color: #3b6d52;
+      }
+
+      &:disabled {
+        background-color: #f8f6f6;
+        color: #bdbdbd;
       }
     `}
     ${({ variant }) =>
@@ -55,6 +73,34 @@ const StyledButton = styled.button<Button>`
         background-color: #bdc8c2;
       }
     `};
+
+  ${({ variant, status }) =>
+    status === 'error'
+      ? css`
+          color: ${variant === 'icon' ? '#E5342F' : ''};
+
+          &:hover,
+          &:focus {
+            color: ${variant === 'icon' ? '#FB5F5B' : ''};
+          }
+
+          &:active {
+            color: ${variant === 'icon' ? '#E5342F' : ''};
+          }
+        `
+      : status === 'success' &&
+        css`
+          color: ${variant === 'icon' ? '#468EE5' : ''};
+
+          &:hover,
+          &:focus {
+            color: ${variant === 'icon' ? '#7AB6FF' : ''};
+          }
+
+          &:active {
+            color: ${variant === 'icon' ? '#468EE5' : ''};
+          }
+        `}
 `;
 
 const StyledIcon = styled.span``;

@@ -1,25 +1,42 @@
-
-import { deleteDrawCoords, redoDrawCoords, undoDrawCoords, updateDrawInfo } from '@/redux/features/drawSlice';
+import {
+  deleteDrawCoords,
+  redoDrawCoords,
+  undoDrawCoords,
+  updateDrawInfo,
+} from '@/redux/features/drawSlice';
 import { StyledMapControls } from './MapControls.styles';
 
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 
-
-import { useState, useEffect } from 'react';
-import { changeCurrentCoords, changeFitBounds, changeLocationStatus } from '@/redux/features/controlsSlice';
+import { useState } from 'react';
+import {
+  changeCurrentCoords,
+  changeFitBounds,
+  changeLocationStatus,
+} from '@/redux/features/controlsSlice';
 import { addLatLng } from '@/redux/features/geocoderSlice';
+import { Button } from '@/components/Button/Button';
 
-const options = {
-  enableHighAccuracy: true,
-  timeout: 5000,
-  maximumAge: 0,
-};
+import LocationIcon from '../../../assets/icons/location.svg';
+import LocationFilledIcon from '../../../assets/icons/location-filled.svg';
+import DeleteIcon from '../../../assets/icons/delete.svg';
+import RedoIcon from '../../../assets/icons/redo.svg';
+import UndoIcon from '../../../assets/icons/undo.svg';
+import FitIcon from '../../../assets/icons/fit.svg';
+import { DrawType, LocationStatus } from '@/types/global/index.types';
 
 export default function MapControls() {
-  const [isLocationFetching, setIsLocationFetching] = useState<boolean>(false);
-
+  const [locationStatus, setLocationStatus] = useState<LocationStatus>(
+    LocationStatus.idle
+  );
   const dispatch = useAppDispatch();
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords);
+  const drawCoordsDeleted = useAppSelector(
+    (state) => state.drawReducer.drawCoordsDeleted
+  );
+  const drawCoordsFuture = useAppSelector(
+    (state) => state.drawReducer.drawCoordsFuture
+  );
   const drawType = useAppSelector((state) => state.controlsReducer.draw);
 
   const handleDelete = () => {
@@ -37,57 +54,101 @@ export default function MapControls() {
     dispatch(changeLocationStatus(false));
   };
 
-  const getPos = (data: {
-    coords: { latitude: number; longitude: number };
-  }) => {
-    setIsLocationFetching(false);
-    dispatch(changeLocationStatus(true));
-    dispatch(
-      addLatLng({
-        lat: data.coords.latitude,
-        lng: data.coords.longitude,
-        zoom: 16,
-      })
-    );
-    dispatch(
-      changeCurrentCoords({
-        currentCoords: {
-          lat: data.coords.latitude,
-          lng: data.coords.longitude,
-          zoom: 16,
-        },
-      })
-    );
-  };
+  const getLocation = async () => {
+    try {
+      if (navigator.geolocation) {
+        setLocationStatus(LocationStatus.fetching);
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const geoPoint = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+              zoom: 16,
+            };
+            setLocationStatus(LocationStatus.success);
+            if (geoPoint) {
+              dispatch(addLatLng(geoPoint));
 
-  const error = (err: { code: number; message: string }) => {
-    console.warn(`ERROR(${err.code}): ${err.message}`);
-    setIsLocationFetching(false);
-  };
+              dispatch(changeCurrentCoords({ currentCoords: geoPoint }));
 
-  useEffect(() => {
-    if (isLocationFetching) {
-      navigator.geolocation.getCurrentPosition(getPos, error, options);
+              dispatch(changeLocationStatus(true));
+            }
+          },
+          (error) => {
+            setLocationStatus(LocationStatus.error);
+          }
+        );
+      }
+    } catch (error) {
+      setLocationStatus(LocationStatus.error);
+      return null;
     }
-  }, [isLocationFetching]);
+  };
 
   return (
     <StyledMapControls>
-      <button
+      <Button
+        variant="icon"
+        text="Undo"
+        icon={UndoIcon}
         onClick={() => dispatch(undoDrawCoords(null))}
-      >
-        Undo
-      </button>
-      <button onClick={() => dispatch(redoDrawCoords(null))}>Redo</button>
-      <button
+        isDisabled={
+          drawCoords.length === 0 || drawType === DrawType.None
+            ? 'true'
+            : 'false'
+        }
+      />
+
+      <Button
+        variant="icon"
+        text="Redo"
+        icon={RedoIcon}
+        onClick={() => dispatch(redoDrawCoords(null))}
+        isDisabled={
+          (drawCoordsFuture.length === 0 && drawCoordsDeleted.length === 0) ||
+          drawType === DrawType.None
+            ? 'true'
+            : 'false'
+        }
+      />
+
+      <Button
+        variant="icon"
+        text="Delete"
+        icon={DeleteIcon}
         onClick={() => {
           handleDelete();
         }}
-      >
-        Delete
-      </button>
-      <button onClick={handleRouteFit}>Fit</button>
-      <button onClick={() => setIsLocationFetching(true)}>Location</button>
+        isDisabled={drawCoords.length === 0 ? 'true' : 'false'}
+      />
+
+      <Button
+        variant="icon"
+        text="Fit route"
+        icon={FitIcon}
+        onClick={handleRouteFit}
+        isDisabled={drawCoords.length === 0 ? 'true' : 'false'}
+      />
+
+      <Button
+        variant="icon"
+        text="Location"
+        icon={
+          locationStatus === LocationStatus.success
+            ? LocationFilledIcon
+            : locationStatus === LocationStatus.fetching
+            ? LocationIcon
+            : LocationIcon
+        }
+        onClick={getLocation}
+        status={
+          locationStatus === LocationStatus.error
+            ? 'error'
+            : locationStatus === LocationStatus.success
+            ? 'success'
+            : 'default'
+        }
+      />
     </StyledMapControls>
   );
 }

@@ -5,3 +5,10 @@ export enum DrawType {
   Road,
   Hand,
 }
+
+export enum LocationStatus {
+  idle,
+  fetching,
+  success,
+  error,
+}

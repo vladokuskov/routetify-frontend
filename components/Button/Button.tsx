@@ -9,6 +9,7 @@ const Button = ({
   onClick,
   isDisabled = 'false',
   full = 'false',
+  status,
 }: Button) => {
   return (
     <StyledButton
@@ -17,13 +18,10 @@ const Button = ({
       title={text}
       disabled={isDisabled === 'true' ? true : false}
       full={full}
+      status={status}
     >
-      {icon && variant !== 'text' && (
-        <StyledIcon>
-          <Icon svg={icon} />
-        </StyledIcon>
-      )}
-      {text && <StyledText>{text}</StyledText>}
+      {icon && variant !== 'text' && <Icon svg={icon} />}
+      {text && variant !== 'icon' && <StyledText>{text}</StyledText>}
     </StyledButton>
   );
 };

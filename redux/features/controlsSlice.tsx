@@ -65,7 +65,7 @@ export const controlsReducer = createSlice({
     changeCurrentCoords: (
       state,
       action: PayloadAction<{
-        currentCoords: { lat: number; lng: number; zoom?: number };
+        currentCoords: { lat: number; lng: number };
       }>
     ) => {
       return {

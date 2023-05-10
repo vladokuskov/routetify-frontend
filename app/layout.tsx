@@ -1,19 +1,19 @@
-import { siteConfig } from '@/config/site';
-import StyledComponentsRegistry from '@/lib/registry';
-import { Providers } from '@/redux/provider';
-import { Inter, Roboto } from 'next/font/google';
+import { siteConfig } from '@/config/site'
+import StyledComponentsRegistry from '@/lib/registry'
+import { Providers } from '@/redux/provider'
+import { Inter, Roboto } from 'next/font/google'
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
   subsets: ['latin'],
   variable: '--font-roboto',
-});
+})
 
 const inter = Inter({
   weight: ['300', '400', '500', '700'],
   subsets: ['latin'],
   variable: '--font-inter',
-});
+})
 
 export const metadata = {
   title: siteConfig.name,
@@ -44,12 +44,12 @@ export const metadata = {
     apple: '/apple-touch-icon.png',
   },
   manifest: `${siteConfig.url}/site.webmanifest`,
-};
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <html lang="en">
@@ -63,5 +63,5 @@ export default function RootLayout({
         </StyledComponentsRegistry>
       </body>
     </html>
-  );
+  )
 }

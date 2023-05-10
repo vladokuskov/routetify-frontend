@@ -1,24 +1,24 @@
-import { RefObject, useEffect, useState } from 'react';
+import { RefObject, useEffect, useState } from 'react'
 
 export const useClickOutside = <T extends HTMLElement>(
   ref: RefObject<T>,
-  initialState: boolean
+  initialState: boolean,
 ) => {
-  const [isOpen, setIsOpen] = useState(initialState);
+  const [isOpen, setIsOpen] = useState(initialState)
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (ref.current && !ref.current.contains(event.target as Node)) {
-        setIsOpen(false);
+        setIsOpen(false)
       }
-    };
+    }
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside)
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [ref]);
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [ref])
 
-  return [isOpen, setIsOpen] as const;
-};
+  return [isOpen, setIsOpen] as const
+}

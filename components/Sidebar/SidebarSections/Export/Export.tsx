@@ -1,14 +1,14 @@
-import { useAppSelector } from '@/redux/hooks';
-import { useState } from 'react';
-import downloadjs from 'downloadjs';
-import { DrawCoords } from '@/types/models/drawCoords.types';
-import { StyledSidebarSectionContent } from '../../SidebarSection/SidebarSection.styles';
-import { Button } from '@/components/Button/Button';
+import { useAppSelector } from '@/redux/hooks'
+import { useState } from 'react'
+import downloadjs from 'downloadjs'
+import { DrawCoords } from '@/types/models/drawCoords.types'
+import { StyledSidebarSectionContent } from '../../SidebarSection/SidebarSection.styles'
+import { Button } from '@/components/Button/Button'
 
-const date = new Date();
+const date = new Date()
 const current_date = `${date.getFullYear()}-${
   date.getMonth() + 1
-}-${date.getDate()}_${date.getHours()}:${date.getMinutes()}`;
+}-${date.getDate()}_${date.getHours()}:${date.getMinutes()}`
 
 enum ExportType {
   none,
@@ -17,11 +17,9 @@ enum ExportType {
 }
 
 const Export = () => {
-  const exportCoords = useAppSelector(
-    (state) => state.drawReducer.exportCoords
-  );
+  const exportCoords = useAppSelector((state) => state.drawReducer.exportCoords)
 
-  const [filename, setFilename] = useState<string>('');
+  const [filename, setFilename] = useState<string>('')
 
   // Function that generate gpx file with dynamic filenames and coords
   const generateGPX = async (coords: DrawCoords[]) => {
@@ -45,20 +43,20 @@ const Export = () => {
         : filename
     }</name>
     <type>Cycling</type>
-    <trkseg>`;
+    <trkseg>`
 
     coords.forEach((coord) => {
       gpx += `
-      <trkpt lat="${coord.lat}" lon="${coord.lng}"></trkpt>`;
-    });
+      <trkpt lat="${coord.lat}" lon="${coord.lng}"></trkpt>`
+    })
 
     gpx += `
     </trkseg>
     </trk>
-  </gpx>`;
+  </gpx>`
 
-    return gpx;
-  };
+    return gpx
+  }
 
   const generateKML = async (coords: DrawCoords[]) => {
     let kml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -93,24 +91,24 @@ const Export = () => {
           }</name>
           <LineString>
             <tessellate>1</tessellate>
-            <coordinates>`;
+            <coordinates>`
 
     coords.forEach((coord, index: number) => {
-      kml += `${coord.lng},${coord.lat},0 `;
-    });
+      kml += `${coord.lng},${coord.lat},0 `
+    })
 
     kml += `
         </coordinates>
       </LineString>
     </Placemark>
   </Document>
-</kml>`;
+</kml>`
 
-    return kml;
-  };
+    return kml
+  }
 
   const handleGpxDownload = async () => {
-    const gpx = await generateGPX(exportCoords);
+    const gpx = await generateGPX(exportCoords)
 
     downloadjs(
       gpx,
@@ -119,12 +117,12 @@ const Export = () => {
           ? `new_route_${current_date}`
           : filename
       }.gpx`,
-      'application/gpx+xml'
-    );
-  };
+      'application/gpx+xml',
+    )
+  }
 
   const handleKmlDownload = async () => {
-    const kml = await generateKML(exportCoords);
+    const kml = await generateKML(exportCoords)
 
     downloadjs(
       kml,
@@ -133,9 +131,9 @@ const Export = () => {
           ? `new_route_${current_date}`
           : filename
       }.kml`,
-      'application/vnd.google-earth.kml+xml'
-    );
-  };
+      'application/vnd.google-earth.kml+xml',
+    )
+  }
 
   return (
     <StyledSidebarSectionContent>
@@ -154,7 +152,7 @@ const Export = () => {
         isDisabled={exportCoords.length === 0 ? 'true' : 'false'}
       />
     </StyledSidebarSectionContent>
-  );
-};
+  )
+}
 
-export { Export };
+export { Export }

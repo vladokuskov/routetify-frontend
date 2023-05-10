@@ -1,6 +1,6 @@
-import React from 'react';
-import { Icon } from './Icon.types';
-import { StyledIconWrapper } from './Icon.styles';
+import React from 'react'
+import { Icon } from './Icon.types'
+import { StyledIconWrapper } from './Icon.styles'
 
 const Icon: React.FC<Icon> = ({
   svg: Icon,
@@ -13,7 +13,7 @@ const Icon: React.FC<Icon> = ({
     <StyledIconWrapper className={className} spin={spin}>
       <Icon width={width} height={height} />
     </StyledIconWrapper>
-  );
-};
+  )
+}
 
-export default Icon;
+export default Icon

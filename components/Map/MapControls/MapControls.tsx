@@ -3,88 +3,88 @@ import {
   redoDrawCoords,
   undoDrawCoords,
   updateDrawInfo,
-} from '@/redux/features/drawSlice';
-import { StyledMapControls } from './MapControls.styles';
+} from '@/redux/features/drawSlice'
+import { StyledMapControls } from './MapControls.styles'
 
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 
 import {
   changeCurrentCoords,
   changeFitBounds,
   changeLocationStatus,
-} from '@/redux/features/controlsSlice';
-import { addLatLng } from '@/redux/features/geocoderSlice';
-import { Button } from '@/components/Button/Button';
+} from '@/redux/features/controlsSlice'
+import { addLatLng } from '@/redux/features/geocoderSlice'
+import { Button } from '@/components/Button/Button'
 
-import LocationIcon from '../../../assets/icons/location.svg';
-import LocationFilledIcon from '../../../assets/icons/location-filled.svg';
-import DeleteIcon from '../../../assets/icons/delete.svg';
-import RedoIcon from '../../../assets/icons/redo.svg';
-import UndoIcon from '../../../assets/icons/undo.svg';
-import FitIcon from '../../../assets/icons/fit.svg';
-import LoadingIcon from '../../../assets/icons/loader.svg';
-import { DrawType, LocationStatus } from '@/types/global/index.types';
+import LocationIcon from '../../../assets/icons/location.svg'
+import LocationFilledIcon from '../../../assets/icons/location-filled.svg'
+import DeleteIcon from '../../../assets/icons/delete.svg'
+import RedoIcon from '../../../assets/icons/redo.svg'
+import UndoIcon from '../../../assets/icons/undo.svg'
+import FitIcon from '../../../assets/icons/fit.svg'
+import LoadingIcon from '../../../assets/icons/loader.svg'
+import { DrawType, LocationStatus } from '@/types/global/index.types'
 
 export default function MapControls() {
-  const dispatch = useAppDispatch();
-  const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords);
+  const dispatch = useAppDispatch()
+  const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
 
   const drawCoordsDeleted = useAppSelector(
-    (state) => state.drawReducer.drawCoordsDeleted
-  );
+    (state) => state.drawReducer.drawCoordsDeleted,
+  )
   const drawCoordsFuture = useAppSelector(
-    (state) => state.drawReducer.drawCoordsFuture
-  );
+    (state) => state.drawReducer.drawCoordsFuture,
+  )
   const locationStatus = useAppSelector(
-    (state) => state.controlsReducer.location
-  );
-  const drawType = useAppSelector((state) => state.controlsReducer.draw);
+    (state) => state.controlsReducer.location,
+  )
+  const drawType = useAppSelector((state) => state.controlsReducer.draw)
 
   const handleDelete = () => {
-    dispatch(deleteDrawCoords(null));
+    dispatch(deleteDrawCoords(null))
     dispatch(
       updateDrawInfo({
         time: '0',
         dist: '0',
-      })
-    );
-  };
+      }),
+    )
+  }
 
   const handleRouteFit = () => {
-    dispatch(changeFitBounds(true));
-    dispatch(changeLocationStatus(LocationStatus.idle));
-  };
+    dispatch(changeFitBounds(true))
+    dispatch(changeLocationStatus(LocationStatus.idle))
+  }
 
   const getLocation = async () => {
     try {
       if (navigator.geolocation) {
-        dispatch(changeLocationStatus(LocationStatus.fetching));
+        dispatch(changeLocationStatus(LocationStatus.fetching))
         navigator.geolocation.getCurrentPosition(
           (position) => {
             const geoPoint = {
               lat: position.coords.latitude,
               lng: position.coords.longitude,
               zoom: 16,
-            };
+            }
 
             if (geoPoint) {
-              dispatch(addLatLng(geoPoint));
+              dispatch(addLatLng(geoPoint))
 
-              dispatch(changeCurrentCoords({ currentCoords: geoPoint }));
+              dispatch(changeCurrentCoords({ currentCoords: geoPoint }))
 
-              dispatch(changeLocationStatus(LocationStatus.success));
+              dispatch(changeLocationStatus(LocationStatus.success))
             }
           },
           (error) => {
-            dispatch(changeLocationStatus(LocationStatus.error));
-          }
-        );
+            dispatch(changeLocationStatus(LocationStatus.error))
+          },
+        )
       }
     } catch (error) {
-      dispatch(changeLocationStatus(LocationStatus.error));
-      return null;
+      dispatch(changeLocationStatus(LocationStatus.error))
+      return null
     }
-  };
+  }
 
   return (
     <StyledMapControls>
@@ -118,7 +118,7 @@ export default function MapControls() {
         text="Delete"
         icon={DeleteIcon}
         onClick={() => {
-          handleDelete();
+          handleDelete()
         }}
         isDisabled={drawCoords.length === 0 ? 'true' : 'false'}
         status="danger"
@@ -153,5 +153,5 @@ export default function MapControls() {
         }
       />
     </StyledMapControls>
-  );
+  )
 }

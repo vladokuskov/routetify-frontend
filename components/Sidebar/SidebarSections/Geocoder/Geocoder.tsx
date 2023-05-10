@@ -1,45 +1,44 @@
-import { useState, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, useEffect, useRef } from 'react'
 
-import { useClickOutside } from '../../../../hooks/useClickOutside';
-import { Input } from '../../../Input/Input';
+import { useClickOutside } from '../../../../hooks/useClickOutside'
+import { Input } from '../../../Input/Input'
 import {
   StyledGeocoderContainer,
   StyledGeocoderResult,
   StyledGeocoderResultsContainer,
-} from './Geocoder.styles';
-import { TGeoResponse } from './Geocoder.types';
-import { addLatLng } from '@/redux/features/geocoderSlice';
+} from './Geocoder.styles'
+import { TGeoResponse } from './Geocoder.types'
+import { addLatLng } from '@/redux/features/geocoderSlice'
 import {
   changeCurrentCoords,
   changeLocationStatus,
-} from '@/redux/features/controlsSlice';
-import { useAppDispatch } from '@/redux/hooks';
-import { LocationStatus } from '@/types/global/index.types';
+} from '@/redux/features/controlsSlice'
+import { useAppDispatch } from '@/redux/hooks'
+import { LocationStatus } from '@/types/global/index.types'
 
 const Geocoder = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [geocoderValue, setGeocoderValue] = useState<string>('');
+  const ref = useRef<HTMLDivElement>(null)
+  const [geocoderValue, setGeocoderValue] = useState<string>('')
   const [geocoderResponse, setGeocoderResponse] = useState<
     TGeoResponse[] | null
-  >(null);
-  const [isGeocoderLoading, setIsGeocoderLoading] = useState<boolean>(false);
-  const [isResultsOpen, setIsResultsOpen] = useClickOutside(ref, false);
-  const [hasUserTyped, setHasUserTyped] = useState(false);
+  >(null)
+  const [isGeocoderLoading, setIsGeocoderLoading] = useState<boolean>(false)
+  const [isResultsOpen, setIsResultsOpen] = useClickOutside(ref, false)
+  const [hasUserTyped, setHasUserTyped] = useState(false)
 
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   const handleChangeGeocoder = (
-    e: React.ChangeEvent<HTMLInputElement>
+    e: React.ChangeEvent<HTMLInputElement>,
   ): void => {
-    setGeocoderValue(e.target.value);
-    setHasUserTyped(true);
-  };
+    setGeocoderValue(e.target.value)
+    setHasUserTyped(true)
+  }
 
   const handleClear = () => {
-    setGeocoderValue('');
-    setGeocoderResponse(null);
-  };
+    setGeocoderValue('')
+    setGeocoderResponse(null)
+  }
 
   const handleResultSelect = ({ lat, lon, display_name }: TGeoResponse) => {
     dispatch(
@@ -47,63 +46,64 @@ const Geocoder = () => {
         lat: lat,
         lng: lon,
         zoom: 12,
-      })
-    );
+      }),
+    )
     dispatch(
       changeCurrentCoords({
         currentCoords: {
           lat: lat,
           lng: lon,
+          zoom: 16,
         },
-      })
-    );
+      }),
+    )
 
-    dispatch(changeLocationStatus(LocationStatus.idle));
+    dispatch(changeLocationStatus(LocationStatus.idle))
 
     if (display_name) {
-      setGeocoderValue(display_name);
+      setGeocoderValue(display_name)
     }
 
-    window.scrollTo(0, 0);
-    setIsResultsOpen(false);
-    setHasUserTyped(false);
-  };
+    window.scrollTo(0, 0)
+    setIsResultsOpen(false)
+    setHasUserTyped(false)
+  }
 
   const fetchGeoData = async () => {
     try {
-      let url = `https://geocode.maps.co/search?q=${geocoderValue}`;
+      let url = `https://geocode.maps.co/search?q=${geocoderValue}`
 
-      setIsGeocoderLoading(true);
-      const response = await fetch(url);
+      setIsGeocoderLoading(true)
+      const response = await fetch(url)
       if (!response.ok) {
-        console.error(`HTTP error! Status: ${response.status}`);
+        console.error(`HTTP error! Status: ${response.status}`)
       }
-      const data = await response.json();
+      const data = await response.json()
 
-      setGeocoderResponse(data);
-      setIsGeocoderLoading(false);
-      setIsResultsOpen(true);
+      setGeocoderResponse(data)
+      setIsGeocoderLoading(false)
+      setIsResultsOpen(true)
     } catch (error) {
-      console.error('An error occurred:', error);
+      console.error('An error occurred:', error)
     }
-  };
+  }
 
   useEffect(() => {
-    let timer: ReturnType<typeof setTimeout>;
+    let timer: ReturnType<typeof setTimeout>
 
     // Fetch geocoder after 400ms when user stop typing
     if (hasUserTyped) {
       if (geocoderValue.length >= 3) {
         timer = setTimeout(() => {
-          fetchGeoData();
-        }, 400);
+          fetchGeoData()
+        }, 400)
       } else if (geocoderValue.length < 3) {
-        setGeocoderResponse([]);
+        setGeocoderResponse([])
       }
     }
 
-    return () => clearTimeout(timer);
-  }, [geocoderValue, hasUserTyped]);
+    return () => clearTimeout(timer)
+  }, [geocoderValue, hasUserTyped])
 
   return (
     <StyledGeocoderContainer ref={ref}>
@@ -119,7 +119,7 @@ const Geocoder = () => {
       {geocoderResponse && isResultsOpen && (
         <StyledGeocoderResultsContainer>
           {geocoderResponse.slice(0, 3).map((data: TGeoResponse, i) => {
-            let { lat, lon, display_name } = data;
+            let { lat, lon, display_name } = data
             return (
               <StyledGeocoderResult key={i}>
                 <button
@@ -129,12 +129,12 @@ const Geocoder = () => {
                   {display_name}
                 </button>
               </StyledGeocoderResult>
-            );
+            )
           })}
         </StyledGeocoderResultsContainer>
       )}
     </StyledGeocoderContainer>
-  );
-};
+  )
+}
 
-export { Geocoder };
+export { Geocoder }

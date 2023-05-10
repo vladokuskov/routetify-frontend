@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { TStyledContainer } from './StyledContainer.types';
+import styled, { css } from 'styled-components'
+import { TStyledContainer } from './StyledContainer.types'
 
 const StyledContainer = styled.div<TStyledContainer>`
   ${({ variant }) =>
@@ -12,6 +12,6 @@ const StyledContainer = styled.div<TStyledContainer>`
       align-items: flex-start;
       justify-content: flex-start;
     `}
-`;
+`
 
-export { StyledContainer };
+export { StyledContainer }

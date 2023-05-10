@@ -1,15 +1,15 @@
-import Icon from '../Icon/Icon';
+import Icon from '../Icon/Icon'
 import {
   StyledInput,
   StyledInputButton,
   StyledInputIcon,
   StyledInputMainWrapper,
-} from './Input.styles';
-import { Input } from './Input.types';
+} from './Input.styles'
+import { Input } from './Input.types'
 
-import ClearIcon from '../../assets/icons/x.svg';
-import SearchIcon from '../../assets/icons/search.svg';
-import LoadingIcon from '../../assets/icons/loader.svg';
+import ClearIcon from '../../assets/icons/x.svg'
+import SearchIcon from '../../assets/icons/search.svg'
+import LoadingIcon from '../../assets/icons/loader.svg'
 
 const Input = ({
   variant,
@@ -68,7 +68,7 @@ const Input = ({
         </StyledInputButton>
       )}
     </StyledInputMainWrapper>
-  );
-};
+  )
+}
 
-export { Input };
+export { Input }

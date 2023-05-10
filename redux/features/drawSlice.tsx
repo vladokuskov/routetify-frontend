@@ -1,12 +1,12 @@
-import { DrawCoords } from '@/types/models/drawCoords.types';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { DrawCoords } from '@/types/models/drawCoords.types'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface DrawState {
-  drawInfo: { time: string; dist: string };
-  drawCoords: DrawCoords[];
-  exportCoords: DrawCoords[];
-  drawCoordsDeleted: DrawCoords[];
-  drawCoordsFuture: DrawCoords[];
+  drawInfo: { time: string; dist: string }
+  drawCoords: DrawCoords[]
+  exportCoords: DrawCoords[]
+  drawCoordsDeleted: DrawCoords[]
+  drawCoordsFuture: DrawCoords[]
 }
 
 const initialState = {
@@ -15,7 +15,7 @@ const initialState = {
   exportCoords: [], // Coords that are saved under the hood and user can export them
   drawCoordsDeleted: [], // Coords that are deleted
   drawCoordsFuture: [], // Coords that can be recovered
-} as DrawState;
+} as DrawState
 
 export const drawReducer = createSlice({
   name: 'draw',
@@ -25,11 +25,11 @@ export const drawReducer = createSlice({
       return {
         ...state,
         exportCoords: action.payload,
-      };
+      }
     },
     updateDrawInfo: (
       state,
-      action: PayloadAction<{ time: string; dist: string }>
+      action: PayloadAction<{ time: string; dist: string }>,
     ) => {
       return {
         ...state,
@@ -38,7 +38,7 @@ export const drawReducer = createSlice({
           time: action.payload.time,
           dist: action.payload.dist,
         },
-      };
+      }
     },
     updateDrawCoords: (state, action: PayloadAction<DrawCoords>) => {
       return {
@@ -52,10 +52,10 @@ export const drawReducer = createSlice({
         ],
         drawCoordsDeleted: [],
         drawCoordsFuture: [],
-      };
+      }
     },
     undoDrawCoords: (state, index) => {
-      if (state.drawCoords.length === 0) return;
+      if (state.drawCoords.length === 0) return
       if (state.drawCoords.length !== 0) {
         return {
           ...state,
@@ -64,9 +64,9 @@ export const drawReducer = createSlice({
             ...state.drawCoords.slice(-1),
           ],
           drawCoords: state.drawCoords.filter(
-            (item, index) => index !== state.drawCoords.length - 1
+            (item, index) => index !== state.drawCoords.length - 1,
           ),
-        };
+        }
       }
     },
     redoDrawCoords: (state, index) => {
@@ -79,10 +79,10 @@ export const drawReducer = createSlice({
           ],
           drawCoordsFuture: [
             ...state.drawCoordsFuture.filter(
-              (item, index) => index !== state.drawCoordsFuture.length - 1
+              (item, index) => index !== state.drawCoordsFuture.length - 1,
             ),
           ],
-        };
+        }
       } else if (
         state.drawCoordsFuture.length === 0 &&
         state.drawCoordsDeleted.length > 0
@@ -91,11 +91,11 @@ export const drawReducer = createSlice({
           ...state,
           drawCoords: [...state.drawCoordsDeleted],
           drawCoordsDeleted: [],
-        };
+        }
       }
     },
     deleteDrawCoords: (state, index) => {
-      if (state.drawCoords.length === 0) return;
+      if (state.drawCoords.length === 0) return
       if (state.drawCoords.length !== 0) {
         return {
           ...state,
@@ -103,11 +103,11 @@ export const drawReducer = createSlice({
           drawCoords: [],
           drawCoordsFuture: [],
           exportCoords: [],
-        };
+        }
       }
     },
   },
-});
+})
 
 export const {
   updateDrawInfo,
@@ -116,5 +116,5 @@ export const {
   undoDrawCoords,
   redoDrawCoords,
   updateExportCoords,
-} = drawReducer.actions;
-export default drawReducer.reducer;
+} = drawReducer.actions
+export default drawReducer.reducer

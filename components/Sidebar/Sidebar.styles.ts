@@ -1,4 +1,4 @@
-import { styled } from 'styled-components';
+import { styled } from 'styled-components'
 
 const StyledSidebarContainer = styled.div`
   position: relative;
@@ -25,7 +25,7 @@ const StyledSidebarContainer = styled.div`
     -moz-box-shadow: -7px 0px 20px 3px rgba(0, 0, 0, 0.3);
     box-shadow: -7px 0px 20px 3px rgba(0, 0, 0, 0.3);
   }
-`;
+`
 
 const StyledDragDecoration = styled.div`
   height: 0.3rem;
@@ -35,7 +35,7 @@ const StyledDragDecoration = styled.div`
   @media (min-width: 530px) {
     display: none;
   }
-`;
+`
 
 const StyledSidebarContent = styled.div`
   width: 100%;
@@ -47,6 +47,6 @@ const StyledSidebarContent = styled.div`
   justify-content: flex-start;
   gap: 1.5rem;
   margin: 0 auto;
-`;
+`
 
-export { StyledSidebarContainer, StyledDragDecoration, StyledSidebarContent };
+export { StyledSidebarContainer, StyledDragDecoration, StyledSidebarContent }

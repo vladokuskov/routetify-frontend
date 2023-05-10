@@ -1,22 +1,22 @@
-import { ReactNode } from 'react';
+import { ReactNode } from 'react'
 import {
   StyledSidebarSection,
   StyledSidebarSectionTitle,
-} from './SidebarSection.styles';
+} from './SidebarSection.styles'
 
 const SidebarSection = ({
   title,
   children,
 }: {
-  title: string;
-  children: ReactNode;
+  title: string
+  children: ReactNode
 }) => {
   return (
     <StyledSidebarSection>
       <StyledSidebarSectionTitle>{title}</StyledSidebarSectionTitle>
       {children}
     </StyledSidebarSection>
-  );
-};
+  )
+}
 
-export { SidebarSection };
+export { SidebarSection }

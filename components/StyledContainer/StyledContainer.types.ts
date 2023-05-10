@@ -1,3 +1,3 @@
 export type TStyledContainer = {
-  variant: 'layout';
-};
+  variant: 'layout'
+}

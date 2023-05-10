@@ -1,10 +1,10 @@
-import { styled } from 'styled-components';
+import { styled } from 'styled-components'
 
 const StyledGeocoderContainer = styled.div`
   font-family: var(--font-roboto), sans-serif;
   position: relative;
   width: 100%;
-`;
+`
 
 const StyledGeocoderResultsContainer = styled.ul`
   position: absolute;
@@ -14,7 +14,7 @@ const StyledGeocoderResultsContainer = styled.ul`
   box-shadow: 0px 5px 15px -1px rgba(0, 0, 0, 0.09);
   background-color: #e5e5e5;
   z-index: 2;
-`;
+`
 
 const StyledGeocoderResult = styled.li`
   width: 100%;
@@ -40,10 +40,10 @@ const StyledGeocoderResult = styled.li`
       opacity: 1;
     }
   }
-`;
+`
 
 export {
   StyledGeocoderContainer,
   StyledGeocoderResultsContainer,
   StyledGeocoderResult,
-};
+}

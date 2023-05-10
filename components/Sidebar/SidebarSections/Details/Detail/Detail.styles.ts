@@ -1,4 +1,4 @@
-import { styled } from 'styled-components';
+import { styled } from 'styled-components'
 
 const StyledDetailContainer = styled.div`
   font-family: var(--font-roboto), sans-serif;
@@ -12,7 +12,7 @@ const StyledDetailContainer = styled.div`
   border-radius: 8px;
   padding: 0.2rem;
   min-width: 5rem;
-`;
+`
 
 const StyledDetailTitle = styled.h4`
   font-size: 18px;
@@ -20,7 +20,7 @@ const StyledDetailTitle = styled.h4`
   letter-spacing: -0.004em;
   font-weight: 700;
   color: #2c2c2c;
-`;
+`
 
 const StyledDetailSubTitle = styled.p`
   font-weight: 500;
@@ -28,6 +28,6 @@ const StyledDetailSubTitle = styled.p`
   line-height: 21px;
   letter-spacing: 0.01em;
   color: #2c2c2c90;
-`;
+`
 
-export { StyledDetailContainer, StyledDetailTitle, StyledDetailSubTitle };
+export { StyledDetailContainer, StyledDetailTitle, StyledDetailSubTitle }

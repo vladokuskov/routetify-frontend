@@ -1,8 +1,8 @@
 export type SiteConfig = {
-  name: string;
-  description: string;
-  url: string;
+  name: string
+  description: string
+  url: string
   links: {
-    github: string;
-  };
-};
+    github: string
+  }
+}

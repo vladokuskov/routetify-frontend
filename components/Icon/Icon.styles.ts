@@ -1,10 +1,10 @@
-import { css, keyframes, styled } from 'styled-components';
-import { IBoolean } from '@/types/global/index.types';
+import { css, keyframes, styled } from 'styled-components'
+import { IBoolean } from '@/types/global/index.types'
 
 const spinKeyFrame = keyframes`
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
-`;
+`
 
 const StyledIconWrapper = styled.span<{ spin: IBoolean }>`
   display: flex;
@@ -17,6 +17,6 @@ const StyledIconWrapper = styled.span<{ spin: IBoolean }>`
         animation: ${spinKeyFrame} 1s linear infinite;
       `}
   }
-`;
+`
 
-export { StyledIconWrapper };
+export { StyledIconWrapper }

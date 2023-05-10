@@ -1,15 +1,15 @@
-import { changeLayer } from '@/redux/features/controlsSlice';
-import { addLatLng } from '@/redux/features/geocoderSlice';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { StyledSidebarSectionContent } from '../../SidebarSection/SidebarSection.styles';
-import { Button } from '@/components/Button/Button';
+import { changeLayer } from '@/redux/features/controlsSlice'
+import { addLatLng } from '@/redux/features/geocoderSlice'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { StyledSidebarSectionContent } from '../../SidebarSection/SidebarSection.styles'
+import { Button } from '@/components/Button/Button'
 
 const Layer = () => {
-  const layer = useAppSelector((state) => state.controlsReducer.layer);
+  const layer = useAppSelector((state) => state.controlsReducer.layer)
   const currentCoords = useAppSelector(
-    (state) => state.controlsReducer.currentCoords
-  );
-  const dispatch = useAppDispatch();
+    (state) => state.controlsReducer.currentCoords,
+  )
+  const dispatch = useAppDispatch()
 
   const handleLayerChange = (e: string) => {
     if (e === 'toDefault') {
@@ -17,21 +17,21 @@ const Layer = () => {
         addLatLng({
           lat: currentCoords.lat,
           lng: currentCoords.lng,
-        })
-      );
-      window.scrollTo(0, 0);
-      dispatch(changeLayer('default'));
+        }),
+      )
+      window.scrollTo(0, 0)
+      dispatch(changeLayer('default'))
     } else if (e === 'toSatellite') {
       dispatch(
         addLatLng({
           lat: currentCoords.lat,
           lng: currentCoords.lng,
-        })
-      );
-      dispatch(changeLayer('satellite'));
-      window.scrollTo(0, 0);
+        }),
+      )
+      dispatch(changeLayer('satellite'))
+      window.scrollTo(0, 0)
     }
-  };
+  }
 
   return (
     <StyledSidebarSectionContent>
@@ -50,7 +50,7 @@ const Layer = () => {
         isDisabled={layer === 'satellite' ? 'true' : 'false'}
       />
     </StyledSidebarSectionContent>
-  );
-};
+  )
+}
 
-export { Layer };
+export { Layer }

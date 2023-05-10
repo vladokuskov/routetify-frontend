@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components'
 
-import { Input } from './Input.types';
+import { Input } from './Input.types'
 
 const StyledInputMainWrapper = styled.div<Input>`
   position: relative;
@@ -31,7 +31,7 @@ const StyledInputMainWrapper = styled.div<Input>`
   .icon {
     pointer-events: none;
   }
-`;
+`
 
 const StyledInput = styled.input<Input>`
   font-family: var(--font-roboto), sans-serif;
@@ -88,7 +88,7 @@ const StyledInput = styled.input<Input>`
         border-radius: 0.5rem;
       `}
   }
-`;
+`
 
 const StyledInputButton = styled.button<Input>`
   position: absolute;
@@ -110,7 +110,7 @@ const StyledInputButton = styled.button<Input>`
         opacity: 1;
       }
     `}
-`;
+`
 
 const StyledInputIcon = styled.span<Input>`
   transition: 0.2s;
@@ -125,11 +125,11 @@ const StyledInputIcon = styled.span<Input>`
       top: 0.4rem;
       color: #5a5a5ab3;
     `}
-`;
+`
 
 export {
   StyledInput,
   StyledInputButton,
   StyledInputIcon,
   StyledInputMainWrapper,
-};
+}

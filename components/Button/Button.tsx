@@ -1,6 +1,6 @@
-import Icon from '../Icon/Icon';
-import { StyledButton, StyledIcon, StyledText } from './Button.styles';
-import { Button } from './Button.types';
+import Icon from '../Icon/Icon'
+import { StyledButton, StyledIcon, StyledText } from './Button.styles'
+import { Button } from './Button.types'
 
 const Button = ({
   variant = 'text',
@@ -26,7 +26,7 @@ const Button = ({
       )}
       {text && variant !== 'icon' && <StyledText>{text}</StyledText>}
     </StyledButton>
-  );
-};
+  )
+}
 
-export { Button };
+export { Button }

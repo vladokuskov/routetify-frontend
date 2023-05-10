@@ -1,4 +1,4 @@
 export type TDetail = {
-  title: string;
-  subTitle: string;
-};
+  title: string
+  subTitle: string
+}

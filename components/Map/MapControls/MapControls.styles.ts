@@ -1,4 +1,4 @@
-import { styled } from 'styled-components';
+import { styled } from 'styled-components'
 
 const StyledMapControls = styled.div`
   position: fixed;
@@ -14,6 +14,6 @@ const StyledMapControls = styled.div`
     @include flexCenter(row, 0.5rem);
     padding: 0 !important;
   }
-`;
+`
 
-export { StyledMapControls };
+export { StyledMapControls }

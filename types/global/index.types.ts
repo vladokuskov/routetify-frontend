@@ -1,4 +1,4 @@
-export type IBoolean = 'true' | 'false';
+export type IBoolean = 'true' | 'false'
 
 export enum DrawType {
   None,

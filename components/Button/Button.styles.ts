@@ -1,5 +1,5 @@
-import { css, styled } from 'styled-components';
-import { Button } from './Button.types';
+import { css, styled } from 'styled-components'
+import { Button } from './Button.types'
 
 const StyledButton = styled.button<Button>`
   font-family: var(--font-roboto), sans-serif;
@@ -85,10 +85,10 @@ const StyledButton = styled.button<Button>`
         background-color: #bdc8c2;
       }
     `};
-`;
+`
 
-const StyledIcon = styled.span``;
+const StyledIcon = styled.span``
 
-const StyledText = styled.span``;
+const StyledText = styled.span``
 
-export { StyledButton, StyledText, StyledIcon };
+export { StyledButton, StyledText, StyledIcon }

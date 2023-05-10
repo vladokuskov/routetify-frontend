@@ -2,8 +2,8 @@ import {
   StyledDetailContainer,
   StyledDetailSubTitle,
   StyledDetailTitle,
-} from './Detail.styles';
-import { TDetail } from './Detail.types';
+} from './Detail.styles'
+import { TDetail } from './Detail.types'
 
 const Detail = ({ title, subTitle }: TDetail) => {
   return (
@@ -11,7 +11,7 @@ const Detail = ({ title, subTitle }: TDetail) => {
       <StyledDetailTitle>{title}</StyledDetailTitle>
       <StyledDetailSubTitle>{subTitle}</StyledDetailSubTitle>
     </StyledDetailContainer>
-  );
-};
+  )
+}
 
-export { Detail };
+export { Detail }

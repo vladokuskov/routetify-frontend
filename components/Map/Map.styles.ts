@@ -1,4 +1,4 @@
-import { styled } from 'styled-components';
+import { styled } from 'styled-components'
 
 const StyledMapMainContainer = styled.div`
   position: fixed;
@@ -13,13 +13,13 @@ const StyledMapMainContainer = styled.div`
     margin-left: calc(18.75rem);
     width: calc(100% - 18.75rem);
   }
-`;
+`
 
 const StyledMapContainer = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
   display: grid;
-`;
+`
 
-export { StyledMapMainContainer, StyledMapContainer };
+export { StyledMapMainContainer, StyledMapContainer }

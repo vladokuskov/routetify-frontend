@@ -1,5 +1,5 @@
-'use client';
-import { createGlobalStyle } from 'styled-components';
+'use client'
+import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
 
@@ -114,6 +114,6 @@ const GlobalStyle = createGlobalStyle`
   select {
   font: inherit;
   }
-`;
+`
 
-export default GlobalStyle;
+export default GlobalStyle

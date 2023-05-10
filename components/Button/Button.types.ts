@@ -1,8 +1,8 @@
-import { IBoolean } from '@/types/global/index.types';
+import { IBoolean } from '@/types/global/index.types'
 
-type ButtonVariants = 'text' | 'icon' | 'iconWithText';
+type ButtonVariants = 'text' | 'icon' | 'iconWithText'
 
-type ButtonStatus = 'default' | 'error' | 'success' | 'danger';
+type ButtonStatus = 'default' | 'error' | 'success' | 'danger'
 
 type ButtonSizes =
   | 'sm1'
@@ -13,17 +13,17 @@ type ButtonSizes =
   | 'md3'
   | 'xl1'
   | 'xl2'
-  | 'xl3';
+  | 'xl3'
 
 export type Button = {
-  variant?: ButtonVariants;
-  text?: string;
-  icon?: React.FC<React.SVGProps<SVGSVGElement>> | null;
-  full?: IBoolean;
-  size?: ButtonSizes;
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  className?: string;
-  isDisabled?: IBoolean;
-  status?: ButtonStatus;
-  loading?: IBoolean;
-};
+  variant?: ButtonVariants
+  text?: string
+  icon?: React.FC<React.SVGProps<SVGSVGElement>> | null
+  full?: IBoolean
+  size?: ButtonSizes
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
+  className?: string
+  isDisabled?: IBoolean
+  status?: ButtonStatus
+  loading?: IBoolean
+}

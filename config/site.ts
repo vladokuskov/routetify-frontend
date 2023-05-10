@@ -1,4 +1,4 @@
-import { SiteConfig } from '@/types/global/siteConfig.types';
+import { SiteConfig } from '@/types/global/siteConfig.types'
 
 export const siteConfig: SiteConfig = {
   name: 'cycroute',
@@ -8,4 +8,4 @@ export const siteConfig: SiteConfig = {
   links: {
     github: 'https://github.com/swappnet/cycroute',
   },
-};
+}

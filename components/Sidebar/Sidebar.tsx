@@ -2,13 +2,13 @@ import {
   StyledDragDecoration,
   StyledSidebarContainer,
   StyledSidebarContent,
-} from './Sidebar.styles';
-import { Geocoder } from './SidebarSections/Geocoder/Geocoder';
-import { SidebarSection } from './SidebarSection/SidebarSection';
-import { Draw } from './SidebarSections/Draw/Draw';
-import { Layer } from './SidebarSections/Layer/Layer';
-import { Export } from './SidebarSections/Export/Export';
-import { Details } from './SidebarSections/Details/Details';
+} from './Sidebar.styles'
+import { Geocoder } from './SidebarSections/Geocoder/Geocoder'
+import { SidebarSection } from './SidebarSection/SidebarSection'
+import { Draw } from './SidebarSections/Draw/Draw'
+import { Layer } from './SidebarSections/Layer/Layer'
+import { Export } from './SidebarSections/Export/Export'
+import { Details } from './SidebarSections/Details/Details'
 
 const Sidebar = () => {
   return (
@@ -32,7 +32,7 @@ const Sidebar = () => {
         </SidebarSection>
       </StyledSidebarContent>
     </StyledSidebarContainer>
-  );
-};
+  )
+}
 
-export { Sidebar };
+export { Sidebar }

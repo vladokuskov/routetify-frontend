@@ -41,13 +41,19 @@ const MapControls = () => {
   const drawType = useAppSelector((state) => state.controlsReducer.draw)
 
   const handleDelete = () => {
-    dispatch(deleteDrawCoords(null))
-    dispatch(
-      updateDrawInfo({
-        time: '0',
-        dist: '0',
-      }),
-    )
+    let isConfirmed = window.confirm('Are you sure you want delete route?')
+
+    if (isConfirmed) {
+      dispatch(deleteDrawCoords(null))
+      dispatch(
+        updateDrawInfo({
+          time: '0',
+          dist: '0',
+        }),
+      )
+    } else {
+      return null
+    }
   }
 
   const handleRouteFit = () => {
@@ -82,7 +88,6 @@ const MapControls = () => {
       }
     } catch (error) {
       dispatch(changeLocationStatus(LocationStatus.error))
-      return null
     }
   }
 

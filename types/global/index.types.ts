@@ -2,7 +2,7 @@ export type IBoolean = 'true' | 'false'
 
 export enum DrawType {
   None,
-  Hand,
+  Line,
 }
 
 export enum LocationStatus {

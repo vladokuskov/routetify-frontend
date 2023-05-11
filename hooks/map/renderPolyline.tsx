@@ -36,7 +36,7 @@ const useRenderPolyline = (e: L.Map | null) => {
     if (!drawPolyline) return
 
     if (e) {
-      if (drawPolyline && drawType === DrawType.Hand) {
+      if (drawPolyline && drawType === DrawType.Line) {
         drawPolyline.addTo(e)
         dispatch(updateExportCoords(drawCoords))
       }

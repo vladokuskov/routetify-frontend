@@ -6,7 +6,7 @@ import {
 import { Geocoder } from './SidebarSections/Geocoder/Geocoder'
 import { SidebarSection } from './SidebarSection/SidebarSection'
 import { Draw } from './SidebarSections/Draw/Draw'
-import { Layer } from './SidebarSections/Layer/Layer'
+import { Layers } from './SidebarSections/Layers/Layers'
 import { Export } from './SidebarSections/Export/Export'
 import { Details } from './SidebarSections/Details/Details'
 
@@ -25,7 +25,7 @@ const Sidebar = () => {
           <Draw />
         </SidebarSection>
         <SidebarSection title="Layer">
-          <Layer />
+          <Layers />
         </SidebarSection>
         <SidebarSection title="Export">
           <Export />

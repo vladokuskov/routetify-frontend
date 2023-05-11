@@ -39,8 +39,6 @@ const useRenderPolyline = (e: L.Map | null) => {
       if (drawPolyline && drawType === DrawType.Hand) {
         drawPolyline.addTo(e)
         dispatch(updateExportCoords(drawCoords))
-      } else if (drawPolyline && drawType === DrawType.Road) {
-        drawPolyline.remove()
       }
     }
   }, [drawPolyline, drawType, e, location])

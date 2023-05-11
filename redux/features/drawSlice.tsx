@@ -1,13 +1,6 @@
+import { DrawState } from '@/types/global/redux.types'
 import { DrawCoords } from '@/types/models/drawCoords.types'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
-interface DrawState {
-  drawInfo: { time: string; dist: string }
-  drawCoords: DrawCoords[]
-  exportCoords: DrawCoords[]
-  drawCoordsDeleted: DrawCoords[]
-  drawCoordsFuture: DrawCoords[]
-}
 
 const initialState = {
   drawInfo: { time: '0', dist: '0' },

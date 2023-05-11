@@ -9,7 +9,6 @@ import * as L from 'leaflet'
 
 import GetPositionByDragging from './GetDragPosition'
 import useUpdateMapView from '../../../hooks/map/updateMapView'
-import useRenderRouting from '../../../hooks/map/renderRouting'
 import useClickedCoords from '../../../hooks/map/updateClickedCoords'
 import useRenderPolyline from '../../../hooks/map/renderPolyline'
 import useRenderMarkers from '../../../hooks/map/renderMarkers'
@@ -25,7 +24,6 @@ const LeafletMap = () => {
 
   useClickedCoords(map)
   useUpdateMapView(map)
-  useRenderRouting(map)
   useRenderPolyline(map)
   useRenderMarkers(map)
   useFitBoundsOnClick(map)

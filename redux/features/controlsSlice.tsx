@@ -1,26 +1,15 @@
-import { DrawType, LocationStatus } from '@/types/global/index.types'
+import { mapConfig } from '@/config/map'
+import { DrawType, Layer, LocationStatus } from '@/types/global/index.types'
+import { ControlsState } from '@/types/global/redux.types'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
-interface ControlsState {
-  draw: DrawType
-  layer: 'default' | 'satellite'
-  isFitBounds: boolean
-  location: LocationStatus
-  colorPicker: { color: string; isOpen: boolean }
-  currentCoords: { lat: number; lng: number; zoom: number }
-}
 
 const initialState = {
   draw: DrawType.None,
-  layer: 'default',
+  layer: Layer.default,
   location: LocationStatus.idle,
   isFitBounds: false,
-  colorPicker: { color: '#00ACC1', isOpen: false },
-  currentCoords: {
-    lat: 50.45,
-    lng: 30.5241,
-    zoom: 12,
-  },
+  colorPicker: { color: mapConfig.lineColor, isOpen: false },
+  currentCoords: mapConfig.initialCoords,
 } as ControlsState
 
 export const controlsReducer = createSlice({
@@ -57,7 +46,7 @@ export const controlsReducer = createSlice({
         draw: action.payload,
       }
     },
-    changeLayer: (state, action: PayloadAction<'default' | 'satellite'>) => {
+    changeLayer: (state, action: PayloadAction<Layer>) => {
       return {
         ...state,
         layer: action.payload,

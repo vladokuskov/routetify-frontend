@@ -17,7 +17,7 @@ const useClickedCoords = (e: L.Map | null) => {
 
     if (e) {
       if (drawType === DrawType.None) return
-      if (drawType === DrawType.Hand || drawType === DrawType.Road) {
+      if (drawType === DrawType.Hand) {
         e.on('click', (e: { latlng: { lat: number; lng: number } }) => {
           setClickedCoords({ lat: e.latlng.lat, lng: e.latlng.lng })
         })
@@ -28,9 +28,7 @@ const useClickedCoords = (e: L.Map | null) => {
   useEffect(() => {
     if (!clickedCoords) return
 
-    if (clickedCoords && drawType === DrawType.Road) {
-      dispatch(updateDrawCoords(clickedCoords))
-    } else if (clickedCoords && drawType === DrawType.Hand) {
+    if (clickedCoords && drawType === DrawType.Hand) {
       dispatch(updateDrawCoords(clickedCoords))
     } else {
       setClickedCoords(null)

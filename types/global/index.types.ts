@@ -2,7 +2,6 @@ export type IBoolean = 'true' | 'false'
 
 export enum DrawType {
   None,
-  Road,
   Hand,
 }
 
@@ -11,4 +10,9 @@ export enum LocationStatus {
   fetching,
   success,
   error,
+}
+
+export enum Layer {
+  default,
+  satellite,
 }

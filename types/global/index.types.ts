@@ -16,3 +16,8 @@ export enum Layer {
   default,
   satellite,
 }
+
+export enum Route {
+  GPX,
+  KML,
+}

@@ -4,6 +4,7 @@ import downloadjs from 'downloadjs'
 import { DrawCoords } from '@/types/models/drawCoords.types'
 import { StyledSidebarSectionContent } from '../../SidebarSection/SidebarSection.styles'
 import { Button } from '@/components/Button/Button'
+import { Route } from '@/types/global/index.types'
 
 const date = new Date()
 const current_date = `${date.getFullYear()}-${
@@ -15,45 +16,36 @@ const Export = () => {
 
   const [filename, setFilename] = useState<string>('')
 
-  // Function that generate gpx file with dynamic filenames and coords
-  const generateGPX = async (coords: DrawCoords[]) => {
-    let gpx = `<?xml version="1.0" encoding="UTF-8"?>
-  <gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd http://www.topografix.com/GPX/gpx_style/0/2 http://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:gpx_style="http://www.topografix.com/GPX/gpx_style/0/2" version="1.1" creator="https://cycroute.netlify.app/">
-  <metadata>
-    <name>${
-      filename.length === 0 || !filename
-        ? `new_route_${current_date}`
-        : filename
-    }</name>
-  <author>
-    <name>cycroute</name>
-    <link href="https://cycroute.netlify.app/"></link>
-  </author>
-  </metadata>
-  <trk>
-    <name>${
-      filename.length === 0 || !filename
-        ? `new_route_${current_date}`
-        : filename
-    }</name>
-    <type>Cycling</type>
-    <trkseg>`
+  const generateGPX = (coords: DrawCoords[]) => {
+    let gpxString = `
+    <?xml version="1.0" encoding="UTF-8"?>
+    <gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd http://www.topografix.com/GPX/gpx_style/0/2 http://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:gpx_style="http://www.topografix.com/GPX/gpx_style/0/2" version="1.1" creator="https://cycplanner.vercel.app/">
+      <metadata>
+        <name>${filename}</name>
+        <author>
+          <name>cycroute</name>
+          <link href="https://cycplanner.vercel.app/"></link>
+        </author>
+      </metadata>
+      <trk>
+        <name>${filename}</name>
+        <type>Cycling</type>
+        <trkseg>
+          ${coords
+            .map(
+              (point) =>
+                `<trkpt lat="${point.lat}" lon="${point.lng}"></trkpt>`,
+            )
+            .join('\n\t')}
+        </trkseg>
+      </trk>
+    </gpx>`
 
-    coords.forEach((coord) => {
-      gpx += `
-      <trkpt lat="${coord.lat}" lon="${coord.lng}"></trkpt>`
-    })
-
-    gpx += `
-    </trkseg>
-    </trk>
-  </gpx>`
-
-    return gpx
+    return gpxString
   }
 
-  const generateKML = async (coords: DrawCoords[]) => {
-    let kml = `<?xml version="1.0" encoding="UTF-8"?>
+  const generateKML = (coords: DrawCoords[]) => {
+    let kmlString = `<?xml version="1.0" encoding="UTF-8"?>
     <kml xmlns="http://www.opengis.net/kml/2.2">
       <Document>
         <name>${
@@ -85,47 +77,33 @@ const Export = () => {
           }</name>
           <LineString>
             <tessellate>1</tessellate>
-            <coordinates>`
-
-    coords.forEach((coord, index: number) => {
-      kml += `${coord.lng},${coord.lat},0 `
-    })
-
-    kml += `
-        </coordinates>
+            <coordinates>
+            ${coords.forEach(
+              (coord, index: number) => `${coord.lng},${coord.lat},0`,
+            )}
+          </coordinates>
       </LineString>
     </Placemark>
   </Document>
 </kml>`
 
-    return kml
+    return kmlString
   }
 
-  const handleGpxDownload = async () => {
-    const gpx = await generateGPX(exportCoords)
+  const handleRouteDownload = (e: Route) => {
+    const route =
+      e === Route.GPX ? generateGPX(exportCoords) : generateKML(exportCoords)
 
     downloadjs(
-      gpx,
+      route,
       `${
         filename.length === 0 || !filename
           ? `new_route_${current_date}`
           : filename
-      }.gpx`,
-      'application/gpx+xml',
-    )
-  }
-
-  const handleKmlDownload = async () => {
-    const kml = await generateKML(exportCoords)
-
-    downloadjs(
-      kml,
-      `${
-        filename.length === 0 || !filename
-          ? `new_route_${current_date}`
-          : filename
-      }.kml`,
-      'application/vnd.google-earth.kml+xml',
+      }${e === Route.GPX ? '.gpx' : '.kml'}`,
+      `application/${
+        e === Route.GPX ? 'application/gpx+xml' : 'vnd.google-earth.kml+xml'
+      }`,
     )
   }
 
@@ -134,14 +112,14 @@ const Export = () => {
       <Button
         variant="iconWithText"
         text="GPX"
-        onClick={handleGpxDownload}
+        onClick={() => handleRouteDownload(Route.GPX)}
         full="true"
         isDisabled={exportCoords.length === 0 ? 'true' : 'false'}
       />
       <Button
         variant="iconWithText"
         text="KML"
-        onClick={handleKmlDownload}
+        onClick={() => handleRouteDownload(Route.KML)}
         full="true"
         isDisabled={exportCoords.length === 0 ? 'true' : 'false'}
       />

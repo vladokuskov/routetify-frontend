@@ -3,7 +3,7 @@ import {
   changeLocationStatus,
 } from '@/redux/features/controlsSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import { LocationStatus } from '@/types/global/index.types'
+import { LocationStatus } from '@/types/global/locationStatus.types'
 import { useMapEvents } from 'react-leaflet'
 
 const GetPositionByDragging = () => {

@@ -4,7 +4,7 @@ import downloadjs from 'downloadjs'
 import { DrawCoords } from '@/types/models/drawCoords.types'
 import { StyledSidebarSectionContent } from '../../SidebarSection/SidebarSection.styles'
 import { Button } from '@/components/Button/Button'
-import { Route } from '@/types/global/index.types'
+import { Route } from '@/types/global/export.types'
 
 const date = new Date()
 const current_date = `${date.getFullYear()}-${
@@ -110,14 +110,14 @@ const Export = () => {
   return (
     <StyledSidebarSectionContent>
       <Button
-        variant="iconWithText"
+        variant="primary"
         text="GPX"
         onClick={() => handleRouteDownload(Route.GPX)}
         full="true"
         isDisabled={exportCoords.length === 0 ? 'true' : 'false'}
       />
       <Button
-        variant="iconWithText"
+        variant="primary"
         text="KML"
         onClick={() => handleRouteDownload(Route.KML)}
         full="true"

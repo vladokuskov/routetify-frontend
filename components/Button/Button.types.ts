@@ -1,8 +1,8 @@
 import { IBoolean } from '@/types/global/index.types'
 
-type ButtonVariants = 'text' | 'icon' | 'iconWithText'
+type ButtonVariants = 'primary' | 'icon' | 'outlined'
 
-type ButtonStatus = 'default' | 'error' | 'success' | 'danger'
+type ButtonStatus = 'default' | 'success' | 'danger'
 
 type ButtonSizes =
   | 'sm1'

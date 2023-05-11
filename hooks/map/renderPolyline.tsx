@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import * as L from 'leaflet'
 
 import { updateExportCoords } from '../../redux/features/drawSlice'
-import { DrawType } from '@/types/global/index.types'
+import { DrawType } from '@/types/global/drawType.types'
 
 const useRenderPolyline = (e: L.Map | null) => {
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
@@ -36,7 +36,7 @@ const useRenderPolyline = (e: L.Map | null) => {
     if (!drawPolyline) return
 
     if (e) {
-      if (drawPolyline && drawType === DrawType.Hand) {
+      if (drawPolyline && drawType === DrawType.Line) {
         drawPolyline.addTo(e)
         dispatch(updateExportCoords(drawCoords))
       }

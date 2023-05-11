@@ -3,7 +3,7 @@ import { addLatLng } from '@/redux/features/geocoderSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { StyledSidebarSectionContent } from '../../SidebarSection/SidebarSection.styles'
 import { Button } from '@/components/Button/Button'
-import { Layer } from '@/types/global/index.types'
+import { Layer } from '@/types/global/layer.types'
 
 const Layers = () => {
   const layer = useAppSelector((state) => state.controlsReducer.layer)
@@ -37,14 +37,14 @@ const Layers = () => {
   return (
     <StyledSidebarSectionContent>
       <Button
-        variant="iconWithText"
+        variant="primary"
         text="Default"
         onClick={() => handleLayerChange(Layer.default)}
         full="true"
         isDisabled={layer === Layer.default ? 'true' : 'false'}
       />
       <Button
-        variant="iconWithText"
+        variant="primary"
         text="Satellite"
         onClick={() => handleLayerChange(Layer.satellite)}
         full="true"

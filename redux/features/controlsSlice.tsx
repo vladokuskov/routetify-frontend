@@ -1,5 +1,7 @@
 import { mapConfig } from '@/config/map'
-import { DrawType, Layer, LocationStatus } from '@/types/global/index.types'
+import { DrawType } from '@/types/global/drawType.types'
+import { Layer } from '@/types/global/layer.types'
+import { LocationStatus } from '@/types/global/locationStatus.types'
 import { ControlsState } from '@/types/global/redux.types'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 

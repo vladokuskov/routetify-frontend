@@ -3,7 +3,7 @@ import { StyledButton, StyledIcon, StyledText } from './Button.styles'
 import { Button } from './Button.types'
 
 const Button = ({
-  variant = 'text',
+  variant = 'primary',
   icon,
   text,
   onClick,
@@ -11,6 +11,7 @@ const Button = ({
   full = 'false',
   status,
   loading,
+  size = 'sm3',
 }: Button) => {
   return (
     <StyledButton
@@ -20,11 +21,10 @@ const Button = ({
       disabled={isDisabled === 'true' ? true : false}
       full={full}
       status={status}
+      size={size}
     >
-      {icon && variant !== 'text' && (
-        <Icon svg={icon} spin={loading === 'true' ? 'true' : 'false'} />
-      )}
       {text && variant !== 'icon' && <StyledText>{text}</StyledText>}
+      {icon && <Icon svg={icon} spin={loading === 'true' ? 'true' : 'false'} />}
     </StyledButton>
   )
 }

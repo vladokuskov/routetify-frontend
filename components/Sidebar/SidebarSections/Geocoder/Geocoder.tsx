@@ -14,7 +14,7 @@ import {
   changeLocationStatus,
 } from '@/redux/features/controlsSlice'
 import { useAppDispatch } from '@/redux/hooks'
-import { LocationStatus } from '@/types/global/index.types'
+import { LocationStatus } from '@/types/global/locationStatus.types'
 
 const Geocoder = () => {
   const ref = useRef<HTMLDivElement>(null)

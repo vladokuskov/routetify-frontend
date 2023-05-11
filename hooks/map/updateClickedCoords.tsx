@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { updateDrawCoords } from '../../redux/features/drawSlice'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import { DrawType } from '@/types/global/index.types'
+import { DrawType } from '@/types/global/drawType.types'
 
 const useClickedCoords = (e: L.Map | null) => {
   const drawType = useAppSelector((state) => state.controlsReducer.draw)

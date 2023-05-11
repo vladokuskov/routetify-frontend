@@ -5,7 +5,7 @@
 
 `cycroute` - user-friendly web application that allows you to create bike routes effortlessly. With our application, you can easily export your routes in GPX/KML format, making it simple to share your favorite rides with others.
 
-Live - https://cycroute.netlify.app/
+Live - https://cycroute.vercel.app/
 
 ### Features
 
@@ -16,9 +16,9 @@ Live - https://cycroute.netlify.app/
 
 ### Technology Stack
 
-    React
+    NextJS
     Redux
-    Sass
+    Styled Components
     TypeScript
     Leaflet
 

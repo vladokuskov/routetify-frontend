@@ -10,7 +10,7 @@ const initialState = {
   layer: Layer.default,
   location: LocationStatus.idle,
   isFitBounds: false,
-  colorPicker: { color: mapConfig.lineColor, isOpen: false },
+  colorPicker: { color: mapConfig.lineColor.placed, isOpen: false },
   currentCoords: mapConfig.initialCoords,
 } as ControlsState
 

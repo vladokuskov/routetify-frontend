@@ -99,6 +99,30 @@ export const drawReducer = createSlice({
         }
       }
     },
+    updateDraggedMarkerCoords: (
+      state,
+      action: PayloadAction<{
+        i: number
+        newCoords: DrawCoords
+      }>,
+    ) => {
+      const { i, newCoords } = action.payload
+
+      const updatedCoords = state.drawCoords.map((coord, index) => {
+        if (index === i) {
+          return {
+            lat: newCoords.lat,
+            lng: newCoords.lng,
+          }
+        }
+        return coord
+      })
+
+      return {
+        ...state,
+        drawCoords: updatedCoords,
+      }
+    },
   },
 })
 
@@ -109,5 +133,6 @@ export const {
   undoDrawCoords,
   redoDrawCoords,
   updateExportCoords,
+  updateDraggedMarkerCoords,
 } = drawReducer.actions
 export default drawReducer.reducer

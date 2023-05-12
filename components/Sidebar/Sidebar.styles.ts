@@ -13,17 +13,15 @@ const StyledSidebarContainer = styled.div`
   -webkit-box-shadow: 0 -7px 10px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 -7px 10px rgba(0, 0, 0, 0.1);
   padding: 1rem;
-  @media (min-width: 530px) {
+  @media (min-width: 650px) {
     z-index: 2;
     position: absolute;
     max-width: 18.75rem;
-    left: 0;
+    right: 0;
     top: 0;
     margin-top: 0;
     height: 100%;
-    -webkit-box-shadow: -7px 0px 20px 3px rgba(0, 0, 0, 0.3);
-    -moz-box-shadow: -7px 0px 20px 3px rgba(0, 0, 0, 0.3);
-    box-shadow: -7px 0px 20px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 25px 0px 20px 20px rgba(0, 0, 0, 0.3);
   }
 `
 
@@ -32,7 +30,7 @@ const StyledDragDecoration = styled.div`
   width: 1.8rem;
   border-radius: 0.2rem;
   background-color: #2c2c2c50;
-  @media (min-width: 530px) {
+  @media (min-width: 650px) {
     display: none;
   }
 `

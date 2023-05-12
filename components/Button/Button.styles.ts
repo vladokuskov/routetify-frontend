@@ -119,6 +119,7 @@ const StyledButton = styled.button<Button>`
       : variant === 'primary'
       ? css`
           border-radius: 8px;
+          border: 0.15rem solid transparent;
           background-color: #a2c3b1;
           color: #424242;
           gap: 0.5rem;
@@ -139,8 +140,8 @@ const StyledButton = styled.button<Button>`
         css`
           border-radius: 8px;
           border: 0.15rem solid ${status === 'danger' ? '#E5342F' : '#a2c3b1'};
-          background-color: transparent;
-          color: ${status === 'danger' ? '#E5342F' : '#a2c3b1'};
+          background-color: ${status === 'danger' ? '#E5342F' : 'transparent'};
+          color: ${status === 'danger' ? '#f8f6f6' : '#a2c3b1'};
           gap: 0.5rem;
           &:hover,
           &:focus {

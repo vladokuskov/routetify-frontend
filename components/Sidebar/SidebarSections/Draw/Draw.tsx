@@ -11,8 +11,8 @@ const Draw = () => {
   const dispatch = useAppDispatch()
 
   const handleDrawChange = (e: DrawType) => {
-    if (drawType !== e && e === DrawType.Line) {
-      dispatch(changeDraw(DrawType.Line))
+    if (drawType !== e) {
+      dispatch(changeDraw(e))
     }
   }
 
@@ -23,22 +23,17 @@ const Draw = () => {
   return (
     <StyledSidebarSectionContent>
       <Button
-        variant="primary"
-        text="Line"
-        onClick={() => handleDrawChange(DrawType.Line)}
+        variant={drawType !== DrawType.None ? 'outlined' : 'primary'}
+        text={drawType !== DrawType.None ? 'Exit drawing' : 'Line'}
+        onClick={() =>
+          handleDrawChange(
+            drawType !== DrawType.None ? DrawType.None : DrawType.Line,
+          )
+        }
         full="true"
-        isDisabled={drawType === DrawType.Line ? 'true' : 'false'}
-        icon={LineIcon}
+        icon={drawType !== DrawType.None ? ClearIcon : LineIcon}
+        status={drawType !== DrawType.None ? 'danger' : 'default'}
       />
-      {drawType !== DrawType.None && (
-        <Button
-          variant="outlined"
-          icon={ClearIcon}
-          onClick={handleDrawExit}
-          status="danger"
-          size="sm1"
-        />
-      )}
     </StyledSidebarSectionContent>
   )
 }

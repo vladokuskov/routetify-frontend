@@ -6,6 +6,8 @@ import { mapConfig } from '@/config/map'
 import { updateExportCoords } from '../../redux/features/drawSlice'
 
 const useRenderPolyline = (e: L.Map | null) => {
+  const [drawPolyline, setDrawPolyline] = useState<L.Polyline | null>(null)
+
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
   const drawType = useAppSelector((state) => state.controlsReducer.draw)
   const lineColor = useAppSelector(
@@ -13,9 +15,6 @@ const useRenderPolyline = (e: L.Map | null) => {
   )
 
   const dispatch = useAppDispatch()
-  const [drawPolyline, setDrawPolyline] = useState<L.Polyline | null>(null)
-
-  let previewCoords: L.LatLngExpression[] = []
 
   const previewPolyline = L.polyline([], {
     color: mapConfig.lineColor.preview,

@@ -4,7 +4,10 @@ export type MapConfig = {
     lng: number
     zoom: number
   }
-  lineColor: string
+  lineColor: {
+    placed: string
+    preview: string
+  }
   layer: {
     default: string
     satellite: string

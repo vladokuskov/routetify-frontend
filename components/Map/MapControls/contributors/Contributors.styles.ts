@@ -9,7 +9,7 @@ const StyledContributorsLink = styled.a`
   background-color: #f8f6f680;
   font-size: 0.8rem;
   pointer-events: all;
-  color: #2c2c2c;
+  color: #2c2c2c90;
   &:hover,
   &:focus {
     text-decoration: underline;

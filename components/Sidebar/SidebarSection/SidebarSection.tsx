@@ -8,12 +8,12 @@ const SidebarSection = ({
   title,
   children,
 }: {
-  title: string
+  title?: string
   children: ReactNode
 }) => {
   return (
     <StyledSidebarSection>
-      <StyledSidebarSectionTitle>{title}</StyledSidebarSectionTitle>
+      {title && <StyledSidebarSectionTitle>{title}</StyledSidebarSectionTitle>}
       {children}
     </StyledSidebarSection>
   )

@@ -13,7 +13,7 @@ import useRenderPolyline from '../../../hooks/map/renderPolyline'
 import useRenderMarkers from '../../../hooks/map/renderMarkers'
 
 import StyleMap from './TileLayer'
-import { MapContainer } from 'react-leaflet'
+import { MapContainer, ZoomControl } from 'react-leaflet'
 
 import LocationMarker from './LocationMarker'
 import useFitBoundsOnClick from '../../../hooks/map/fitBounds'
@@ -37,11 +37,11 @@ const LeafletMap = () => {
         minZoom={2}
         scrollWheelZoom={true}
         ref={setMap}
-        style={{ cursor: 'crosshair' }}
       >
         <StyleMap />
         <GetPositionByDragging />
         <LocationMarker />
+        <ZoomControl position="bottomleft" />
       </MapContainer>
     </>
   )

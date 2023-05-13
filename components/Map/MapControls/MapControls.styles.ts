@@ -1,17 +1,33 @@
 import { styled } from 'styled-components'
 
-const StyledMapControls = styled.div`
+const StyledMapMainOverlay = styled.div`
   position: fixed;
-  display: grid;
-  gap: 1rem;
-  right: 0.7rem;
-  top: 4rem;
-  padding-left: 0.8rem;
-  padding-bottom: 0.5rem;
-  padding-top: 0.3rem;
+  width: 100%;
+  height: 100%;
   z-index: 1003;
+  pointer-events: none;
+`
+
+const StyledMapOverlay = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+`
+
+const StyledMapMainControls = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  top: 4rem;
+  padding: 0.5rem 0.8rem;
+  padding-right: 0;
+  z-index: 1004;
+  pointer-events: visible;
+  right: 0.5rem;
   @media (max-height: 550px) {
-    @include flexCenter(row, 0.5rem);
     padding: 0 !important;
     display: flex;
     top: 0.7rem;
@@ -22,4 +38,33 @@ const StyledMapControls = styled.div`
   }
 `
 
-export { StyledMapControls }
+const StyledMapControls = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  @media (max-height: 550px) {
+    flex-direction: row;
+  }
+
+  @media (min-width: 650px) {
+    right: 19.3rem;
+  }
+`
+
+const StyledMapZoomWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 5rem;
+  height: 100%;
+`
+
+export {
+  StyledMapMainControls,
+  StyledMapMainOverlay,
+  StyledMapOverlay,
+  StyledMapZoomWrapper,
+  StyledMapControls,
+}

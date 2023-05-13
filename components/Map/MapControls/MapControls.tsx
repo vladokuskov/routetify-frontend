@@ -1,4 +1,10 @@
-import { StyledMapControls } from './MapControls.styles'
+import {
+  StyledMapControls,
+  StyledMapMainOverlay,
+  StyledMapOverlay,
+  StyledMapZoomWrapper,
+  StyledMapMainControls,
+} from './MapControls.styles'
 import { MapControlUndo } from './undo/MapControlUndo'
 import { MapControlRedo } from './redo/MapControlRedo'
 import { MapControlDelete } from './delete/MapControlDelete'
@@ -8,19 +14,20 @@ import { MapControlDraw } from './draw/MapControlDraw'
 
 const MapControls = () => {
   return (
-    <StyledMapControls>
-      <MapControlUndo />
-
-      <MapControlRedo />
-
-      <MapControlDelete />
-
-      <MapControlFit />
-
-      <MapControlLocation />
-
-      <MapControlDraw />
-    </StyledMapControls>
+    <StyledMapMainOverlay>
+      <StyledMapOverlay>
+        <StyledMapMainControls>
+          <StyledMapControls>
+            <MapControlUndo />
+            <MapControlRedo />
+            <MapControlDelete />
+            <MapControlFit />
+            <MapControlLocation />
+            <MapControlDraw />
+          </StyledMapControls>
+        </StyledMapMainControls>
+      </StyledMapOverlay>
+    </StyledMapMainOverlay>
   )
 }
 

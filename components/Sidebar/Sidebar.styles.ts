@@ -1,9 +1,10 @@
+import Image from 'next/image'
 import { styled } from 'styled-components'
 
-const StyledSidebarContainer = styled.div`
+const StyledSidebarContainer = styled.aside`
   position: relative;
   z-index: 20;
-  overflow-y: hidden;
+  overflow-y: scroll;
   margin-top: calc(70vh);
   width: 100%;
   z-index: 1001;
@@ -23,6 +24,18 @@ const StyledSidebarContainer = styled.div`
     height: 100%;
     box-shadow: 25px 0px 20px 20px rgba(0, 0, 0, 0.3);
   }
+
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #f5f5f5;
+  }
+  &::-webkit-scrollbar {
+    width: 0.4rem;
+    background-color: #f5f5f5;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #a0a0a0;
+  }
 `
 
 const StyledDragDecoration = styled.div`
@@ -32,6 +45,13 @@ const StyledDragDecoration = styled.div`
   background-color: #2c2c2c50;
   @media (min-width: 650px) {
     display: none;
+  }
+`
+
+const StyledLogoImage = styled(Image)`
+  display: none;
+  @media (min-width: 650px) {
+    display: block;
   }
 `
 
@@ -47,4 +67,9 @@ const StyledSidebarContent = styled.div`
   margin: 0 auto;
 `
 
-export { StyledSidebarContainer, StyledDragDecoration, StyledSidebarContent }
+export {
+  StyledSidebarContainer,
+  StyledDragDecoration,
+  StyledSidebarContent,
+  StyledLogoImage,
+}

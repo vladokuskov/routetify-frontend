@@ -2,6 +2,7 @@ import {
   StyledDragDecoration,
   StyledSidebarContainer,
   StyledSidebarContent,
+  StyledLogoImage,
 } from './Sidebar.styles'
 import { Geocoder } from './SidebarSections/Geocoder/Geocoder'
 import { SidebarSection } from './SidebarSection/SidebarSection'
@@ -15,7 +16,14 @@ const Sidebar = () => {
     <StyledSidebarContainer>
       <StyledSidebarContent>
         <StyledDragDecoration />
-        <SidebarSection title="Details">
+        <StyledLogoImage
+          src="logo.svg"
+          width={200}
+          height={50}
+          priority
+          alt=""
+        />
+        <SidebarSection>
           <Details />
         </SidebarSection>
         <SidebarSection title="Location">

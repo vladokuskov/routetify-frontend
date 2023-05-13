@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { changeDraw } from '@/redux/features/controlsSlice'
 
 import { DrawType } from '@/types/global/drawType.types'
+import { useKeyDown } from '@/hooks/useKeyDown'
 
 const MapControlDraw = () => {
   const dispatch = useAppDispatch()
@@ -14,6 +15,12 @@ const MapControlDraw = () => {
   const handleDrawChange = (e: DrawType) => {
     dispatch(changeDraw(e))
   }
+
+  useKeyDown(() => {
+    if (drawType !== DrawType.None) {
+      dispatch(changeDraw(DrawType.None))
+    }
+  }, ['Escape'])
 
   return (
     <Button

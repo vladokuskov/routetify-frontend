@@ -8,7 +8,6 @@ const MapControlUndo = () => {
   const dispatch = useAppDispatch()
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
   const drawType = useAppSelector((state) => state.controlsReducer.draw)
-
   return (
     <Button
       variant="icon"

@@ -11,6 +11,7 @@ import { MapControlFit } from './fit/MapControlFit'
 import { MapControlLocation } from './location/MapControlLocation'
 import { MapControlDraw } from './draw/MapControlDraw'
 import { Contributors } from './contributors/Contributors'
+import { ChangeMapTiles } from './changeMapTiles/ChangeMapTiles'
 
 const MapControls = () => {
   return (
@@ -27,6 +28,7 @@ const MapControls = () => {
             <MapControlDraw />
           </StyledMapControls>
         </StyledMapMainControls>
+        <ChangeMapTiles />
       </StyledMapOverlay>
     </StyledMapMainOverlay>
   )

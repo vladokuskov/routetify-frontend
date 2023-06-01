@@ -1,7 +1,7 @@
 import { IBoolean } from '@/types/global/index.types'
 import { ButtonHTMLAttributes, ReactNode } from 'react'
 
-type ButtonVariants = 'primary' | 'map' | 'outlined'
+type ButtonVariants = 'primary' | 'map' | 'outlined' | 'ghost'
 
 type ButtonStatus = 'default' | 'success' | 'danger'
 

@@ -9,7 +9,6 @@ export type Input = {
   label?: string
   value?: string
   fieldType?: FieldTypes
-  icon?: React.FC<React.SVGProps<SVGSVGElement>>
   full?: IBoolean
   placeholder?: string
   name?: string

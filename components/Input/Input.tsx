@@ -15,7 +15,6 @@ const Input = ({
   variant,
   label,
   value,
-  icon,
   full = 'false',
   onChange,
   onClick,

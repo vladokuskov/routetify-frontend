@@ -93,8 +93,8 @@ const StyledButton = styled.button<Button>`
             background-color: #a2c3b1;
           }
         `
-      : variant === 'outlined' &&
-        css`
+      : variant === 'outlined'
+      ? css`
           border-radius: 8px;
           border: 0.15rem solid ${status === 'danger' ? '#E5342F' : '#a2c3b1'};
           background-color: ${status === 'danger' ? '#E5342F' : 'transparent'};
@@ -110,6 +110,22 @@ const StyledButton = styled.button<Button>`
           &:active {
             border-color: ${status === 'danger' ? '#E5342F' : '#a2c3b1'};
             color: ${status === 'danger' ? '#E5342F' : '#a2c3b1'};
+          }
+        `
+      : variant === 'ghost' &&
+        css`
+          border-radius: 8px;
+          border: 0.15rem solid transparent;
+          background-color: transparent;
+          color: #2c2c2c;
+          gap: 0.5rem;
+          &:hover,
+          &:focus {
+            color: #454545;
+          }
+
+          &:active {
+            color: #1f1f1f;
           }
         `}
 `

@@ -6,8 +6,9 @@ import { changeDraw } from '@/redux/features/controlsSlice'
 
 import { DrawType } from '@/types/global/drawType.types'
 import { useKeyDown } from '@/hooks/useKeyDown'
+import Icon from '@/components/Icon/Icon'
 
-const MapControlDraw = () => {
+const MapControlDrawSelection = () => {
   const dispatch = useAppDispatch()
 
   const drawType = useAppSelector((state) => state.controlsReducer.draw)
@@ -24,17 +25,18 @@ const MapControlDraw = () => {
 
   return (
     <Button
-      variant="icon"
-      text={drawType === DrawType.Line ? 'Stop drawing' : 'Draw line'}
-      icon={drawType === DrawType.Line ? ClearIcon : LineIcon}
+      variant="map"
+      title={drawType === DrawType.Line ? 'Stop drawing' : 'Draw line'}
       onClick={() =>
         handleDrawChange(
           drawType !== DrawType.None ? DrawType.None : DrawType.Line,
         )
       }
       status={drawType === DrawType.Line ? 'danger' : 'default'}
-    />
+    >
+      <Icon svg={drawType === DrawType.Line ? ClearIcon : LineIcon} />
+    </Button>
   )
 }
 
-export { MapControlDraw }
+export { MapControlDrawSelection }

@@ -3,8 +3,9 @@ import RedoIcon from '../../../../assets/icons/redo.svg'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { redoDrawCoords } from '@/redux/features/drawSlice'
 import { DrawType } from '@/types/global/drawType.types'
+import Icon from '@/components/Icon/Icon'
 
-const MapControlRedo = () => {
+const MapControlRedoAction = () => {
   const dispatch = useAppDispatch()
   const drawCoordsFuture = useAppSelector(
     (state) => state.drawReducer.drawCoordsFuture,
@@ -16,18 +17,17 @@ const MapControlRedo = () => {
 
   return (
     <Button
-      variant="icon"
-      text="Redo"
-      icon={RedoIcon}
+      variant="map"
+      title={'Redo action'}
       onClick={() => dispatch(redoDrawCoords(null))}
-      isDisabled={
+      disabled={
         (drawCoordsFuture.length === 0 && drawCoordsDeleted.length === 0) ||
         drawType === DrawType.None
-          ? 'true'
-          : 'false'
       }
-    />
+    >
+      <Icon svg={RedoIcon} />
+    </Button>
   )
 }
 
-export { MapControlRedo }
+export { MapControlRedoAction }

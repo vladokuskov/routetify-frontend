@@ -1,30 +1,23 @@
-import Icon from '../Icon/Icon'
-import { StyledButton, StyledIcon, StyledText } from './Button.styles'
+import { StyledButton } from './Button.styles'
 import { Button } from './Button.types'
 
 const Button = ({
   variant = 'primary',
-  icon,
-  text,
-  onClick,
-  isDisabled = 'false',
   full = 'false',
   status,
-  loading,
-  size = 'sm3',
+  size = 'regular',
+  children,
+  ...props
 }: Button) => {
   return (
     <StyledButton
       variant={variant}
-      onClick={onClick}
-      title={text}
-      disabled={isDisabled === 'true' ? true : false}
       full={full}
       status={status}
       size={size}
+      {...props}
     >
-      {text && variant !== 'icon' && <StyledText>{text}</StyledText>}
-      {icon && <Icon svg={icon} spin={loading === 'true' ? 'true' : 'false'} />}
+      {children}
     </StyledButton>
   )
 }

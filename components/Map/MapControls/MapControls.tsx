@@ -4,13 +4,14 @@ import {
   StyledMapOverlay,
   StyledMapMainControls,
 } from './MapControls.styles'
-import { MapControlUndo } from './undo/MapControlUndo'
-import { MapControlRedo } from './redo/MapControlRedo'
-import { MapControlDelete } from './delete/MapControlDelete'
-import { MapControlFit } from './fit/MapControlFit'
-import { MapControlLocation } from './location/MapControlLocation'
-import { MapControlDraw } from './draw/MapControlDraw'
-import { Contributors } from './contributors/Contributors'
+import { MapControlUndoAction } from './UndoAction/MapControlUndo'
+import { MapControlRedoAction } from './RedoAction/MapControlRedo'
+import { MapControlDeleteRoute } from './DeleteRoute/MapControlDelete'
+import { MapControlFitRoute } from './FitRoute/MapControlFit'
+import { MapControlFindLocation } from './FindLocation/MapControlLocation'
+import { MapControlDrawSelection } from './DrawSelection/MapControlDraw'
+import { Contributors } from '../Contributors/Contributors'
+import { MapControlTileSelection } from './TilesSelector/MapControlTileSelection'
 
 const MapControls = () => {
   return (
@@ -19,12 +20,13 @@ const MapControls = () => {
         <Contributors />
         <StyledMapMainControls>
           <StyledMapControls>
-            <MapControlUndo />
-            <MapControlRedo />
-            <MapControlDelete />
-            <MapControlFit />
-            <MapControlLocation />
-            <MapControlDraw />
+            <MapControlUndoAction />
+            <MapControlRedoAction />
+            <MapControlDeleteRoute />
+            <MapControlFitRoute />
+            <MapControlFindLocation />
+            <MapControlDrawSelection />
+            <MapControlTileSelection />
           </StyledMapControls>
         </StyledMapMainControls>
       </StyledMapOverlay>

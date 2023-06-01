@@ -6,8 +6,9 @@ import {
   changeLocationStatus,
 } from '@/redux/features/controlsSlice'
 import { LocationStatus } from '@/types/global/locationStatus.types'
+import Icon from '@/components/Icon/Icon'
 
-const MapControlFit = () => {
+const MapControlFitRoute = () => {
   const dispatch = useAppDispatch()
 
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
@@ -19,13 +20,14 @@ const MapControlFit = () => {
 
   return (
     <Button
-      variant="icon"
-      text="Fit route"
-      icon={FitIcon}
+      variant="map"
+      title={'Fit route'}
       onClick={handleRouteFit}
-      isDisabled={drawCoords.length === 0 ? 'true' : 'false'}
-    />
+      disabled={drawCoords.length === 0}
+    >
+      <Icon svg={FitIcon} />
+    </Button>
   )
 }
 
-export { MapControlFit }
+export { MapControlFitRoute }

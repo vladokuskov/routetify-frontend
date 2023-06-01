@@ -119,18 +119,20 @@ const Export = () => {
     <StyledSidebarSectionContent>
       <Button
         variant="primary"
-        text="GPX"
         onClick={() => handleRouteDownload(Route.GPX)}
         full="true"
-        isDisabled={exportCoords.length === 0 ? 'true' : 'false'}
-      />
+        disabled={exportCoords.length === 0}
+      >
+        GPX
+      </Button>
       <Button
         variant="primary"
-        text="KML"
         onClick={() => handleRouteDownload(Route.KML)}
         full="true"
-        isDisabled={exportCoords.length === 0 ? 'true' : 'false'}
-      />
+        disabled={exportCoords.length === 0}
+      >
+        KML
+      </Button>
     </StyledSidebarSectionContent>
   )
 }

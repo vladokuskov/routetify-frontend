@@ -10,8 +10,9 @@ import {
 } from '@/redux/features/controlsSlice'
 import { LocationStatus } from '@/types/global/locationStatus.types'
 import { addLatLng } from '@/redux/features/geocoderSlice'
+import Icon from '@/components/Icon/Icon'
 
-const MapControlLocation = () => {
+const MapControlFindLocation = () => {
   const dispatch = useAppDispatch()
 
   const locationStatus = useAppSelector(
@@ -50,16 +51,8 @@ const MapControlLocation = () => {
 
   return (
     <Button
-      variant="icon"
-      text="Location"
-      loading={locationStatus === LocationStatus.fetching ? 'true' : 'false'}
-      icon={
-        locationStatus === LocationStatus.success
-          ? LocationFilledIcon
-          : locationStatus === LocationStatus.fetching
-          ? LoadingIcon
-          : LocationIcon
-      }
+      variant="map"
+      title={'Find location'}
       onClick={getLocation}
       status={
         locationStatus === LocationStatus.error
@@ -68,8 +61,19 @@ const MapControlLocation = () => {
           ? 'success'
           : 'default'
       }
-    />
+    >
+      <Icon
+        svg={
+          locationStatus === LocationStatus.success
+            ? LocationFilledIcon
+            : locationStatus === LocationStatus.fetching
+            ? LoadingIcon
+            : LocationIcon
+        }
+        spin={locationStatus === LocationStatus.fetching ? 'true' : 'false'}
+      />
+    </Button>
   )
 }
 
-export { MapControlLocation }
+export { MapControlFindLocation }

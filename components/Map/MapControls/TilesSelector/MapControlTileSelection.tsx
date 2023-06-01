@@ -2,10 +2,14 @@ import { changeLayer } from '@/redux/features/controlsSlice'
 import { addLatLng } from '@/redux/features/geocoderSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { Layer } from '@/types/global/layer.types'
-import { StyledChangeMapTilesButton } from './ChangeMapTiles.styles'
-import Image from 'next/image'
+import { Button } from '@/components/Button/Button'
+import { useState } from 'react'
+import Icon from '@/components/Icon/Icon'
+import LayersIcon from '../../../../assets/icons/layers.svg'
 
-const ChangeMapTiles = () => {
+const MapControlTileSelection = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
+
   const layer = useAppSelector((state) => state.controlsReducer.layer)
   const currentCoords = useAppSelector(
     (state) => state.controlsReducer.currentCoords,
@@ -13,7 +17,7 @@ const ChangeMapTiles = () => {
 
   const dispatch = useAppDispatch()
 
-  const handleLayerChange = () => {
+  const handleTileChange = () => {
     if (layer === Layer.satellite) {
       dispatch(
         addLatLng({
@@ -34,24 +38,16 @@ const ChangeMapTiles = () => {
       window.scrollTo(0, 0)
     }
   }
+
+  const handleMenuOpen = () => {
+    setIsMenuOpen((prev) => !prev)
+  }
+
   return (
-    <StyledChangeMapTilesButton onClick={handleLayerChange}>
-      <Image
-        priority
-        title={layer === Layer.satellite ? 'Default tile' : 'Satellite tile'}
-        src={layer === Layer.satellite ? '/default.webp' : '/satellite.webp'}
-        width={70}
-        height={70}
-        style={{
-          borderRadius: '4px',
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-        }}
-        alt=""
-      />
-    </StyledChangeMapTilesButton>
+    <Button variant="map" title={'Change map tile'} onClick={handleMenuOpen}>
+      <Icon svg={LayersIcon} />
+    </Button>
   )
 }
 
-export { ChangeMapTiles }
+export { MapControlTileSelection }

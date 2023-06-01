@@ -2,8 +2,9 @@ import { Button } from '@/components/Button/Button'
 import DeleteIcon from '../../../../assets/icons/delete.svg'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { deleteDrawCoords, updateDrawInfo } from '@/redux/features/drawSlice'
+import Icon from '@/components/Icon/Icon'
 
-const MapControlDelete = () => {
+const MapControlDeleteRoute = () => {
   const dispatch = useAppDispatch()
 
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
@@ -21,16 +22,15 @@ const MapControlDelete = () => {
 
   return (
     <Button
-      variant="icon"
-      text="Delete route"
-      icon={DeleteIcon}
-      onClick={() => {
-        handleDelete()
-      }}
-      isDisabled={drawCoords.length === 0 ? 'true' : 'false'}
+      variant="map"
+      title={'Delete route'}
+      onClick={handleDelete}
+      disabled={drawCoords.length === 0}
       status="danger"
-    />
+    >
+      <Icon svg={DeleteIcon} />
+    </Button>
   )
 }
 
-export { MapControlDelete }
+export { MapControlDeleteRoute }

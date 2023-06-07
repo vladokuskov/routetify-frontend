@@ -22,6 +22,11 @@ Live - https://cycroute.vercel.app/
     TypeScript
     Leaflet
 
+<div style="display: flex; justify-content: center;">
+    <img src="public/previews/1.png" width="200px">
+</div>
+
+
 ### How to start?
 
 1.  Clone the repository: `git clone https://github.com/swappnet/cycroute.git`.

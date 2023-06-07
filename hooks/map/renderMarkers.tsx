@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import * as L from 'leaflet'
 import { updateDraggedMarkerCoords } from '@/redux/features/drawSlice'
 import { DrawType } from '@/types/global/drawType.types'
+import { toggleIsMarkerDragging } from '@/redux/features/controlsSlice'
 
 const useRenderMarkers = (e: L.Map | null) => {
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
@@ -45,11 +46,16 @@ const useRenderMarkers = (e: L.Map | null) => {
         }).addTo(markersLayer)
 
         if (drawType === DrawType.Line) {
+          marker.on('dragstart', () => {
+            dispatch(toggleIsMarkerDragging(true))
+          })
+
           marker.on('dragend', () => {
             const markerLatLng = marker.getLatLng()
             const newCoords = { lat: markerLatLng.lat, lng: markerLatLng.lng }
 
             dispatch(updateDraggedMarkerCoords({ i, newCoords }))
+            dispatch(toggleIsMarkerDragging(false))
           })
         }
 

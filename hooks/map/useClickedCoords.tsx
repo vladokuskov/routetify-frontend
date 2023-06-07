@@ -3,7 +3,7 @@ import { updateDrawCoords } from '../../redux/features/drawSlice'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { DrawType } from '@/types/global/drawType.types'
 
-const useClickedCoords = (e: L.Map | null) => {
+const useClickedCoords = (map: L.Map | null) => {
   const drawType = useAppSelector((state) => state.controlsReducer.draw)
   const dispatch = useAppDispatch()
 
@@ -13,16 +13,16 @@ const useClickedCoords = (e: L.Map | null) => {
   } | null>(null)
 
   useEffect(() => {
-    if (!e) return
+    if (!map) return
 
-    if (e) {
+    if (map) {
       if (drawType !== DrawType.None) {
-        e.on('click', (e: { latlng: { lat: number; lng: number } }) => {
+        map.on('click', (e: { latlng: { lat: number; lng: number } }) => {
           setClickedCoords({ lat: e.latlng.lat, lng: e.latlng.lng })
         })
       }
     }
-  }, [e, drawType])
+  }, [map, drawType])
 
   useEffect(() => {
     if (clickedCoords && drawType !== DrawType.None) {

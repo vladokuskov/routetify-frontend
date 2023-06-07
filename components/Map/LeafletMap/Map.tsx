@@ -2,30 +2,27 @@
 
 import { useState } from 'react'
 
-import 'leaflet/dist/leaflet.css'
-
 import * as L from 'leaflet'
 
-import GetPositionByDragging from './GetDragPosition'
-import useUpdateMapView from '../../../hooks/map/updateMapView'
-import useClickedCoords from '../../../hooks/map/updateClickedCoords'
-import useRenderPolyline from '../../../hooks/map/renderPolyline'
-import useRenderMarkers from '../../../hooks/map/renderMarkers'
+import useUpdateMapView from '../../../hooks/map/useUpdateMapView'
+import useClickedCoords from '../../../hooks/map/useClickedCoords'
 
 import StyleMap from './TileLayer'
 import { MapContainer, ZoomControl } from 'react-leaflet'
 
-import LocationMarker from './LocationMarker'
-import useFitBoundsOnClick from '../../../hooks/map/fitBounds'
+import RenderLocationMarker from './RenderLocationMarker'
+import useFitBoundsOnClick from '../../../hooks/map/useFitBoundsOnClick'
+import RenderPolyline from './RenderPolyline'
+import RenderMarkers from './RenderMarkers'
+import useGetPositionByDrag from '@/hooks/map/useGetPositionByDrag'
 
 const LeafletMap = () => {
   const [map, setMap] = useState<L.Map | null>(null)
 
   useClickedCoords(map)
   useUpdateMapView(map)
-  useRenderPolyline(map)
-  useRenderMarkers(map)
   useFitBoundsOnClick(map)
+  useGetPositionByDrag(map)
 
   return (
     <>
@@ -40,8 +37,9 @@ const LeafletMap = () => {
         style={{ cursor: 'crosshair' }}
       >
         <StyleMap />
-        <GetPositionByDragging />
-        <LocationMarker />
+        <RenderLocationMarker map={map} />
+        <RenderMarkers map={map} />
+        <RenderPolyline map={map} />
         <ZoomControl position="bottomleft" />
       </MapContainer>
     </>

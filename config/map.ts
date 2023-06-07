@@ -9,7 +9,7 @@ export const mapConfig: MapConfig = {
   },
   lineColor: {
     placed: '#00ACC1',
-    preview: '#A5A5A590',
+    preview: '#00ACC170',
   },
   layer: {
     default: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',

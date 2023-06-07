@@ -3,6 +3,8 @@ import StyledComponentsRegistry from '@/lib/registry'
 import { Providers } from '@/redux/provider'
 import { Inter, Roboto } from 'next/font/google'
 
+import 'leaflet/dist/leaflet.css'
+
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
   subsets: ['latin'],

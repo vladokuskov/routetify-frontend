@@ -1,11 +1,10 @@
-import { Circle } from 'react-leaflet'
 import { useEffect, useState } from 'react'
-
+import * as L from 'leaflet'
+import { LatLngExpression, Map } from 'leaflet'
 import { useAppSelector } from '@/redux/hooks'
-import { LatLngExpression } from 'leaflet'
 import { LocationStatus } from '@/types/global/locationStatus.types'
 
-const LocationMarker = () => {
+const RenderLocationMarker = ({ map }: { map: Map | null }) => {
   const [position, setPosition] = useState<LatLngExpression | null>(null)
 
   const locationStatus = useAppSelector(
@@ -27,13 +26,18 @@ const LocationMarker = () => {
     }
   }, [locationStatus, currentCoords])
 
-  function LocationMarkerInner() {
-    return position === null ? null : (
-      <Circle center={position} radius={120} fillOpacity={0.5} />
-    )
-  }
+  useEffect(() => {
+    if (map && position) {
+      const marker = L.circle(position, { radius: 120, fillOpacity: 0.5 })
+      marker.addTo(map)
 
-  return <LocationMarkerInner />
+      return () => {
+        map.removeLayer(marker)
+      }
+    }
+  }, [map, position])
+
+  return null
 }
 
-export default LocationMarker
+export default RenderLocationMarker

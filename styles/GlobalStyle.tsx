@@ -114,6 +114,10 @@ const GlobalStyle = createGlobalStyle`
   select {
   font: inherit;
   }
+
+  .cursorCrosshair {
+    cursor: crosshair !important; 
+  }
 `
 
 export default GlobalStyle

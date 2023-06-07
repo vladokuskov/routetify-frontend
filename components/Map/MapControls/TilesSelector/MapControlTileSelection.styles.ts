@@ -26,6 +26,12 @@ const StyledTileSelectionMenu = styled.div`
   }
 `
 
+const StyledIconWrapper = styled.div`
+  position: relative;
+  width: 1.2rem;
+  height: 1.2rem;
+`
+
 const StyledTileButton = styled.button`
   font-size: 0.9rem;
   font-weight: 500;
@@ -36,13 +42,15 @@ const StyledTileButton = styled.button`
   align-items: center;
   justify-content: space-between;
   color: #2c2c2c;
-  gap: 1rem;
+  gap: 0.6rem;
   width: 100%;
-  padding: 0.1rem 0.2rem;
+  padding: 0.1rem 0.5rem;
   &:disabled {
     cursor: default;
     pointer-events: none;
     opacity: 50%;
+    color: #393939;
+    background-color: #1f1f1f20;
   }
   &:hover,
   &:focus {
@@ -54,4 +62,9 @@ const StyledTileButton = styled.button`
   }
 `
 
-export { StyledTileSelectionWrapper, StyledTileSelectionMenu, StyledTileButton }
+export {
+  StyledTileSelectionWrapper,
+  StyledTileSelectionMenu,
+  StyledTileButton,
+  StyledIconWrapper,
+}

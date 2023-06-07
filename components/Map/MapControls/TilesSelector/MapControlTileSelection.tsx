@@ -10,6 +10,7 @@ import {
   StyledTileButton,
   StyledTileSelectionMenu,
   StyledTileSelectionWrapper,
+  StyledIconWrapper,
 } from './MapControlTileSelection.styles'
 import { useClickOutside } from '@/hooks/useClickOutside'
 import Image from 'next/image'
@@ -51,16 +52,15 @@ const MapControlTileSelection = () => {
             disabled={layer === Layer.default}
             onClick={() => handleTileSelect(Layer.default)}
           >
-            <span>
+            <StyledIconWrapper>
               <Image
                 src="/default.webp"
-                width={20}
-                height={20}
+                fill
                 priority
                 alt=""
                 style={{ borderRadius: '4px' }}
               />
-            </span>
+            </StyledIconWrapper>
             Default
           </StyledTileButton>
           <StyledTileButton
@@ -68,16 +68,15 @@ const MapControlTileSelection = () => {
             disabled={layer === Layer.satellite}
             onClick={() => handleTileSelect(Layer.satellite)}
           >
-            <span>
+            <StyledIconWrapper>
               <Image
                 src="/satellite.webp"
-                width={20}
-                height={20}
+                fill
                 priority
                 alt=""
                 style={{ borderRadius: '4px' }}
               />
-            </span>
+            </StyledIconWrapper>
             Satellite
           </StyledTileButton>
         </StyledTileSelectionMenu>

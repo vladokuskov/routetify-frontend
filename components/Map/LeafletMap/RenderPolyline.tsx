@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 
-import * as L from 'leaflet'
-import { DrawType } from '@/types/global/drawType.types'
 import { mapConfig } from '@/config/map'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { updateExportCoords } from '@/redux/features/drawSlice'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { DrawType } from '@/types/global/drawType.types'
+import * as L from 'leaflet'
 
 const RenderPolyline = ({ map }: { map: L.Map | null }) => {
   const [drawPolyline, setDrawPolyline] = useState<L.Polyline | null>(null)
@@ -24,6 +24,7 @@ const RenderPolyline = ({ map }: { map: L.Map | null }) => {
     color: mapConfig.lineColor.preview,
     weight: 6,
     dashArray: '15, 15',
+    className: 'cursorCrosshair',
   })
 
   const onMouseMove = (event: L.LeafletMouseEvent) => {
@@ -42,6 +43,7 @@ const RenderPolyline = ({ map }: { map: L.Map | null }) => {
     const polyline = L.polyline(drawCoords as any, {
       color: lineColor,
       weight: 6,
+      className: 'cursorCrosshair',
     })
 
     setDrawPolyline(polyline)
@@ -74,7 +76,6 @@ const RenderPolyline = ({ map }: { map: L.Map | null }) => {
       return () => {
         if (!isMarkerDragging) {
           previewPolyline.remove()
-          drawPolyline.remove()
           map.off('mousemove', onMouseMove)
           map.off('click', onMouseClick)
         }

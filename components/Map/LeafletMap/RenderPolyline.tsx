@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
+
 import * as L from 'leaflet'
-import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { DrawType } from '@/types/global/drawType.types'
 import { mapConfig } from '@/config/map'
-import { updateExportCoords } from '../../redux/features/drawSlice'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { updateExportCoords } from '@/redux/features/drawSlice'
 
-const useRenderPolyline = (e: L.Map | null) => {
+const RenderPolyline = ({ map }: { map: L.Map | null }) => {
   const [drawPolyline, setDrawPolyline] = useState<L.Polyline | null>(null)
 
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
@@ -31,56 +32,57 @@ const useRenderPolyline = (e: L.Map | null) => {
   }
 
   const onMouseClick = () => {
-    e?.off('mousemove', onMouseMove)
-    e?.off('click', onMouseClick)
+    map?.off('mousemove', onMouseMove)
+    map?.off('click', onMouseClick)
   }
 
-  useEffect((): ReturnType<L.Polyline | any> => {
-    if (!e) return
+  useEffect(() => {
+    if (!map) return
 
-    if (e) {
-      const polyline = L.polyline(drawCoords as any, {
-        color: lineColor,
-        weight: 6,
-      })
+    const polyline = L.polyline(drawCoords as any, {
+      color: lineColor,
+      weight: 6,
+    })
 
-      setDrawPolyline(polyline)
+    setDrawPolyline(polyline)
+    polyline.addTo(map)
 
-      return () => {
-        polyline.remove()
-        previewPolyline.remove()
-        e.off('mousemove', onMouseMove)
-        e.off('click', onMouseClick)
-      }
+    return () => {
+      polyline.remove()
+      previewPolyline.remove()
+      map.off('mousemove', onMouseMove)
+      map.off('click', onMouseClick)
     }
-  }, [e, drawCoords, lineColor])
+  }, [map, drawCoords, lineColor])
 
   useEffect(() => {
     if (
       !drawPolyline ||
-      (drawType !== DrawType.Line && e && drawPolyline.addTo(e))
+      (drawType !== DrawType.Line && map && drawPolyline.addTo(map))
     )
       return
 
-    if (e && drawPolyline && drawType === DrawType.Line) {
+    if (map && drawPolyline && drawType === DrawType.Line) {
       if (!isMarkerDragging) {
-        e.on('mousemove', onMouseMove)
-        e.on('click', onMouseClick)
-        previewPolyline.addTo(e)
+        map.on('mousemove', onMouseMove)
+        map.on('click', onMouseClick)
+        previewPolyline.addTo(map)
       }
 
-      drawPolyline.addTo(e)
       dispatch(updateExportCoords(drawCoords))
+
       return () => {
         if (!isMarkerDragging) {
           previewPolyline.remove()
           drawPolyline.remove()
-          e.off('mousemove', onMouseMove)
-          e.off('click', onMouseClick)
+          map.off('mousemove', onMouseMove)
+          map.off('click', onMouseClick)
         }
       }
     }
-  }, [drawPolyline, drawType, e, isMarkerDragging])
+  }, [drawPolyline, drawType, map, isMarkerDragging])
+
+  return null
 }
 
-export default useRenderPolyline
+export default RenderPolyline

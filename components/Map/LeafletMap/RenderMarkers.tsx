@@ -1,20 +1,20 @@
-import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { useEffect } from 'react'
-
 import * as L from 'leaflet'
 import { updateDraggedMarkerCoords } from '@/redux/features/drawSlice'
 import { DrawType } from '@/types/global/drawType.types'
 import { toggleIsMarkerDragging } from '@/redux/features/controlsSlice'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 
-const useRenderMarkers = (e: L.Map | null) => {
+const RenderMarkers = ({ map }: { map: L.Map | null }) => {
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
   const drawType = useAppSelector((state) => state.controlsReducer.draw)
 
   const dispatch = useAppDispatch()
 
-  useEffect((): ReturnType<L.Map | any> => {
+  useEffect(() => {
     const markersLayer = L.layerGroup()
-    if (e) {
+
+    if (map) {
       drawCoords.forEach((coords: any, i) => {
         let lastIndex = drawCoords.length - 1
         let iconUrl = ''
@@ -58,14 +58,17 @@ const useRenderMarkers = (e: L.Map | null) => {
             dispatch(toggleIsMarkerDragging(false))
           })
         }
-
-        return marker
       })
 
-      markersLayer.addTo(e)
-      return () => e.removeLayer(markersLayer)
+      markersLayer.addTo(map)
+
+      return () => {
+        map.removeLayer(markersLayer)
+      }
     }
-  }, [drawCoords, drawType])
+  }, [map, drawCoords, drawType])
+
+  return null
 }
 
-export default useRenderMarkers
+export default RenderMarkers

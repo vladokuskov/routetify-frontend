@@ -5,7 +5,7 @@ import { useAppSelector } from '@/redux/hooks'
 import { LatLngExpression } from 'leaflet'
 import { LocationStatus } from '@/types/global/locationStatus.types'
 
-const LocationMarker = () => {
+const RenderLocationMarker = () => {
   const [position, setPosition] = useState<LatLngExpression | null>(null)
 
   const locationStatus = useAppSelector(
@@ -36,4 +36,4 @@ const LocationMarker = () => {
   return <LocationMarkerInner />
 }
 
-export default LocationMarker
+export default RenderLocationMarker

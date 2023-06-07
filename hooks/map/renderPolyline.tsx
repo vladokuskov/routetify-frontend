@@ -10,6 +10,9 @@ const useRenderPolyline = (e: L.Map | null) => {
 
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
   const drawType = useAppSelector((state) => state.controlsReducer.draw)
+  const isMarkerDragging = useAppSelector(
+    (state) => state.controlsReducer.isMarkerDragging,
+  )
   const lineColor = useAppSelector(
     (state) => state.controlsReducer.colorPicker.color,
   )
@@ -52,20 +55,32 @@ const useRenderPolyline = (e: L.Map | null) => {
     }
   }, [e, drawCoords, lineColor])
 
-  useEffect((): ReturnType<L.Polyline | any> => {
-    if (!drawPolyline || drawType !== DrawType.Line) return
+  useEffect(() => {
+    if (
+      !drawPolyline ||
+      (drawType !== DrawType.Line && e && drawPolyline.addTo(e))
+    )
+      return
 
     if (e && drawPolyline && drawType === DrawType.Line) {
-      e.on('mousemove', onMouseMove)
-      e.on('click', onMouseClick)
-
-      previewPolyline.addTo(e)
+      if (!isMarkerDragging) {
+        e.on('mousemove', onMouseMove)
+        e.on('click', onMouseClick)
+        previewPolyline.addTo(e)
+      }
 
       drawPolyline.addTo(e)
       dispatch(updateExportCoords(drawCoords))
-      return () => previewPolyline.remove()
+      return () => {
+        if (!isMarkerDragging) {
+          previewPolyline.remove()
+          drawPolyline.remove()
+          e.off('mousemove', onMouseMove)
+          e.off('click', onMouseClick)
+        }
+      }
     }
-  }, [drawPolyline, drawType, e])
+  }, [drawPolyline, drawType, e, isMarkerDragging])
 }
 
 export default useRenderPolyline

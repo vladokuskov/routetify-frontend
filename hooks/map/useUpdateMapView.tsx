@@ -1,15 +1,15 @@
 import { useAppSelector } from '../../redux/hooks'
 import { useEffect } from 'react'
 
-const useUpdateMapView = (e: L.Map | null) => {
+const useUpdateMapView = (map: L.Map | null) => {
   const geocoderCoords = useAppSelector((state) => state.geocoderReducer)
 
   useEffect(() => {
-    if (!e) return
+    if (!map) return
 
-    if (e) {
-      e.setView([geocoderCoords.lat, geocoderCoords.lng], geocoderCoords.zoom)
+    if (map) {
+      map.setView([geocoderCoords.lat, geocoderCoords.lng], geocoderCoords.zoom)
     }
-  }, [e, geocoderCoords])
+  }, [map, geocoderCoords])
 }
 export default useUpdateMapView

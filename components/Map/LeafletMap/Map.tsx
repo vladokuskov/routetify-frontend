@@ -4,7 +4,6 @@ import { useState } from 'react'
 
 import * as L from 'leaflet'
 
-import GetPositionByDragging from './GetDragPosition'
 import useUpdateMapView from '../../../hooks/map/useUpdateMapView'
 import useClickedCoords from '../../../hooks/map/useClickedCoords'
 
@@ -38,7 +37,7 @@ const LeafletMap = () => {
         style={{ cursor: 'crosshair' }}
       >
         <StyleMap />
-        <RenderLocationMarker />
+        <RenderLocationMarker map={map} />
         <RenderMarkers map={map} />
         <RenderPolyline map={map} />
         <ZoomControl position="bottomleft" />

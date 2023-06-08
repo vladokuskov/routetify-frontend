@@ -5,6 +5,7 @@ import { DrawType } from '@/types/global/drawType.types'
 
 const useClickedCoords = (map: L.Map | null) => {
   const drawType = useAppSelector((state) => state.controlsReducer.draw)
+  const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
   const dispatch = useAppDispatch()
 
   const [clickedCoords, setClickedCoords] = useState<{
@@ -31,6 +32,10 @@ const useClickedCoords = (map: L.Map | null) => {
       setClickedCoords(null)
     }
   }, [clickedCoords])
+
+  useEffect(() => {
+    localStorage.setItem(`route`, JSON.stringify(drawCoords))
+  }, [drawCoords])
 }
 
 export default useClickedCoords

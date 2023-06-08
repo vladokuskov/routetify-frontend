@@ -1,9 +1,9 @@
 import { Button } from '@/components/Button/Button'
-import RedoIcon from '../../../../assets/icons/redo.svg'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import { redoDrawCoords } from '@/redux/features/drawSlice'
-import { DrawType } from '@/types/global/drawType.types'
 import Icon from '@/components/Icon/Icon'
+import { redoDrawCoords } from '@/redux/features/drawSlice'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { DrawType } from '@/types/global/drawType.types'
+import RedoIcon from '../../../../assets/icons/redo.svg'
 
 const MapControlRedoAction = () => {
   const dispatch = useAppDispatch()

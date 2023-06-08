@@ -1,18 +1,20 @@
 import { Button } from '@/components/Button/Button'
-import LocationIcon from '../../../../assets/icons/location.svg'
-import LocationFilledIcon from '../../../../assets/icons/location-filled.svg'
 import LoadingIcon from '../../../../assets/icons/loader.svg'
+import LocationFilledIcon from '../../../../assets/icons/location-filled.svg'
+import LocationIcon from '../../../../assets/icons/location.svg'
 
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import Icon from '@/components/Icon/Icon'
 import {
   changeCurrentCoords,
   changeLocationStatus,
 } from '@/redux/features/controlsSlice'
-import { LocationStatus } from '@/types/global/locationStatus.types'
 import { addLatLng } from '@/redux/features/geocoderSlice'
-import Icon from '@/components/Icon/Icon'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { LocationStatus } from '@/types/global/locationStatus.types'
+import updateMapView from '@/lib/updateMapView'
 
 const MapControlFindLocation = () => {
+  const map = useAppSelector((state) => state.controlsReducer.map)
   const dispatch = useAppDispatch()
 
   const locationStatus = useAppSelector(
@@ -34,9 +36,17 @@ const MapControlFindLocation = () => {
             if (geoPoint) {
               dispatch(addLatLng(geoPoint))
 
-              dispatch(changeCurrentCoords({ currentCoords: geoPoint }))
-
               dispatch(changeLocationStatus(LocationStatus.success))
+
+              updateMapView(map, geoPoint)
+
+              dispatch(
+                changeCurrentCoords({
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude,
+                  zoom: 16,
+                }),
+              )
             }
           },
           (error) => {

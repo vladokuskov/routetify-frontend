@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
-import * as L from 'leaflet'
-import { LatLngExpression, Map } from 'leaflet'
 import { useAppSelector } from '@/redux/hooks'
 import { LocationStatus } from '@/types/global/locationStatus.types'
+import * as L from 'leaflet'
+import { LatLngExpression, Map } from 'leaflet'
+import { useEffect, useState } from 'react'
 
 const RenderLocationMarker = ({ map }: { map: Map | null }) => {
   const [position, setPosition] = useState<LatLngExpression | null>(null)
@@ -11,20 +11,22 @@ const RenderLocationMarker = ({ map }: { map: Map | null }) => {
     (state) => state.controlsReducer.location,
   )
 
-  const currentCoords = useAppSelector(
-    (state) => state.controlsReducer.currentCoords,
-  )
+  const geocoderCoords = useAppSelector((state) => state.geocoderReducer)
 
   useEffect(() => {
-    if (locationStatus === LocationStatus.success) {
-      setPosition(currentCoords)
+    if (
+      locationStatus === LocationStatus.success &&
+      geocoderCoords.lat &&
+      geocoderCoords.lng
+    ) {
+      setPosition({ lat: geocoderCoords.lat, lng: geocoderCoords.lng })
     } else {
       const timer: number = window.setTimeout(() => {
         setPosition(null)
       }, 1000)
       return () => clearTimeout(timer)
     }
-  }, [locationStatus, currentCoords])
+  }, [locationStatus])
 
   useEffect(() => {
     if (map && position) {

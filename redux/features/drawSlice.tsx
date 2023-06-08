@@ -5,7 +5,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 const initialState = {
   drawInfo: { time: '0', dist: '0' },
   drawCoords: [], // Coords that used for rendering Markers & polyline
-  exportCoords: [], // Coords that are saved under the hood and user can export them
   drawCoordsDeleted: [], // Coords that are deleted
   drawCoordsFuture: [], // Coords that can be recovered
 } as DrawState
@@ -14,12 +13,6 @@ export const drawReducer = createSlice({
   name: 'draw',
   initialState,
   reducers: {
-    updateExportCoords: (state, action) => {
-      return {
-        ...state,
-        exportCoords: action.payload,
-      }
-    },
     updateDrawInfo: (
       state,
       action: PayloadAction<{ time: string; dist: string }>,
@@ -31,6 +24,14 @@ export const drawReducer = createSlice({
           time: action.payload.time,
           dist: action.payload.dist,
         },
+      }
+    },
+    putDrawCoords: (state, action: PayloadAction<DrawCoords[]>) => {
+      return {
+        ...state,
+        drawCoords: action.payload,
+        drawCoordsDeleted: [],
+        drawCoordsFuture: [],
       }
     },
     updateDrawCoords: (state, action: PayloadAction<DrawCoords>) => {
@@ -132,7 +133,7 @@ export const {
   deleteDrawCoords,
   undoDrawCoords,
   redoDrawCoords,
-  updateExportCoords,
   updateDraggedMarkerCoords,
+  putDrawCoords,
 } = drawReducer.actions
 export default drawReducer.reducer

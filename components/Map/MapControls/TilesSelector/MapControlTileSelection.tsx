@@ -1,19 +1,19 @@
-import { changeLayer } from '@/redux/features/controlsSlice'
 import { Button } from '@/components/Button/Button'
+import Icon from '@/components/Icon/Icon'
+import { useClickOutside } from '@/hooks/useClickOutside'
+import { changeLayer } from '@/redux/features/controlsSlice'
 import { addLatLng } from '@/redux/features/geocoderSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { Layer } from '@/types/global/layer.types'
+import Image from 'next/image'
 import { useRef } from 'react'
-import Icon from '@/components/Icon/Icon'
 import LayersIcon from '../../../../assets/icons/layers.svg'
 import {
+  StyledIconWrapper,
   StyledTileButton,
   StyledTileSelectionMenu,
   StyledTileSelectionWrapper,
-  StyledIconWrapper,
 } from './MapControlTileSelection.styles'
-import { useClickOutside } from '@/hooks/useClickOutside'
-import Image from 'next/image'
 
 const MapControlTileSelection = () => {
   const ref = useRef(null)

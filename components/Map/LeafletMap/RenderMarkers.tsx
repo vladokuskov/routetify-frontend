@@ -1,9 +1,9 @@
-import { useEffect } from 'react'
-import * as L from 'leaflet'
-import { updateDraggedMarkerCoords } from '@/redux/features/drawSlice'
-import { DrawType } from '@/types/global/drawType.types'
 import { toggleIsMarkerDragging } from '@/redux/features/controlsSlice'
+import { updateDraggedMarkerCoords } from '@/redux/features/drawSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { DrawType } from '@/types/global/drawType.types'
+import * as L from 'leaflet'
+import { useEffect } from 'react'
 
 const RenderMarkers = ({ map }: { map: L.Map | null }) => {
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
@@ -41,7 +41,9 @@ const RenderMarkers = ({ map }: { map: L.Map | null }) => {
             iconUrl,
             iconSize,
             iconAnchor,
+            className: `${drawType === DrawType.None && 'cursorCrosshair'}`,
           }),
+
           draggable: drawType === DrawType.Line,
         }).addTo(markersLayer)
 

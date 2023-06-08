@@ -11,20 +11,22 @@ const RenderLocationMarker = ({ map }: { map: Map | null }) => {
     (state) => state.controlsReducer.location,
   )
 
-  const currentCoords = useAppSelector(
-    (state) => state.controlsReducer.currentCoords,
-  )
+  const geocoderCoords = useAppSelector((state) => state.geocoderReducer)
 
   useEffect(() => {
-    if (locationStatus === LocationStatus.success) {
-      setPosition(currentCoords)
+    if (
+      locationStatus === LocationStatus.success &&
+      geocoderCoords.lat &&
+      geocoderCoords.lng
+    ) {
+      setPosition({ lat: geocoderCoords.lat, lng: geocoderCoords.lng })
     } else {
       const timer: number = window.setTimeout(() => {
         setPosition(null)
       }, 1000)
       return () => clearTimeout(timer)
     }
-  }, [locationStatus, currentCoords])
+  }, [locationStatus])
 
   useEffect(() => {
     if (map && position) {

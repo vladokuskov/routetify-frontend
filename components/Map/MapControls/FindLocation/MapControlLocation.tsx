@@ -11,8 +11,10 @@ import {
 import { addLatLng } from '@/redux/features/geocoderSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { LocationStatus } from '@/types/global/locationStatus.types'
+import updateMapView from '@/lib/updateMapView'
 
 const MapControlFindLocation = () => {
+  const map = useAppSelector((state) => state.controlsReducer.map)
   const dispatch = useAppDispatch()
 
   const locationStatus = useAppSelector(
@@ -34,9 +36,17 @@ const MapControlFindLocation = () => {
             if (geoPoint) {
               dispatch(addLatLng(geoPoint))
 
-              dispatch(changeCurrentCoords({ currentCoords: geoPoint }))
-
               dispatch(changeLocationStatus(LocationStatus.success))
+
+              updateMapView(map, geoPoint)
+
+              dispatch(
+                changeCurrentCoords({
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude,
+                  zoom: 16,
+                }),
+              )
             }
           },
           (error) => {

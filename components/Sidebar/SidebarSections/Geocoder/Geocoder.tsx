@@ -9,12 +9,10 @@ import {
 } from './Geocoder.styles'
 import { TGeoResponse } from './Geocoder.types'
 import { addLatLng } from '@/redux/features/geocoderSlice'
-import {
-  changeCurrentCoords,
-  changeLocationStatus,
-} from '@/redux/features/controlsSlice'
-import { useAppDispatch } from '@/redux/hooks'
+import { changeLocationStatus } from '@/redux/features/controlsSlice'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { LocationStatus } from '@/types/global/locationStatus.types'
+import updateMapView from '@/lib/updateMapView'
 
 const Geocoder = () => {
   const ref = useRef<HTMLDivElement>(null)
@@ -25,6 +23,7 @@ const Geocoder = () => {
   const [isGeocoderLoading, setIsGeocoderLoading] = useState<boolean>(false)
   const [isResultsOpen, setIsResultsOpen] = useClickOutside(ref, false)
   const [hasUserTyped, setHasUserTyped] = useState(false)
+  const map = useAppSelector((state) => state.controlsReducer.map)
 
   const dispatch = useAppDispatch()
 
@@ -48,15 +47,12 @@ const Geocoder = () => {
         zoom: 12,
       }),
     )
-    dispatch(
-      changeCurrentCoords({
-        currentCoords: {
-          lat: lat,
-          lng: lon,
-          zoom: 16,
-        },
-      }),
-    )
+
+    updateMapView(map, {
+      lat: lat,
+      lng: lon,
+      zoom: 12,
+    })
 
     dispatch(changeLocationStatus(LocationStatus.idle))
 

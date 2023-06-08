@@ -2,10 +2,11 @@ import { DrawCoords } from '../models/drawCoords.types'
 import { DrawType } from './drawType.types'
 import { Layer } from './layer.types'
 import { LocationStatus } from './locationStatus.types'
+import * as L from 'leaflet'
 
 export type GeocoderState = {
-  lat: number
-  lng: number
+  lat: number | null
+  lng: number | null
   zoom?: number
 }
 
@@ -24,4 +25,5 @@ export type ControlsState = {
   location: LocationStatus
   colorPicker: { color: string; isOpen: boolean }
   currentCoords: { lat: number; lng: number; zoom: number }
+  map: L.Map | null
 }

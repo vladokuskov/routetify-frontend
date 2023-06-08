@@ -1,16 +1,16 @@
 import { Button } from '@/components/Button/Button'
-import LocationIcon from '../../../../assets/icons/location.svg'
-import LocationFilledIcon from '../../../../assets/icons/location-filled.svg'
 import LoadingIcon from '../../../../assets/icons/loader.svg'
+import LocationFilledIcon from '../../../../assets/icons/location-filled.svg'
+import LocationIcon from '../../../../assets/icons/location.svg'
 
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import Icon from '@/components/Icon/Icon'
 import {
   changeCurrentCoords,
   changeLocationStatus,
 } from '@/redux/features/controlsSlice'
-import { LocationStatus } from '@/types/global/locationStatus.types'
 import { addLatLng } from '@/redux/features/geocoderSlice'
-import Icon from '@/components/Icon/Icon'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { LocationStatus } from '@/types/global/locationStatus.types'
 
 const MapControlFindLocation = () => {
   const dispatch = useAppDispatch()

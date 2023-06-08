@@ -4,17 +4,17 @@ import { useState } from 'react'
 
 import * as L from 'leaflet'
 
-import useUpdateMapView from '../../../hooks/map/useUpdateMapView'
 import useClickedCoords from '../../../hooks/map/useClickedCoords'
+import useUpdateMapView from '../../../hooks/map/useUpdateMapView'
 
-import StyleMap from './TileLayer'
 import { MapContainer, ZoomControl } from 'react-leaflet'
+import StyleMap from './TileLayer'
 
-import RenderLocationMarker from './RenderLocationMarker'
-import useFitBoundsOnClick from '../../../hooks/map/useFitBoundsOnClick'
-import RenderPolyline from './RenderPolyline'
-import RenderMarkers from './RenderMarkers'
 import useGetPositionByDrag from '@/hooks/map/useGetPositionByDrag'
+import useFitBoundsOnClick from '../../../hooks/map/useFitBoundsOnClick'
+import RenderLocationMarker from './RenderLocationMarker'
+import RenderMarkers from './RenderMarkers'
+import RenderPolyline from './RenderPolyline'
 
 const LeafletMap = () => {
   const [map, setMap] = useState<L.Map | null>(null)

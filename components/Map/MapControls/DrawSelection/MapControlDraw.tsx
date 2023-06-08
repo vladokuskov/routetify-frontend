@@ -1,12 +1,12 @@
 import { Button } from '@/components/Button/Button'
+import { changeDraw } from '@/redux/features/controlsSlice'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import LineIcon from '../../../../assets/icons/line.svg'
 import ClearIcon from '../../../../assets/icons/x.svg'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import { changeDraw } from '@/redux/features/controlsSlice'
 
-import { DrawType } from '@/types/global/drawType.types'
-import { useKeyDown } from '@/hooks/useKeyDown'
 import Icon from '@/components/Icon/Icon'
+import { useKeyDown } from '@/hooks/useKeyDown'
+import { DrawType } from '@/types/global/drawType.types'
 
 const MapControlDrawSelection = () => {
   const dispatch = useAppDispatch()

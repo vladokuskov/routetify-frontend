@@ -1,12 +1,12 @@
 import { Button } from '@/components/Button/Button'
-import FitIcon from '../../../../assets/icons/fit.svg'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import Icon from '@/components/Icon/Icon'
 import {
   changeFitBounds,
   changeLocationStatus,
 } from '@/redux/features/controlsSlice'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { LocationStatus } from '@/types/global/locationStatus.types'
-import Icon from '@/components/Icon/Icon'
+import FitIcon from '../../../../assets/icons/fit.svg'
 
 const MapControlFitRoute = () => {
   const dispatch = useAppDispatch()

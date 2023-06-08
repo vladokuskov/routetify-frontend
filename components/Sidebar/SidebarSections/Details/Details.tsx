@@ -1,19 +1,19 @@
+import { updateDrawInfo } from '@/redux/features/drawSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { calculateRouteDetails } from '@/utils/getRouteDetails'
+import { useEffect } from 'react'
 import { Detail } from './Detail/Detail'
 import { StyledDetailsMainContainer } from './Details.styles'
-import { calculateRouteDetails } from '@/utils/getRouteDetails'
-import { updateDrawInfo } from '@/redux/features/drawSlice'
-import { useEffect } from 'react'
 
 const Details = () => {
-  const exportCoords = useAppSelector((state) => state.drawReducer.exportCoords)
+  const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
   const { time, dist } = useAppSelector((state) => state.drawReducer.drawInfo)
 
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     const updateDetails = () => {
-      const { time, distance } = calculateRouteDetails(exportCoords)
+      const { time, distance } = calculateRouteDetails(drawCoords)
 
       dispatch(
         updateDrawInfo({
@@ -22,7 +22,7 @@ const Details = () => {
         }),
       )
 
-      if (exportCoords.length === 0) {
+      if (drawCoords.length === 0) {
         dispatch(
           updateDrawInfo({
             time: '0',
@@ -32,10 +32,10 @@ const Details = () => {
       }
     }
 
-    if (exportCoords.length !== 0) {
+    if (drawCoords.length !== 0) {
       updateDetails()
     }
-  }, [exportCoords])
+  }, [drawCoords])
 
   return (
     <StyledDetailsMainContainer>

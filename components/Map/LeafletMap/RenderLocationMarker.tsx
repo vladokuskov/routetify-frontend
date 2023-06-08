@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
-import * as L from 'leaflet'
-import { LatLngExpression, Map } from 'leaflet'
 import { useAppSelector } from '@/redux/hooks'
 import { LocationStatus } from '@/types/global/locationStatus.types'
+import * as L from 'leaflet'
+import { LatLngExpression, Map } from 'leaflet'
+import { useEffect, useState } from 'react'
 
 const RenderLocationMarker = ({ map }: { map: Map | null }) => {
   const [position, setPosition] = useState<LatLngExpression | null>(null)

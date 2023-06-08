@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 
 import { mapConfig } from '@/config/map'
-import { updateExportCoords } from '@/redux/features/drawSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { DrawType } from '@/types/global/drawType.types'
 import * as L from 'leaflet'
@@ -70,8 +69,6 @@ const RenderPolyline = ({ map }: { map: L.Map | null }) => {
         map.on('click', onMouseClick)
         previewPolyline.addTo(map)
       }
-
-      dispatch(updateExportCoords(drawCoords))
 
       return () => {
         if (!isMarkerDragging) {

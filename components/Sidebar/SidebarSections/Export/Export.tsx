@@ -1,10 +1,11 @@
-import { useAppSelector } from '@/redux/hooks'
-import { useState } from 'react'
-import downloadjs from 'downloadjs'
-import { DrawCoords } from '@/types/models/drawCoords.types'
-import { StyledSidebarSectionContent } from '../../SidebarSection/SidebarSection.styles'
 import { Button } from '@/components/Button/Button'
+import { putDrawCoords } from '@/redux/features/drawSlice'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { Route } from '@/types/global/export.types'
+import { DrawCoords } from '@/types/models/drawCoords.types'
+import downloadjs from 'downloadjs'
+import { useEffect, useState } from 'react'
+import { StyledSidebarSectionContent } from '../../SidebarSection/SidebarSection.styles'
 
 const date = new Date()
 const current_date = `${date.getFullYear()}-${
@@ -12,11 +13,22 @@ const current_date = `${date.getFullYear()}-${
 }-${date.getDate()}_${date.getHours()}:${date.getMinutes()}`
 
 const Export = () => {
-  const exportCoords = useAppSelector((state) => state.drawReducer.exportCoords)
+  const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
+  const dispatch = useAppDispatch()
 
   const [filename, setFilename] = useState<string>('')
 
-  const generateGPX = (coords: DrawCoords[]) => {
+  useEffect(() => {
+    const route = localStorage.getItem(`route`)
+
+    if (route) {
+      const parsedRoute = JSON.parse(route) as DrawCoords[]
+
+      dispatch(putDrawCoords(parsedRoute))
+    }
+  }, [])
+
+  const generateGPX = async (coords: DrawCoords[]) => {
     let gpxString = `
     <?xml version="1.0" encoding="UTF-8"?>
     <gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd http://www.topografix.com/GPX/gpx_style/0/2 http://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:gpx_style="http://www.topografix.com/GPX/gpx_style/0/2" version="1.1" creator="https://cycplanner.vercel.app/">
@@ -39,12 +51,14 @@ const Export = () => {
         }</name>
         <type>Cycling</type>
         <trkseg>
-          ${coords
-            .map(
-              (point) =>
-                `<trkpt lat="${point.lat}" lon="${point.lng}"></trkpt>`,
-            )
-            .join('\n\t')}
+          ${await Promise.resolve(
+            coords
+              .map(
+                (point) =>
+                  `<trkpt lat="${point.lat}" lon="${point.lng}"></trkpt>`,
+              )
+              .join('\n\t'),
+          )}
         </trkseg>
       </trk>
     </gpx>`
@@ -52,7 +66,7 @@ const Export = () => {
     return gpxString
   }
 
-  const generateKML = (coords: DrawCoords[]) => {
+  const generateKML = async (coords: DrawCoords[]) => {
     let kmlString = `<?xml version="1.0" encoding="UTF-8"?>
     <kml xmlns="http://www.opengis.net/kml/2.2">
       <Document>
@@ -86,8 +100,10 @@ const Export = () => {
           <LineString>
             <tessellate>1</tessellate>
             <coordinates>
-            ${coords.forEach(
-              (coord, index: number) => `${coord.lng},${coord.lat},0`,
+            ${await Promise.resolve(
+              coords.forEach(
+                (point, index: number) => `${point.lng},${point.lat},0`,
+              ),
             )}
           </coordinates>
       </LineString>
@@ -98,9 +114,11 @@ const Export = () => {
     return kmlString
   }
 
-  const handleRouteDownload = (e: Route) => {
+  const handleRouteDownload = async (e: Route) => {
     const route =
-      e === Route.GPX ? generateGPX(exportCoords) : generateKML(exportCoords)
+      e === Route.GPX
+        ? await generateGPX(drawCoords)
+        : await generateKML(drawCoords)
 
     downloadjs(
       route,
@@ -121,7 +139,7 @@ const Export = () => {
         variant="primary"
         onClick={() => handleRouteDownload(Route.GPX)}
         full="true"
-        disabled={exportCoords.length === 0}
+        disabled={drawCoords.length === 0}
       >
         GPX
       </Button>
@@ -129,7 +147,7 @@ const Export = () => {
         variant="primary"
         onClick={() => handleRouteDownload(Route.KML)}
         full="true"
-        disabled={exportCoords.length === 0}
+        disabled={drawCoords.length === 0}
       >
         KML
       </Button>

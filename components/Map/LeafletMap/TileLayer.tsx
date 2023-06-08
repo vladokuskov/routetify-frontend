@@ -1,8 +1,8 @@
 import { mapConfig } from '@/config/map'
+import { useAppSelector } from '@/redux/hooks'
 import { Layer } from '@/types/global/layer.types'
 import { useMemo, useState } from 'react'
 import { TileLayer } from 'react-leaflet'
-import { useAppSelector } from '@/redux/hooks'
 
 const StyleMap = () => {
   const [mapUrl, setMapUrl] = useState<string>(

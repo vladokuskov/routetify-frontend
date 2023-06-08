@@ -12,7 +12,6 @@ export type GeocoderState = {
 export type DrawState = {
   drawInfo: { time: string; dist: string }
   drawCoords: DrawCoords[]
-  exportCoords: DrawCoords[]
   drawCoordsDeleted: DrawCoords[]
   drawCoordsFuture: DrawCoords[]
 }

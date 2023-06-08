@@ -14,6 +14,7 @@ import {
   StyledTileSelectionMenu,
   StyledTileSelectionWrapper,
 } from './MapControlTileSelection.styles'
+import { useKeyDown } from '@/hooks/useKeyDown'
 
 const MapControlTileSelection = () => {
   const ref = useRef(null)
@@ -36,6 +37,18 @@ const MapControlTileSelection = () => {
     dispatch(changeLayer(layer))
   }
 
+  useKeyDown(() => {
+    if (layer !== Layer.default) {
+      handleTileSelect(Layer.default)
+    }
+  }, ['KeyN'])
+
+  useKeyDown(() => {
+    if (layer !== Layer.satellite) {
+      handleTileSelect(Layer.satellite)
+    }
+  }, ['KeyM'])
+
   const handleMenuOpen = () => {
     setIsMenuOpen((prev) => !prev)
   }
@@ -48,7 +61,7 @@ const MapControlTileSelection = () => {
       {isMenuOpen && (
         <StyledTileSelectionMenu>
           <StyledTileButton
-            title="Default tile"
+            title="Default tile [N]"
             disabled={layer === Layer.default}
             onClick={() => handleTileSelect(Layer.default)}
           >
@@ -65,7 +78,7 @@ const MapControlTileSelection = () => {
             Default
           </StyledTileButton>
           <StyledTileButton
-            title="Satellite tile"
+            title="Satellite tile [M]"
             disabled={layer === Layer.satellite}
             onClick={() => handleTileSelect(Layer.satellite)}
           >

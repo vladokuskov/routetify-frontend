@@ -4,6 +4,7 @@ import { redoDrawCoords } from '@/redux/features/drawSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { DrawType } from '@/types/global/drawType.types'
 import RedoIcon from '../../../../assets/icons/redo.svg'
+import { useKeyDown } from '@/hooks/useKeyDown'
 
 const MapControlRedoAction = () => {
   const dispatch = useAppDispatch()
@@ -15,11 +16,24 @@ const MapControlRedoAction = () => {
   )
   const drawType = useAppSelector((state) => state.controlsReducer.draw)
 
+  const handleRedo = () => {
+    if (
+      (drawCoordsFuture.length > 0 && drawCoordsDeleted.length > 0) ||
+      drawType !== DrawType.None
+    ) {
+      dispatch(redoDrawCoords(null))
+    }
+  }
+
+  useKeyDown(() => {
+    handleRedo()
+  }, ['KeyX'])
+
   return (
     <Button
       variant="map"
-      title={'Redo action'}
-      onClick={() => dispatch(redoDrawCoords(null))}
+      title="Redo action [X]"
+      onClick={handleRedo}
       disabled={
         (drawCoordsFuture.length === 0 && drawCoordsDeleted.length === 0) ||
         drawType === DrawType.None

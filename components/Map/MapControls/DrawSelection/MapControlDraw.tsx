@@ -23,10 +23,14 @@ const MapControlDrawSelection = () => {
     }
   }, ['Escape'])
 
+  useKeyDown(() => {
+    handleDrawChange(drawType !== DrawType.None ? DrawType.None : DrawType.Line)
+  }, ['KeyL'])
+
   return (
     <Button
       variant="map"
-      title={drawType === DrawType.Line ? 'Stop drawing' : 'Draw line'}
+      title={drawType === DrawType.Line ? 'Stop drawing' : 'Draw line [L]'}
       onClick={() =>
         handleDrawChange(
           drawType !== DrawType.None ? DrawType.None : DrawType.Line,

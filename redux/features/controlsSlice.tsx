@@ -10,7 +10,6 @@ const initialState = {
   draw: DrawType.None,
   layer: Layer.default,
   location: LocationStatus.idle,
-  isFitBounds: false,
   isMarkerDragging: false,
   colorPicker: { color: mapConfig.lineColor.placed, isOpen: false },
   currentCoords: mapConfig.initialCoords,
@@ -31,12 +30,6 @@ export const controlsReducer = createSlice({
       return {
         ...state,
         isMarkerDragging: action.payload,
-      }
-    },
-    changeFitBounds: (state, action: PayloadAction<boolean>) => {
-      return {
-        ...state,
-        isFitBounds: action.payload,
       }
     },
     changeLocationStatus: (state, action: PayloadAction<LocationStatus>) => {
@@ -96,7 +89,6 @@ export const {
   changeLineColor,
   showColorPicker,
   changeLocationStatus,
-  changeFitBounds,
   toggleIsMarkerDragging,
   loadMap,
 } = controlsReducer.actions

@@ -20,7 +20,6 @@ export type DrawState = {
 export type ControlsState = {
   draw: DrawType
   layer: Layer
-  isFitBounds: boolean
   isMarkerDragging: boolean
   location: LocationStatus
   colorPicker: { color: string; isOpen: boolean }

@@ -1,12 +1,12 @@
 import { Button } from '@/components/Button/Button'
-import { putDrawCoords } from '@/redux/features/drawSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { Route } from '@/types/global/export.types'
 import { DrawCoords } from '@/types/models/drawCoords.types'
 import downloadjs from 'downloadjs'
 import { useEffect, useState } from 'react'
 import { StyledSidebarSectionContent } from '../../SidebarSection/SidebarSection.styles'
-import { changeFitBounds } from '@/redux/features/controlsSlice'
+import { putDrawCoords } from '@/redux/features/drawSlice'
+import fitBounds from '@/lib/fitBounds'
 
 const date = new Date()
 const current_date = `${date.getFullYear()}-${
@@ -14,24 +14,25 @@ const current_date = `${date.getFullYear()}-${
 }-${date.getDate()}_${date.getHours()}:${date.getMinutes()}`
 
 const Export = () => {
-  const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
-  const dispatch = useAppDispatch()
-
   const [filename, setFilename] = useState<string>('')
 
+  const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
+  const map = useAppSelector((state) => state.controlsReducer.map) // L.Map || null
+
+  const dispatch = useAppDispatch()
+
   useEffect(() => {
-    const route = localStorage.getItem(`route`)
+    const route = localStorage.getItem('route')
 
     if (route) {
       const parsedRoute = JSON.parse(route) as DrawCoords[]
 
       if (parsedRoute.length > 0) {
         dispatch(putDrawCoords(parsedRoute))
-
-        dispatch(changeFitBounds(true))
+        fitBounds(map, parsedRoute)
       }
     }
-  }, [])
+  }, [map])
 
   const generateGPX = async (coords: DrawCoords[]) => {
     let gpxString = `

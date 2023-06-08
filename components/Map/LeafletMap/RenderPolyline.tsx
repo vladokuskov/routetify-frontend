@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { mapConfig } from '@/config/map'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { useAppSelector } from '@/redux/hooks'
 import { DrawType } from '@/types/global/drawType.types'
 import * as L from 'leaflet'
 
@@ -16,8 +16,6 @@ const RenderPolyline = ({ map }: { map: L.Map | null }) => {
   const lineColor = useAppSelector(
     (state) => state.controlsReducer.colorPicker.color,
   )
-
-  const dispatch = useAppDispatch()
 
   const previewPolyline = L.polyline([], {
     color: mapConfig.lineColor.preview,

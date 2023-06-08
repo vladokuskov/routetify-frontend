@@ -54,6 +54,7 @@ const MapControlTileSelection = () => {
           >
             <StyledIconWrapper>
               <Image
+                quality={50}
                 src="/default.webp"
                 fill
                 priority
@@ -70,6 +71,7 @@ const MapControlTileSelection = () => {
           >
             <StyledIconWrapper>
               <Image
+                quality={50}
                 src="/satellite.webp"
                 fill
                 priority

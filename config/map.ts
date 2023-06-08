@@ -8,8 +8,8 @@ export const mapConfig: MapConfig = {
     zoom: 12,
   },
   lineColor: {
-    placed: '#00ACC1',
-    preview: '#00ACC170',
+    placed: '#83f520',
+    preview: '#3520f570',
   },
   layer: {
     default: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',

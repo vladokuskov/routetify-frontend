@@ -41,7 +41,9 @@ const RenderMarkers = ({ map }: { map: L.Map | null }) => {
             iconUrl,
             iconSize,
             iconAnchor,
+            className: `${drawType === DrawType.None && 'cursorCrosshair'}`,
           }),
+
           draggable: drawType === DrawType.Line,
         }).addTo(markersLayer)
 

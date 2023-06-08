@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { LocationStatus } from '@/types/global/locationStatus.types'
 import FitIcon from '../../../../assets/icons/fit.svg'
 import fitBounds from '@/lib/fitBounds'
+import { useKeyDown } from '@/hooks/useKeyDown'
 
 const MapControlFitRoute = () => {
   const dispatch = useAppDispatch()
@@ -13,15 +14,21 @@ const MapControlFitRoute = () => {
   const map = useAppSelector((state) => state.controlsReducer.map)
 
   const handleRouteFit = () => {
-    dispatch(changeLocationStatus(LocationStatus.idle))
+    if (drawCoords.length > 0) {
+      dispatch(changeLocationStatus(LocationStatus.idle))
 
-    fitBounds(map, drawCoords)
+      fitBounds(map, drawCoords)
+    }
   }
+
+  useKeyDown(() => {
+    handleRouteFit()
+  }, ['KeyF'])
 
   return (
     <Button
       variant="map"
-      title={'Fit route'}
+      title="Fit route [F]"
       onClick={handleRouteFit}
       disabled={drawCoords.length === 0}
     >

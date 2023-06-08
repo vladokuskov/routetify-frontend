@@ -14,11 +14,11 @@ const useFitBoundsOnClick = (map: L.Map | null) => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (map && isFitBounds && drawCoords.length !== 0) {
+    if (map && isFitBounds && drawCoords.length > 0) {
       map.fitBounds(drawCoords as any)
       dispatch(changeFitBounds(false))
     }
-  }, [isFitBounds, drawCoords])
+  }, [map, isFitBounds, drawCoords, dispatch])
 }
 
 export default useFitBoundsOnClick

@@ -16,18 +16,6 @@ const useGetPositionByDrag = (map: L.Map | null) => {
   useEffect(() => {
     if (!map) return
 
-    const dragHandler = () => {
-      dispatch(
-        changeCurrentCoords({
-          currentCoords: {
-            lat: map.getCenter().lat,
-            lng: map.getCenter().lng,
-            zoom: map.getZoom(),
-          },
-        }),
-      )
-    }
-
     const dragStartHandler = () => {
       dispatch(
         changeLocationStatus(
@@ -38,11 +26,9 @@ const useGetPositionByDrag = (map: L.Map | null) => {
       )
     }
 
-    map.on('drag', dragHandler)
     map.on('dragstart', dragStartHandler)
 
     return () => {
-      map.off('drag', dragHandler)
       map.off('dragstart', dragStartHandler)
     }
   }, [map, dispatch, locationStatus])

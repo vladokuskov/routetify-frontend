@@ -6,6 +6,7 @@ import { DrawCoords } from '@/types/models/drawCoords.types'
 import downloadjs from 'downloadjs'
 import { useEffect, useState } from 'react'
 import { StyledSidebarSectionContent } from '../../SidebarSection/SidebarSection.styles'
+import { changeFitBounds } from '@/redux/features/controlsSlice'
 
 const date = new Date()
 const current_date = `${date.getFullYear()}-${
@@ -24,7 +25,11 @@ const Export = () => {
     if (route) {
       const parsedRoute = JSON.parse(route) as DrawCoords[]
 
-      dispatch(putDrawCoords(parsedRoute))
+      if (parsedRoute.length > 0) {
+        dispatch(putDrawCoords(parsedRoute))
+
+        dispatch(changeFitBounds(true))
+      }
     }
   }, [])
 

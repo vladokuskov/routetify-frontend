@@ -10,6 +10,6 @@ const useUpdateMapView = (map: L.Map | null) => {
     if (map) {
       map.setView([geocoderCoords.lat, geocoderCoords.lng], geocoderCoords.zoom)
     }
-  }, [map, geocoderCoords])
+  }, [geocoderCoords])
 }
 export default useUpdateMapView

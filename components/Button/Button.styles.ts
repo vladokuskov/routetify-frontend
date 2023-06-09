@@ -46,35 +46,35 @@ const StyledButton = styled.button<Button>`
   ${({ variant, status }) =>
     variant === 'map'
       ? css`
-          background-color: #f8f6f6;
+          background-color: #fafafa;
           color: ${status === 'danger'
             ? '#E5342F'
             : status === 'success'
             ? '#468EE5'
-            : '#3b6d52'};
-          border-radius: 50%;
+            : '#5A5A5A'};
+          border-radius: 10px;
           padding: 0.4rem;
-          box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.28);
+          box-shadow: 0px 0px 7px -2px rgba(0, 0, 0, 0.25);
 
           &:hover,
           &:focus {
-            background-color: #f8f6f6;
+            background-color: #fafafa;
             color: ${status === 'danger'
               ? '#FB5F5B'
               : status === 'success'
               ? '#7AB6FF'
-              : '#5d9b7a'};
-            box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.28);
+              : '#858585'};
+            box-shadow: 0px 0px 7px -2px rgba(0, 0, 0, 0.25);
           }
 
           &:active {
-            background-color: #f8f6f6;
+            background-color: #fafafa;
             color: ${status === 'danger'
               ? '#E5342F'
               : status === 'success'
               ? '#468EE5'
-              : '#3b6d52'};
-            box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.28);
+              : '#5A5A5A'};
+            box-shadow: 0px 0px 7px -2px rgba(0, 0, 0, 0.25);
           }
         `
       : variant === 'primary'

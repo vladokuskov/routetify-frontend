@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { styled } from 'styled-components'
 
 const StyledSidebarContainer = styled.aside`
@@ -15,6 +14,7 @@ const StyledSidebarContainer = styled.aside`
   -moz-box-shadow: 0 -7px 10px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   @media (min-width: 650px) {
+    overflow: hidden;
     z-index: 2;
     position: absolute;
     max-width: 18.75rem;
@@ -22,7 +22,8 @@ const StyledSidebarContainer = styled.aside`
     top: 0;
     margin-top: 0;
     height: 100%;
-    box-shadow: 25px 0px 20px 20px rgba(0, 0, 0, 0.3);
+    border-left: 2px solid #cfcfcf;
+    box-shadow: -2px 0px 18px -6px rgba(0, 0, 0, 0.25);
   }
 
   &::-webkit-scrollbar-track {
@@ -60,4 +61,34 @@ const StyledSidebarContent = styled.div`
   margin: 0 auto;
 `
 
-export { StyledSidebarContainer, StyledDragDecoration, StyledSidebarContent }
+const StyledDragButton = styled.button``
+
+const StyledCopyrightTitle = styled.h3`
+  font-family: var(--font-roboto), sans-serif;
+  color: #cdcdcd;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1rem;
+  letter-spacing: 0.015em;
+  letter-spacing: 0.01rem;
+`
+
+const StyledSidebarFooter = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: center;
+  justify-self: flex-end;
+  margin-top: auto;
+  margin-bottom: 2rem;
+`
+
+export {
+  StyledSidebarContainer,
+  StyledDragDecoration,
+  StyledSidebarContent,
+  StyledDragButton,
+  StyledCopyrightTitle,
+  StyledSidebarFooter,
+}

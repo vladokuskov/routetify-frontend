@@ -2,6 +2,9 @@ import {
   StyledDragDecoration,
   StyledSidebarContainer,
   StyledSidebarContent,
+  StyledDragButton,
+  StyledCopyrightTitle,
+  StyledSidebarFooter,
 } from './Sidebar.styles'
 import { Geocoder } from './SidebarSections/Geocoder/Geocoder'
 import { SidebarSection } from './SidebarSection/SidebarSection'
@@ -11,6 +14,7 @@ import { Details } from './SidebarSections/Details/Details'
 const Sidebar = () => {
   return (
     <StyledSidebarContainer>
+      <StyledDragButton />
       <StyledSidebarContent>
         <StyledDragDecoration />
         <SidebarSection>
@@ -22,6 +26,9 @@ const Sidebar = () => {
         <SidebarSection title="Export">
           <Export />
         </SidebarSection>
+        <StyledSidebarFooter>
+          <StyledCopyrightTitle>&copy; Routetify</StyledCopyrightTitle>
+        </StyledSidebarFooter>
       </StyledSidebarContent>
     </StyledSidebarContainer>
   )

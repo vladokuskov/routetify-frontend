@@ -22,7 +22,7 @@ const StyledMapContainer = styled.div`
   display: grid;
 
   .leaflet-control-zoom {
-    border: 8px !important;
+    border: 10px !important;
     width: 40px;
     height: 80px;
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.28) !important;
@@ -31,8 +31,8 @@ const StyledMapContainer = styled.div`
     .leaflet-control-zoom-out {
       width: 100% !important;
       height: 50% !important;
-      color: #3b6d52 !important;
-      background-color: #f8f6f6;
+      color: #5a5a5a !important;
+      background-color: #fafafa;
 
       -webkit-tap-highlight-color: transparent;
       user-select: none;
@@ -42,7 +42,7 @@ const StyledMapContainer = styled.div`
       -ms-user-select: none;
       &:hover,
       &:focus {
-        color: #5d9b7a !important;
+        color: #858585 !important;
       }
 
       &:disabled,
@@ -53,11 +53,11 @@ const StyledMapContainer = styled.div`
   }
 
   .leaflet-control-zoom-in {
-    border-radius: 8px 8px 0 0 !important;
+    border-radius: 10px 10px 0 0 !important;
   }
 
   .leaflet-control-zoom-out {
-    border-radius: 0 0 8px 8px !important;
+    border-radius: 0 0 10px 10px !important;
   }
 `
 

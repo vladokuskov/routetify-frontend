@@ -21,7 +21,7 @@ const StyledMapMainControls = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  top: 4rem;
+  top: 1.75rem;
   padding: 0.5rem 0.8rem;
   padding-right: 0;
   z-index: 1004;

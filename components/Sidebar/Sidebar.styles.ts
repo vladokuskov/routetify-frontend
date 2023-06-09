@@ -48,13 +48,6 @@ const StyledDragDecoration = styled.div`
   }
 `
 
-const StyledLogoImage = styled(Image)`
-  display: none;
-  @media (min-width: 650px) {
-    display: block;
-  }
-`
-
 const StyledSidebarContent = styled.div`
   width: 100%;
   height: 100%;
@@ -67,9 +60,4 @@ const StyledSidebarContent = styled.div`
   margin: 0 auto;
 `
 
-export {
-  StyledSidebarContainer,
-  StyledDragDecoration,
-  StyledSidebarContent,
-  StyledLogoImage,
-}
+export { StyledSidebarContainer, StyledDragDecoration, StyledSidebarContent }

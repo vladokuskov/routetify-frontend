@@ -20,7 +20,7 @@ const inter = Inter({
 export const metadata = {
   title: siteConfig.name,
   description: siteConfig.description,
-  keywords: ['cycroute', 'Bike', 'Route', 'GPX', 'KML'],
+  keywords: ['Routetify', 'Bike', 'Route', 'GPX', 'KML'],
   authors: [
     {
       name: 'swappnet',

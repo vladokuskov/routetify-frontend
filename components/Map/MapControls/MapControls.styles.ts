@@ -15,7 +15,7 @@ const StyledMapOverlay = styled.div`
   pointer-events: none;
 `
 
-const StyledMapMainControls = styled.div`
+const StyledMapMainControls = styled.div<{ isSidebarOpen: boolean }>`
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -26,7 +26,9 @@ const StyledMapMainControls = styled.div`
   padding-right: 0;
   z-index: 1004;
   pointer-events: visible;
-  right: 0.5rem;
+  @media (min-width: 650px) {
+    right: ${({ isSidebarOpen }) => (isSidebarOpen ? '19.3rem' : '4.5rem')};
+  }
   @media (max-height: 550px) {
     padding: 0 !important;
     display: flex;
@@ -34,7 +36,7 @@ const StyledMapMainControls = styled.div`
   }
 `
 
-const StyledMapControls = styled.div`
+const StyledMapControls = styled.div<{ isSidebarOpen: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,7 +47,7 @@ const StyledMapControls = styled.div`
   }
 
   @media (min-width: 650px) {
-    right: 19.3rem;
+    right: ${({ isSidebarOpen }) => (isSidebarOpen ? '19.3rem' : '4rem')};
   }
 `
 

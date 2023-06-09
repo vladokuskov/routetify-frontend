@@ -12,14 +12,19 @@ import { MapControlFindLocation } from './FindLocation/MapControlLocation'
 import { MapControlDrawSelection } from './DrawSelection/MapControlDraw'
 import { Contributors } from '../Contributors/Contributors'
 import { MapControlTileSelection } from './TilesSelector/MapControlTileSelection'
+import { useAppSelector } from '@/redux/hooks'
 
 const MapControls = () => {
+  const isSidebarOpen = useAppSelector(
+    (state) => state.controlsReducer.isSidebarOpen,
+  )
+
   return (
     <StyledMapMainOverlay>
       <StyledMapOverlay>
         <Contributors />
-        <StyledMapMainControls>
-          <StyledMapControls>
+        <StyledMapMainControls isSidebarOpen={isSidebarOpen}>
+          <StyledMapControls isSidebarOpen={isSidebarOpen}>
             <MapControlUndoAction />
             <MapControlRedoAction />
             <MapControlDeleteRoute />

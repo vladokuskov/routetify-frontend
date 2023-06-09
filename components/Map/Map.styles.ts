@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 
-const StyledMapMainContainer = styled.main`
+const StyledMapMainContainer = styled.main<{ isSidebarOpen: boolean }>`
   position: fixed;
   z-index: 1;
   width: 100%;
@@ -12,6 +12,11 @@ const StyledMapMainContainer = styled.main`
     position: static;
     width: 100%;
     height: 100%;
+    margin-right: ${({ isSidebarOpen }) =>
+      isSidebarOpen ? '18.75rem' : '4rem'};
+    width: calc(
+      100% - ${({ isSidebarOpen }) => (isSidebarOpen ? '18.75rem' : '4rem')}
+    );
   }
 `
 

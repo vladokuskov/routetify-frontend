@@ -15,7 +15,9 @@ const current_date = `${date.getFullYear()}-${
 
 const Export = () => {
   const [filename, setFilename] = useState<string>('')
-
+  const isSidebarOpen = useAppSelector(
+    (state) => state.controlsReducer.isSidebarOpen,
+  )
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
   const map = useAppSelector((state) => state.controlsReducer.map) // L.Map || null
 

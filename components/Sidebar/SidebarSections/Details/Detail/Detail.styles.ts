@@ -18,7 +18,7 @@ const StyledDetailTitle = styled.h4`
   letter-spacing: -0.004em;
   font-weight: 700;
   color: #717171;
-  overflow-wrap: break-word;
+  word-break: break-all;
 `
 
 const StyledDetailSubTitle = styled.p`
@@ -27,7 +27,7 @@ const StyledDetailSubTitle = styled.p`
   line-height: 1rem;
   letter-spacing: 0.01em;
   color: #717171;
-  overflow-wrap: break-word;
+  word-break: break-all;
 `
 
 const StyledDetailDescription = styled.p`

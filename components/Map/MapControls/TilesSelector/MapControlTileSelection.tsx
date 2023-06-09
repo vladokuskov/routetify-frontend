@@ -67,10 +67,10 @@ const MapControlTileSelection = () => {
           >
             <StyledIconWrapper>
               <Image
-                quality={50}
-                src="/default.webp"
                 fill
                 priority
+                quality={30}
+                src="/icons/default.webp"
                 alt=""
                 style={{ borderRadius: '4px' }}
               />
@@ -84,10 +84,10 @@ const MapControlTileSelection = () => {
           >
             <StyledIconWrapper>
               <Image
-                quality={50}
-                src="/satellite.webp"
                 fill
                 priority
+                quality={30}
+                src="/icons/satellite.webp"
                 alt=""
                 style={{ borderRadius: '4px' }}
               />

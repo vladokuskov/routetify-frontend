@@ -32,10 +32,6 @@ const StyledMapMainControls = styled.div`
     display: flex;
     top: 0.7rem;
   }
-
-  @media (min-width: 650px) {
-    right: 19.3rem;
-  }
 `
 
 const StyledMapControls = styled.div`

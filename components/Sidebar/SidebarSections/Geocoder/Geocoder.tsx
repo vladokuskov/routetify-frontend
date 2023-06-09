@@ -1,18 +1,24 @@
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
+import Icon from '@/components/Icon/Icon'
+import updateMapView from '@/lib/updateMapView'
+import {
+  changeLocationStatus,
+  toggleIsSidebarOpen,
+} from '@/redux/features/controlsSlice'
+import { addLatLng } from '@/redux/features/geocoderSlice'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { LocationStatus } from '@/types/global/locationStatus.types'
 import { useClickOutside } from '../../../../hooks/useClickOutside'
 import { Input } from '../../../Input/Input'
+import SearchIcon from '../../../../assets/icons/search.svg'
 import {
   StyledGeocoderContainer,
   StyledGeocoderResult,
   StyledGeocoderResultsContainer,
+  StyledGeocoderAltButton,
 } from './Geocoder.styles'
 import { TGeoResponse } from './Geocoder.types'
-import { addLatLng } from '@/redux/features/geocoderSlice'
-import { changeLocationStatus } from '@/redux/features/controlsSlice'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import { LocationStatus } from '@/types/global/locationStatus.types'
-import updateMapView from '@/lib/updateMapView'
 
 const Geocoder = () => {
   const ref = useRef<HTMLDivElement>(null)
@@ -23,7 +29,11 @@ const Geocoder = () => {
   const [isGeocoderLoading, setIsGeocoderLoading] = useState<boolean>(false)
   const [isResultsOpen, setIsResultsOpen] = useClickOutside(ref, false)
   const [hasUserTyped, setHasUserTyped] = useState(false)
+
   const map = useAppSelector((state) => state.controlsReducer.map)
+  const isSidebarOpen = useAppSelector(
+    (state) => state.controlsReducer.isSidebarOpen,
+  )
 
   const dispatch = useAppDispatch()
 
@@ -102,34 +112,48 @@ const Geocoder = () => {
   }, [geocoderValue, hasUserTyped])
 
   return (
-    <StyledGeocoderContainer ref={ref}>
-      <Input
-        placeholder="Search location"
-        variant="search"
-        value={geocoderValue}
-        onChange={handleChangeGeocoder}
-        loading={isGeocoderLoading ? 'true' : 'false'}
-        onClick={handleClear}
-        full="true"
-      />
-      {geocoderResponse && isResultsOpen && (
-        <StyledGeocoderResultsContainer>
-          {geocoderResponse.slice(0, 3).map((data: TGeoResponse, i) => {
-            let { lat, lon, display_name } = data
-            return (
-              <StyledGeocoderResult key={i}>
-                <button
-                  title={display_name}
-                  onClick={() => handleResultSelect({ lat, lon, display_name })}
-                >
-                  {display_name}
-                </button>
-              </StyledGeocoderResult>
-            )
-          })}
-        </StyledGeocoderResultsContainer>
-      )}
-    </StyledGeocoderContainer>
+    <>
+      <StyledGeocoderContainer ref={ref} isSidebarOpen={isSidebarOpen}>
+        <Input
+          placeholder="Search location"
+          variant="search"
+          value={geocoderValue}
+          onChange={handleChangeGeocoder}
+          loading={isGeocoderLoading ? 'true' : 'false'}
+          onClick={handleClear}
+          full="true"
+        />
+        {geocoderResponse && isResultsOpen && (
+          <StyledGeocoderResultsContainer>
+            {geocoderResponse.slice(0, 3).map((data: TGeoResponse, i) => {
+              let { lat, lon, display_name } = data
+              return (
+                <StyledGeocoderResult key={i}>
+                  <button
+                    title={display_name}
+                    onClick={() =>
+                      handleResultSelect({ lat, lon, display_name })
+                    }
+                  >
+                    {display_name}
+                  </button>
+                </StyledGeocoderResult>
+              )
+            })}
+          </StyledGeocoderResultsContainer>
+        )}
+      </StyledGeocoderContainer>
+
+      <StyledGeocoderAltButton
+        isSidebarOpen={isSidebarOpen}
+        title="Open location search"
+        onClick={() => {
+          dispatch(toggleIsSidebarOpen())
+        }}
+      >
+        <Icon svg={SearchIcon} />
+      </StyledGeocoderAltButton>
+    </>
   )
 }
 

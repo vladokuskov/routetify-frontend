@@ -54,7 +54,7 @@ const StyledInput = styled.input<Input>`
     css`
       padding: 0.35rem 2rem 0.35rem 0.3rem;
       border: 2px solid transparent;
-      border-radius: 0.5rem;
+      border-radius: 10px;
     `}
 
   &:hover {
@@ -79,13 +79,12 @@ const StyledInput = styled.input<Input>`
   &:focus-visible {
     outline: none;
     outline-offset: 0;
-    border-color: #3b6d52 !important;
 
     ${({ variant }) =>
       variant === 'search' &&
       css`
-        background-color: #e6e6e66e;
-        border-radius: 0.5rem;
+        background-color: #cbcbcb6e;
+        border-radius: 10px;
       `}
   }
 `

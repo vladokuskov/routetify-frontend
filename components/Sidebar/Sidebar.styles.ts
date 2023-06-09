@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 
-const StyledSidebarContainer = styled.aside`
+const StyledSidebarContainer = styled.aside<{ isSidebarOpen: boolean }>`
   position: relative;
   z-index: 20;
   overflow-y: scroll;
@@ -12,12 +12,14 @@ const StyledSidebarContainer = styled.aside`
   box-shadow: 0 -7px 10px rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 0 -7px 10px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 -7px 10px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
+  padding: ${({ isSidebarOpen }) => (isSidebarOpen ? '1rem' : '0.2rem')};
   @media (min-width: 650px) {
-    overflow: hidden;
+    overflow: visible;
     z-index: 2;
     position: absolute;
     max-width: 18.75rem;
+    min-width: 4rem;
+    width: ${({ isSidebarOpen }) => (isSidebarOpen ? '18.75rem' : '4rem')};
     right: 0;
     top: 0;
     margin-top: 0;
@@ -61,7 +63,34 @@ const StyledSidebarContent = styled.div`
   margin: 0 auto;
 `
 
-const StyledDragButton = styled.button``
+const StyledDragButton = styled.button`
+  display: none;
+  @media (min-width: 650px) {
+    display: block;
+  }
+  border: 2px solid #cfcfcf;
+  cursor: pointer;
+  z-index: 3;
+  position: absolute;
+  top: 50%;
+  left: -1.25rem;
+  background-color: #fafafa;
+  padding: 0.4rem;
+  border-radius: 9999px;
+  font-size: 1.1rem;
+  box-shadow: 0px 0px 8px -3px rgba(0, 0, 0, 0.25);
+  color: #cecece;
+
+  &:hover {
+    background-color: #f3f3f3;
+  }
+
+  &:active,
+  &:focus {
+    background-color: #e4e4e4;
+    color: #9e9e9e;
+  }
+`
 
 const StyledCopyrightTitle = styled.h3`
   font-family: var(--font-roboto), sans-serif;

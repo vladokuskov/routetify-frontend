@@ -9,9 +9,9 @@ const StyledMapMainContainer = styled.main`
   right: 0;
   left: 0;
   @media (min-width: 650px) {
+    position: static;
+    width: 100%;
     height: 100%;
-    margin-right: calc(18.75rem);
-    width: calc(100% - 18.75rem);
   }
 `
 

@@ -1,6 +1,9 @@
 import { styled } from 'styled-components'
 
-const StyledGeocoderContainer = styled.div`
+const StyledGeocoderContainer = styled.div<{ isSidebarOpen: boolean }>`
+  @media (min-width: 650px) {
+    display: ${({ isSidebarOpen }) => (isSidebarOpen ? 'block' : 'none')};
+  }
   font-family: var(--font-roboto), sans-serif;
   position: relative;
   width: 100%;
@@ -42,8 +45,41 @@ const StyledGeocoderResult = styled.li`
   }
 `
 
+const StyledGeocoderAltButton = styled.button<{ isSidebarOpen: boolean }>`
+  @media (min-width: 650px) {
+    display: ${({ isSidebarOpen }) => (isSidebarOpen ? 'none' : 'block')};
+  }
+  display: none;
+  background: #dddddd;
+  box-shadow: 0px 6px 5px -5px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  color: #b5b5b5;
+  width: 3.2rem;
+  height: 3.2rem;
+
+  &:hover,
+  &:focus {
+    background-color: #e7e7e7;
+  }
+
+  &:active {
+    background-color: #dddddd;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  *:focus:not(:focus-visible) {
+    outline: none;
+    box-shadow: none;
+  }
+`
+
 export {
   StyledGeocoderContainer,
   StyledGeocoderResultsContainer,
   StyledGeocoderResult,
+  StyledGeocoderAltButton,
 }

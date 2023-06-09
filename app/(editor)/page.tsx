@@ -7,7 +7,6 @@ import { StyledContainer } from '@/components/StyledContainer/StyledContainer'
 export default function Editor() {
   return (
     <>
-      {' '}
       <StyledContainer variant="layout">
         <Sidebar />
         <Map />

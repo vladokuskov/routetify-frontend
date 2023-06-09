@@ -6,7 +6,7 @@ const StyledSidebarSection = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.7rem;
+  gap: 0.6rem;
 `
 
 const StyledSidebarSectionHeader = styled.div<{ isSidebarOpen: boolean }>`

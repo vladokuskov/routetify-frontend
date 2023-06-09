@@ -26,6 +26,7 @@ const StyledMapMainControls = styled.div<{ isSidebarOpen: boolean }>`
   padding-right: 0;
   z-index: 1004;
   pointer-events: visible;
+  right: 0.7rem;
   @media (min-width: 650px) {
     right: ${({ isSidebarOpen }) => (isSidebarOpen ? '19.3rem' : '4.5rem')};
   }

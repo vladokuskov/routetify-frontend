@@ -3,10 +3,16 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { calculateRouteDetails } from '@/utils/getRouteDetails'
 import { useEffect } from 'react'
 import { Detail } from './Detail/Detail'
-import { StyledDetailsMainContainer } from './Details.styles'
+import {
+  StyledDetailsMainContainer,
+  StyledSeparationLine,
+} from './Details.styles'
 
 const Details = () => {
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
+  const isSidebarOpen = useAppSelector(
+    (state) => state.controlsReducer.isSidebarOpen,
+  )
   const { time, dist } = useAppSelector((state) => state.drawReducer.drawInfo)
 
   const dispatch = useAppDispatch()
@@ -17,8 +23,8 @@ const Details = () => {
 
       dispatch(
         updateDrawInfo({
-          time: time.toFixed(2).toString(),
-          dist: distance.toFixed(2).toString(),
+          time: time.toFixed(1).toString(),
+          dist: distance.toFixed(1).toString(),
         }),
       )
 
@@ -38,9 +44,10 @@ const Details = () => {
   }, [drawCoords])
 
   return (
-    <StyledDetailsMainContainer>
-      <Detail title={time} subTitle="Time, h" />
-      <Detail title={dist} subTitle="Dist, km" />
+    <StyledDetailsMainContainer isSidebarOpen={isSidebarOpen}>
+      <Detail title={time} subTitle="TIME" description="h" />
+      <StyledSeparationLine isSidebarOpen={isSidebarOpen} />
+      <Detail title={dist} subTitle="DIST" description="km" />
     </StyledDetailsMainContainer>
   )
 }

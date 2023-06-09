@@ -59,8 +59,11 @@ const StyledSidebarContent = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  gap: 1.5rem;
+  gap: 1.75rem;
   margin: 0 auto;
+  @media (min-width: 650px) {
+    padding-top: 2rem;
+  }
 `
 
 const StyledDragButton = styled.button`

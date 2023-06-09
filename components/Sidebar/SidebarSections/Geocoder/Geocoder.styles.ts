@@ -53,7 +53,7 @@ const StyledGeocoderAltButton = styled.button<{ isSidebarOpen: boolean }>`
   background: #dddddd;
   box-shadow: 0px 6px 5px -5px rgba(0, 0, 0, 0.05);
   border-radius: 8px;
-  color: #b5b5b5;
+  color: #7a7a7ab3;
   width: 3.2rem;
   height: 3.2rem;
 

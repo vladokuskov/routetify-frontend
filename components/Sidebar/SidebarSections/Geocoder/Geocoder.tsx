@@ -146,7 +146,7 @@ const Geocoder = () => {
 
       <StyledGeocoderAltButton
         isSidebarOpen={isSidebarOpen}
-        title="Open location search"
+        title="Location search"
         onClick={() => {
           dispatch(toggleIsSidebarOpen())
         }}

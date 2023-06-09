@@ -1,9 +1,9 @@
 import { styled } from 'styled-components'
 
 const StyledSidebarContainer = styled.aside<{ isSidebarOpen: boolean }>`
+  transition: width 0.1s ease;
   position: relative;
   z-index: 20;
-  overflow-y: scroll;
   margin-top: calc(70vh);
   width: 100%;
   z-index: 1001;
@@ -12,6 +12,7 @@ const StyledSidebarContainer = styled.aside<{ isSidebarOpen: boolean }>`
   box-shadow: 0 -7px 10px rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 0 -7px 10px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 -7px 10px rgba(0, 0, 0, 0.1);
+
   padding: ${({ isSidebarOpen }) => (isSidebarOpen ? '1rem' : '0.2rem')};
   @media (min-width: 650px) {
     overflow: visible;
@@ -64,6 +65,7 @@ const StyledSidebarContent = styled.div`
   @media (min-width: 650px) {
     padding-top: 2rem;
   }
+  overflow: hidden;
 `
 
 const StyledDragButton = styled.button`

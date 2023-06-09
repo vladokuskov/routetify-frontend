@@ -143,7 +143,7 @@ const Export = () => {
 
   return (
     <StyledSidebarSectionContent>
-      <Button
+      {/* <Button
         variant="primary"
         onClick={() => handleRouteDownload(Route.GPX)}
         full="true"
@@ -158,7 +158,7 @@ const Export = () => {
         disabled={drawCoords.length === 0}
       >
         KML
-      </Button>
+      </Button> */}
     </StyledSidebarSectionContent>
   )
 }

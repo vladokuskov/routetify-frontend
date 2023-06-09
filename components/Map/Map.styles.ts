@@ -25,7 +25,6 @@ const StyledMapContainer = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-
   .leaflet-control-zoom {
     border-radius: 10px !important;
     width: 40px;

@@ -10,8 +10,8 @@ Live - https://cycroute.vercel.app/
 ### Features
 
 - Create bike tracks and export them as GPX/KML file format;
-- Be able to create tracks by calculating very detailed route or create route by own hand;
-- Save tracks in your account and open them in the future when you want;
+- Be able to create route by own hand;
+- Save route and open in the future when you want;
 - Search your location & create routes where you like;
 
 ### Technology Stack

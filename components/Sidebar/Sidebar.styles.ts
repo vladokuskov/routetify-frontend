@@ -43,6 +43,7 @@ const StyledSidebarContainer = styled.aside<{ isSidebarOpen: boolean }>`
 `
 
 const StyledDragDecoration = styled.div`
+  margin-top: 1rem;
   height: 0.3rem;
   width: 1.8rem;
   border-radius: 0.2rem;

@@ -28,7 +28,7 @@ const Sidebar = () => {
   }
 
   return (
-    <StyledSidebarContainer isSidebarOpen={isSidebarOpen}>
+    <StyledSidebarContainer>
       <StyledDragButton
         onClick={handleSidebarResize}
         title={isSidebarOpen ? 'Hide sidebar' : 'Open sidebar'}

@@ -1,6 +1,7 @@
 import { Button } from '@/components/Button/Button'
 import Icon from '@/components/Icon/Icon'
 import { useClickOutside } from '@/hooks/useClickOutside'
+import { useKeyDown } from '@/hooks/useKeyDown'
 import { changeLayer } from '@/redux/features/controlsSlice'
 import { addLatLng } from '@/redux/features/geocoderSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
@@ -8,13 +9,7 @@ import { Layer } from '@/types/global/layer.types'
 import Image from 'next/image'
 import { useRef } from 'react'
 import LayersIcon from '../../../../assets/icons/layers.svg'
-import {
-  StyledIconWrapper,
-  StyledTileButton,
-  StyledTileSelectionMenu,
-  StyledTileSelectionWrapper,
-} from './MapControlTileSelection.styles'
-import { useKeyDown } from '@/hooks/useKeyDown'
+import clsx from 'clsx'
 
 const MapControlTileSelection = () => {
   const ref = useRef(null)
@@ -54,18 +49,28 @@ const MapControlTileSelection = () => {
   }
 
   return (
-    <StyledTileSelectionWrapper ref={ref}>
+    <div className="relative" ref={ref}>
       <Button variant="map" title={'Change map tile'} onClick={handleMenuOpen}>
         <Icon svg={LayersIcon} />
       </Button>
       {isMenuOpen && (
-        <StyledTileSelectionMenu>
-          <StyledTileButton
+        <div
+          className={clsx(
+            'absolute font-roboto font-semibold gap-1 right-11 bottom-0 rounded-md p-1 bg-app shadow flex flex-col items-center justify-center',
+            'minSm:bottom-auto minSm:top-11 minSm:right-3',
+          )}
+        >
+          <button
+            className={clsx(
+              'cursor-pointer p-1 rounded-md inline-flex items-center justify-center gap-2 text-neutral-700 hocus:text-neutral-600 hocus:bg-neutral-200',
+              layer === Layer.default &&
+                'bg-neutral-200 !text-neutral-500 cursor-default ',
+            )}
             title="Default tile [N]"
             disabled={layer === Layer.default}
             onClick={() => handleTileSelect(Layer.default)}
           >
-            <StyledIconWrapper>
+            <div className="relative w-5 h-5">
               <Image
                 fill
                 priority
@@ -74,15 +79,20 @@ const MapControlTileSelection = () => {
                 alt=""
                 style={{ borderRadius: '4px' }}
               />
-            </StyledIconWrapper>
+            </div>
             Default
-          </StyledTileButton>
-          <StyledTileButton
+          </button>
+          <button
+            className={clsx(
+              'cursor-pointer p-1 rounded-md inline-flex items-center justify-center gap-2 text-neutral-700 hocus:text-neutral-600 hocus:bg-neutral-200',
+              layer === Layer.satellite &&
+                'bg-neutral-200 !text-neutral-500 cursor-default',
+            )}
             title="Satellite tile [M]"
             disabled={layer === Layer.satellite}
             onClick={() => handleTileSelect(Layer.satellite)}
           >
-            <StyledIconWrapper>
+            <div className="relative w-5 h-5">
               <Image
                 fill
                 priority
@@ -91,12 +101,12 @@ const MapControlTileSelection = () => {
                 alt=""
                 style={{ borderRadius: '4px' }}
               />
-            </StyledIconWrapper>
+            </div>
             Satellite
-          </StyledTileButton>
-        </StyledTileSelectionMenu>
+          </button>
+        </div>
       )}
-    </StyledTileSelectionWrapper>
+    </div>
   )
 }
 

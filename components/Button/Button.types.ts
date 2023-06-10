@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react'
 
-type ButtonVariants = 'map' | 'routeType'
+type ButtonVariants = 'map' | 'routeType' | 'tile'
 
 type ButtonStatus = 'default' | 'success' | 'danger'
 

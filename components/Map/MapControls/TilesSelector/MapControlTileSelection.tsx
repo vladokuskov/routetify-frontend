@@ -60,12 +60,8 @@ const MapControlTileSelection = () => {
             'minSm:bottom-auto minSm:top-11 minSm:right-3',
           )}
         >
-          <button
-            className={clsx(
-              'cursor-pointer p-1 rounded-md inline-flex items-center justify-center gap-2 text-neutral-700 hocus:text-neutral-600 hocus:bg-neutral-200',
-              layer === Layer.default &&
-                'bg-neutral-200 !text-neutral-500 cursor-default ',
-            )}
+          <Button
+            variant="tile"
             title="Default tile [N]"
             disabled={layer === Layer.default}
             onClick={() => handleTileSelect(Layer.default)}
@@ -81,13 +77,9 @@ const MapControlTileSelection = () => {
               />
             </div>
             Default
-          </button>
-          <button
-            className={clsx(
-              'cursor-pointer p-1 rounded-md inline-flex items-center justify-center gap-2 text-neutral-700 hocus:text-neutral-600 hocus:bg-neutral-200',
-              layer === Layer.satellite &&
-                'bg-neutral-200 !text-neutral-500 cursor-default',
-            )}
+          </Button>
+          <Button
+            variant="tile"
             title="Satellite tile [M]"
             disabled={layer === Layer.satellite}
             onClick={() => handleTileSelect(Layer.satellite)}
@@ -103,7 +95,7 @@ const MapControlTileSelection = () => {
               />
             </div>
             Satellite
-          </button>
+          </Button>
         </div>
       )}
     </div>

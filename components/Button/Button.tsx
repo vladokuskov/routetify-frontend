@@ -25,6 +25,8 @@ const Button = ({
           'bg-app text-neutral-800 hocus:bg-neutral-200 hocus:shadow-md hocus:text-neutral-700 rounded-md !px-2 !py-2 shadow-md',
         variant === 'routeType' &&
           'w-full p-1 text-neutral-700 hocus:bg-neutral-200 hocus:text-neutral-500 rounded-md transition-colors',
+        variant === 'tile' &&
+          'cursor-pointer p-1 rounded-md inline-flex items-center justify-center gap-2 text-neutral-700 hocus:text-neutral-600 hocus:bg-neutral-200',
 
         sizesClass[size],
         status === 'danger' && '!text-red-500',

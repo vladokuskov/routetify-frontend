@@ -136,7 +136,7 @@ const Export = () => {
 
   const handleRouteDownload = async () => {
     let route
-    if (selectedRouteType === Route.GPX) {
+    if (selectedRouteType === Route.GPX && drawCoords.length > 0) {
       route = await generateGPX(drawCoords)
     } else if (selectedRouteType === Route.KML) {
       route = await generateKML(drawCoords)
@@ -185,8 +185,9 @@ const Export = () => {
     >
       <button
         onClick={handleRouteDownload}
+        disabled={drawCoords.length === 0}
         title="Download route"
-        className="w-full inline-flex justify-center items-center gap-4 p-3 text-neutral-700 hocus:bg-neutral-200 hocus:text-neutral-500 rounded-md transition-colors"
+        className="w-full inline-flex justify-center items-center gap-4 p-3 text-neutral-700 hocus:bg-neutral-200 hocus:text-neutral-500 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <span className={clsx('', 'max-sm:!block', !isSidebarOpen && 'hidden')}>
           Download

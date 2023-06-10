@@ -9,15 +9,10 @@ import {
 import { addLatLng } from '@/redux/features/geocoderSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { LocationStatus } from '@/types/global/locationStatus.types'
+import clsx from 'clsx'
+import SearchIcon from '../../../../assets/icons/search.svg'
 import { useClickOutside } from '../../../../hooks/useClickOutside'
 import { Input } from '../../../Input/Input'
-import SearchIcon from '../../../../assets/icons/search.svg'
-import {
-  StyledGeocoderContainer,
-  StyledGeocoderResult,
-  StyledGeocoderResultsContainer,
-  StyledGeocoderAltButton,
-} from './Geocoder.styles'
 import { TGeoResponse } from './Geocoder.types'
 
 const Geocoder = () => {
@@ -113,7 +108,14 @@ const Geocoder = () => {
 
   return (
     <>
-      <StyledGeocoderContainer ref={ref} isSidebarOpen={isSidebarOpen}>
+      <div
+        className={clsx(
+          'w-full relative font-roboto',
+          'max-sm:block',
+          isSidebarOpen ? 'block' : 'hidden',
+        )}
+        ref={ref}
+      >
         <Input
           placeholder="Search location"
           variant="search"
@@ -124,35 +126,37 @@ const Geocoder = () => {
           full="true"
         />
         {geocoderResponse && isResultsOpen && (
-          <StyledGeocoderResultsContainer>
+          <div className="w-full top-10 absolute rounded-md  z-20">
             {geocoderResponse.slice(0, 3).map((data: TGeoResponse, i) => {
               let { lat, lon, display_name } = data
               return (
-                <StyledGeocoderResult key={i}>
-                  <button
-                    title={display_name}
-                    onClick={() =>
-                      handleResultSelect({ lat, lon, display_name })
-                    }
-                  >
-                    {display_name}
-                  </button>
-                </StyledGeocoderResult>
+                <button
+                  key={i}
+                  className="w-full  flex flex-col items-center  justify-center border p-2 font-semibold text-neutral-600 bg-neutral-300 border-b-neutral-400 last:border-none last:rounded-b-md first:rounded-t-md hocus:bg-neutral-200 transition-colors"
+                  title={display_name}
+                  onClick={() => handleResultSelect({ lat, lon, display_name })}
+                >
+                  {display_name}
+                </button>
               )
             })}
-          </StyledGeocoderResultsContainer>
+          </div>
         )}
-      </StyledGeocoderContainer>
+      </div>
 
-      <StyledGeocoderAltButton
-        isSidebarOpen={isSidebarOpen}
+      <button
+        className={clsx(
+          'bg-neutral-300 w-full-h-full p-2 rounded-md text-neutral-500 hocus:bg-neutral-200 hocus:text-neutral-400 transition-colors',
+          'max-sm:hidden',
+          !isSidebarOpen ? 'block' : 'hidden',
+        )}
         title="Location search"
         onClick={() => {
           dispatch(toggleIsSidebarOpen())
         }}
       >
         <Icon svg={SearchIcon} />
-      </StyledGeocoderAltButton>
+      </button>
     </>
   )
 }

@@ -3,7 +3,6 @@ import { Route } from '@/types/global/export.types'
 import { DrawCoords } from '@/types/models/drawCoords.types'
 import downloadjs from 'downloadjs'
 import { useEffect, useState } from 'react'
-import { StyledSidebarSectionContent } from '../../SidebarSection/SidebarSection.styles'
 import { putDrawCoords } from '@/redux/features/drawSlice'
 import fitBounds from '@/lib/fitBounds'
 import {
@@ -154,7 +153,7 @@ const Export = () => {
   }
 
   return (
-    <StyledSidebarSectionContent>
+    <div>
       <StyledExportButtonWrapper isSidebarOpen={isSidebarOpen}>
         <StyledExportButton
           title="Download route"
@@ -172,7 +171,7 @@ const Export = () => {
           </StyledSelectionMenuWrapper>
         )}
       </StyledExportButtonWrapper>
-    </StyledSidebarSectionContent>
+    </div>
   )
 }
 

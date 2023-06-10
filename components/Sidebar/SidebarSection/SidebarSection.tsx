@@ -1,11 +1,6 @@
-import { ReactNode } from 'react'
-import {
-  StyledSidebarSection,
-  StyledSidebarSectionTitle,
-  StyledSidebarSectionDescription,
-  StyledSidebarSectionHeader,
-} from './SidebarSection.styles'
 import { useAppSelector } from '@/redux/hooks'
+import clsx from 'clsx'
+import { ReactNode } from 'react'
 
 const SidebarSection = ({
   title,
@@ -20,20 +15,27 @@ const SidebarSection = ({
     (state) => state.controlsReducer.isSidebarOpen,
   )
   return (
-    <StyledSidebarSection>
-      <StyledSidebarSectionHeader isSidebarOpen={isSidebarOpen}>
+    <div className="w-full flex flex-col items-center justify-center gap-4">
+      <div
+        className={clsx(
+          'w-full flex flex-col items-start justify-center gap-1 font-roboto',
+          'max-sm:block',
+          !isSidebarOpen && 'hidden',
+        )}
+      >
         {title && (
-          <StyledSidebarSectionTitle>{title}</StyledSidebarSectionTitle>
+          <h2 className=" text-xl font-semibold text-neutral-600 tracking-tight">
+            {title}
+          </h2>
         )}
         {description && (
-          <StyledSidebarSectionDescription>
+          <p className=" text-base leading-4 font-normal text-neutral-400">
             {description}
-          </StyledSidebarSectionDescription>
+          </p>
         )}
-      </StyledSidebarSectionHeader>
-
+      </div>
       {children}
-    </StyledSidebarSection>
+    </div>
   )
 }
 

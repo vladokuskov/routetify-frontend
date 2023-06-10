@@ -12,6 +12,7 @@ import ArrowUpIcon from '../../../../assets/icons/chevron-up.svg'
 import ArrowDownIcon from '../../../../assets/icons/chevron-down.svg'
 import ArrowRightIcon from '../../../../assets/icons/arrow-right.svg'
 import { useClickOutside } from '@/hooks/useClickOutside'
+import { Button } from '@/components/Button/Button'
 
 const date = new Date()
 const current_date = `${date.getFullYear()}-${
@@ -219,31 +220,29 @@ const Export = () => {
         <Icon svg={ArrowRightIcon} />
       </button>
       {isSelectionMenuOpen && (
-        <div className="absolute w-full max-w-[7rem] right-0 bottom-[-4.7rem] rounded-md p-1 bg-neutral-300 shadow">
-          <button
-            className={clsx(
-              'w-full p-1 text-neutral-700 hocus:bg-neutral-200 hocus:text-neutral-500 rounded-md transition-colors',
-              selectedRouteType === Route.GPX &&
-                ' hocus:!bg-neutral-300 hocus:!text-neutral-500 !text-neutral-500',
-            )}
+        <div
+          className={clsx(
+            'absolute w-full max-w-[7rem] right-0 bottom-[-5.2rem] rounded-md p-1 bg-neutral-300 shadow',
+            'max-sm:!block',
+            !isSidebarOpen && 'hidden',
+          )}
+        >
+          <Button
+            variant="routeType"
             title="GPX"
             onClick={() => handleRouteTypeChange(Route.GPX)}
             disabled={selectedRouteType === Route.GPX}
           >
             GPX
-          </button>
-          <button
-            className={clsx(
-              'w-full p-1 text-neutral-700 hocus:bg-neutral-200 hocus:text-neutral-500 rounded-md transition-colors',
-              selectedRouteType === Route.KML &&
-                ' hocus:!bg-neutral-300 hocus:!text-neutral-500 !text-neutral-500',
-            )}
+          </Button>
+          <Button
+            variant="routeType"
             title="KML"
             onClick={() => handleRouteTypeChange(Route.KML)}
             disabled={selectedRouteType === Route.KML}
           >
             KML
-          </button>
+          </Button>
         </div>
       )}
     </div>

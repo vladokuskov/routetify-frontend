@@ -3,7 +3,7 @@ import { TDetail } from './Detail.types'
 const Detail = ({ title, subTitle, description }: TDetail) => {
   return (
     <div className="font-roboto w-full flex flex-col items-center justify-center gap-2 rounded-md px-1">
-      <h4 className=" text-lg tracking-tighter font-bold text-neutral-800 opacity-70">
+      <h4 className=" text-lg tracking-tighter font-bold text-neutral-800 opacity-70 break-all leading-4">
         {title}
       </h4>
       <div className="w-full flex flex-col justify-center items-center">

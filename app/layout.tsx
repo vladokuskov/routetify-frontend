@@ -52,7 +52,6 @@ export default function RootLayout({
       <head />
       <body className={`${roboto.variable}`} suppressHydrationWarning={true}>
         <StyledComponentsRegistry>
-          {' '}
           <Providers>{children}</Providers>
         </StyledComponentsRegistry>
       </body>

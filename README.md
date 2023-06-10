@@ -1,15 +1,15 @@
 <img align='center' src="public/logo.svg" width="100px">
 
-![Commits](https://img.shields.io/github/commit-activity/m/swappnet/cycroute)
-[![Website cycroute.netlify.app](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://cycroute.netlify.app/)
+![Commits](https://img.shields.io/github/commit-activity/m/swappnet/routetify)
+[![Website cycroute.netlify.app](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://routetify.vercel.app/)
 
-`cycroute` - user-friendly web application that allows you to create bike routes effortlessly. With our application, you can easily export your routes in GPX/KML format, making it simple to share your favorite rides with others.
+`routetify` - user-friendly web application that allows you to create routes effortlessly. With our application, you can easily export your routes in GPX/KML format, making it simple to share your favorite routes with others.
 
-Live - https://cycroute.vercel.app/
+Live - https://routetify.vercel.app/
 
 ### Features
 
-- Create bike tracks and export them as GPX/KML file format;
+- Create routes and export them as GPX/KML file format;
 - Be able to create route by own hand;
 - Save route and open in the future when you want;
 - Search your location & create routes where you like;
@@ -18,7 +18,7 @@ Live - https://cycroute.vercel.app/
 
     NextJS
     Redux
-    Styled Components
+    Tailwind
     TypeScript
     Leaflet
 
@@ -29,7 +29,7 @@ Live - https://cycroute.vercel.app/
 
 ### How to start?
 
-1.  Clone the repository: `git clone https://github.com/swappnet/cycroute.git`.
+1.  Clone the repository: `git clone https://github.com/swappnet/routetify.git`.
 2.  Install dependencies: `npm install`.
 3.  To set up `.env` file in the root directory. You can use the `.env.example` file as a template.
 4.  Start the development server: `npm run dev`.
@@ -37,7 +37,7 @@ Live - https://cycroute.vercel.app/
 
 ### Contributing
 
-Contributions to 'cycroute' are welcome! If you would like to contribute, please follow these steps:
+Contributions to 'routetify' are welcome! If you would like to contribute, please follow these steps:
 
     1. Fork the repository.
     2. Create a new branch for your feature or bug fix.
@@ -47,7 +47,7 @@ Contributions to 'cycroute' are welcome! If you would like to contribute, please
 
 ### Acknowledgements
 
-`cycroute` was created by Swappnet as a project for cycling community.
+`routetify` was created by Swappnet as a project for people who love outdoor and maps.
 
 <h4>Liked the work ?</h4>
 Give the repository a star :-)

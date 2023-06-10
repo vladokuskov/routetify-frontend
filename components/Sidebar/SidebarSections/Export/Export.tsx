@@ -1,21 +1,10 @@
+import fitBounds from '@/lib/fitBounds'
+import { putDrawCoords } from '@/redux/features/drawSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { Route } from '@/types/global/export.types'
 import { DrawCoords } from '@/types/models/drawCoords.types'
 import downloadjs from 'downloadjs'
 import { useEffect, useState } from 'react'
-import { putDrawCoords } from '@/redux/features/drawSlice'
-import fitBounds from '@/lib/fitBounds'
-import {
-  StyledExportButtonWrapper,
-  StyledExportSelectionButton,
-  StyledSelectionMenuButton,
-  StyledSelectionMenuWrapper,
-  StyledExportButton,
-} from './Export.styles'
-import Icon from '@/components/Icon/Icon'
-import DownloadIcon from '../../../../assets/icons/download.svg'
-import ArrowUpIcon from '../../../../assets/icons/chevron-up.svg'
-import ArrowDownIcon from '../../../../assets/icons/chevron-down.svg'
 
 const date = new Date()
 const current_date = `${date.getFullYear()}-${
@@ -154,12 +143,11 @@ const Export = () => {
 
   return (
     <div>
-      <StyledExportButtonWrapper isSidebarOpen={isSidebarOpen}>
+      {/* <StyledExportButtonWrapper isSidebarOpen={isSidebarOpen}>
         <StyledExportButton
           title="Download route"
           onClick={() => handleRouteDownload(selectedType)}
         >
-          {/* TODO: Handle name change from DOWNLOAD to ROUTE TYPE when isSidebarOpen and min-width:650px */}
           {isSidebarOpen}
           <Icon svg={DownloadIcon} />
         </StyledExportButton>
@@ -170,7 +158,7 @@ const Export = () => {
             <StyledSelectionMenuButton></StyledSelectionMenuButton>
           </StyledSelectionMenuWrapper>
         )}
-      </StyledExportButtonWrapper>
+      </StyledExportButtonWrapper> */}
     </div>
   )
 }

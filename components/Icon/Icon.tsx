@@ -1,6 +1,6 @@
+import clsx from 'clsx'
 import React from 'react'
 import { Icon } from './Icon.types'
-import { StyledIconWrapper } from './Icon.styles'
 
 const Icon: React.FC<Icon> = ({
   svg: Icon,
@@ -10,9 +10,14 @@ const Icon: React.FC<Icon> = ({
   spin = 'false',
 }) => {
   return (
-    <StyledIconWrapper className={className} spin={spin}>
+    <div
+      className={clsx(
+        'flex items-center justify-center',
+        spin === 'true' && 'animate-spin',
+      )}
+    >
       <Icon width={width} height={height} />
-    </StyledIconWrapper>
+    </div>
   )
 }
 

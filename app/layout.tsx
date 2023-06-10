@@ -1,9 +1,8 @@
 import { siteConfig } from '@/config/site'
-import StyledComponentsRegistry from '@/lib/registry'
 import { Providers } from '@/redux/provider'
-import { Inter, Roboto } from 'next/font/google'
-
+import '@/styles/globals.css'
 import 'leaflet/dist/leaflet.css'
+import { Roboto } from 'next/font/google'
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -11,16 +10,10 @@ const roboto = Roboto({
   variable: '--font-roboto',
 })
 
-const inter = Inter({
-  weight: ['300', '400', '500', '700'],
-  subsets: ['latin'],
-  variable: '--font-inter',
-})
-
 export const metadata = {
   title: siteConfig.name,
   description: siteConfig.description,
-  keywords: ['cycroute', 'Bike', 'Route', 'GPX', 'KML'],
+  keywords: ['Routetify', 'Bike', 'Route', 'GPX', 'KML'],
   authors: [
     {
       name: 'swappnet',
@@ -56,13 +49,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head />
-      <body
-        className={`${roboto.variable} ${inter.variable}`}
-        suppressHydrationWarning={true}
-      >
-        <StyledComponentsRegistry>
-          <Providers>{children}</Providers>
-        </StyledComponentsRegistry>
+      <body className={`${roboto.variable}`} suppressHydrationWarning={true}>
+        <Providers>{children}</Providers>
       </body>
     </html>
   )

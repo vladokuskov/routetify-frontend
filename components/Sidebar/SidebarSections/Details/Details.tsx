@@ -1,12 +1,15 @@
 import { updateDrawInfo } from '@/redux/features/drawSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { calculateRouteDetails } from '@/utils/getRouteDetails'
+import clsx from 'clsx'
 import { useEffect } from 'react'
 import { Detail } from './Detail/Detail'
-import { StyledDetailsMainContainer } from './Details.styles'
 
 const Details = () => {
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
+  const isSidebarOpen = useAppSelector(
+    (state) => state.controlsReducer.isSidebarOpen,
+  )
   const { time, dist } = useAppSelector((state) => state.drawReducer.drawInfo)
 
   const dispatch = useAppDispatch()
@@ -17,8 +20,8 @@ const Details = () => {
 
       dispatch(
         updateDrawInfo({
-          time: time.toFixed(2).toString(),
-          dist: distance.toFixed(2).toString(),
+          time: time.toFixed(1).toString(),
+          dist: distance.toFixed(1).toString(),
         }),
       )
 
@@ -38,10 +41,22 @@ const Details = () => {
   }, [drawCoords])
 
   return (
-    <StyledDetailsMainContainer>
-      <Detail title={time} subTitle="Time, h" />
-      <Detail title={dist} subTitle="Dist, km" />
-    </StyledDetailsMainContainer>
+    <div
+      className={clsx(
+        'w-full flex items-center flex-row justify-center gap-1 bg-details rounded-md p-1',
+        'max-sm:flex-row max-sm:max-w-full',
+        !isSidebarOpen && 'flex-col',
+      )}
+    >
+      <Detail title={time} subTitle="TIME" description="h" />
+      <hr
+        className={clsx(
+          'h-full w-auto rounded-md border border-black border-opacity-20',
+          !isSidebarOpen && 'h-auto !w-full max-sm:!w-auto',
+        )}
+      />
+      <Detail title={dist} subTitle="DIST" description="km" />
+    </div>
   )
 }
 

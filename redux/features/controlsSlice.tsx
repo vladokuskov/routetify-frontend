@@ -14,12 +14,19 @@ const initialState = {
   colorPicker: { color: mapConfig.lineColor.placed, isOpen: false },
   currentCoords: mapConfig.initialCoords,
   map: null,
+  isSidebarOpen: true,
 } as ControlsState
 
 export const controlsReducer = createSlice({
   name: 'controls',
   initialState,
   reducers: {
+    toggleIsSidebarOpen: (state, action: PayloadAction<void>) => {
+      return {
+        ...state,
+        isSidebarOpen: !state.isSidebarOpen,
+      }
+    },
     loadMap: (state, action: PayloadAction<L.Map>) => {
       return {
         ...state,
@@ -91,5 +98,6 @@ export const {
   changeLocationStatus,
   toggleIsMarkerDragging,
   loadMap,
+  toggleIsSidebarOpen,
 } = controlsReducer.actions
 export default controlsReducer.reducer

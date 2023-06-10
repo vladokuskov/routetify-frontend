@@ -1,25 +1,33 @@
-import {
-  StyledMapControls,
-  StyledMapMainOverlay,
-  StyledMapOverlay,
-  StyledMapMainControls,
-} from './MapControls.styles'
-import { MapControlUndoAction } from './UndoAction/MapControlUndo'
-import { MapControlRedoAction } from './RedoAction/MapControlRedo'
-import { MapControlDeleteRoute } from './DeleteRoute/MapControlDelete'
-import { MapControlFitRoute } from './FitRoute/MapControlFit'
-import { MapControlFindLocation } from './FindLocation/MapControlLocation'
-import { MapControlDrawSelection } from './DrawSelection/MapControlDraw'
+import { useAppSelector } from '@/redux/hooks'
+import clsx from 'clsx'
 import { Contributors } from '../Contributors/Contributors'
+import { MapControlDeleteRoute } from './DeleteRoute/MapControlDelete'
+import { MapControlDrawSelection } from './DrawSelection/MapControlDraw'
+import { MapControlFindLocation } from './FindLocation/MapControlLocation'
+import { MapControlFitRoute } from './FitRoute/MapControlFit'
+import { MapControlRedoAction } from './RedoAction/MapControlRedo'
 import { MapControlTileSelection } from './TilesSelector/MapControlTileSelection'
+import { MapControlUndoAction } from './UndoAction/MapControlUndo'
 
 const MapControls = () => {
+  const isSidebarOpen = useAppSelector(
+    (state) => state.controlsReducer.isSidebarOpen,
+  )
+
   return (
-    <StyledMapMainOverlay>
-      <StyledMapOverlay>
+    <div className="fixed w-full f-full pointer-events-none z-[1003]">
+      <div className="relative w-full h-full pointer-events-none">
         <Contributors />
-        <StyledMapMainControls>
-          <StyledMapControls>
+        <div
+          className={clsx(
+            'absolute flex flex-col items-center justify-start top-7 py-2 px-3 pr-0 pointer-events-auto',
+            'max-sm:right-3',
+            isSidebarOpen ? 'right-[19.3rem]' : 'right-[4.5rem]',
+          )}
+        >
+          <div
+            className={clsx('flex flex-col items-center justify-start gap-4')}
+          >
             <MapControlUndoAction />
             <MapControlRedoAction />
             <MapControlDeleteRoute />
@@ -27,10 +35,10 @@ const MapControls = () => {
             <MapControlFindLocation />
             <MapControlDrawSelection />
             <MapControlTileSelection />
-          </StyledMapControls>
-        </StyledMapMainControls>
-      </StyledMapOverlay>
-    </StyledMapMainOverlay>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 

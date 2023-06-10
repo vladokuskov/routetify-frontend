@@ -17,6 +17,7 @@ const useGetPositionByDrag = (map: L.Map | null) => {
     if (!map) return
 
     const dragStartHandler = () => {
+      map.invalidateSize()
       dispatch(
         changeLocationStatus(
           locationStatus === LocationStatus.fetching

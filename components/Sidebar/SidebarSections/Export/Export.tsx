@@ -1,12 +1,18 @@
-import { Button } from '@/components/Button/Button'
+import Icon from '@/components/Icon/Icon'
+import fitBounds from '@/lib/fitBounds'
+import { putDrawCoords } from '@/redux/features/drawSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { Route } from '@/types/global/export.types'
 import { DrawCoords } from '@/types/models/drawCoords.types'
+import clsx from 'clsx'
 import downloadjs from 'downloadjs'
-import { useEffect, useState } from 'react'
-import { StyledSidebarSectionContent } from '../../SidebarSection/SidebarSection.styles'
-import { putDrawCoords } from '@/redux/features/drawSlice'
-import fitBounds from '@/lib/fitBounds'
+import { useEffect, useRef, useState } from 'react'
+import DownloadIcon from '../../../../assets/icons/download.svg'
+import ArrowUpIcon from '../../../../assets/icons/chevron-up.svg'
+import ArrowDownIcon from '../../../../assets/icons/chevron-down.svg'
+import ArrowRightIcon from '../../../../assets/icons/arrow-right.svg'
+import { useClickOutside } from '@/hooks/useClickOutside'
+import { Button } from '@/components/Button/Button'
 
 const date = new Date()
 const current_date = `${date.getFullYear()}-${
@@ -14,8 +20,16 @@ const current_date = `${date.getFullYear()}-${
 }-${date.getDate()}_${date.getHours()}:${date.getMinutes()}`
 
 const Export = () => {
+  const selectionMenuRef = useRef(null)
   const [filename, setFilename] = useState<string>('')
-
+  const [selectedRouteType, setSelectedRouteType] = useState<Route>(Route.GPX)
+  const [isSelectionMenuOpen, setIsSelectionMenuOpen] = useClickOutside(
+    selectionMenuRef,
+    false,
+  )
+  const isSidebarOpen = useAppSelector(
+    (state) => state.controlsReducer.isSidebarOpen,
+  )
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
   const map = useAppSelector((state) => state.controlsReducer.map) // L.Map || null
 
@@ -120,44 +134,119 @@ const Export = () => {
     return kmlString
   }
 
-  const handleRouteDownload = async (e: Route) => {
-    const route =
-      e === Route.GPX
-        ? await generateGPX(drawCoords)
-        : await generateKML(drawCoords)
+  const handleRouteDownload = async () => {
+    let route
+    if (selectedRouteType === Route.GPX && drawCoords.length > 0) {
+      route = await generateGPX(drawCoords)
+    } else if (selectedRouteType === Route.KML) {
+      route = await generateKML(drawCoords)
+    }
 
-    downloadjs(
-      route,
-      `${
-        filename.length === 0 || !filename
-          ? `new_route_${current_date}`
-          : filename
-      }${e === Route.GPX ? '.gpx' : '.kml'}`,
-      `application/${
-        e === Route.GPX ? 'application/gpx+xml' : 'vnd.google-earth.kml+xml'
-      }`,
-    )
+    if (route) {
+      downloadjs(
+        route,
+        `${
+          filename.length === 0 || !filename
+            ? `new_route_${current_date}`
+            : filename
+        }${selectedRouteType === Route.GPX ? '.gpx' : '.kml'}`,
+        `application/${
+          selectedRouteType === Route.GPX
+            ? 'application/gpx+xml'
+            : 'vnd.google-earth.kml+xml'
+        }`,
+      )
+    }
+  }
+
+  const handleSelectionMenuOpen = () => {
+    setIsSelectionMenuOpen((prev) => !prev)
+  }
+
+  const handleRouteTypeChange = (type: Route | null) => {
+    if (!type) {
+      setSelectedRouteType(
+        selectedRouteType === Route.GPX ? Route.KML : Route.GPX,
+      )
+    } else {
+      setSelectedRouteType(type)
+    }
+    setIsSelectionMenuOpen(false)
   }
 
   return (
-    <StyledSidebarSectionContent>
-      <Button
-        variant="primary"
-        onClick={() => handleRouteDownload(Route.GPX)}
-        full="true"
+    <div
+      className={clsx(
+        'w-full relative bg-neutral-300 rounded font-roboto font-semibold flex justify-center items-center',
+        'max-sm:!flex-row',
+        !isSidebarOpen && 'flex-col',
+      )}
+      ref={selectionMenuRef}
+    >
+      <button
+        onClick={handleRouteDownload}
         disabled={drawCoords.length === 0}
+        title="Download route"
+        className="w-full inline-flex justify-center items-center gap-4 p-3 text-neutral-700 hocus:bg-neutral-200 hocus:text-neutral-500 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        GPX
-      </Button>
-      <Button
-        variant="primary"
-        onClick={() => handleRouteDownload(Route.KML)}
-        full="true"
-        disabled={drawCoords.length === 0}
+        <span className={clsx('', 'max-sm:!block', !isSidebarOpen && 'hidden')}>
+          Download
+        </span>
+        <Icon svg={DownloadIcon} />
+      </button>
+      <button
+        className={clsx(
+          'w-full max-w-[7rem] inline-flex justify-center items-center gap-1 p-3 text-neutral-700 hocus:bg-neutral-200 hocus:text-neutral-500 rounded-md transition-colors',
+          'max-sm:!inline-flex',
+          !isSidebarOpen && 'hidden',
+        )}
+        title="Select route type"
+        onClick={handleSelectionMenuOpen}
       >
-        KML
-      </Button>
-    </StyledSidebarSectionContent>
+        <span className={clsx('', 'max-sm:!block', !isSidebarOpen && 'hidden')}>
+          {selectedRouteType === Route.GPX ? 'GPX' : 'KML'}
+        </span>
+        <Icon svg={isSelectionMenuOpen ? ArrowUpIcon : ArrowDownIcon} />
+      </button>
+      <button
+        className={clsx(
+          'w-full flex flex-col justify-center items-center gap-1 p-3 text-neutral-700 hocus:bg-neutral-200 hocus:text-neutral-500 rounded-md transition-colors',
+          'max-sm:!hidden',
+          isSidebarOpen && 'hidden',
+        )}
+        title="Change route type"
+        onClick={() => handleRouteTypeChange(null)}
+      >
+        <span>{selectedRouteType === Route.GPX ? 'GPX' : 'KML'}</span>
+        <Icon svg={ArrowRightIcon} />
+      </button>
+      {isSelectionMenuOpen && (
+        <div
+          className={clsx(
+            'absolute w-full max-w-[7rem] right-0 bottom-[-5.2rem] rounded-md p-1 bg-neutral-300 shadow',
+            'max-sm:!block',
+            !isSidebarOpen && 'hidden',
+          )}
+        >
+          <Button
+            variant="routeType"
+            title="GPX"
+            onClick={() => handleRouteTypeChange(Route.GPX)}
+            disabled={selectedRouteType === Route.GPX}
+          >
+            GPX
+          </Button>
+          <Button
+            variant="routeType"
+            title="KML"
+            onClick={() => handleRouteTypeChange(Route.KML)}
+            disabled={selectedRouteType === Route.KML}
+          >
+            KML
+          </Button>
+        </div>
+      )}
+    </div>
   )
 }
 

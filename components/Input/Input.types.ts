@@ -1,19 +1,11 @@
 import { IBoolean } from '@/types/global/index.types'
+import { InputHTMLAttributes, ReactNode } from 'react'
 
-type InputVariants = 'search'
+type inputVariant = 'search'
 
-type FieldTypes = 'text' | 'email' | 'password' | 'number'
-
-export type Input = {
-  variant?: InputVariants
-  label?: string
-  value?: string
-  fieldType?: FieldTypes
-  full?: IBoolean
-  placeholder?: string
-  name?: string
+export interface Input extends InputHTMLAttributes<HTMLInputElement> {
+  variant: inputVariant
   className?: string
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
+  icon?: React.FC<React.SVGProps<SVGSVGElement>>
   loading?: IBoolean
 }

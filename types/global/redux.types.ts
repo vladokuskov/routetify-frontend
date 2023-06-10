@@ -25,4 +25,5 @@ export type ControlsState = {
   colorPicker: { color: string; isOpen: boolean }
   currentCoords: { lat: number; lng: number; zoom: number }
   map: L.Map | null
+  isSidebarOpen: boolean
 }

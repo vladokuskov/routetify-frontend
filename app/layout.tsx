@@ -1,8 +1,8 @@
 import { siteConfig } from '@/config/site'
 import { Providers } from '@/redux/provider'
-import 'leaflet/dist/leaflet.css'
 import { Roboto } from 'next/font/google'
 import '@/styles/globals.css'
+import 'leaflet/dist/leaflet.css'
 import StyledComponentsRegistry from '@/lib/registry'
 
 const roboto = Roboto({

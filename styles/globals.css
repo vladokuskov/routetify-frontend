@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@supports (font: -apple-system-body) and (-webkit-appearance: none) {
+  img[loading='lazy'] {
+    clip-path: inset(0.6px);
+  }
+}
+
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  h1 {
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+  h3 {
+    @apply text-lg;
+  }
+}
+
+:root {
+  background-color: #f8f6f6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    background-color: #f8f6f6;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    background-color: #f8f6f6;
+  }
+}
+
+body {
+  background-color: #f8f6f6;
+}
+
+*::-moz-selection {
+  background: #94949450;
+}
+
+*::selection {
+  background: #94949450;
+}
+
+*:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+*:focus-visible {
+  outline: none;
+  box-shadow: none;
+}

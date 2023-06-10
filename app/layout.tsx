@@ -1,9 +1,9 @@
 import { siteConfig } from '@/config/site'
-import StyledComponentsRegistry from '@/lib/registry'
 import { Providers } from '@/redux/provider'
-import { Roboto } from 'next/font/google'
-import './globals.css'
 import 'leaflet/dist/leaflet.css'
+import { Roboto } from 'next/font/google'
+import '@/styles/globals.css'
+import StyledComponentsRegistry from '@/lib/registry'
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -52,6 +52,7 @@ export default function RootLayout({
       <head />
       <body className={`${roboto.variable}`} suppressHydrationWarning={true}>
         <StyledComponentsRegistry>
+          {' '}
           <Providers>{children}</Providers>
         </StyledComponentsRegistry>
       </body>

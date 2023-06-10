@@ -1,22 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+
+    // Or if using `src` directory:
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {
-      backgroundColor: {},
-      color: {},
-      fontFamily: {
-        roboto: ['var(--font-roboto)'],
-      },
-      screens: {
-        sm: '650px',
-      },
-    },
+    extend: {},
   },
-  plugins: [require('@tailwindcss/typography')],
+  plugins: [],
 }
-b

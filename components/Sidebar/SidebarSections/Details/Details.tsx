@@ -43,7 +43,7 @@ const Details = () => {
   return (
     <div
       className={clsx(
-        'w-full flex items-center flex-row justify-center gap-1 bg-details rounded-md',
+        'w-full flex items-center flex-row justify-center gap-1 bg-details rounded-md p-1',
         'max-sm:flex-row max-sm:max-w-full',
         !isSidebarOpen && 'flex-col',
       )}
@@ -51,8 +51,8 @@ const Details = () => {
       <Detail title={time} subTitle="TIME" description="h" />
       <hr
         className={clsx(
-          'h-[80%] w-auto rounded-md border border-black border-opacity-20',
-          !isSidebarOpen && 'h-auto !w-[80%] max-sm:!w-auto',
+          'h-full w-auto rounded-md border border-black border-opacity-20',
+          !isSidebarOpen && 'h-auto !w-full max-sm:!w-auto',
         )}
       />
       <Detail title={dist} subTitle="DIST" description="km" />

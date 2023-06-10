@@ -1,7 +1,6 @@
 'use-client'
 
 import { useMemo } from 'react'
-import '@/styles/map.css'
 import MapControls from './MapControls/MapControls'
 import dynamic from 'next/dynamic'
 import { useAppSelector } from '@/redux/hooks'

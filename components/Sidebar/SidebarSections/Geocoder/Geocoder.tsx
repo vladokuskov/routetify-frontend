@@ -40,11 +40,6 @@ const Geocoder = () => {
     setHasUserTyped(true)
   }
 
-  const handleClear = () => {
-    setGeocoderValue('')
-    setGeocoderResponse(null)
-  }
-
   const handleResultSelect = ({ lat, lon, display_name }: TGeoResponse) => {
     dispatch(
       addLatLng({
@@ -120,14 +115,14 @@ const Geocoder = () => {
         <Input
           placeholder="Search location"
           variant="search"
+          onClick={() => geocoderResponse && setIsResultsOpen(true)}
           value={geocoderValue}
           onChange={handleChangeGeocoder}
-          onClick={handleClear}
           icon={isGeocoderLoading ? SpinnerIcon : SearchIcon}
           loading={isGeocoderLoading ? 'true' : 'false'}
         />
         {geocoderResponse && isResultsOpen && (
-          <div className="w-full top-[2.6rem] absolute rounded-md  z-20">
+          <div className="w-full top-[2.6rem] absolute rounded-md z-20 shadow">
             {geocoderResponse.slice(0, 3).map((data: TGeoResponse, i) => {
               let { lat, lon, display_name } = data
               return (
@@ -147,7 +142,7 @@ const Geocoder = () => {
 
       <button
         className={clsx(
-          'bg-neutral-300 w-full-h-full p-2 rounded-md text-neutral-500 hocus:bg-neutral-200 hocus:text-neutral-400 transition-colors',
+          'bg-neutral-300 w-full-h-full p-3 rounded-md text-neutral-500 hocus:bg-neutral-200 hocus:text-neutral-400 transition-colors',
           'max-sm:hidden',
           !isSidebarOpen ? 'block' : 'hidden',
         )}

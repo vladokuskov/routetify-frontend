@@ -13,6 +13,7 @@ module.exports = {
     extend: {
       backgroundColor: {
         app: '#f8f6f6',
+        details: '#d8d8ff',
       },
       width: {
         sidebar: '18.75rem',

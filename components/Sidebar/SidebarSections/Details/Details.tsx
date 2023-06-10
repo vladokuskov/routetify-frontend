@@ -1,12 +1,9 @@
 import { updateDrawInfo } from '@/redux/features/drawSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { calculateRouteDetails } from '@/utils/getRouteDetails'
+import clsx from 'clsx'
 import { useEffect } from 'react'
 import { Detail } from './Detail/Detail'
-import {
-  StyledDetailsMainContainer,
-  StyledSeparationLine,
-} from './Details.styles'
 
 const Details = () => {
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
@@ -44,11 +41,22 @@ const Details = () => {
   }, [drawCoords])
 
   return (
-    <StyledDetailsMainContainer isSidebarOpen={isSidebarOpen}>
+    <div
+      className={clsx(
+        'w-full flex items-center flex-row justify-center gap-1 bg-details rounded-md',
+        'max-sm:flex-row max-sm:max-w-full',
+        !isSidebarOpen && 'flex-col',
+      )}
+    >
       <Detail title={time} subTitle="TIME" description="h" />
-      <StyledSeparationLine isSidebarOpen={isSidebarOpen} />
+      <hr
+        className={clsx(
+          'h-[80%] w-auto rounded-md border border-black border-opacity-20',
+          !isSidebarOpen && 'h-auto !w-[80%] max-sm:!w-auto',
+        )}
+      />
       <Detail title={dist} subTitle="DIST" description="km" />
-    </StyledDetailsMainContainer>
+    </div>
   )
 }
 

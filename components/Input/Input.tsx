@@ -1,72 +1,33 @@
+import clsx from 'clsx'
 import Icon from '../Icon/Icon'
-import {
-  StyledInput,
-  StyledInputButton,
-  StyledInputIcon,
-  StyledInputMainWrapper,
-} from './Input.styles'
 import { Input } from './Input.types'
 
-import ClearIcon from '../../assets/icons/x.svg'
-import SearchIcon from '../../assets/icons/search.svg'
-import LoadingIcon from '../../assets/icons/loader.svg'
-
 const Input = ({
-  variant,
-  label,
-  value,
-  full = 'false',
-  onChange,
-  onClick,
-  placeholder,
-  name,
-  fieldType = 'text',
-  loading = 'false',
+  variant = 'search',
+  className,
+  icon,
+  loading,
+  ...props
 }: Input) => {
   return (
-    <StyledInputMainWrapper variant={variant} full={full}>
-      {variant === 'search' && (
-        <StyledInputIcon variant={variant} className="icon">
-          {loading === 'true' && (
-            <Icon
-              svg={LoadingIcon}
-              spin={loading === 'true' ? 'true' : 'false'}
-            />
-          )}
-          {loading === 'false' && value?.length === 0 && (
-            <Icon svg={SearchIcon} />
-          )}
-        </StyledInputIcon>
+    <div className="w-full flex flex-col gap-1 relative">
+      {icon && (
+        <div className="absolute right-2 top-2 text-neutral-500">
+          <Icon svg={icon} spin={loading} />
+        </div>
       )}
-      <StyledInput
-        loading={loading}
-        type={
-          fieldType === 'email'
-            ? 'email'
-            : fieldType === 'password'
-            ? 'password'
-            : fieldType === 'number'
-            ? 'number'
-            : 'text'
-        }
-        name={name}
-        value={value}
-        variant={variant}
-        title={label ? label : ''}
-        onChange={onChange}
-        placeholder={placeholder}
+      <input
+        className={clsx(
+          'w-full text-base rounded focus:outline-none font-roboto tracking-light transition-colors',
+          'disabled:cursor-not-allowed disabled:opacity-50',
+          variant === 'search' &&
+            'bg-neutral-300 font-semibold placeholder:text-neutral-500 text-neutral-600 rounded-md hocus:bg-neutral-200 active:bg-neutral-400 !pr-10 py-2 pl-2',
+
+          className,
+        )}
+        {...props}
       />
-      {variant === 'search' && value?.length !== 0 && loading !== 'true' && (
-        <StyledInputButton
-          type="button"
-          onClick={onClick}
-          variant={variant}
-          title={variant === 'search' ? 'Clear' : ''}
-        >
-          <Icon svg={ClearIcon} />
-        </StyledInputButton>
-      )}
-    </StyledInputMainWrapper>
+    </div>
   )
 }
 

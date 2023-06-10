@@ -10,6 +10,7 @@ import { addLatLng } from '@/redux/features/geocoderSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { LocationStatus } from '@/types/global/locationStatus.types'
 import clsx from 'clsx'
+import SpinnerIcon from '../../../../assets/icons/loader.svg'
 import SearchIcon from '../../../../assets/icons/search.svg'
 import { useClickOutside } from '../../../../hooks/useClickOutside'
 import { Input } from '../../../Input/Input'
@@ -121,12 +122,12 @@ const Geocoder = () => {
           variant="search"
           value={geocoderValue}
           onChange={handleChangeGeocoder}
-          loading={isGeocoderLoading ? 'true' : 'false'}
           onClick={handleClear}
-          full="true"
+          icon={isGeocoderLoading ? SpinnerIcon : SearchIcon}
+          loading={isGeocoderLoading ? 'true' : 'false'}
         />
         {geocoderResponse && isResultsOpen && (
-          <div className="w-full top-10 absolute rounded-md  z-20">
+          <div className="w-full top-[2.6rem] absolute rounded-md  z-20">
             {geocoderResponse.slice(0, 3).map((data: TGeoResponse, i) => {
               let { lat, lon, display_name } = data
               return (

@@ -43,7 +43,7 @@ const Details = () => {
   return (
     <div
       className={clsx(
-        'w-full flex items-center flex-row justify-center gap-1 bg-details rounded-md p-1',
+        'w-full flex items-center flex-row justify-center gap-1 bg-details rounded-md px-1 py-2',
         'max-sm:flex-row max-sm:max-w-full',
         !isSidebarOpen && 'flex-col',
       )}

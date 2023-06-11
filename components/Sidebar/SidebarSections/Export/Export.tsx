@@ -237,7 +237,10 @@ const Export = () => {
                 handleRouteTypeChange={handleRouteTypeChange}
                 selectedType={selectedRouteType}
                 type={type}
-              />
+                title={type === Route.GPX ? 'GPX' : 'KML'}
+              >
+                {type === Route.GPX ? 'GPX' : 'KML'}
+              </TypeSelectionButton>
             )
           })}
         </div>

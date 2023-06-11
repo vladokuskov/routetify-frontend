@@ -3,6 +3,7 @@ import { DrawType } from '@/types/global/drawType.types'
 import { Layer } from '@/types/global/layer.types'
 import { LocationStatus } from '@/types/global/locationStatus.types'
 import { ControlsState } from '@/types/global/redux.types'
+import { Theme } from '@/types/global/theme.types'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import * as L from 'leaflet'
 
@@ -15,12 +16,19 @@ const initialState = {
   currentCoords: mapConfig.initialCoords,
   map: null,
   isSidebarOpen: true,
+  theme: Theme.Light,
 } as ControlsState
 
 export const controlsReducer = createSlice({
   name: 'controls',
   initialState,
   reducers: {
+    changeTheme: (state, action: PayloadAction<void>) => {
+      return {
+        ...state,
+        theme: state.theme === Theme.Light ? Theme.Dark : Theme.Light,
+      }
+    },
     toggleIsSidebarOpen: (state, action: PayloadAction<void>) => {
       return {
         ...state,
@@ -99,5 +107,6 @@ export const {
   toggleIsMarkerDragging,
   loadMap,
   toggleIsSidebarOpen,
+  changeTheme,
 } = controlsReducer.actions
 export default controlsReducer.reducer

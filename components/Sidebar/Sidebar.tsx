@@ -8,6 +8,7 @@ import { SidebarSection } from './SidebarSection'
 import { Details } from './SidebarSections/Details/Details'
 import { Export } from './SidebarSections/Export/Export'
 import { Geocoder } from './SidebarSections/Geocoder/Geocoder'
+import { ThemeSwitcher } from './SidebarSections/ThemeSwitcher/ThemeSwitcher'
 
 const Sidebar = () => {
   const isSidebarOpen = useAppSelector(
@@ -69,7 +70,8 @@ const Sidebar = () => {
         >
           <Export />
         </SidebarSection>
-        <div className="flex flex-ol items-center justify-center gap-5 mt-auto mb-4">
+        <div className="flex flex-col items-center justify-center gap-5 mt-auto mb-4">
+          <ThemeSwitcher />
           <h3
             className={clsx(
               'font-roboto text-neutral-300 font-semibold ',

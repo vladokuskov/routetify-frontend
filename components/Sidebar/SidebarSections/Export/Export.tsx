@@ -12,7 +12,7 @@ import ArrowUpIcon from '../../../../assets/icons/chevron-up.svg'
 import ArrowDownIcon from '../../../../assets/icons/chevron-down.svg'
 import ArrowRightIcon from '../../../../assets/icons/arrow-right.svg'
 import { useClickOutside } from '@/hooks/useClickOutside'
-import { Button } from '@/components/Button/Button'
+import { TypeSelectionButton } from './TypeSelectionButton'
 
 const date = new Date()
 const current_date = `${date.getFullYear()}-${
@@ -34,6 +34,8 @@ const Export = () => {
   const map = useAppSelector((state) => state.controlsReducer.map) // L.Map || null
 
   const dispatch = useAppDispatch()
+
+  const types = [Route.GPX, Route.KML]
 
   useEffect(() => {
     const route = localStorage.getItem('route')
@@ -228,22 +230,16 @@ const Export = () => {
             !isSidebarOpen && 'hidden',
           )}
         >
-          <Button
-            variant="routeType"
-            title="GPX"
-            onClick={() => handleRouteTypeChange(Route.GPX)}
-            disabled={selectedRouteType === Route.GPX}
-          >
-            GPX
-          </Button>
-          <Button
-            variant="routeType"
-            title="KML"
-            onClick={() => handleRouteTypeChange(Route.KML)}
-            disabled={selectedRouteType === Route.KML}
-          >
-            KML
-          </Button>
+          {types.map((type, index) => {
+            return (
+              <TypeSelectionButton
+                key={index}
+                handleRouteTypeChange={handleRouteTypeChange}
+                selectedType={selectedRouteType}
+                type={type}
+              />
+            )
+          })}
         </div>
       )}
     </div>

@@ -22,7 +22,7 @@ const Sidebar = () => {
   return (
     <div
       className={clsx(
-        'absolute overflow-visible max-w-sidebar min-w-sidebarSmall right-0 top-0 mt-0 h-[100lvh] bg-app z-20  transition-transform border-l-2 border-sidebar ',
+        'absolute overflow-visible max-w-sidebar min-w-sidebarSmall right-0 top-0 mt-0 h-[100lvh] bg-app z-20   transition-transform border-l-2 border-sidebar ',
         isSidebarOpen ? 'w-sidebar p-4' : 'w-sidebarSmall p-1',
         'max-sm:relative max-sm:p-4 max-sm:w-full max-sm:min-w-full max-sm:max-w-full max-sm:mt-[70vh] max-sm:shadow-md max-sm:shadow-black max-sm:border-t-2 max-sm:border-l-0',
       )}
@@ -69,16 +69,20 @@ const Sidebar = () => {
         >
           <Export />
         </SidebarSection>
-        <div className="flex flex-ol items-center justify-center gap-5 mt-auto mb-4">
-          <h3
+        <div className="flex flex-col items-center justify-center gap-5 mt-auto mb-4">
+          <a
+            href="https://github.com/swappnet/routetify"
+            rel="noopener noreferrer"
+            target="_blank"
             className={clsx(
-              'font-roboto text-neutral-300 font-semibold ',
+              'font-roboto text-neutral-300 font-semibold cursor-pointer hocus:text-neutral-400 transition-colors',
               'max-sm:block',
+
               !isSidebarOpen && 'hidden',
             )}
           >
             &copy; Routetify
-          </h3>
+          </a>
         </div>
       </div>
     </div>

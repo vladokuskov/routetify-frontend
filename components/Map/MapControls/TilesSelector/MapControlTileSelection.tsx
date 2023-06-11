@@ -69,7 +69,10 @@ const MapControlTileSelection = () => {
                 handleTileSelect={handleTileSelect}
                 selectedLayer={layer}
                 tile={tile}
-              />
+                title={tile === Layer.default ? 'Default [N]' : 'Satellite [M]'}
+              >
+                {tile === Layer.default ? 'Default' : 'Satellite'}
+              </TileButton>
             )
           })}
         </div>

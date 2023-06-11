@@ -6,10 +6,10 @@ import { changeLayer } from '@/redux/features/controlsSlice'
 import { addLatLng } from '@/redux/features/geocoderSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { Layer } from '@/types/global/layer.types'
-import Image from 'next/image'
+import clsx from 'clsx'
 import { useRef } from 'react'
 import LayersIcon from '../../../../assets/icons/layers.svg'
-import clsx from 'clsx'
+import { TileButton } from './TileButton'
 
 const MapControlTileSelection = () => {
   const ref = useRef(null)
@@ -19,6 +19,8 @@ const MapControlTileSelection = () => {
   const currentCoords = useAppSelector(
     (state) => state.controlsReducer.currentCoords,
   )
+
+  const layers = [Layer.default, Layer.satellite]
 
   const dispatch = useAppDispatch()
 
@@ -57,45 +59,19 @@ const MapControlTileSelection = () => {
         <div
           className={clsx(
             'absolute font-roboto font-semibold gap-1 right-11 bottom-0 rounded-md p-1 bg-app shadow flex flex-col items-center justify-center',
-            'minSm:bottom-auto minSm:top-11 minSm:right-3',
+            'max-hsm:bottom-auto max-hsm:top-11 max-hsm:!right-0',
           )}
         >
-          <Button
-            variant="tile"
-            title="Default tile [N]"
-            disabled={layer === Layer.default}
-            onClick={() => handleTileSelect(Layer.default)}
-          >
-            <div className="relative w-5 h-5">
-              <Image
-                fill
-                priority
-                quality={30}
-                src="/icons/default.webp"
-                alt=""
-                style={{ borderRadius: '4px' }}
+          {layers.map((tile, index) => {
+            return (
+              <TileButton
+                key={index}
+                handleTileSelect={handleTileSelect}
+                selectedLayer={layer}
+                tile={tile}
               />
-            </div>
-            Default
-          </Button>
-          <Button
-            variant="tile"
-            title="Satellite tile [M]"
-            disabled={layer === Layer.satellite}
-            onClick={() => handleTileSelect(Layer.satellite)}
-          >
-            <div className="relative w-5 h-5">
-              <Image
-                fill
-                priority
-                quality={30}
-                src="/icons/satellite.webp"
-                alt=""
-                style={{ borderRadius: '4px' }}
-              />
-            </div>
-            Satellite
-          </Button>
+            )
+          })}
         </div>
       )}
     </div>

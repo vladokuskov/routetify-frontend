@@ -7,7 +7,7 @@ const Detail = ({ title, subTitle, description }: TDetail) => {
         {title}
       </h4>
       <div className="w-full flex flex-col justify-center items-center">
-        <h5 className="text-lg tracking-tighter leading-5 font-bold text-neutral-800 opacity-70">
+        <h5 className="text-base tracking-tighter leading-5 font-bold text-neutral-800 opacity-70">
           {subTitle}
         </h5>
         <p className="text-sm tracking-tighter leading-5 font-semibold text-neutral-600 opacity-60">

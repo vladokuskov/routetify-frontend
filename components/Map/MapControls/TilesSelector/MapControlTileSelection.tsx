@@ -57,7 +57,7 @@ const MapControlTileSelection = () => {
         <div
           className={clsx(
             'absolute font-roboto font-semibold gap-1 right-11 bottom-0 rounded-md p-1 bg-app shadow flex flex-col items-center justify-center',
-            'minSm:bottom-auto minSm:top-11 minSm:right-3',
+            'max-hsm:bottom-auto max-hsm:top-11 max-hsm:!right-0',
           )}
         >
           <Button

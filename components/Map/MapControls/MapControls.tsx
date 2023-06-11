@@ -21,12 +21,15 @@ const MapControls = () => {
         <div
           className={clsx(
             'absolute flex flex-col items-center justify-start top-7 py-2 px-3 pr-0 pointer-events-auto',
-            'max-sm:right-3',
+            'max-sm:right-3 ',
             isSidebarOpen ? 'right-[19.3rem]' : 'right-[4.5rem]',
           )}
         >
           <div
-            className={clsx('flex flex-col items-center justify-start gap-4')}
+            className={clsx(
+              'flex flex-col items-center justify-start gap-4',
+              'max-hsm:!flex-row max-hsm:!top-3',
+            )}
           >
             <MapControlUndoAction />
             <MapControlRedoAction />

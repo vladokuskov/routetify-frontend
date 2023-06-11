@@ -30,6 +30,10 @@ module.exports = {
       borderColor: {
         sidebar: '#cfcfcf',
       },
+      screens: {
+        'max-sm': { raw: 'not all and (min-width: 640px)' },
+        'max-hsm': { raw: '(max-height: 550px)' },
+      },
     },
   },
   plugins: [

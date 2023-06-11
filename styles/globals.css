@@ -71,3 +71,6 @@ body {
   outline: none;
   box-shadow: none;
 }
+.cursorCrosshair {
+  cursor: crosshair !important;
+}

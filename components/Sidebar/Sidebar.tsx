@@ -13,6 +13,7 @@ import { Export } from './SidebarSections/Export/Export'
 import { Geocoder } from './SidebarSections/Geocoder/Geocoder'
 import { MovingPreferences } from './SidebarSections/MovingPreferences/MovingPreferences'
 import { useEffect } from 'react'
+import { RouteUploading } from './SidebarSections/RouteUploading/RouteUploading'
 
 const Sidebar = () => {
   const isSidebarOpen = useAppSelector(
@@ -94,6 +95,12 @@ const Sidebar = () => {
           description="You can export route in GPX/KML format"
         >
           <Export />
+        </SidebarSection>
+        <SidebarSection
+          title="Upload route"
+          description="Route should be GPX or KML format"
+        >
+          <RouteUploading />
         </SidebarSection>
         <div className="flex flex-col items-center justify-center gap-5 mt-auto mb-4">
           <a

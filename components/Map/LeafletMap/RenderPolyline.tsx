@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 
-import { mapConfig } from '@/config/map'
 import { useAppSelector } from '@/redux/hooks'
 import { DrawType } from '@/types/global/drawType.types'
 import * as L from 'leaflet'
@@ -13,12 +12,9 @@ const RenderPolyline = ({ map }: { map: L.Map | null }) => {
   const isMarkerDragging = useAppSelector(
     (state) => state.controlsReducer.isMarkerDragging,
   )
-  const lineColor = useAppSelector(
-    (state) => state.controlsReducer.colorPicker.color,
-  )
 
   const previewPolyline = L.polyline([], {
-    color: mapConfig.lineColor.preview,
+    color: '#3520f570',
     weight: 6,
     dashArray: '15, 15',
     className: 'cursorCrosshair',
@@ -38,7 +34,7 @@ const RenderPolyline = ({ map }: { map: L.Map | null }) => {
     if (!map) return
 
     const polyline = L.polyline(drawCoords as any, {
-      color: lineColor,
+      color: '#83f520',
       weight: 6,
       className: 'cursorCrosshair',
     })
@@ -52,7 +48,7 @@ const RenderPolyline = ({ map }: { map: L.Map | null }) => {
       map.off('mousemove', onMouseMove)
       map.off('click', onMouseClick)
     }
-  }, [map, drawCoords, lineColor])
+  }, [map, drawCoords])
 
   useEffect(() => {
     if (

@@ -1,8 +1,8 @@
 import Icon from '@/components/Icon/Icon'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import clsx from 'clsx'
 import { ChangeEvent, useRef, useState } from 'react'
 import FileImportIcon from '../../../../assets/icons/file-import.svg'
-import clsx from 'clsx'
 
 const RouteUploading = () => {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -46,7 +46,7 @@ const RouteUploading = () => {
       <input
         ref={inputRef}
         type="file"
-        accept="gpx, kml"
+        accept=".gpx,.kml"
         onChange={handleFileChange}
         className="hidden"
       />

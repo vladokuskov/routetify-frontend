@@ -45,7 +45,7 @@ const Sidebar = () => {
       className={clsx(
         'absolute overflow-y-visible no-scrollbar max-w-sidebar min-w-sidebarSmall right-0 top-0 mt-0 h-[100lvh] bg-app z-20   transition-transform border-l-2 border-sidebar',
         isSidebarOpen ? 'w-sidebar p-4' : 'w-sidebarSmall p-1',
-        'max-sm:relative max-sm:p-4 max-sm:w-full max-sm:min-w-full max-sm:max-w-full max-sm:mt-[70vh] max-sm:shadow-md max-sm:shadow-black max-sm:border-t-2 max-sm:border-l-0',
+        'max-sm:!overflow-y-hidden max-sm:relative max-sm:p-4 max-sm:w-full max-sm:min-w-full max-sm:max-w-full max-sm:mt-[70vh] max-sm:shadow-md max-sm:shadow-black max-sm:border-t-2 max-sm:border-l-0',
       )}
     >
       <button
@@ -62,7 +62,7 @@ const Sidebar = () => {
       <div
         className={clsx(
           'w-full h-full flex flex-col items-center justify-start gap-6 mx-auto my-0 overflow-y-scroll no-scrollbar',
-          'max-sm:max-w-lg max-sm:p-2',
+          'max-sm:max-w-lg max-sm:p-2 max-sm:!overflow-y-hidden',
           isSidebarOpen ? 'p-2' : 'p-1',
         )}
       >

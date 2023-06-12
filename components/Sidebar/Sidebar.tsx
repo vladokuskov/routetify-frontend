@@ -8,6 +8,7 @@ import { SidebarSection } from './SidebarSection'
 import { Details } from './SidebarSections/Details/Details'
 import { Export } from './SidebarSections/Export/Export'
 import { Geocoder } from './SidebarSections/Geocoder/Geocoder'
+import { MovingPreferences } from './SidebarSections/MovingPreferences/MovingPreferences'
 
 const Sidebar = () => {
   const isSidebarOpen = useAppSelector(
@@ -62,6 +63,12 @@ const Sidebar = () => {
           description="Here you can view route details"
         >
           <Details />
+        </SidebarSection>
+        <SidebarSection
+          title="Moving Preference"
+          description="Choose your transportation"
+        >
+          <MovingPreferences />
         </SidebarSection>
         <SidebarSection
           title="Export route"

@@ -35,7 +35,9 @@ const Export = () => {
 
   const dispatch = useAppDispatch()
 
-  const types = [Route.GPX, Route.KML]
+  const { GPX, KML } = Route
+
+  const types = [GPX, KML]
 
   useEffect(() => {
     const route = localStorage.getItem('route')
@@ -138,9 +140,9 @@ const Export = () => {
 
   const handleRouteDownload = async () => {
     let route
-    if (selectedRouteType === Route.GPX && drawCoords.length > 0) {
+    if (selectedRouteType === GPX && drawCoords.length > 0) {
       route = await generateGPX(drawCoords)
-    } else if (selectedRouteType === Route.KML) {
+    } else if (selectedRouteType === KML) {
       route = await generateKML(drawCoords)
     }
 
@@ -151,9 +153,9 @@ const Export = () => {
           filename.length === 0 || !filename
             ? `new_route_${current_date}`
             : filename
-        }${selectedRouteType === Route.GPX ? '.gpx' : '.kml'}`,
+        }${selectedRouteType === GPX ? '.gpx' : '.kml'}`,
         `application/${
-          selectedRouteType === Route.GPX
+          selectedRouteType === GPX
             ? 'application/gpx+xml'
             : 'vnd.google-earth.kml+xml'
         }`,
@@ -167,9 +169,7 @@ const Export = () => {
 
   const handleRouteTypeChange = (type: Route | null) => {
     if (!type) {
-      setSelectedRouteType(
-        selectedRouteType === Route.GPX ? Route.KML : Route.GPX,
-      )
+      setSelectedRouteType(selectedRouteType === GPX ? KML : GPX)
     } else {
       setSelectedRouteType(type)
     }
@@ -206,7 +206,7 @@ const Export = () => {
         onClick={handleSelectionMenuOpen}
       >
         <span className={clsx('', 'max-sm:!block', !isSidebarOpen && 'hidden')}>
-          {selectedRouteType === Route.GPX ? 'GPX' : 'KML'}
+          {selectedRouteType === GPX ? 'GPX' : 'KML'}
         </span>
         <Icon svg={isSelectionMenuOpen ? ArrowUpIcon : ArrowDownIcon} />
       </button>
@@ -219,7 +219,7 @@ const Export = () => {
         title="Change route type"
         onClick={() => handleRouteTypeChange(null)}
       >
-        <span>{selectedRouteType === Route.GPX ? 'GPX' : 'KML'}</span>
+        <span>{selectedRouteType === GPX ? 'GPX' : 'KML'}</span>
         <Icon svg={ArrowRightIcon} />
       </button>
       {isSelectionMenuOpen && (
@@ -237,9 +237,9 @@ const Export = () => {
                 handleRouteTypeChange={handleRouteTypeChange}
                 selectedType={selectedRouteType}
                 type={type}
-                title={type === Route.GPX ? 'GPX' : 'KML'}
+                title={type === GPX ? 'GPX' : 'KML'}
               >
-                {type === Route.GPX ? 'GPX' : 'KML'}
+                {type === GPX ? 'GPX' : 'KML'}
               </TypeSelectionButton>
             )
           })}

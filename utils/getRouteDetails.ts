@@ -1,4 +1,4 @@
-import { MovingPreferences } from '@/types/global/movingPreferences.types'
+import { movingPreferencesType } from '@/types/global/movingPreferencesType.types'
 import { DrawCoords } from '@/types/models/drawCoords.types'
 
 const calculateDistance = (
@@ -35,12 +35,12 @@ const deg2rad = (deg: number) => {
 // Function to calculate route details
 export const calculateRouteDetails = (
   route: DrawCoords[],
-  movingPreference: MovingPreferences,
+  movingPreference: movingPreferencesType,
 ) => {
   let speed =
-    movingPreference === MovingPreferences.walk
+    movingPreference === movingPreferencesType.walk
       ? 4.5
-      : movingPreference === MovingPreferences.bike
+      : movingPreference === movingPreferencesType.bike
       ? 15.5
       : 87.5 // Speed in km/h
   let distance = 0 // Total distance initialized to zero

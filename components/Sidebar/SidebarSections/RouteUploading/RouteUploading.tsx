@@ -1,7 +1,7 @@
 import Icon from '@/components/Icon/Icon'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import clsx from 'clsx'
-import { ChangeEvent, useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import FileImportIcon from '../../../../assets/icons/file-import.svg'
 
 const RouteUploading = () => {
@@ -28,6 +28,18 @@ const RouteUploading = () => {
       setFile(e.target.files[0])
     }
   }
+
+  useEffect(() => {
+    if (file) {
+      const displayRoute = async () => {
+        if (file.type === 'gpx') {
+        } else if (file.type === 'kml') {
+        }
+      }
+
+      displayRoute()
+    }
+  }, [file])
 
   return (
     <>

@@ -16,11 +16,11 @@ module.exports = {
         details: '#d8d8ff',
       },
       width: {
-        sidebar: '18.75rem',
+        sidebar: '19.75rem',
         sidebarSmall: '4rem',
       },
       maxWidth: {
-        sidebar: '18.75rem',
+        sidebar: '19.75rem',
         sidebarSmall: '4rem',
       },
       minWidth: {

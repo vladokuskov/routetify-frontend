@@ -7,10 +7,6 @@ export const mapConfig: MapConfig = {
     lng: 30.5241,
     zoom: 12,
   },
-  lineColor: {
-    placed: '#83f520',
-    preview: '#3520f570',
-  },
   layer: {
     default: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
     satellite:

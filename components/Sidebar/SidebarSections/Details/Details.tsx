@@ -11,12 +11,18 @@ const Details = () => {
     (state) => state.controlsReducer.isSidebarOpen,
   )
   const { time, dist } = useAppSelector((state) => state.drawReducer.drawInfo)
+  const movingPreference = useAppSelector(
+    (state) => state.controlsReducer.movingPreference,
+  )
 
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     const updateDetails = () => {
-      const { time, distance } = calculateRouteDetails(drawCoords)
+      const { time, distance } = calculateRouteDetails(
+        drawCoords,
+        movingPreference,
+      )
 
       dispatch(
         updateDrawInfo({
@@ -38,7 +44,7 @@ const Details = () => {
     if (drawCoords.length !== 0) {
       updateDetails()
     }
-  }, [drawCoords])
+  }, [drawCoords, movingPreference])
 
   return (
     <div

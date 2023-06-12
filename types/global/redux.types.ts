@@ -3,7 +3,7 @@ import { DrawType } from './drawType.types'
 import { Layer } from './layer.types'
 import { LocationStatus } from './locationStatus.types'
 import * as L from 'leaflet'
-import { Theme } from './theme.types'
+import { MovingPreferencesType } from './movingPreferencesType.types'
 
 export type GeocoderState = {
   lat: number | null
@@ -27,5 +27,5 @@ export type ControlsState = {
   currentCoords: { lat: number; lng: number; zoom: number }
   map: L.Map | null
   isSidebarOpen: boolean
-  theme: Theme
+  movingPreference: MovingPreferencesType
 }

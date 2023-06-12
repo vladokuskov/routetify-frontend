@@ -2,8 +2,8 @@ import { mapConfig } from '@/config/map'
 import { DrawType } from '@/types/global/drawType.types'
 import { Layer } from '@/types/global/layer.types'
 import { LocationStatus } from '@/types/global/locationStatus.types'
+import { MovingPreferencesType } from '@/types/global/movingPreferencesType.types'
 import { ControlsState } from '@/types/global/redux.types'
-import { Theme } from '@/types/global/theme.types'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import * as L from 'leaflet'
 
@@ -12,21 +12,29 @@ const initialState = {
   layer: Layer.default,
   location: LocationStatus.idle,
   isMarkerDragging: false,
-  colorPicker: { color: mapConfig.lineColor.placed, isOpen: false },
   currentCoords: mapConfig.initialCoords,
   map: null,
   isSidebarOpen: true,
-  theme: Theme.Light,
+  movingPreference: MovingPreferencesType.bike,
 } as ControlsState
 
 export const controlsReducer = createSlice({
   name: 'controls',
   initialState,
   reducers: {
-    changeTheme: (state, action: PayloadAction<void>) => {
+    changeMovingPreferences: (
+      state,
+      action: PayloadAction<MovingPreferencesType>,
+    ) => {
       return {
         ...state,
-        theme: state.theme === Theme.Light ? Theme.Dark : Theme.Light,
+        movingPreference: action.payload,
+      }
+    },
+    changeSidebarOpenState: (state, action: PayloadAction<boolean>) => {
+      return {
+        ...state,
+        isSidebarOpen: action.payload,
       }
     },
     toggleIsSidebarOpen: (state, action: PayloadAction<void>) => {
@@ -51,18 +59,6 @@ export const controlsReducer = createSlice({
       return {
         ...state,
         location: action.payload,
-      }
-    },
-    showColorPicker: (state, action: PayloadAction<boolean>) => {
-      return {
-        ...state,
-        colorPicker: { ...state.colorPicker, isOpen: action.payload },
-      }
-    },
-    changeLineColor: (state, action: PayloadAction<string>) => {
-      return {
-        ...state,
-        colorPicker: { ...state.colorPicker, color: action.payload },
       }
     },
     changeDraw: (state, action) => {
@@ -101,12 +97,11 @@ export const {
   changeDraw,
   changeLayer,
   changeCurrentCoords,
-  changeLineColor,
-  showColorPicker,
   changeLocationStatus,
   toggleIsMarkerDragging,
   loadMap,
   toggleIsSidebarOpen,
-  changeTheme,
+  changeMovingPreferences,
+  changeSidebarOpenState,
 } = controlsReducer.actions
 export default controlsReducer.reducer

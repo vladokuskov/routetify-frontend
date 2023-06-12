@@ -1,13 +1,14 @@
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import clsx from 'clsx'
-import { MovingPreferencesButton } from './MovingPreferencesButton'
+import Icon from '@/components/Icon/Icon'
 import { changeMovingPreferences } from '@/redux/features/controlsSlice'
-import { movingPreferencesType } from '@/types/global/movingPreferencesType.types'
-import WalkIcon from '../../../../assets/icons/walk.svg'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { MovingPreferencesType } from '@/types/global/movingPreferencesType.types'
+import clsx from 'clsx'
+import { useEffect } from 'react'
+import ArrowRightIcon from '../../../../assets/icons/arrow-right.svg'
 import BikeIcon from '../../../../assets/icons/bike.svg'
 import CarIcon from '../../../../assets/icons/car.svg'
-import ArrowRightIcon from '../../../../assets/icons/arrow-right.svg'
-import Icon from '@/components/Icon/Icon'
+import WalkIcon from '../../../../assets/icons/walk.svg'
+import { MovingPreferencesButton } from './MovingPreferencesButton'
 
 const MovingPreferences = () => {
   const isSidebarOpen = useAppSelector(
@@ -18,11 +19,11 @@ const MovingPreferences = () => {
   )
   const dispatch = useAppDispatch()
 
-  const { walk, bike, car } = movingPreferencesType
+  const { walk, bike, car } = MovingPreferencesType
 
   const preferences = [walk, bike, car]
 
-  const handlePreferenceChange = (preference: movingPreferencesType) => {
+  const handlePreferenceChange = (preference: MovingPreferencesType) => {
     dispatch(changeMovingPreferences(preference))
   }
 
@@ -35,6 +36,20 @@ const MovingPreferences = () => {
       dispatch(changeMovingPreferences(walk))
     }
   }
+
+  useEffect(() => {
+    const preference = localStorage.getItem('movingPreference')
+
+    if (preference) {
+      const parsedPreference = JSON.parse(preference) as MovingPreferencesType
+
+      dispatch(changeMovingPreferences(parsedPreference))
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('movingPreference', JSON.stringify(selectedPreference))
+  }, [selectedPreference])
 
   return (
     <>

@@ -2,7 +2,7 @@ import { mapConfig } from '@/config/map'
 import { DrawType } from '@/types/global/drawType.types'
 import { Layer } from '@/types/global/layer.types'
 import { LocationStatus } from '@/types/global/locationStatus.types'
-import { movingPreferencesType } from '@/types/global/movingPreferencesType.types'
+import { MovingPreferencesType } from '@/types/global/movingPreferencesType.types'
 import { ControlsState } from '@/types/global/redux.types'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import * as L from 'leaflet'
@@ -15,7 +15,7 @@ const initialState = {
   currentCoords: mapConfig.initialCoords,
   map: null,
   isSidebarOpen: true,
-  movingPreference: movingPreferencesType.bike,
+  movingPreference: MovingPreferencesType.bike,
 } as ControlsState
 
 export const controlsReducer = createSlice({
@@ -24,11 +24,17 @@ export const controlsReducer = createSlice({
   reducers: {
     changeMovingPreferences: (
       state,
-      action: PayloadAction<movingPreferencesType>,
+      action: PayloadAction<MovingPreferencesType>,
     ) => {
       return {
         ...state,
         movingPreference: action.payload,
+      }
+    },
+    changeSidebarOpenState: (state, action: PayloadAction<boolean>) => {
+      return {
+        ...state,
+        isSidebarOpen: action.payload,
       }
     },
     toggleIsSidebarOpen: (state, action: PayloadAction<void>) => {
@@ -96,5 +102,6 @@ export const {
   loadMap,
   toggleIsSidebarOpen,
   changeMovingPreferences,
+  changeSidebarOpenState,
 } = controlsReducer.actions
 export default controlsReducer.reducer

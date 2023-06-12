@@ -1,11 +1,11 @@
-import { movingPreferencesType } from '@/types/global/movingPreferencesType.types'
+import { MovingPreferencesType } from '@/types/global/movingPreferencesType.types'
 import clsx from 'clsx'
 import { ReactNode } from 'react'
 
 interface MovingPreferencesButton {
-  selectedPreference: movingPreferencesType
-  handlePreferenceChange: (preference: movingPreferencesType) => void
-  preference: movingPreferencesType
+  selectedPreference: MovingPreferencesType
+  handlePreferenceChange: (preference: MovingPreferencesType) => void
+  preference: MovingPreferencesType
   title: string
   children: ReactNode
 }

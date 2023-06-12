@@ -1,4 +1,7 @@
-import { toggleIsSidebarOpen } from '@/redux/features/controlsSlice'
+import {
+  changeSidebarOpenState,
+  toggleIsSidebarOpen,
+} from '@/redux/features/controlsSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import clsx from 'clsx'
 import ArrowLeftIcon from '../../assets/icons/arrow-left.svg'
@@ -9,6 +12,7 @@ import { Details } from './SidebarSections/Details/Details'
 import { Export } from './SidebarSections/Export/Export'
 import { Geocoder } from './SidebarSections/Geocoder/Geocoder'
 import { MovingPreferences } from './SidebarSections/MovingPreferences/MovingPreferences'
+import { useEffect } from 'react'
 
 const Sidebar = () => {
   const isSidebarOpen = useAppSelector(
@@ -20,6 +24,21 @@ const Sidebar = () => {
   const handleSidebarResize = () => {
     dispatch(toggleIsSidebarOpen())
   }
+
+  useEffect(() => {
+    const sidebarOpenState = localStorage.getItem('sidebarOpenState')
+
+    if (sidebarOpenState) {
+      const parsedSidebarOpenState = JSON.parse(sidebarOpenState) as boolean
+
+      dispatch(changeSidebarOpenState(parsedSidebarOpenState))
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('sidebarOpenState', JSON.stringify(isSidebarOpen))
+  }, [isSidebarOpen])
+
   return (
     <div
       className={clsx(

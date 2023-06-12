@@ -24,7 +24,7 @@ const Map = () => {
       className={clsx(
         'h-full z-10 top-0 right-0 left-0 static',
         'max-sm:w-full max-sm:h-[70vh] fixed',
-        isSidebarOpen ? 'w-[calc(100%-18.75rem)]' : 'w-[calc(100%-4rem)]',
+        isSidebarOpen ? 'w-[calc(100%-19.75rem)]' : 'w-[calc(100%-4rem)]',
       )}
     >
       <div className=" w-full h-full relative grid">

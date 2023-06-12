@@ -23,16 +23,16 @@ const Sidebar = () => {
   return (
     <div
       className={clsx(
-        'absolute overflow-visible max-w-sidebar min-w-sidebarSmall right-0 top-0 mt-0 h-[100lvh] bg-app z-20   transition-transform border-l-2 border-sidebar ',
+        'absolute overflow-y-visible no-scrollbar max-w-sidebar min-w-sidebarSmall right-0 top-0 mt-0 h-[100lvh] bg-app z-20   transition-transform border-l-2 border-sidebar',
         isSidebarOpen ? 'w-sidebar p-4' : 'w-sidebarSmall p-1',
         'max-sm:relative max-sm:p-4 max-sm:w-full max-sm:min-w-full max-sm:max-w-full max-sm:mt-[70vh] max-sm:shadow-md max-sm:shadow-black max-sm:border-t-2 max-sm:border-l-0',
       )}
     >
       <button
         className={clsx(
-          'absolute p-2 rounded-full left-[-1.25rem] top-1/2 bg-neutral-10 border-2 border-sidebar z-30 bg-neutral-100 text-neutral-400',
+          'absolute p-2 rounded-full -left-6 top-1/2 bg-neutral-10 border-2 border-sidebar z-30 bg-neutral-100 text-neutral-400',
           'transition-colors hocus:bg-neutral-200 hocus:text-neutral-500',
-          'max-sm:hidden',
+          'max-sm:hidden max-hsm:-left-12 max-hsm:bottom-4 max-hsm:top-auto',
         )}
         onClick={handleSidebarResize}
         title={isSidebarOpen ? 'Hide sidebar' : 'Open sidebar'}
@@ -41,7 +41,7 @@ const Sidebar = () => {
       </button>
       <div
         className={clsx(
-          'w-full h-full flex flex-col items-center justify-start gap-4 mx-auto my-0 overflow-hidden',
+          'w-full h-full flex flex-col items-center justify-start gap-6 mx-auto my-0 overflow-y-scroll no-scrollbar',
           'max-sm:max-w-lg max-sm:p-2',
           isSidebarOpen ? 'p-2' : 'p-1',
         )}

@@ -3,6 +3,11 @@ import clsx from 'clsx'
 import { MovingPreferencesButton } from './MovingPreferencesButton'
 import { changeMovingPreferences } from '@/redux/features/controlsSlice'
 import { movingPreferencesType } from '@/types/global/movingPreferencesType.types'
+import WalkIcon from '../../../../assets/icons/walk.svg'
+import BikeIcon from '../../../../assets/icons/bike.svg'
+import CarIcon from '../../../../assets/icons/car.svg'
+import ArrowRightIcon from '../../../../assets/icons/arrow-right.svg'
+import Icon from '@/components/Icon/Icon'
 
 const MovingPreferences = () => {
   const isSidebarOpen = useAppSelector(
@@ -46,16 +51,25 @@ const MovingPreferences = () => {
               key={index}
               title={
                 preference === walk
-                  ? 'walk'
+                  ? 'Walk'
                   : preference === bike
-                  ? 'bike'
-                  : 'car'
+                  ? 'Bike'
+                  : 'Car'
               }
               handlePreferenceChange={() => handlePreferenceChange(preference)}
               selectedPreference={selectedPreference}
               preference={preference}
             >
-              <span>
+              <Icon
+                svg={
+                  preference === walk
+                    ? WalkIcon
+                    : preference === bike
+                    ? BikeIcon
+                    : CarIcon
+                }
+              />
+              <span className=" text-neutral-700 text-sm">
                 {preference === walk
                   ? 'Walk'
                   : preference === bike
@@ -68,19 +82,39 @@ const MovingPreferences = () => {
       </div>
       <div
         className={clsx(
-          'flex items-center justify-center gap-2',
+          'flex items-center justify-center gap-2 w-full',
           'max-sm:!hidden',
           isSidebarOpen && 'hidden',
         )}
       >
-        <button title="Change preference" onClick={handleNextPreference}>
-          <span></span>
-          <span>
+        <button
+          title="Change preference"
+          onClick={handleNextPreference}
+          className={clsx(
+            ' bg-lime-300 px-1 py-2 h-22 w-full rounded-md transition-colors text-neutral-700',
+            'hocus:bg-lime-200',
+          )}
+        >
+          <span className=" flex flex-col justify-center items-center">
+            <Icon
+              svg={
+                selectedPreference === walk
+                  ? WalkIcon
+                  : selectedPreference === bike
+                  ? BikeIcon
+                  : CarIcon
+              }
+            />
+          </span>
+          <span className="font-roboto font-semibold text-sm">
             {selectedPreference === walk
               ? 'Walk'
               : selectedPreference === bike
-              ? 'bike'
-              : 'car'}
+              ? 'Bike'
+              : 'Car'}
+          </span>
+          <span>
+            <Icon svg={ArrowRightIcon} />
           </span>
         </button>
       </div>

@@ -124,16 +124,12 @@ const Export = () => {
           <LineString>
             <tessellate>1</tessellate>
             <coordinates>
-            ${await Promise.resolve(
-              coords.forEach(
-                (point, index: number) => `${point.lng},${point.lat},0`,
-              ),
-            )}
-          </coordinates>
-      </LineString>
-    </Placemark>
-  </Document>
-</kml>`
+            ${coords.map((point) => `${point.lng},${point.lat},0`).join('\n')}
+            </coordinates>
+          </LineString>
+        </Placemark>
+      </Document>
+    </kml>`
 
     return kmlString
   }

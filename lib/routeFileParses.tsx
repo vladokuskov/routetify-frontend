@@ -17,28 +17,37 @@ export async function parseFile(
             reject(new Error('Failed to read file, choose another.'))
           } else if (extension === 'gpx') {
             const points = result.gpx.trk[0].trkseg[0].trkpt
-            const route = points.map((point: any) => ({
-              lat: Number(point.$.lat),
-              lng: Number(point.$.lon),
-            }))
-            resolve(route)
+            const route = points.map((point: any) => {
+              const parsedLat = Number(point.$.lat)
+              const parsedLng = Number(point.$.lon)
+
+              if (isNaN(parsedLat) || isNaN(parsedLng)) {
+                return null // Skip invalid coordinates
+              }
+
+              return {
+                lat: parsedLat,
+                lng: parsedLng,
+              }
+            })
+            resolve(route.filter((coord: DrawCoords) => coord !== null))
           } else if (extension === 'kml') {
             const coordinates = result.kml.Document[0].Placemark.find(
               (placemark: any) => placemark.LineString,
             ).LineString[0].coordinates[0]
 
-            console.log('Coordinates:', coordinates)
-
             const route = coordinates.split('\n').map((coord: string) => {
               const [lng, lat, _] = coord.trim().split(',')
-              console.log('Latitude:', lat, 'Longitude:', lng)
+              const parsedLat = Number(lat)
+              const parsedLng = Number(lng)
+
               return {
-                lat: Number(lat),
-                lng: Number(lng),
+                lat: parsedLat,
+                lng: parsedLng,
               }
             })
 
-            resolve(route)
+            resolve(route.filter((coord: DrawCoords) => coord !== null)) // Remove any null coordinates
           }
         })
       }

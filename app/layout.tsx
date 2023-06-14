@@ -3,6 +3,7 @@ import { Providers } from '@/redux/provider'
 import '@/styles/globals.css'
 import 'leaflet/dist/leaflet.css'
 import { Roboto } from 'next/font/google'
+import { Toaster } from 'react-hot-toast'
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
@@ -50,6 +51,27 @@ export default function RootLayout({
     <html lang="en">
       <head />
       <body className={`${roboto.variable}`} suppressHydrationWarning={true}>
+        <Toaster
+          toastOptions={{
+            className: 'font-roboto font-semibold',
+            position: 'top-center',
+            style: {
+              padding: '.5rem',
+              color: '#f4f4f4',
+            },
+            success: {
+              style: {
+                background: 'green',
+              },
+            },
+            error: {
+              style: {
+                background: '#ef4444',
+                opacity: '70%',
+              },
+            },
+          }}
+        />
         <Providers>{children}</Providers>
       </body>
     </html>

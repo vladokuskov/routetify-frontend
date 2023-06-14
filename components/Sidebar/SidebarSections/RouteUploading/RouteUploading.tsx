@@ -2,18 +2,16 @@ import Icon from '@/components/Icon/Icon'
 import fitBounds from '@/lib/fitBounds'
 import { parseFile } from '@/lib/routeFileParses'
 import {
+  checkFileExtension,
   getFileExtension,
-  isGPXFileType,
-  isKMLFileType,
   validateFileStructure,
 } from '@/lib/validations/routeFileValidation'
 import { putDrawCoords } from '@/redux/features/drawSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import clsx from 'clsx'
 import { ChangeEvent, useRef } from 'react'
+import { toast } from 'react-hot-toast'
 import FileImportIcon from '../../../../assets/icons/file-import.svg'
-
-//TODO fix KML file uploading
 
 const RouteUploading = () => {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -31,29 +29,28 @@ const RouteUploading = () => {
     const selectedFile = e.target.files[0]
     const fileName = selectedFile.name
 
-    const isGPX = await isGPXFileType(fileName)
-    const isKML = await isKMLFileType(fileName)
+    try {
+      // Checking file extension if it GPX or KML
+      const isCorrectFileExtension = await checkFileExtension(fileName)
 
-    if (isGPX || isKML) {
-      const isFileStructureValid = await validateFileStructure(selectedFile)
+      if (isCorrectFileExtension) {
+        const isFileStructureValid = await validateFileStructure(selectedFile)
 
-      if (isFileStructureValid) {
-        const extension = await getFileExtension(fileName)
+        if (isFileStructureValid) {
+          const extension = await getFileExtension(fileName) // Should be GPX or KML
 
-        if (extension) {
-          const route = await parseFile(selectedFile, extension)
+          const route = await parseFile(
+            selectedFile,
+            extension ? extension : null,
+          )
 
           dispatch(putDrawCoords(route))
 
           fitBounds(map, route)
-        } else {
-          console.error('Choose another file, this file is incompatible.')
         }
-      } else {
-        console.error('Choose another file, this file is incompatible.')
       }
-    } else {
-      console.error('Select the correct file type!')
+    } catch (err) {
+      if (err instanceof Error) toast.error(err.message)
     }
 
     // Reset selected file

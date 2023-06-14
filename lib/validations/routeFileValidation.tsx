@@ -1,56 +1,48 @@
+import { parseString } from 'xml2js'
+
 export const getFileExtension = async (fileName: string) => {
   const extension = fileName.split('.').pop()?.toLowerCase()
+
   return extension
 }
 
-export const isGPXFileType = async (fileName: string): Promise<boolean> => {
+export const checkFileExtension = async (
+  fileName: string,
+): Promise<boolean> => {
   const extension = await getFileExtension(fileName)
-  return new Promise<boolean>((resolve) => {
-    if (extension === 'gpx') {
+  return new Promise<boolean>((resolve, reject) => {
+    if (extension === 'gpx' || extension === 'kml') {
       resolve(true)
     } else {
-      resolve(false)
-    }
-  })
-}
-
-export const isKMLFileType = async (fileName: string): Promise<boolean> => {
-  const extension = await getFileExtension(fileName)
-  return new Promise<boolean>((resolve) => {
-    if (extension === 'kml') {
-      resolve(true)
-    } else {
-      resolve(false)
+      reject(new Error('Invalid file type.'))
     }
   })
 }
 
 export const validateFileStructure = async (file: File): Promise<boolean> => {
-  try {
-    const reader = new FileReader() // Create a new FileReader object
-    const fileContent = await new Promise<string>((resolve, reject) => {
-      reader.onload = (event: ProgressEvent<FileReader>) => {
-        const content = event.target?.result as string // Access the file content
-        resolve(content)
-      }
-      reader.onerror = (event: ProgressEvent<FileReader>) => {
-        reject(new Error('Failed to validate file, choose another.'))
-      }
-      reader.readAsText(file) // Read the file as text
-    })
+  return new Promise<boolean>((resolve, reject) => {
+    const reader = new FileReader()
 
-    try {
-      const parser = new DOMParser()
-      const doc = parser.parseFromString(fileContent, 'application/xml')
-      if (doc) {
-        return true
+    reader.onload = (e: ProgressEvent<FileReader>) => {
+      const content = (e.target as FileReader).result
+
+      if (typeof content === 'string' && content.trim() !== '') {
+        parseString(content, (err, result) => {
+          if (err) {
+            reject(new Error('Invalid file structure.'))
+          } else {
+            resolve(true)
+          }
+        })
       } else {
-        return false
+        reject(new Error('Empty file.'))
       }
-    } catch (error) {
-      return false
     }
-  } catch (error) {
-    return false
-  }
+
+    reader.onerror = (e: ProgressEvent<FileReader>) => {
+      reject(new Error('Failed to read file, choose another.'))
+    }
+
+    reader.readAsText(file)
+  })
 }

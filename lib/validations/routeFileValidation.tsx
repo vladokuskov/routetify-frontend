@@ -1,17 +1,20 @@
 import { parseString } from 'xml2js'
 
-export const getFileExtension = async (fileName: string) => {
+export const getFileExtension = (fileName: string): string => {
   const extension = fileName.split('.').pop()?.toLowerCase()
 
-  return extension
+  return extension || ''
 }
 
 export const checkFileExtension = async (
   fileName: string,
 ): Promise<boolean> => {
-  const extension = await getFileExtension(fileName)
+  const validExtensions = ['gpx', 'kml']
+
+  const extension = getFileExtension(fileName)
+
   return new Promise<boolean>((resolve, reject) => {
-    if (extension === 'gpx' || extension === 'kml') {
+    if (validExtensions.includes(extension)) {
       resolve(true)
     } else {
       reject(new Error('Invalid file type.'))

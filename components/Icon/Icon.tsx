@@ -14,6 +14,7 @@ const Icon: React.FC<Icon> = ({
       className={clsx(
         'flex items-center justify-center',
         spin === 'true' && 'animate-spin',
+        className,
       )}
     >
       <Icon width={width} height={height} />

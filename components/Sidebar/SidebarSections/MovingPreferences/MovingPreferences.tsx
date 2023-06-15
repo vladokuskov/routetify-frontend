@@ -3,7 +3,7 @@ import { changeMovingPreferences } from '@/redux/features/controlsSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { MovingPreferencesType } from '@/types/global/movingPreferencesType.types'
 import clsx from 'clsx'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import ArrowRightIcon from '../../../../assets/icons/arrow-right.svg'
 import BikeIcon from '../../../../assets/icons/bike.svg'
 import CarIcon from '../../../../assets/icons/car.svg'
@@ -11,6 +11,8 @@ import WalkIcon from '../../../../assets/icons/walk.svg'
 import { MovingPreferencesButton } from './MovingPreferencesButton'
 
 const MovingPreferences = () => {
+  const [isArrowAnimated, setIsArrowAnimated] = useState(false)
+
   const isSidebarOpen = useAppSelector(
     (state) => state.controlsReducer.isSidebarOpen,
   )
@@ -35,6 +37,11 @@ const MovingPreferences = () => {
     } else if (selectedPreference === car) {
       dispatch(changeMovingPreferences(walk))
     }
+
+    setIsArrowAnimated(true)
+    setTimeout(() => {
+      setIsArrowAnimated(false)
+    }, 200)
   }
 
   useEffect(() => {
@@ -106,7 +113,7 @@ const MovingPreferences = () => {
           title="Change preference"
           onClick={handleNextPreference}
           className={clsx(
-            ' bg-lime-300 px-1 py-2 h-22 w-full rounded-md transition-colors text-neutral-700',
+            ' bg-lime-300 px-1 py-2 h-22 w-full rounded-md transition-colors text-neutral-700 relative pb-7 flex flex-col items-center justify-center',
             'hocus:bg-lime-200',
           )}
         >
@@ -128,9 +135,14 @@ const MovingPreferences = () => {
               ? 'Bike'
               : 'Car'}
           </span>
-          <span>
-            <Icon svg={ArrowRightIcon} />
-          </span>
+          <Icon
+            svg={ArrowRightIcon}
+            className={clsx(
+              'absolute bottom-4 h-1',
+              'transform transition-transform',
+              isArrowAnimated && 'animate-moveRight',
+            )}
+          />
         </button>
       </div>
     </>

@@ -11,6 +11,17 @@ module.exports = {
   ],
   theme: {
     extend: {
+      keyframes: {
+        moveRight: {
+          '0%': { transform: 'translateX(0)' },
+          '25%': { transform: 'translateX(200%)' },
+          '50%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+      },
+      animation: {
+        moveRight: 'moveRight 0.5s backwards',
+      },
       backgroundColor: {
         app: '#f8f6f6',
         details: '#d8d8ff',

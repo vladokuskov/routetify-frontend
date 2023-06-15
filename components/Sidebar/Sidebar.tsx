@@ -43,7 +43,7 @@ const Sidebar = () => {
   return (
     <div
       className={clsx(
-        'absolute overflow-y-visible no-scrollbar max-w-sidebar min-w-sidebarSmall right-0 top-0 mt-0 h-[100lvh] bg-app z-20   transition-transform border-l-2 border-sidebar',
+        'absolute overflow-y-visible no-scrollbar max-w-sidebar min-w-sidebarSmall right-0 top-0 mt-0 h-[100lvh] bg-app z-20 transform transition-transform border-l-2 border-sidebar',
         isSidebarOpen ? 'w-sidebar p-4' : 'w-sidebarSmall p-1',
         'max-sm:!overflow-y-hidden max-sm:relative max-sm:p-4 max-sm:w-full max-sm:min-w-full max-sm:max-w-full max-sm:mt-[70vh] max-sm:shadow-md max-sm:shadow-black max-sm:border-t-2 max-sm:border-l-0',
       )}

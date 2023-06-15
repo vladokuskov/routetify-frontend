@@ -43,9 +43,9 @@ const Sidebar = () => {
   return (
     <div
       className={clsx(
-        'absolute overflow-y-visible no-scrollbar max-w-sidebar min-w-sidebarSmall right-0 top-0 mt-0 h-[100lvh] bg-app z-20   transition-transform border-l-2 border-sidebar',
+        'absolute overflow-y-visible no-scrollbar max-w-sidebar min-w-sidebarSmall right-0 top-0 mt-0 h-[100lvh] bg-app z-20 transform transition-transform border-l-2 border-sidebar',
         isSidebarOpen ? 'w-sidebar p-4' : 'w-sidebarSmall p-1',
-        'max-sm:!overflow-y-hidden max-sm:relative max-sm:p-4 max-sm:w-full max-sm:min-w-full max-sm:max-w-full max-sm:mt-[70vh] max-sm:shadow-md max-sm:shadow-black max-sm:border-t-2 max-sm:border-l-0',
+        'max-sm:!overflow-y-hidden max-sm:relative max-sm:p-4 max-sm:w-full max-sm:min-w-full max-sm:max-w-full max-sm:mt-[70vh] max-sm:shadow max-sm:border-t-2 max-sm:border-l-0 max-sm:min-h-[100lvh] max-sm:!h-full',
       )}
     >
       <button
@@ -68,8 +68,8 @@ const Sidebar = () => {
       >
         <div
           className={clsx(
-            'hidden bg-neutral-300 rounded w-10 h-2',
-            'max-sm:block',
+            'hidden bg-neutral-300 rounded w-8 h-2 p-1',
+            'max-sm:flex',
           )}
         />
         <SidebarSection
@@ -102,7 +102,7 @@ const Sidebar = () => {
         >
           <RouteUploading />
         </SidebarSection>
-        <div className="flex flex-col items-center justify-center gap-5 mt-auto mb-4">
+        <div className="flex flex-col items-center justify-center gap-5 mt-auto mb-4 max-sm:mt-12">
           <a
             href="https://github.com/swappnet/routetify"
             rel="noopener noreferrer"

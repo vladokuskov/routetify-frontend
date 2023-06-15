@@ -27,6 +27,8 @@ const Export = () => {
     selectionMenuRef,
     false,
   )
+  const [isArrowAnimated, setIsArrowAnimated] = useState(false)
+
   const isSidebarOpen = useAppSelector(
     (state) => state.controlsReducer.isSidebarOpen,
   )
@@ -166,6 +168,10 @@ const Export = () => {
   const handleRouteTypeChange = (type: Route | null) => {
     if (!type) {
       setSelectedRouteType(selectedRouteType === GPX ? KML : GPX)
+      setIsArrowAnimated(true)
+      setTimeout(() => {
+        setIsArrowAnimated(false)
+      }, 200)
     } else {
       setSelectedRouteType(type)
     }
@@ -211,12 +217,20 @@ const Export = () => {
           'w-full flex flex-col justify-center items-center gap-1 p-3 text-neutral-700 hocus:bg-neutral-200 hocus:text-neutral-500 rounded-md transition-colors',
           'max-sm:!hidden',
           isSidebarOpen && 'hidden',
+          'relative pb-8',
         )}
         title="Change route type"
         onClick={() => handleRouteTypeChange(null)}
       >
         <span>{selectedRouteType === GPX ? 'GPX' : 'KML'}</span>
-        <Icon svg={ArrowRightIcon} />
+        <Icon
+          svg={ArrowRightIcon}
+          className={clsx(
+            'absolute bottom-5 h-1',
+            'transform transition-transform',
+            isArrowAnimated && 'animate-moveRight',
+          )}
+        />
       </button>
       {isSelectionMenuOpen && (
         <div

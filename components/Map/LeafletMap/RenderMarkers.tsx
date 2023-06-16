@@ -15,7 +15,7 @@ const RenderMarkers = ({ map }: { map: L.Map | null }) => {
     const markersLayer = L.layerGroup()
 
     if (map) {
-      drawCoords.forEach((coords: any, i) => {
+      drawCoords.forEach((coords, i) => {
         let lastIndex = drawCoords.length - 1
         let iconUrl = ''
         let iconSize: [number, number] = [0, 0]

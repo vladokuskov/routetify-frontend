@@ -58,7 +58,8 @@ const Details = () => {
       <hr
         className={clsx(
           'h-full w-auto rounded-md border border-black border-opacity-20',
-          !isSidebarOpen && 'h-auto !w-full max-sm:!w-auto',
+          !isSidebarOpen && 'h-auto !w-full ',
+          'max-sm:!w-auto max-sm:!h-full max-sm:!min-h-[3.5rem]',
         )}
       />
       <Detail title={dist} subTitle="DIST" description="km" />

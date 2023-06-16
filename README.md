@@ -10,7 +10,7 @@ Live - https://routetify.vercel.app/
 ### Features
 
 - Create routes and export them as GPX/KML file format;
-- Be able to create route by own hand;
+- Import routes to editor;
 - Save route and open in the future when you want;
 - Search your location & create routes where you like;
 
@@ -22,8 +22,9 @@ Live - https://routetify.vercel.app/
     TypeScript
     Leaflet
 
-<div style="display: flex; justify-content: center;">
-    <img src="public/previews/1.png" width="200px">
+<div style="display: flex; justify-content: center; gap: 1rem;">
+    <img src="public/previews/1.png" width="450px">
+    <img src="public/previews/2.png" width="300px">
 </div>
 
 

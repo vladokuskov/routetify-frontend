@@ -91,16 +91,16 @@ const Sidebar = () => {
           <MovingPreferences />
         </SidebarSection>
         <SidebarSection
-          title="Export route"
-          description="You can export route in GPX/KML format"
-        >
-          <Export />
-        </SidebarSection>
-        <SidebarSection
           title="Upload route"
           description="Route should be GPX or KML format"
         >
           <RouteUploading />
+        </SidebarSection>
+        <SidebarSection
+          title="Export route"
+          description="You can export route in GPX/KML format"
+        >
+          <Export />
         </SidebarSection>
         <div className="flex flex-col items-center justify-center gap-5 mt-auto mb-4 max-sm:mt-12">
           <a

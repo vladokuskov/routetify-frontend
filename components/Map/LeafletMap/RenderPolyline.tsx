@@ -13,6 +13,14 @@ const RenderPolyline = ({ map }: { map: L.Map | null }) => {
     (state) => state.controlsReducer.isMarkerDragging,
   )
 
+  const polyline = L.polyline(drawCoords, {
+    color: '#83f520',
+    weight: 6,
+    className: 'cursorCrosshair',
+    lineCap: 'round',
+    lineJoin: 'round',
+  })
+
   const previewPolyline = L.polyline([], {
     color: '#3520f570',
     weight: 6,
@@ -32,12 +40,6 @@ const RenderPolyline = ({ map }: { map: L.Map | null }) => {
 
   useEffect(() => {
     if (!map) return
-
-    const polyline = L.polyline(drawCoords as any, {
-      color: '#83f520',
-      weight: 6,
-      className: 'cursorCrosshair',
-    })
 
     setDrawPolyline(polyline)
     polyline.addTo(map)

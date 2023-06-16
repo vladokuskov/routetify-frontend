@@ -1,5 +1,6 @@
 export type TDetail = {
-  title: string
-  subTitle: string
-  description?: string
+  title: string | null
+  subTitle: string | null
+  metric: string | null
+  last: boolean
 }

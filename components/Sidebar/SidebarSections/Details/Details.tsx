@@ -5,11 +5,14 @@ import clsx from 'clsx'
 import { useEffect } from 'react'
 import { Detail } from './Detail/Detail'
 
+type DetailVariants = 'time' | 'dist'
+
 const Details = () => {
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
   const isSidebarOpen = useAppSelector(
     (state) => state.controlsReducer.isSidebarOpen,
   )
+  const details = ['time', 'dist'] as DetailVariants[]
   const { time, dist } = useAppSelector((state) => state.drawReducer.drawInfo)
   const movingPreference = useAppSelector(
     (state) => state.controlsReducer.movingPreference,
@@ -49,20 +52,24 @@ const Details = () => {
   return (
     <div
       className={clsx(
-        'w-full flex items-center flex-row justify-center gap-1 bg-details rounded-md px-1 py-2',
+        'w-full flex items-center flex-row justify-center bg-details rounded-md px-1 py-2',
         'max-sm:flex-row max-sm:max-w-full',
         !isSidebarOpen && 'flex-col',
       )}
     >
-      <Detail title={time} subTitle="TIME" description="h" />
-      <hr
-        className={clsx(
-          'h-full w-auto rounded-md border border-black border-opacity-20',
-          !isSidebarOpen && 'h-auto !w-full ',
-          'max-sm:!w-auto max-sm:!h-full max-sm:!min-h-[3.5rem]',
-        )}
-      />
-      <Detail title={dist} subTitle="DIST" description="km" />
+      {details.map((variant, index) => {
+        return (
+          <Detail
+            key={index}
+            title={variant === 'time' ? time : variant === 'dist' ? dist : null}
+            subTitle={
+              variant === 'time' ? 'TIME' : variant === 'dist' ? 'DIST' : null
+            }
+            metric={variant === 'time' ? 'h' : variant === 'dist' ? 'km' : null}
+            last={index === details.length - 1}
+          />
+        )
+      })}
     </div>
   )
 }

@@ -32,7 +32,7 @@ const Detail = ({ title, subTitle, metric, last }: TDetail) => {
         <hr
           className={clsx(
             'h-full w-auto rounded-md border border-black border-opacity-20 min-h-[3.5rem]',
-            !isSidebarOpen && 'h-auto !w-full min-h-0',
+            !isSidebarOpen && 'h-auto !w-full !min-h-0',
             'max-sm:!w-auto max-sm:!h-full max-sm:!min-h-[3.5rem]',
           )}
         />

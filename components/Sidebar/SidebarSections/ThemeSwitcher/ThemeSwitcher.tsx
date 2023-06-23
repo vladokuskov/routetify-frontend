@@ -13,13 +13,15 @@ const ThemeSwitcher = () => {
 
   const dispatch = useAppDispatch()
 
-  const { setTheme } = useTheme()
+  const { theme, systemTheme, setTheme } = useTheme()
 
   const handleThemeChange = () => {
-    const newTheme = currentTheme === Theme.Light ? Theme.Dark : Theme.Light
-    dispatch(changeTheme(newTheme))
-    setTheme(newTheme === Theme.Light ? 'light' : 'dark')
-    localStorage.setItem('theme', newTheme === Theme.Light ? 'light' : 'dark')
+    const currentTheme = theme === 'system' ? systemTheme : theme
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light'
+
+    dispatch(changeTheme(newTheme === 'dark' ? Theme.Dark : Theme.Light))
+    setTheme(newTheme)
+    localStorage.setItem('theme', newTheme)
   }
 
   useEffect(() => {

@@ -1,4 +1,5 @@
 import { siteConfig } from '@/config/site'
+import { NextThemeProvider } from '@/providers/ThemeProvider'
 import { Providers } from '@/redux/provider'
 import '@/styles/globals.css'
 import 'leaflet/dist/leaflet.css'
@@ -24,7 +25,7 @@ export const metadata = {
   creator: 'swappnet',
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#f8f6f6' },
-    { media: '(prefers-color-scheme: dark)', color: '#f8f6f6' },
+    { media: '(prefers-color-scheme: dark)', color: '#171717' },
   ],
   openGraph: {
     type: 'website',
@@ -72,7 +73,9 @@ export default function RootLayout({
             },
           }}
         />
-        <Providers>{children}</Providers>
+        <NextThemeProvider>
+          <Providers>{children}</Providers>
+        </NextThemeProvider>
       </body>
     </html>
   )

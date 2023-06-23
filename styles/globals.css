@@ -33,6 +33,12 @@
   h3 {
     @apply text-lg;
   }
+  body {
+    @apply dark:bg-gray-800 bg-[#f8f6f6];
+  }
+  :root {
+    @apply dark:bg-gray-800 bg-[#f8f6f6];
+  }
 }
 
 @layer utilities {
@@ -48,26 +54,6 @@
       scrollbar-width: none; /* Firefox */
     }
   }
-}
-
-:root {
-  background-color: #f8f6f6;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    background-color: #f8f6f6;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    background-color: #f8f6f6;
-  }
-}
-
-body {
-  background-color: #f8f6f6;
 }
 
 *::-moz-selection {

@@ -1,5 +1,6 @@
 import { Button } from '@/components/Button/Button'
 import { Layer } from '@/types/global/layer.types'
+import clsx from 'clsx'
 import Image from 'next/image'
 import { ReactNode } from 'react'
 
@@ -28,7 +29,7 @@ const TileButton = ({
       <div className="relative w-5 h-5">
         <Image
           fill
-          priority
+          priority={true}
           quality={30}
           src={`/icons/${
             tile === Layer.default

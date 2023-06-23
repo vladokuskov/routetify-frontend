@@ -4,6 +4,7 @@ import { Layer } from '@/types/global/layer.types'
 import { LocationStatus } from '@/types/global/locationStatus.types'
 import { MovingPreferencesType } from '@/types/global/movingPreferencesType.types'
 import { ControlsState } from '@/types/global/redux.types'
+import { Theme } from '@/types/global/theme.types'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import * as L from 'leaflet'
 
@@ -16,12 +17,19 @@ const initialState = {
   map: null,
   isSidebarOpen: true,
   movingPreference: MovingPreferencesType.bike,
+  theme: Theme.Light,
 } as ControlsState
 
 export const controlsReducer = createSlice({
   name: 'controls',
   initialState,
   reducers: {
+    changeTheme: (state, action: PayloadAction<Theme>) => {
+      return {
+        ...state,
+        theme: action.payload,
+      }
+    },
     changeMovingPreferences: (
       state,
       action: PayloadAction<MovingPreferencesType>,
@@ -103,5 +111,6 @@ export const {
   toggleIsSidebarOpen,
   changeMovingPreferences,
   changeSidebarOpenState,
+  changeTheme,
 } = controlsReducer.actions
 export default controlsReducer.reducer

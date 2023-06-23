@@ -60,6 +60,7 @@ const MapControlTileSelection = () => {
           className={clsx(
             'absolute font-roboto font-semibold gap-1 right-11 bottom-0 rounded-md p-1 bg-app shadow flex flex-col items-center justify-center',
             'max-hsm:bottom-auto max-hsm:top-11 max-hsm:!right-0',
+            'dark:bg-neutral-700',
           )}
         >
           {layers.map((tile, index) => {

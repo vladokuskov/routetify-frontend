@@ -21,7 +21,7 @@ const StyleMap = () => {
   return (
     <TileLayer
       url={mapUrl}
-      maxNativeZoom={17}
+      maxNativeZoom={layer === Layer.satellite ? 17 : undefined}
       maxZoom={22}
       minZoom={2}
       key={layer}

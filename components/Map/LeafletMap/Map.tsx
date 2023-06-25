@@ -18,6 +18,7 @@ import { loadMap } from '@/redux/features/controlsSlice'
 
 const LeafletMap = () => {
   const [map, setMap] = useState<L.Map | null>(null)
+
   const dispatch = useAppDispatch()
 
   useClickedCoords(map)

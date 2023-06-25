@@ -9,7 +9,7 @@ import ArrowRightIcon from '../../assets/icons/arrow-right.svg'
 import Icon from '../Icon/Icon'
 import { SidebarSection } from './SidebarSection'
 import { Details } from './SidebarSections/Details/Details'
-import { Export } from './SidebarSections/Export/Export'
+import { RouteExport } from './SidebarSections/RouteExport/RouteExport'
 import { Geocoder } from './SidebarSections/Geocoder/Geocoder'
 import { MovingPreferences } from './SidebarSections/MovingPreferences/MovingPreferences'
 import { useEffect } from 'react'
@@ -42,9 +42,9 @@ const Sidebar = () => {
   }, [isSidebarOpen])
 
   return (
-    <div
+    <aside
       className={clsx(
-        'absolute overflow-y-visible no-scrollbar max-w-sidebar min-w-sidebarSmall right-0 top-0 mt-0 h-[100lvh] bg-app z-20 transform transition-transform border-l-2 border-sidebar',
+        'absolute bg-app border-sidebar z-20 overflow-y-visible no-scrollbar max-w-sidebar min-w-sidebarSmall right-0 top-0 mt-0 h-[100lvh] transform transition-transform border-l-2 ',
         'dark:bg-neutral-800 dark:border-neutral-600',
         isSidebarOpen ? 'w-sidebar p-4' : 'w-sidebarSmall p-1',
         'max-sm:!overflow-y-hidden max-sm:relative max-sm:p-4 max-sm:w-full max-sm:min-w-full max-sm:max-w-full max-sm:mt-[70vh] max-sm:shadow max-sm:border-t-2 max-sm:border-l-0 max-sm:min-h-[100lvh] max-sm:!h-full',
@@ -54,7 +54,7 @@ const Sidebar = () => {
         className={clsx(
           'absolute p-2 rounded-full -left-6 top-1/2 bg-neutral-10 border-2 border-sidebar z-30 bg-neutral-100 text-neutral-400',
           'transition-colors hocus:bg-neutral-200 hocus:text-neutral-500',
-          'dark:bg-neutral-700 dark:text-neutral-400 dark:hocus:bg-neutral-600 dark:border-neutral-400',
+          'dark:bg-neutral-700 dark:text-neutral-300 dark:hocus:bg-neutral-500 dark:border-neutral-600',
           'max-sm:hidden max-hsm:-left-12 max-hsm:bottom-4 max-hsm:top-auto',
         )}
         onClick={handleSidebarResize}
@@ -69,10 +69,11 @@ const Sidebar = () => {
           isSidebarOpen ? 'p-2' : 'p-1',
         )}
       >
-        <div
+        <figure
           className={clsx(
             'hidden bg-neutral-300 rounded w-8 h-2 p-1',
             'max-sm:flex',
+            'dark:bg-neutral-600',
           )}
         />
         <SidebarSection
@@ -103,7 +104,7 @@ const Sidebar = () => {
           title="Export route"
           description="You can export route in GPX/KML format"
         >
-          <Export />
+          <RouteExport />
         </SidebarSection>
         <div className="flex flex-col items-center justify-center gap-5 mt-auto mb-4 max-sm:mt-12">
           <ThemeSwitcher />
@@ -122,7 +123,7 @@ const Sidebar = () => {
           </a>
         </div>
       </div>
-    </div>
+    </aside>
   )
 }
 

@@ -25,7 +25,7 @@ const MapControls = () => {
             isSidebarOpen ? 'right-[20.3rem]' : 'right-[4.5rem]',
           )}
         >
-          <div
+          <section
             className={clsx(
               'flex flex-col items-center justify-start gap-4',
               'max-hsm:!flex-row',
@@ -38,7 +38,7 @@ const MapControls = () => {
             <MapControlFindLocation />
             <MapControlDrawSelection />
             <MapControlTileSelection />
-          </div>
+          </section>
         </div>
       </div>
     </div>

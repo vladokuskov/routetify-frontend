@@ -5,10 +5,12 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { Theme } from '@/types/global/theme.types'
 import { changeTheme } from '@/redux/features/controlsSlice'
 import { useTheme } from 'next-themes'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import clsx from 'clsx'
 
 const ThemeSwitcher = () => {
+  const [isMounted, setIsMounted] = useState<boolean>(false)
+
   const currentTheme = useAppSelector((state) => state.controlsReducer.theme)
 
   const dispatch = useAppDispatch()
@@ -25,13 +27,18 @@ const ThemeSwitcher = () => {
   }
 
   useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  useEffect(() => {
     const savedTheme = localStorage.getItem('theme')
     if (savedTheme) {
       dispatch(changeTheme(savedTheme === 'light' ? Theme.Light : Theme.Dark))
       setTheme(savedTheme)
     }
   }, [])
-  return (
+
+  return isMounted ? (
     <button
       className={clsx(
         'hocus:bg-neutral-200 text-neutral-600 hocus:text-neutral-800 p-3 rounded-md',
@@ -42,6 +49,8 @@ const ThemeSwitcher = () => {
     >
       <Icon svg={currentTheme === Theme.Light ? SunIcon : MoonIcon} />
     </button>
+  ) : (
+    <></>
   )
 }
 

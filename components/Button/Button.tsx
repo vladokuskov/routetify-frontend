@@ -26,7 +26,7 @@ const Button = ({
         variant === 'routeType' &&
           'w-full p-1 text-neutral-700 hocus:bg-neutral-200 hocus:text-neutral-500 rounded-md transition-colors',
         variant === 'tile' &&
-          'cursor-pointer p-1 rounded-md inline-flex items-center justify-center gap-2 text-neutral-700 dark:text-neutral-200 hocus:text-neutral-600 dark:hocus:text-neutral-100 hocus:bg-neutral-200 dark:hocus:bg-neutral-500',
+          'w-full cursor-pointer p-1 rounded-md inline-flex items-center justify-between gap-2 text-neutral-700 dark:text-neutral-200 hocus:text-neutral-600 dark:hocus:text-neutral-100 hocus:bg-neutral-200 dark:hocus:bg-neutral-500',
 
         sizesClass[size],
         status === 'danger' && '!text-red-500',

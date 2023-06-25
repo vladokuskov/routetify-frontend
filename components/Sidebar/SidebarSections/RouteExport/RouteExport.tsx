@@ -19,7 +19,7 @@ const current_date = `${date.getFullYear()}-${
   date.getMonth() + 1
 }-${date.getDate()}_${date.getHours()}:${date.getMinutes()}`
 
-const Export = () => {
+const RouteExport = () => {
   const selectionMenuRef = useRef(null)
   const [filename, setFilename] = useState<string>('')
   const [selectedRouteType, setSelectedRouteType] = useState<Route>(Route.GPX)
@@ -259,4 +259,4 @@ const Export = () => {
   )
 }
 
-export { Export }
+export { RouteExport }

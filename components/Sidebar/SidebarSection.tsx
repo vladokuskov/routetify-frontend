@@ -15,7 +15,7 @@ const SidebarSection = ({
     (state) => state.controlsReducer.isSidebarOpen,
   )
   return (
-    <div className="w-full flex flex-col items-center justify-center gap-4">
+    <section className="w-full flex flex-col items-center justify-center gap-4">
       <div
         className={clsx(
           'w-full flex flex-col items-start justify-center gap-1 font-roboto',
@@ -40,7 +40,7 @@ const SidebarSection = ({
         )}
       </div>
       {children}
-    </div>
+    </section>
   )
 }
 

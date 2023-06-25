@@ -27,8 +27,8 @@ const RenderMarkers = ({ map }: { map: L.Map | null }) => {
           iconAnchor = [6, 25]
         } else if (i > 0 && i < lastIndex) {
           iconUrl = 'map/mid-marker.svg'
-          iconSize = [20, 20]
-          iconAnchor = [10, 10]
+          iconSize = [12, 12]
+          iconAnchor = [5, 5]
         } else if (i === lastIndex && drawCoords.length > 1) {
           iconUrl = 'map/finish-marker.svg'
           iconSize = [33, 33]

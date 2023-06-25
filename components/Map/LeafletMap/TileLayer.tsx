@@ -18,7 +18,16 @@ const StyleMap = () => {
     }
   }, [layer])
 
-  return <TileLayer url={mapUrl} maxNativeZoom={17} maxZoom={22} />
+  return (
+    <TileLayer
+      url={mapUrl}
+      maxNativeZoom={layer === Layer.satellite ? 17 : undefined}
+      maxZoom={22}
+      minZoom={3}
+      key={layer}
+      className={layer === Layer.default ? 'dark:to-dark-filter' : ''}
+    />
+  )
 }
 
 export default StyleMap

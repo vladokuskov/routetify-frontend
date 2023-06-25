@@ -18,6 +18,7 @@ import { loadMap } from '@/redux/features/controlsSlice'
 
 const LeafletMap = () => {
   const [map, setMap] = useState<L.Map | null>(null)
+
   const dispatch = useAppDispatch()
 
   useClickedCoords(map)
@@ -36,7 +37,7 @@ const LeafletMap = () => {
         zoomControl={false}
         center={[50, 30]}
         zoom={9}
-        minZoom={2}
+        minZoom={3}
         scrollWheelZoom={true}
         ref={setMap}
         style={{ cursor: 'crosshair' }}

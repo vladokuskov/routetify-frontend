@@ -15,6 +15,8 @@ import FileImportIcon from '../../../../assets/icons/file-import.svg'
 
 const RouteUploading = () => {
   const inputRef = useRef<HTMLInputElement>(null)
+
+  const [isUserConfirmed, setIsUserConfirmed] = useState<boolean>(false)
   const [isDragging, setIsDragging] = useState(false)
   const [file, setFile] = useState<File | null>(null)
 
@@ -106,13 +108,18 @@ const RouteUploading = () => {
       <button
         className="inline-flex justify-center items-center gap-2 w-full p-2 bg-neutral-300 rounded-md font-sans font-semibold text-neutral-700 hocus:bg-neutral-200 hocus:text-neutral-500 transition-colors"
         onClick={() => {
-          const isConfirmed = window.confirm(
-            'If you have route, it will be replaced, continue?',
-          )
+          if (!isUserConfirmed) {
+            const isConfirmed = window.confirm(
+              'If you have route, it will be replaced, continue?',
+            )
 
-          if (!isConfirmed) return
+            if (!isConfirmed) return
 
-          inputRef.current?.click()
+            setIsUserConfirmed(true)
+            inputRef.current?.click()
+          } else {
+            inputRef.current?.click()
+          }
         }}
         title="Choose a file"
       >

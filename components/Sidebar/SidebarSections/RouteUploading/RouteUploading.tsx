@@ -12,67 +12,47 @@ import clsx from 'clsx'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import FileImportIcon from '../../../../assets/icons/file-import.svg'
+import { updateRouteFile } from '@/redux/features/fileUploadSlice'
 
 const RouteUploading = () => {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const [isUserConfirmed, setIsUserConfirmed] = useState<boolean>(false)
-  const [isDragging, setIsDragging] = useState(false)
-  const [file, setFile] = useState<File | null>(null)
 
   const map = useAppSelector((state) => state.controlsReducer.map)
+  const routeFile = useAppSelector((state) => state.fileUploadReducer.routeFile)
   const isSidebarOpen = useAppSelector(
     (state) => state.controlsReducer.isSidebarOpen,
   )
 
   const dispatch = useAppDispatch()
 
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault()
-    setIsDragging(true)
-  }
-
-  const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault()
-    setIsDragging(true)
-  }
-
-  const handleDragLeave = () => {
-    setIsDragging(false)
-  }
-
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault()
-    setIsDragging(false)
-
-    if (e.dataTransfer.files.length > 0) {
-      setFile(e.dataTransfer.files[0])
-    }
-  }
-
   const handleFileSelection = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return
 
-    setFile(e.target.files[0])
+    dispatch(updateRouteFile(e.target.files[0]))
   }
 
   useEffect(() => {
     const handleRouteDisplaying = async () => {
-      if (!file) return
+      if (!routeFile) return
 
-      const fileName = file.name
+      const fileName = routeFile.name
 
       try {
         // Checking file extension if it GPX or KML
         const isCorrectFileExtension = await checkFileExtension(fileName)
 
         if (isCorrectFileExtension) {
-          const isFileStructureValid = await validateFileStructure(file)
+          const isFileStructureValid = await validateFileStructure(routeFile)
 
           if (isFileStructureValid) {
             const extension = await getFileExtension(fileName)
 
-            const route = await parseFile(file, extension ? extension : null)
+            const route = await parseFile(
+              routeFile,
+              extension ? extension : null,
+            )
 
             dispatch(putDrawCoords(route))
 
@@ -83,28 +63,17 @@ const RouteUploading = () => {
         if (err instanceof Error) toast.error(err.message)
       }
 
-      setFile(null)
+      dispatch(updateRouteFile(null))
       if (inputRef.current) {
         inputRef.current.value = ''
       }
     }
 
     handleRouteDisplaying()
-  }, [file])
+  }, [routeFile])
 
   return (
-    <div
-      className="relative w-full flex flex-col items-center justify-center gap-4"
-      onDragOver={handleDragOver}
-      onDragEnter={handleDragEnter}
-      onDragLeave={handleDragLeave}
-      onDrop={handleDrop}
-    >
-      {isDragging && (
-        <div className="w-full flex items-center justify-center p-2 rounded-md border border-dashed border-neutral-400 font-roboto font-semibold text-neutral-600">
-          Drop file
-        </div>
-      )}
+    <div className="relative w-full flex flex-col items-center justify-center gap-4">
       <button
         className="inline-flex justify-center items-center gap-2 w-full p-2 bg-neutral-300 rounded-md font-sans font-semibold text-neutral-700 hocus:bg-neutral-200 hocus:text-neutral-500 transition-colors"
         onClick={() => {

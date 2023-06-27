@@ -13,7 +13,7 @@ const MapControlDeleteRoute = () => {
   const handleDelete = () => {
     if (drawCoords.length > 0) {
       let isConfirmed = window.confirm(
-        'Are you sure you want to delete the route??',
+        'Are you sure you want to delete route??',
       )
 
       if (isConfirmed) {

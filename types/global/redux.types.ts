@@ -31,3 +31,8 @@ export type ControlsState = {
   movingPreference: MovingPreferencesType
   theme: Theme
 }
+
+export type FileUploadState = {
+  routeFile: File | null
+  isDragging: boolean
+}

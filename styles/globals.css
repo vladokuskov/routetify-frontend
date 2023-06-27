@@ -39,6 +39,10 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
+
+    .to-dark-filter {
+      filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+    }
   }
   .no-scrollbar::-webkit-scrollbar {
     display: none;

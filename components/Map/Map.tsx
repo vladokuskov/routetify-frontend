@@ -20,7 +20,7 @@ const Map = () => {
   )
 
   return (
-    <main
+    <section
       className={clsx(
         'h-full z-10 top-0 right-0 left-0 static',
         'max-sm:w-full max-sm:h-[70vh] fixed',
@@ -31,7 +31,7 @@ const Map = () => {
         <MapControls />
         <LeafletMap />
       </div>
-    </main>
+    </section>
   )
 }
 

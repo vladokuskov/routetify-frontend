@@ -10,7 +10,7 @@ const Icon: React.FC<Icon> = ({
   spin = 'false',
 }) => {
   return (
-    <div
+    <span
       className={clsx(
         'flex items-center justify-center',
         spin === 'true' && 'animate-spin',
@@ -18,7 +18,7 @@ const Icon: React.FC<Icon> = ({
       )}
     >
       <Icon width={width} height={height} />
-    </div>
+    </span>
   )
 }
 

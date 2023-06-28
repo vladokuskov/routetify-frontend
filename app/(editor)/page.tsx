@@ -46,7 +46,7 @@ export default function Editor() {
   }, [])
 
   return (
-    <div
+    <main
       className="bg-app dark:bg-neutral-800 w-full h-full max-h-full flex items-start justify-start"
       onDragEnter={handleDragEnter}
       onDragOver={handleDragOver}
@@ -55,6 +55,6 @@ export default function Editor() {
       <Sidebar />
       <Map />
       {isDragging && <RouteFileUploadDrag />}
-    </div>
+    </main>
   )
 }

@@ -108,19 +108,21 @@ const Sidebar = () => {
         </SidebarSection>
         <div className="flex flex-col items-center justify-center gap-5 mt-auto mb-4 max-sm:mt-12">
           <ThemeSwitcher />
-          <a
-            href="https://github.com/swappnet/routetify"
-            rel="noopener noreferrer"
-            target="_blank"
-            className={clsx(
-              'font-roboto text-neutral-300 font-semibold cursor-pointer hocus:text-neutral-400 transition-colors',
-              'max-sm:block',
+          <p>
+            <a
+              href="https://github.com/swappnet/routetify"
+              rel="noopener noreferrer"
+              target="_blank"
+              className={clsx(
+                'font-roboto text-neutral-300 font-semibold cursor-pointer hocus:text-neutral-400 transition-colors',
+                'max-sm:block',
 
-              !isSidebarOpen && 'hidden',
-            )}
-          >
-            &copy; Routetify
-          </a>
+                !isSidebarOpen && 'hidden',
+              )}
+            >
+              &copy; Routetify
+            </a>
+          </p>
         </div>
       </div>
     </aside>

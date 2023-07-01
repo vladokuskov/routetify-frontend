@@ -15,6 +15,7 @@ import SearchIcon from '../../../../assets/icons/search.svg'
 import { useClickOutside } from '../../../../hooks/useClickOutside'
 import { Input } from '../../../Input/Input'
 import { TGeoResponse } from './Geocoder.types'
+import { toast } from 'react-hot-toast'
 
 const Geocoder = () => {
   const ref = useRef<HTMLDivElement>(null)
@@ -73,7 +74,7 @@ const Geocoder = () => {
       setIsGeocoderLoading(true)
       const response = await fetch(url)
       if (!response.ok) {
-        console.error(`HTTP error! Status: ${response.status}`)
+        toast.error(`HTTP error! Status: ${response.status}`)
       }
       const data = await response.json()
 
@@ -81,7 +82,7 @@ const Geocoder = () => {
       setIsGeocoderLoading(false)
       setIsResultsOpen(true)
     } catch (error) {
-      console.error('An error occurred:', error)
+      toast.error(`An error occurred`)
     }
   }
 
@@ -120,17 +121,29 @@ const Geocoder = () => {
           onChange={handleChangeGeocoder}
           icon={isGeocoderLoading ? SpinnerIcon : SearchIcon}
           loading={isGeocoderLoading ? 'true' : 'false'}
+          className={isResultsOpen ? 'rounded-b-none' : ''}
+          role="combobox"
+          aria-haspopup="listbox"
+          aria-expanded={isResultsOpen}
+          aria-owns="geocoder-results"
         />
         {geocoderResponse && isResultsOpen && (
-          <div className="w-full top-[2.6rem] absolute rounded-md z-20 shadow">
+          <div
+            className="w-full top-[2.5rem] absolute rounded-t-none rounded-md z-20 bg-neutral-300 shadow p-1"
+            role="listbox"
+            id="geocoder-results"
+          >
             {geocoderResponse.slice(0, 3).map((data: TGeoResponse, i) => {
               let { lat, lon, display_name } = data
               return (
                 <button
                   key={i}
-                  className="w-full  flex flex-col items-center  justify-center border p-2 font-semibold text-neutral-600 bg-neutral-300 border-b-neutral-400 last:border-none last:rounded-b-md first:rounded-t-md hocus:bg-neutral-200 transition-colors"
+                  className={clsx(
+                    'w-full p-2 text-neutral-700 hocus:bg-neutral-200 hocus:text-neutral-500 rounded-md transition-colors font-semibold',
+                  )}
                   title={display_name}
                   onClick={() => handleResultSelect({ lat, lon, display_name })}
+                  id={`geocoder-option-${i}`}
                 >
                   {display_name}
                 </button>

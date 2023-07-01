@@ -10,13 +10,13 @@ const Detail = ({ title, subTitle, metric, last }: TDetail) => {
   return (
     <div
       className={clsx(
-        'font-roboto w-full flex flex-row items-center justify-center gap-2 rounded-md px-1 py-1',
+        'font-roboto w-full flex flex-row items-center justify-center gap-2 rounded-md p-1',
         !isSidebarOpen && 'flex-col',
         'max-sm:!flex-row',
       )}
     >
-      <div className="w-full flex flex-col items-center justify-center gap-2">
-        <h4 className=" text-lg tracking-tighter font-bold text-neutral-800 opacity-70 break-all leading-4">
+      <div className="w-full flex flex-col items-center justify-center gap-2 no-scrollbar">
+        <h4 className="w-full text-center text-base tracking-tighter font-bold text-neutral-800 opacity-70 leading-4 text-clip overflow-hidden whitespace-nowrap hover:break-all hover:whitespace-normal">
           {title}
         </h4>
         <div className="w-full flex flex-col justify-center items-center">

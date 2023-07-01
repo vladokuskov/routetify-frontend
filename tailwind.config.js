@@ -23,6 +23,7 @@ module.exports = {
       animation: {
         moveRight: 'moveRight 0.5s backwards',
       },
+
       backgroundColor: {
         app: '#f8f6f6',
         details: '#d8d8ff',

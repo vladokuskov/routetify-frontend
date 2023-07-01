@@ -27,7 +27,7 @@ const Map = () => {
         isSidebarOpen ? 'w-[calc(100%-19.75rem)]' : 'w-[calc(100%-4rem)]',
       )}
     >
-      <div className=" w-full h-full relative grid">
+      <div className="w-full h-full relative grid">
         <MapControls />
         <LeafletMap />
       </div>

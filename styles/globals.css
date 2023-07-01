@@ -43,6 +43,10 @@
     .to-dark-filter {
       filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
     }
+
+    .sidebarAnimation {
+      transition: width 0.1s ease-in-out;
+    }
   }
   .no-scrollbar::-webkit-scrollbar {
     display: none;

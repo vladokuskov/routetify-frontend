@@ -44,16 +44,16 @@ const Sidebar = () => {
   return (
     <aside
       className={clsx(
-        'absolute bg-app border-sidebar z-20 overflow-y-visible no-scrollbar max-w-sidebar min-w-sidebarSmall right-0 top-0 mt-0 h-[100lvh] transform transition-transform border-l-2 ',
+        'absolute bg-app border-sidebar z-20 overflow-y-visible no-scrollbar max-w-sidebar min-w-sidebarSmall right-0 top-0 mt-0 h-[100lvh] border-l-2  ',
         'dark:bg-neutral-800 dark:border-neutral-600',
-        isSidebarOpen ? 'w-sidebar p-4' : 'w-sidebarSmall p-1',
+        isSidebarOpen ? 'w-sidebar p-4' : 'w-sidebarSmall p-1 sidebarAnimation',
         'max-sm:!overflow-y-hidden max-sm:relative max-sm:p-4 max-sm:w-full max-sm:min-w-full max-sm:max-w-full max-sm:mt-[70vh] max-sm:shadow max-sm:border-t-2 max-sm:border-l-0 max-sm:min-h-[100lvh] max-sm:!h-full',
       )}
     >
       <button
         className={clsx(
           'absolute p-2 rounded-full -left-6 top-1/2 bg-neutral-10 border-2 border-sidebar z-30 bg-neutral-100 text-neutral-400',
-          'transition-colors hocus:bg-neutral-200 hocus:text-neutral-500',
+          'transition-colors hocus:bg-neutral-200 hocus:text-neutral-500 active:!text-neutral-400',
           'dark:bg-neutral-700 dark:text-neutral-300 dark:hocus:bg-neutral-500 dark:border-neutral-600',
           'max-sm:hidden max-hsm:-left-12 max-hsm:bottom-4 max-hsm:top-auto',
         )}

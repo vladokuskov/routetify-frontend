@@ -13,6 +13,21 @@ export const drawReducer = createSlice({
   name: 'draw',
   initialState,
   reducers: {
+    reverseRoute: (state) => {
+      if (state.drawCoords.length === 0) return
+
+      const reversedCoords = []
+      for (let i = state.drawCoords.length - 1; i >= 0; i--) {
+        reversedCoords.push(state.drawCoords[i])
+      }
+
+      return {
+        ...state,
+        drawCoords: reversedCoords,
+        drawCoordsFuture: [],
+        drawCoordsDeleted: [],
+      }
+    },
     updateDrawInfo: (
       state,
       action: PayloadAction<{ time: string; dist: string }>,
@@ -135,5 +150,6 @@ export const {
   redoDrawCoords,
   updateDraggedMarkerCoords,
   putDrawCoords,
+  reverseRoute,
 } = drawReducer.actions
 export default drawReducer.reducer

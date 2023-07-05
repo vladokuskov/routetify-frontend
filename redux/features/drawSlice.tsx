@@ -16,16 +16,11 @@ export const drawReducer = createSlice({
     reverseRoute: (state) => {
       if (state.drawCoords.length === 0) return
 
-      const reversedCoords = []
-      for (let i = state.drawCoords.length - 1; i >= 0; i--) {
-        reversedCoords.push(state.drawCoords[i])
-      }
-
       return {
         ...state,
-        drawCoords: reversedCoords,
-        drawCoordsFuture: [],
-        drawCoordsDeleted: [],
+        drawCoords: [...state.drawCoords].reverse(),
+        drawCoordsFuture: [...state.drawCoordsFuture].reverse(),
+        drawCoordsDeleted: [...state.drawCoordsDeleted].reverse(),
       }
     },
     updateDrawInfo: (

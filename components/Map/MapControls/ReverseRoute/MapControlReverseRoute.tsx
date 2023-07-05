@@ -4,7 +4,6 @@ import { changeLocationStatus } from '@/redux/features/controlsSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { LocationStatus } from '@/types/global/locationStatus.types'
 import RepeatIcon from '../../../../assets/icons/repeat.svg'
-import fitBounds from '@/lib/fitBounds'
 import { useKeyDown } from '@/hooks/useKeyDown'
 import { reverseRoute } from '@/redux/features/drawSlice'
 
@@ -12,7 +11,6 @@ const MapControlReverseRoute = () => {
   const dispatch = useAppDispatch()
 
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
-  const map = useAppSelector((state) => state.controlsReducer.map)
 
   const handleRouteReverse = () => {
     if (drawCoords.length > 0) {

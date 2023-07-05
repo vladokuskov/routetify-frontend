@@ -12,22 +12,18 @@ import { MapControlReverseRoute } from './ReverseRoute/MapControlReverseRoute'
 import { MapControlZoom } from './Zoom/MapControlZoom'
 
 const MapControls = () => {
-  const isSidebarOpen = useAppSelector(
-    (state) => state.controlsReducer.isSidebarOpen,
-  )
   const map = useAppSelector((state) => state.controlsReducer.map)
 
   return (
-    <div className="fixed w-full f-full pointer-events-none z-[1003]">
+    <div className="absolute min-w-full min-h-full w-full f-full pointer-events-none z-[1003]">
       {map && (
-        <div className="relative w-full h-full pointer-events-none">
+        <div className="min-w-full min-h-full w-full h-full pointer-events-none]">
           <Contributors />
           <MapControlZoom />
           <div
             className={clsx(
-              'absolute flex flex-col items-center justify-start top-7 py-2 px-3 pr-0 pointer-events-auto',
+              'absolute flex flex-col items-center justify-start top-7 py-2 px-3 pr-0 pointer-events-auto right-2',
               'max-sm:right-3 max-hsm:!top-1',
-              isSidebarOpen ? 'right-[20.3rem]' : 'right-[4.5rem]',
             )}
           >
             <section

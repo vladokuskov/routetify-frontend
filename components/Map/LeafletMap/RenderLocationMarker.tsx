@@ -38,26 +38,8 @@ const RenderLocationMarker = ({ map }: { map: Map | null }) => {
       })
       marker.addTo(map)
 
-      // Add user direction tracking
-      const watchOptions = {
-        enableHighAccuracy: true,
-        maximumAge: 1000,
-      }
-
-      const watchId = navigator.geolocation.watchPosition(
-        (position) => {
-          const { heading } = position.coords
-          setUserDirection(heading)
-        },
-        (error) => {
-          console.error('Error:', error)
-        },
-        watchOptions,
-      )
-
       return () => {
         map.removeLayer(marker)
-        navigator.geolocation.clearWatch(watchId)
       }
     }
   }, [map, position])

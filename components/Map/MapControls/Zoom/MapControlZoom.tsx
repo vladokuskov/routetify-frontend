@@ -3,6 +3,7 @@ import Icon from '@/components/Icon/Icon'
 import { useAppSelector } from '@/redux/hooks'
 import MinusIcon from '../../../../assets/icons/minus.svg'
 import PlusIcon from '../../../../assets/icons/plus.svg'
+import clsx from 'clsx'
 
 const MapControlZoom = () => {
   const map = useAppSelector((state) => state.controlsReducer.map)
@@ -16,7 +17,12 @@ const MapControlZoom = () => {
   }
 
   return (
-    <div className="absolute left-1 pointer-events-auto flex flex-col gap-1 items-center justify-center">
+    <div
+      className={clsx(
+        'absolute left-1 bottom-4 pointer-events-auto flex flex-col gap-1 items-center justify-center',
+        'max-sm:!bottom-[1rem]',
+      )}
+    >
       <Button
         variant="map"
         title="Zoom in"

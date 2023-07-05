@@ -37,6 +37,11 @@ const RouteUploading = () => {
     const handleRouteDisplaying = async () => {
       if (!routeFile) return
 
+      if (!map) {
+        toast.error('Map is not initialized.')
+        return
+      }
+
       const fileName = routeFile.name
 
       try {

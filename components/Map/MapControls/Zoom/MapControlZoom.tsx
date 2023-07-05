@@ -19,7 +19,7 @@ const MapControlZoom = () => {
   return (
     <div
       className={clsx(
-        'absolute left-1 bottom-4 pointer-events-auto flex flex-col gap-1 items-center justify-center',
+        'absolute left-2 bottom-2 pointer-events-auto flex flex-col gap-1 items-center justify-center',
         'max-sm:!bottom-[1rem]',
       )}
     >

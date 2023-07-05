@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 
 const RenderLocationMarker = ({ map }: { map: Map | null }) => {
   const [position, setPosition] = useState<LatLngExpression | null>(null)
+  const [userDirection, setUserDirection] = useState<number | null>(null) // Add user direction state
 
   const locationStatus = useAppSelector(
     (state) => state.controlsReducer.location,
@@ -30,11 +31,33 @@ const RenderLocationMarker = ({ map }: { map: Map | null }) => {
 
   useEffect(() => {
     if (map && position) {
-      const marker = L.circle(position, { radius: 120, fillOpacity: 0.5 })
+      const marker = L.circle(position, {
+        radius: 1000,
+        fillOpacity: 0.5,
+        stroke: false,
+      })
       marker.addTo(map)
+
+      // Add user direction tracking
+      const watchOptions = {
+        enableHighAccuracy: true,
+        maximumAge: 1000,
+      }
+
+      const watchId = navigator.geolocation.watchPosition(
+        (position) => {
+          const { heading } = position.coords
+          setUserDirection(heading)
+        },
+        (error) => {
+          console.error('Error:', error)
+        },
+        watchOptions,
+      )
 
       return () => {
         map.removeLayer(marker)
+        navigator.geolocation.clearWatch(watchId)
       }
     }
   }, [map, position])

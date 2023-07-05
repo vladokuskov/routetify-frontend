@@ -30,7 +30,7 @@ const MapControlFindLocation = () => {
             const geoPoint = {
               lat: position.coords.latitude,
               lng: position.coords.longitude,
-              zoom: 16,
+              zoom: 14,
             }
 
             if (geoPoint) {
@@ -44,7 +44,7 @@ const MapControlFindLocation = () => {
                 changeCurrentCoords({
                   lat: position.coords.latitude,
                   lng: position.coords.longitude,
-                  zoom: 16,
+                  zoom: 14,
                 }),
               )
             }

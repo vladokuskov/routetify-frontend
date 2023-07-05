@@ -6,7 +6,7 @@ import * as L from 'leaflet'
 
 import useClickedCoords from '../../../hooks/map/useClickedCoords'
 
-import { MapContainer, ZoomControl } from 'react-leaflet'
+import { MapContainer } from 'react-leaflet'
 import StyleMap from './TileLayer'
 
 import useGetPositionByDrag from '@/hooks/map/useGetPositionByDrag'
@@ -46,7 +46,6 @@ const LeafletMap = () => {
         <RenderLocationMarker map={map} />
         <RenderMarkers map={map} />
         <RenderPolyline map={map} />
-        <ZoomControl position="bottomleft" />
       </MapContainer>
     </>
   )

@@ -45,7 +45,7 @@ module.exports = {
       },
       screens: {
         'max-sm': { raw: 'not all and (min-width: 640px)' },
-        'max-hsm': { raw: '(max-height: 550px)' },
+        'max-hsm': { raw: '(max-height: 680px)' },
       },
     },
   },

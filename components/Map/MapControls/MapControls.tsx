@@ -9,6 +9,7 @@ import { MapControlRedoAction } from './RedoAction/MapControlRedo'
 import { MapControlTileSelection } from './TilesSelector/MapControlTileSelection'
 import { MapControlUndoAction } from './UndoAction/MapControlUndo'
 import { MapControlReverseRoute } from './ReverseRoute/MapControlReverseRoute'
+import { MapControlZoom } from './Zoom/MapControlZoom'
 
 const MapControls = () => {
   const isSidebarOpen = useAppSelector(
@@ -21,6 +22,7 @@ const MapControls = () => {
       {map && (
         <div className="relative w-full h-full pointer-events-none">
           <Contributors />
+          <MapControlZoom />
           <div
             className={clsx(
               'absolute flex flex-col items-center justify-start top-7 py-2 px-3 pr-0 pointer-events-auto',

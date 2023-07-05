@@ -68,6 +68,11 @@ const Geocoder = () => {
   }
 
   const fetchGeoData = async () => {
+    if (!map) {
+      toast.error('Map is not initialized.')
+      return
+    }
+
     try {
       let url = `https://geocode.maps.co/search?q=${geocoderValue}`
 
@@ -78,9 +83,12 @@ const Geocoder = () => {
       }
       const data = await response.json()
 
-      setGeocoderResponse(data)
+      if (data.length > 0) {
+        setGeocoderResponse(data)
+        setIsResultsOpen(true)
+      }
+
       setIsGeocoderLoading(false)
-      setIsResultsOpen(true)
     } catch (error) {
       toast.error(`An error occurred`)
     }
@@ -96,7 +104,8 @@ const Geocoder = () => {
           fetchGeoData()
         }, 400)
       } else if (geocoderValue.length < 3) {
-        setGeocoderResponse([])
+        setGeocoderResponse(null)
+        setIsResultsOpen(false)
       }
     }
 

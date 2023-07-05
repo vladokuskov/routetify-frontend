@@ -8,6 +8,7 @@ import { MapControlFitRoute } from './FitRoute/MapControlFit'
 import { MapControlRedoAction } from './RedoAction/MapControlRedo'
 import { MapControlTileSelection } from './TilesSelector/MapControlTileSelection'
 import { MapControlUndoAction } from './UndoAction/MapControlUndo'
+import { MapControlReverseRoute } from './ReverseRoute/MapControlReverseRoute'
 
 const MapControls = () => {
   const isSidebarOpen = useAppSelector(
@@ -30,7 +31,7 @@ const MapControls = () => {
             <section
               className={clsx(
                 'flex flex-col items-center justify-start gap-4',
-                'max-hsm:!flex-row',
+                'max-hsm:!flex-row max-hsm:!flex-wrap',
               )}
             >
               <MapControlUndoAction />
@@ -39,6 +40,7 @@ const MapControls = () => {
               <MapControlFitRoute />
               <MapControlFindLocation />
               <MapControlDrawSelection />
+              <MapControlReverseRoute />
               <MapControlTileSelection />
             </section>
           </div>

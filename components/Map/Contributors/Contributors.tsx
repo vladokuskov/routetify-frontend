@@ -13,7 +13,7 @@ const Contributors = () => {
       title="OpenStreetMap contributors"
       aria-label="OpenStreetMap contributors"
     >
-      OpenStreetMap contributors
+      OpenStreetMap
     </a>
   )
 }

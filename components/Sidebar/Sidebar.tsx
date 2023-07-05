@@ -1,15 +1,12 @@
-import {
-  changeSidebarOpenState,
-  toggleIsSidebarOpen,
-} from '@/redux/features/controlsSlice'
+import { changeSidebarOpenState } from '@/redux/features/controlsSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import clsx from 'clsx'
 import { useEffect } from 'react'
 import { ShowButton } from './ShowButton/ShowButton'
 
-import { ThemeSwitcher } from './SidebarSections/ThemeSwitcher/ThemeSwitcher'
 import { Copyright } from './Copyright/Copyright'
 import { SidebarSections } from './SidebarSections/SidebarSections'
+import { ThemeSwitcher } from './SidebarSections/ThemeSwitcher/ThemeSwitcher'
 
 const Sidebar = () => {
   const isSidebarOpen = useAppSelector(

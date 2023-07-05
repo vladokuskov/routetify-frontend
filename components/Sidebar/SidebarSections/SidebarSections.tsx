@@ -8,7 +8,6 @@ import { RouteUploading } from './RouteUploading/RouteUploading'
 const SidebarSections = () => {
   return (
     <>
-      {' '}
       <SidebarSection
         title="Your location"
         description="Here you can find location"

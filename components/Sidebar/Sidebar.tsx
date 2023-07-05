@@ -1,19 +1,11 @@
-import {
-  changeSidebarOpenState,
-  toggleIsSidebarOpen,
-} from '@/redux/features/controlsSlice'
+import { changeSidebarOpenState } from '@/redux/features/controlsSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import clsx from 'clsx'
-import ArrowLeftIcon from '../../assets/icons/arrow-left.svg'
-import ArrowRightIcon from '../../assets/icons/arrow-right.svg'
-import Icon from '../Icon/Icon'
-import { SidebarSection } from './SidebarSection'
-import { Details } from './SidebarSections/Details/Details'
-import { RouteExport } from './SidebarSections/RouteExport/RouteExport'
-import { Geocoder } from './SidebarSections/Geocoder/Geocoder'
-import { MovingPreferences } from './SidebarSections/MovingPreferences/MovingPreferences'
 import { useEffect } from 'react'
-import { RouteUploading } from './SidebarSections/RouteUploading/RouteUploading'
+import { ShowButton } from './ShowButton/ShowButton'
+
+import { Copyright } from './Copyright/Copyright'
+import { SidebarSections } from './SidebarSections/SidebarSections'
 import { ThemeSwitcher } from './SidebarSections/ThemeSwitcher/ThemeSwitcher'
 
 const Sidebar = () => {
@@ -22,10 +14,6 @@ const Sidebar = () => {
   )
 
   const dispatch = useAppDispatch()
-
-  const handleSidebarResize = () => {
-    dispatch(toggleIsSidebarOpen())
-  }
 
   useEffect(() => {
     const sidebarOpenState = localStorage.getItem('sidebarOpenState')
@@ -50,18 +38,14 @@ const Sidebar = () => {
         'max-sm:!overflow-y-hidden max-sm:relative max-sm:p-4 max-sm:w-full max-sm:min-w-full max-sm:max-w-full max-sm:mt-[70vh] max-sm:shadow max-sm:border-t-2 max-sm:border-l-0 max-sm:min-h-[100lvh] max-sm:!h-full',
       )}
     >
-      <button
+      <ShowButton />
+      <figure
         className={clsx(
-          'absolute p-2 rounded-full -left-6 top-1/2 bg-neutral-10 border-2 border-sidebar z-30 bg-neutral-100 text-neutral-400',
-          'transition-colors hocus:bg-neutral-200 hocus:text-neutral-500 active:!text-neutral-400',
-          'dark:bg-neutral-700 dark:text-neutral-300 dark:hocus:bg-neutral-500 dark:border-neutral-600',
-          'max-sm:hidden max-hsm:-left-12 max-hsm:bottom-4 max-hsm:top-auto',
+          'hidden bg-neutral-300 rounded w-8 h-2 p-1 ml-auto mr-auto',
+          'max-sm:flex',
+          'dark:bg-neutral-600',
         )}
-        onClick={handleSidebarResize}
-        title={isSidebarOpen ? 'Hide sidebar' : 'Open sidebar'}
-      >
-        <Icon svg={isSidebarOpen ? ArrowRightIcon : ArrowLeftIcon} />
-      </button>
+      />
       <div
         className={clsx(
           'w-full h-full flex flex-col items-center justify-start gap-6 mx-auto my-0 overflow-y-scroll no-scrollbar',
@@ -69,60 +53,10 @@ const Sidebar = () => {
           isSidebarOpen ? 'p-2' : 'p-1',
         )}
       >
-        <figure
-          className={clsx(
-            'hidden bg-neutral-300 rounded w-8 h-2 p-1',
-            'max-sm:flex',
-            'dark:bg-neutral-600',
-          )}
-        />
-        <SidebarSection
-          title="Your location"
-          description="Here you can find location"
-        >
-          <Geocoder />
-        </SidebarSection>
-        <SidebarSection
-          title="Route details"
-          description="Here you can view route details"
-        >
-          <Details />
-        </SidebarSection>
-        <SidebarSection
-          title="Moving Preference"
-          description="Choose your transportation"
-        >
-          <MovingPreferences />
-        </SidebarSection>
-        <SidebarSection
-          title="Upload route"
-          description="Route should be GPX or KML format"
-        >
-          <RouteUploading />
-        </SidebarSection>
-        <SidebarSection
-          title="Export route"
-          description="You can export route in GPX/KML format"
-        >
-          <RouteExport />
-        </SidebarSection>
+        <SidebarSections />
         <div className="flex flex-col items-center justify-center gap-5 mt-auto mb-4 max-sm:mt-12">
           <ThemeSwitcher />
-          <p>
-            <a
-              href="https://github.com/swappnet/routetify"
-              rel="noopener noreferrer"
-              target="_blank"
-              className={clsx(
-                'font-roboto text-neutral-300 font-semibold cursor-pointer hocus:text-neutral-400 transition-colors',
-                'max-sm:block',
-
-                !isSidebarOpen && 'hidden',
-              )}
-            >
-              &copy; Routetify
-            </a>
-          </p>
+          <Copyright />
         </div>
       </div>
     </aside>

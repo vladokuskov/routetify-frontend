@@ -12,7 +12,7 @@ const Input = ({
   return (
     <div className="w-full flex flex-col gap-1 relative">
       {icon && (
-        <div className="absolute right-2 top-2 text-neutral-500 pointer-events-none z-40">
+        <div className="absolute right-2 top-2 text-neutral-500 pointer-events-none z-40 cursor-none">
           <Icon svg={icon} spin={loading} />
         </div>
       )}

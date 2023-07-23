@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import { useAppSelector } from '@/redux/hooks'
 import { DrawType } from '@/types/global/drawType.types'
 import * as L from 'leaflet'
+import 'leaflet-polylinedecorator'
+import { mapConfig } from '@/config/map'
 
 const RenderPolyline = ({ map }: { map: L.Map | null }) => {
   const [drawPolyline, setDrawPolyline] = useState<L.Polyline | null>(null)
@@ -19,6 +21,19 @@ const RenderPolyline = ({ map }: { map: L.Map | null }) => {
     className: 'cursorCrosshair',
     lineCap: 'round',
     lineJoin: 'round',
+  })
+
+  const decorator = L.polylineDecorator(polyline, {
+    patterns: [
+      {
+        offset: 0,
+        repeat: '60px',
+        symbol: L.Symbol.arrowHead({
+          pixelSize: 15,
+          pathOptions: { color: '#83f520', fillOpacity: 1, opacity: 0.3 },
+        }),
+      },
+    ],
   })
 
   const previewPolyline = L.polyline([], {
@@ -43,10 +58,13 @@ const RenderPolyline = ({ map }: { map: L.Map | null }) => {
 
     setDrawPolyline(polyline)
     polyline.addTo(map)
+    decorator.addTo(map)
 
     return () => {
       polyline.remove()
+      decorator.remove()
       previewPolyline.remove()
+
       map.off('mousemove', onMouseMove)
       map.off('click', onMouseClick)
     }

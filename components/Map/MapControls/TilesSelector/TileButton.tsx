@@ -1,7 +1,5 @@
 import { Button } from '@/components/Button/Button'
 import { Layer } from '@/types/global/layer.types'
-import clsx from 'clsx'
-import Image from 'next/image'
 import { ReactNode } from 'react'
 
 interface TileButton {
@@ -27,10 +25,7 @@ const TileButton = ({
       onClick={() => handleTileSelect(tile)}
     >
       <div className="relative w-5 h-5">
-        <Image
-          fill
-          priority={true}
-          quality={30}
+        <img
           src={`/icons/${
             tile === Layer.default
               ? 'default'
@@ -39,6 +34,8 @@ const TileButton = ({
               : null
           }.webp`}
           alt=""
+          width={30}
+          height={30}
           style={{ borderRadius: '4px' }}
         />
       </div>

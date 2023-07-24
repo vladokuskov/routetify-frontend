@@ -41,6 +41,7 @@ const LeafletMap = () => {
         scrollWheelZoom={true}
         ref={setMap}
         style={{ cursor: 'crosshair' }}
+        id="map"
       >
         <StyleMap />
         <RenderLocationMarker map={map} />

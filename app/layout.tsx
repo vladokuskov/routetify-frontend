@@ -25,7 +25,7 @@ export const metadata = {
   creator: 'swappnet',
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#f8f6f6' },
-    { media: '(prefers-color-scheme: dark)', color: '#171717' },
+    { media: '(prefers-color-scheme: dark)', color: '#262626' },
   ],
   openGraph: {
     type: 'website',

@@ -22,10 +22,14 @@
     @apply text-lg;
   }
   body {
-    @apply dark:bg-gray-800 bg-[#f8f6f6];
+    @apply dark:bg-neutral-800 bg-[#f8f6f6];
   }
   :root {
-    @apply dark:bg-gray-800 bg-[#f8f6f6];
+    @apply dark:bg-neutral-800 bg-[#f8f6f6];
+  }
+  #map {
+    @apply dark:bg-neutral-700 bg-[#eeeeee];
+    @apply dark:grid-bg-dark grid-bg;
   }
 }
 
@@ -33,6 +37,34 @@
   @variants responsive {
     .no-scrollbar::-webkit-scrollbar {
       display: none;
+    }
+
+    .grid-bg {
+      background-size: 3.5rem 3.5rem;
+      background-image: linear-gradient(
+          to right,
+          rgba(173, 173, 173, 0.5) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          to bottom,
+          rgba(173, 173, 173, 0.5) 1px,
+          transparent 1px
+        );
+    }
+
+    .grid-bg-dark {
+      background-size: 3.5rem 3.5rem;
+      background-image: linear-gradient(
+          to right,
+          rgba(134, 134, 134, 0.5) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          to bottom,
+          rgba(134, 134, 134, 0.5) 1px,
+          transparent 1px
+        );
     }
 
     .no-scrollbar {

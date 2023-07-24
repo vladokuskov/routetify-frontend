@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import { useEffect } from 'react'
 import { ShowButton } from './ShowButton/ShowButton'
 
-import { Copyright } from './Copyright/Copyright'
+import { SidebarFooter } from './SidebarFooter/SidebarFooter'
 import { SidebarSections } from './SidebarSections/SidebarSections'
 import { ThemeSwitcher } from './SidebarSections/ThemeSwitcher/ThemeSwitcher'
 
@@ -56,7 +56,7 @@ const Sidebar = () => {
         <SidebarSections />
         <div className="flex flex-col items-center justify-center gap-5 mt-auto mb-4 max-sm:mt-12">
           <ThemeSwitcher />
-          <Copyright />
+          <SidebarFooter />
         </div>
       </div>
     </aside>

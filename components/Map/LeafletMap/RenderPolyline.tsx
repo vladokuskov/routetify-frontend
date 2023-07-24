@@ -30,7 +30,12 @@ const RenderPolyline = ({ map }: { map: L.Map | null }) => {
         repeat: '60px',
         symbol: L.Symbol.arrowHead({
           pixelSize: 15,
-          pathOptions: { color: '#83f520', fillOpacity: 1, opacity: 0.3 },
+          pathOptions: {
+            color: '#83f520',
+            fillOpacity: 1,
+            opacity: 0.3,
+            className: 'cursorCrosshair',
+          },
         }),
       },
     ],

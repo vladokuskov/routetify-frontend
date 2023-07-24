@@ -19,7 +19,7 @@ export const drawReducer = createSlice({
       return {
         ...state,
         drawCoords: [...state.drawCoords].reverse(),
-        drawCoordsFuture: [...state.drawCoordsFuture].reverse(),
+        drawCoordsFuture: [],
         drawCoordsDeleted: [...state.drawCoordsDeleted].reverse(),
       }
     },

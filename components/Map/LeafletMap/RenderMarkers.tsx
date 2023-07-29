@@ -37,6 +37,7 @@ const RenderMarkers = ({ map }: { map: L.Map | null }) => {
 
         const marker = L.marker(coords, {
           alt: '',
+          title: `Marker ${i}`,
           icon: L.icon({
             iconUrl,
             iconSize,

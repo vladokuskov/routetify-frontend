@@ -35,6 +35,7 @@ const RenderLocationMarker = ({ map }: { map: Map | null }) => {
         radius: 1000,
         fillOpacity: 0.5,
         stroke: false,
+        className: 'cursorCrosshair',
       })
       marker.addTo(map)
 

@@ -150,7 +150,7 @@ const Geocoder = () => {
                   className={clsx(
                     'w-full p-2 text-neutral-700 hocus:bg-neutral-200 hocus:text-neutral-500 rounded-md transition-colors font-semibold',
                   )}
-                  title={display_name}
+                  aria-label={display_name}
                   onClick={() => handleResultSelect({ lat, lon, display_name })}
                   id={`geocoder-option-${i}`}
                 >
@@ -168,7 +168,7 @@ const Geocoder = () => {
           'max-sm:hidden',
           !isSidebarOpen ? 'block' : 'hidden',
         )}
-        title="Location search"
+        aria-label="Location search"
         onClick={() => {
           dispatch(toggleIsSidebarOpen())
         }}

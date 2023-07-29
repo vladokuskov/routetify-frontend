@@ -45,7 +45,7 @@ const ThemeSwitcher = () => {
         'dark:hocus:bg-neutral-600 dark:text-neutral-400 dark:hocus:text-neutral-200',
       )}
       onClick={handleThemeChange}
-      title="Change theme"
+      aria-label="Change theme"
     >
       <Icon svg={currentTheme === Theme.Light ? SunIcon : MoonIcon} />
     </button>

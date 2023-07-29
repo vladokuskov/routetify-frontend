@@ -24,7 +24,7 @@ const MapControlUndoAction = () => {
   return (
     <Button
       variant="map"
-      title="Undo action [Z]"
+      aria-label="Undo action [Z]"
       onClick={handleUndo}
       disabled={drawCoords.length === 0 || drawType === DrawType.None}
     >

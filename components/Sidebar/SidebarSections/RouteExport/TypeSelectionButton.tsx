@@ -1,28 +1,25 @@
 import { Button } from '@/components/Button/Button'
 import { Route } from '@/types/global/export.types'
-import { ReactNode } from 'react'
+import { ButtonHTMLAttributes, ReactNode } from 'react'
 
-interface TypeSelectionButton {
+interface TypeSelectionButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   selectedType: Route
   handleRouteTypeChange: (type: Route) => void
-  type: Route
-  title: string
+  routeType: Route
   children: ReactNode
 }
 
 const TypeSelectionButton = ({
   selectedType,
   handleRouteTypeChange,
-  type,
-  title,
+  routeType,
   children,
 }: TypeSelectionButton) => {
   return (
     <Button
       variant="routeType"
-      title={title}
-      onClick={() => handleRouteTypeChange(type)}
-      disabled={selectedType === type}
+      onClick={() => handleRouteTypeChange(routeType)}
+      disabled={selectedType === routeType}
     >
       {children}
     </Button>

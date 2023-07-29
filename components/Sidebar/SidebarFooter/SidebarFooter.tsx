@@ -15,7 +15,7 @@ const SidebarFooter = () => {
         'max-sm:block',
         !isSidebarOpen && 'hidden',
       )}
-      title="Buy me a coffee"
+      aria-label="Buy me a coffee"
       href="https://bmc.link/swappnet"
       target="_blank"
     >

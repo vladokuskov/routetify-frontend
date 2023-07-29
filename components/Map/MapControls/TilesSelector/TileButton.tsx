@@ -2,11 +2,10 @@ import { Button } from '@/components/Button/Button'
 import { Layer } from '@/types/global/layer.types'
 import { ReactNode } from 'react'
 
-interface TileButton {
+interface TileButton extends Button {
   selectedLayer: Layer
   handleTileSelect: (tile: Layer) => void
   tile: Layer
-  title: string
   children: ReactNode
 }
 
@@ -14,13 +13,11 @@ const TileButton = ({
   selectedLayer,
   handleTileSelect,
   tile,
-  title,
   children,
 }: TileButton) => {
   return (
     <Button
       variant="tile"
-      title={title}
       disabled={selectedLayer === tile}
       onClick={() => handleTileSelect(tile)}
     >

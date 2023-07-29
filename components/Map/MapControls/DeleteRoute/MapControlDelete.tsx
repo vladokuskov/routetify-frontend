@@ -32,7 +32,7 @@ const MapControlDeleteRoute = () => {
   return (
     <Button
       variant="map"
-      title="Delete route [Del]"
+      aria-label="Delete route [Del]"
       onClick={handleDelete}
       disabled={drawCoords.length === 0}
       status="danger"

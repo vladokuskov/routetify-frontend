@@ -71,7 +71,7 @@ const MovingPreferences = () => {
           return (
             <MovingPreferencesButton
               key={index}
-              title={
+              aria-label={
                 preference === walk
                   ? 'Walk'
                   : preference === bike
@@ -110,7 +110,7 @@ const MovingPreferences = () => {
         )}
       >
         <button
-          title="Change preference"
+          aria-label="Change preference"
           onClick={handleNextPreference}
           className={clsx(
             ' bg-lime-300 px-1 py-2 h-22 w-full rounded-md transition-colors text-neutral-700 relative pb-7 flex flex-col items-center justify-center',

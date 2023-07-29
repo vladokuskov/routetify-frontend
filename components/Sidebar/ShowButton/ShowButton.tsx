@@ -25,7 +25,7 @@ const ShowButton = () => {
         'max-sm:hidden max-hsm:-left-12 max-hsm:bottom-12 max-hsm:top-auto',
       )}
       onClick={handleSidebarResize}
-      title={isSidebarOpen ? 'Hide sidebar' : 'Open sidebar'}
+      aria-label={isSidebarOpen ? 'Hide sidebar' : 'Open sidebar'}
     >
       <Icon svg={isSidebarOpen ? ArrowRightIcon : ArrowLeftIcon} />
     </button>

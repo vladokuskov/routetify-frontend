@@ -25,7 +25,7 @@ const MapControlReverseRoute = () => {
   return (
     <Button
       variant="map"
-      title="Reverse route [R]"
+      aria-label="Reverse route [R]"
       onClick={handleRouteReverse}
       disabled={drawCoords.length === 0}
     >

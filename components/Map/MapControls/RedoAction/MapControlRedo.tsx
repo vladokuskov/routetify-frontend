@@ -32,7 +32,7 @@ const MapControlRedoAction = () => {
   return (
     <Button
       variant="map"
-      title="Redo action [X]"
+      aria-label="Redo action [X]"
       onClick={handleRedo}
       disabled={
         (drawCoordsFuture.length === 0 && drawCoordsDeleted.length === 0) ||

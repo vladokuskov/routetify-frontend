@@ -95,7 +95,7 @@ const RouteUploading = () => {
             inputRef.current?.click()
           }
         }}
-        title="Choose a file"
+        aria-label="Choose a file"
       >
         <span>
           <Icon svg={FileImportIcon} />

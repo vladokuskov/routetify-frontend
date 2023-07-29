@@ -28,7 +28,7 @@ const MapControlFitRoute = () => {
   return (
     <Button
       variant="map"
-      title="Fit route [F]"
+      aria-label="Fit route [F]"
       onClick={handleRouteFit}
       disabled={drawCoords.length === 0}
     >

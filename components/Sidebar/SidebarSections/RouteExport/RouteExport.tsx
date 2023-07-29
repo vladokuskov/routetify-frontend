@@ -108,7 +108,7 @@ const RouteExport = () => {
       <button
         onClick={handleRouteDownload}
         disabled={drawCoords.length === 0}
-        title="Download route"
+        aria-label="Download route"
         className="w-full inline-flex justify-center items-center gap-4 p-3 text-neutral-700 hocus:bg-neutral-200 hocus:text-neutral-500 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <span className={clsx('', 'max-sm:!block', !isSidebarOpen && 'hidden')}>
@@ -122,7 +122,7 @@ const RouteExport = () => {
           'max-sm:!inline-flex',
           !isSidebarOpen && 'hidden',
         )}
-        title="Select route type"
+        aria-label="Select route type"
         onClick={handleSelectionMenuOpen}
       >
         <span className={clsx('', 'max-sm:!block', !isSidebarOpen && 'hidden')}>
@@ -137,7 +137,7 @@ const RouteExport = () => {
           isSidebarOpen && 'hidden',
           'relative pb-8',
         )}
-        title="Change route type"
+        aria-label="Change route type"
         onClick={() => handleRouteTypeChange(null)}
       >
         <span>{selectedRouteType === GPX ? 'GPX' : 'KML'}</span>
@@ -158,16 +158,16 @@ const RouteExport = () => {
             !isSidebarOpen && 'hidden',
           )}
         >
-          {types.map((type, index) => {
+          {types.map((routeType, index) => {
             return (
               <TypeSelectionButton
                 key={index}
                 handleRouteTypeChange={handleRouteTypeChange}
                 selectedType={selectedRouteType}
-                type={type}
-                title={type === GPX ? 'GPX' : 'KML'}
+                routeType={routeType}
+                aria-label={routeType === GPX ? 'GPX' : 'KML'}
               >
-                {type === GPX ? 'GPX' : 'KML'}
+                {routeType === GPX ? 'GPX' : 'KML'}
               </TypeSelectionButton>
             )
           })}

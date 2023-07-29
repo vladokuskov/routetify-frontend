@@ -30,7 +30,7 @@ const MapControlDrawSelection = () => {
   return (
     <Button
       variant="map"
-      title={drawType === DrawType.Line ? 'Stop drawing' : 'Draw line [L]'}
+      aria-label={drawType === DrawType.Line ? 'Stop drawing' : 'Draw line [L]'}
       onClick={() =>
         handleDrawChange(
           drawType !== DrawType.None ? DrawType.None : DrawType.Line,

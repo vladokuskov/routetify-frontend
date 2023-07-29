@@ -34,13 +34,18 @@ export const metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     siteName: siteConfig.name,
+    images: '',
   },
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { url: '/favicon-16x16.png' },
+      new URL('/favicon-16x16.png', siteConfig.url),
+    ],
     shortcut: '/favicon-16x16.png',
     apple: '/apple-touch-icon.png',
   },
   manifest: `${siteConfig.url}/site.webmanifest`,
+  metadataBase: new URL(siteConfig.url),
 }
 
 export default function RootLayout({

@@ -1,12 +1,12 @@
 import { MovingPreferencesType } from '@/types/global/movingPreferencesType.types'
 import clsx from 'clsx'
-import { ReactNode } from 'react'
+import { ButtonHTMLAttributes, ReactNode } from 'react'
 
-interface MovingPreferencesButton {
+interface MovingPreferencesButton
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
   selectedPreference: MovingPreferencesType
   handlePreferenceChange: (preference: MovingPreferencesType) => void
   preference: MovingPreferencesType
-  title: string
   children: ReactNode
 }
 
@@ -14,12 +14,10 @@ const MovingPreferencesButton = ({
   selectedPreference,
   handlePreferenceChange,
   preference,
-  title,
   children,
 }: MovingPreferencesButton) => {
   return (
     <button
-      title={title}
       onClick={() => handlePreferenceChange(preference)}
       disabled={selectedPreference === preference}
       className={clsx(

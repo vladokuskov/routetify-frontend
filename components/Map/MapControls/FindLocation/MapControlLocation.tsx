@@ -62,7 +62,7 @@ const MapControlFindLocation = () => {
   return (
     <Button
       variant="map"
-      title={'Find location'}
+      aria-label={'Find location'}
       onClick={getLocation}
       status={
         locationStatus === LocationStatus.error

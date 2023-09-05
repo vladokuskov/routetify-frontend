@@ -4,7 +4,6 @@ import { useAppSelector } from '@/redux/hooks'
 import { DrawType } from '@/types/global/drawType.types'
 import * as L from 'leaflet'
 import 'leaflet-polylinedecorator'
-import { mapConfig } from '@/config/map'
 
 const RenderPolyline = ({ map }: { map: L.Map | null }) => {
   const [drawPolyline, setDrawPolyline] = useState<L.Polyline | null>(null)
@@ -26,13 +25,13 @@ const RenderPolyline = ({ map }: { map: L.Map | null }) => {
   const decorator = L.polylineDecorator(polyline, {
     patterns: [
       {
-        offset: 0,
+        offset: 40,
         repeat: '60px',
         symbol: L.Symbol.arrowHead({
-          pixelSize: 15,
+          pixelSize: 12,
           pathOptions: {
-            color: '#83f520',
-            fillOpacity: 1,
+            color: '#bde29c',
+            fillOpacity: 0.5,
             opacity: 0.3,
             className: 'cursorCrosshair',
           },

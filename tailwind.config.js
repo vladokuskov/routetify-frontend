@@ -46,12 +46,13 @@ module.exports = {
       screens: {
         'max-sm': { raw: 'not all and (min-width: 640px)' },
         'max-hsm': { raw: '(max-height: 680px)' },
+        'max-dsm': { raw: '(max-height: 940px)' },
       },
     },
   },
   plugins: [
     plugin(function ({ addVariant }) {
-      addVariant('hocus', ['&:hover', '&:focus'])
+      addVariant('hocus', ['&:hover', '&:focus-visible'])
     }),
   ],
 }

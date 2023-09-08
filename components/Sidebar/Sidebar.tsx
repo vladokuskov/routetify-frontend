@@ -2,7 +2,7 @@ import { changeSidebarOpenState } from '@/redux/features/controlsSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import clsx from 'clsx'
 import { useEffect } from 'react'
-import { ShowButton } from './ShowButton/ShowButton'
+import { ResizeSidebarButton } from './ResizeSidebarButton/ResizeSidebarButton'
 
 import { SidebarSections } from './SidebarSections/SidebarSections'
 import { ThemeSwitcher } from './SidebarSections/ThemeSwitcher/ThemeSwitcher'
@@ -37,7 +37,7 @@ const Sidebar = () => {
         'max-sm:!overflow-y-hidden max-sm:relative max-sm:p-4 max-sm:w-full max-sm:min-w-full max-sm:max-w-full max-sm:mt-[70vh] max-sm:shadow max-sm:border-t-2 max-sm:border-l-0 max-sm:min-h-[100lvh] max-sm:!h-full',
       )}
     >
-      <ShowButton />
+      <ResizeSidebarButton />
       <figure
         className={clsx(
           'hidden bg-neutral-300 rounded w-8 h-2 p-1 ml-auto mr-auto',

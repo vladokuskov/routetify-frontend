@@ -1,9 +1,7 @@
 import { Button } from '@/components/Button/Button'
 import Icon from '@/components/Icon/Icon'
-import { changeLocationStatus } from '@/redux/features/controlsSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import { LocationStatus } from '@/types/global/locationStatus.types'
-import RepeatIcon from '../../../../assets/icons/repeat.svg'
+import RepeatIcon from '@/assets/icons/repeat.svg'
 import { useKeyDown } from '@/hooks/useKeyDown'
 import { reverseRoute } from '@/redux/features/drawSlice'
 

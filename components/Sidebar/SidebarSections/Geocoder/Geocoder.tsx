@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 
+import SpinnerIcon from '@/assets/icons/loader.svg'
+import SearchIcon from '@/assets/icons/search.svg'
 import Icon from '@/components/Icon/Icon'
+import { Input } from '@/components/Input/Input'
+import { useClickOutside } from '@/hooks/useClickOutside'
 import updateMapView from '@/lib/updateMapView'
 import {
   changeLocationStatus,
@@ -10,10 +14,6 @@ import { addLatLng } from '@/redux/features/geocoderSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { LocationStatus } from '@/types/global/locationStatus.types'
 import clsx from 'clsx'
-import SpinnerIcon from '../../../../assets/icons/loader.svg'
-import SearchIcon from '../../../../assets/icons/search.svg'
-import { useClickOutside } from '../../../../hooks/useClickOutside'
-import { Input } from '../../../Input/Input'
 import { toast } from 'react-hot-toast'
 
 interface TGeoResponse {
@@ -146,13 +146,12 @@ const Geocoder = () => {
           onChange={handleChangeGeocoder}
           icon={
             isGeocoderLoading ? (
-              <Icon svg={SpinnerIcon} className="animate-spin" />
+              <Icon svg={SpinnerIcon} spin />
             ) : (
               <Icon svg={SearchIcon} />
             )
           }
           className={isResultsOpen ? 'rounded-b-none' : ''}
-          role="combobox"
           aria-haspopup="listbox"
           aria-expanded={isResultsOpen}
           aria-owns="geocoder-results"
@@ -161,6 +160,7 @@ const Geocoder = () => {
           <div
             className="w-full top-[2.5rem] absolute rounded-t-none rounded-md z-20 bg-neutral-300 shadow p-1"
             role="listbox"
+            aria-expanded={isResultsOpen}
             id="geocoder-results"
           >
             {geocoderResponse.slice(0, 3).map((data: TGeoResponse, i) => {

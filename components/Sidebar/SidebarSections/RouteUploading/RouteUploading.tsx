@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import clsx from 'clsx'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { toast } from 'react-hot-toast'
-import FileImportIcon from '../../../../assets/icons/file-import.svg'
+import FileImportIcon from '@/assets/icons/file-import.svg'
 import { updateRouteFile } from '@/redux/features/fileUploadSlice'
 
 const RouteUploading = () => {

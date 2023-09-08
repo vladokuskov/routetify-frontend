@@ -3,7 +3,7 @@ import Icon from '@/components/Icon/Icon'
 import { changeLocationStatus } from '@/redux/features/controlsSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { LocationStatus } from '@/types/global/locationStatus.types'
-import FitIcon from '../../../../assets/icons/fit.svg'
+import FitIcon from '@/assets/icons/fit.svg'
 import fitBounds from '@/lib/fitBounds'
 import { useKeyDown } from '@/hooks/useKeyDown'
 

@@ -3,7 +3,7 @@ import Icon from '@/components/Icon/Icon'
 import { redoDrawCoords } from '@/redux/features/drawSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { DrawType } from '@/types/global/drawType.types'
-import RedoIcon from '../../../../assets/icons/redo.svg'
+import RedoIcon from '@/assets/icons/redo.svg'
 import { useKeyDown } from '@/hooks/useKeyDown'
 
 const MapControlRedoAction = () => {

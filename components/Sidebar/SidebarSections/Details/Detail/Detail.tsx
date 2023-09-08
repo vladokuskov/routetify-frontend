@@ -1,6 +1,12 @@
 import { useAppSelector } from '@/redux/hooks'
-import { TDetail } from './Detail.types'
 import clsx from 'clsx'
+
+type TDetail = {
+  title: string | null
+  subTitle: string | null
+  metric: string | null
+  last: boolean
+}
 
 const Detail = ({ title, subTitle, metric, last }: TDetail) => {
   const isSidebarOpen = useAppSelector(

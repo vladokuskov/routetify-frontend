@@ -1,7 +1,8 @@
 import { Button } from '@/components/Button/Button'
-import LoadingIcon from '../../../../assets/icons/loader.svg'
-import LocationFilledIcon from '../../../../assets/icons/location-filled.svg'
-import LocationIcon from '../../../../assets/icons/location.svg'
+import LoadingIcon from '@/assets/icons/loader.svg'
+import LocationFilledIcon from '@/assets/icons/location-filled.svg'
+import LocationIconOff from '@/assets/icons/location-off.svg'
+import LocationIconBroken from '@/assets/icons/location-broken.svg'
 
 import Icon from '@/components/Icon/Icon'
 import {
@@ -78,9 +79,11 @@ const MapControlFindLocation = () => {
             ? LocationFilledIcon
             : locationStatus === LocationStatus.fetching
             ? LoadingIcon
-            : LocationIcon
+            : locationStatus === LocationStatus.error
+            ? LocationIconBroken
+            : LocationIconOff
         }
-        spin={locationStatus === LocationStatus.fetching ? 'true' : 'false'}
+        spin={locationStatus === LocationStatus.fetching}
       />
     </Button>
   )

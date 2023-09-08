@@ -1,8 +1,8 @@
 import { Button } from '@/components/Button/Button'
 import Icon from '@/components/Icon/Icon'
 import { useAppSelector } from '@/redux/hooks'
-import MinusIcon from '../../../../assets/icons/minus.svg'
-import PlusIcon from '../../../../assets/icons/plus.svg'
+import MinusIcon from '@/assets/icons/minus.svg'
+import PlusIcon from '@/assets/icons/plus.svg'
 import clsx from 'clsx'
 
 const MapControlZoom = () => {

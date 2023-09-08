@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { Layer } from '@/types/global/layer.types'
 import clsx from 'clsx'
 import { useRef } from 'react'
-import LayersIcon from '../../../../assets/icons/layers.svg'
+import LayersIcon from '@/assets/icons/layers.svg'
 import { TileButton } from './TileButton'
 
 const MapControlTileSelection = () => {

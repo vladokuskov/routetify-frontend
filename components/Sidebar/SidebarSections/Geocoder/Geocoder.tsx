@@ -14,8 +14,18 @@ import SpinnerIcon from '../../../../assets/icons/loader.svg'
 import SearchIcon from '../../../../assets/icons/search.svg'
 import { useClickOutside } from '../../../../hooks/useClickOutside'
 import { Input } from '../../../Input/Input'
-import { TGeoResponse } from './Geocoder.types'
 import { toast } from 'react-hot-toast'
+
+interface TGeoResponse {
+  lat: number
+  lon: number
+  display_name?: string
+}
+
+interface GeoCoords {
+  lat: number
+  lon: number
+}
 
 const Geocoder = () => {
   const ref = useRef<HTMLDivElement>(null)
@@ -23,6 +33,8 @@ const Geocoder = () => {
   const [geocoderResponse, setGeocoderResponse] = useState<
     TGeoResponse[] | null
   >(null)
+  const [lastSelectedResult, setLastSelectedResult] =
+    useState<GeoCoords | null>(null)
   const [isGeocoderLoading, setIsGeocoderLoading] = useState<boolean>(false)
   const [isResultsOpen, setIsResultsOpen] = useClickOutside(ref, false)
   const [hasUserTyped, setHasUserTyped] = useState(false)
@@ -49,6 +61,8 @@ const Geocoder = () => {
         zoom: 12,
       }),
     )
+
+    setLastSelectedResult({ lat, lon })
 
     updateMapView(map, {
       lat: lat,
@@ -77,7 +91,9 @@ const Geocoder = () => {
       let url = `https://geocode.maps.co/search?q=${geocoderValue}`
 
       setIsGeocoderLoading(true)
+
       const response = await fetch(url)
+
       if (!response.ok) {
         toast.error(`HTTP error! Status: ${response.status}`)
       }
@@ -95,9 +111,9 @@ const Geocoder = () => {
   }
 
   useEffect(() => {
+    // Input debounce
     let timer: ReturnType<typeof setTimeout>
 
-    // Fetch geocoder after 400ms when user stop typing
     if (hasUserTyped) {
       if (geocoderValue.length >= 3) {
         timer = setTimeout(() => {
@@ -173,9 +189,21 @@ const Geocoder = () => {
           'max-sm:hidden',
           !isSidebarOpen ? 'block' : 'hidden',
         )}
-        aria-label="Location search"
+        aria-label={
+          lastSelectedResult ? 'Last selected location' : 'Location search'
+        }
+        title={
+          lastSelectedResult ? 'Last selected location' : 'Location search'
+        }
         onClick={() => {
-          dispatch(toggleIsSidebarOpen())
+          if (lastSelectedResult) {
+            handleResultSelect({
+              lat: lastSelectedResult.lat,
+              lon: lastSelectedResult.lon,
+            })
+          } else {
+            dispatch(toggleIsSidebarOpen())
+          }
         }}
       >
         <Icon svg={SearchIcon} />

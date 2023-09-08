@@ -12,12 +12,18 @@ const ThemeSwitcher = () => {
   const { theme, systemTheme, setTheme } = useTheme()
 
   const handleThemeChange = () => {
+    const themeMetaTag = document.querySelector('meta[name="theme-color"]')
     const currentTheme = theme === 'system' ? systemTheme : theme
     const newTheme = currentTheme === 'light' ? 'dark' : 'light'
+    const themeColor = newTheme === 'dark' ? '#0A0A0A' : '#F8F6F6'
 
     setIsDark(newTheme === 'dark')
     setTheme(newTheme)
     localStorage.setItem('theme', newTheme)
+
+    if (themeMetaTag) {
+      themeMetaTag.setAttribute('content', themeColor)
+    }
   }
 
   useEffect(() => {
@@ -27,8 +33,16 @@ const ThemeSwitcher = () => {
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme')
     if (savedTheme) {
+      const themeMetaTag = document.querySelector('meta[name="theme-color"]')
+
       setIsDark(savedTheme === 'dark')
       setTheme(savedTheme)
+
+      const themeColor = savedTheme === 'dark' ? '#0A0A0A' : '#F8F6F6'
+
+      if (themeMetaTag) {
+        themeMetaTag.setAttribute('content', themeColor)
+      }
     }
   }, [])
 

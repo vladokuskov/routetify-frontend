@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react'
 
 const RenderLocationMarker = ({ map }: { map: Map | null }) => {
   const [position, setPosition] = useState<LatLngExpression | null>(null)
-  const [userDirection, setUserDirection] = useState<number | null>(null) // Add user direction state
 
   const locationStatus = useAppSelector(
     (state) => state.controlsReducer.location,

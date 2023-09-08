@@ -128,8 +128,13 @@ const Geocoder = () => {
           onClick={() => geocoderResponse && setIsResultsOpen(true)}
           value={geocoderValue}
           onChange={handleChangeGeocoder}
-          icon={isGeocoderLoading ? SpinnerIcon : SearchIcon}
-          loading={isGeocoderLoading ? 'true' : 'false'}
+          icon={
+            isGeocoderLoading ? (
+              <Icon svg={SpinnerIcon} className="animate-spin" />
+            ) : (
+              <Icon svg={SearchIcon} />
+            )
+          }
           className={isResultsOpen ? 'rounded-b-none' : ''}
           role="combobox"
           aria-haspopup="listbox"

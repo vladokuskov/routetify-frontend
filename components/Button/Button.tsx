@@ -1,5 +1,18 @@
 import clsx from 'clsx'
-import { Button } from './Button.types'
+
+type ButtonVariants = 'map' | 'routeType' | 'tile'
+
+type ButtonStatus = 'default' | 'success' | 'danger'
+
+type ButtonSizes = 'small' | 'regular' | 'large'
+
+export interface Button extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: ButtonVariants
+  size?: ButtonSizes
+  className?: string
+  status?: ButtonStatus
+  children: React.ReactNode
+}
 
 const sizesClass = {
   large: 'px-5 py-3 text-base',
@@ -22,7 +35,7 @@ const Button = ({
         'inline-flex gap-3 justify-center items-center text-center flex-nowrap whitespace-nowrap',
         'disabled:cursor-not-allowed disabled:opacity-50',
         variant === 'map' &&
-          'bg-app dark:bg-neutral-600 text-neutral-800 dark:text-neutral-300 hocus:bg-neutral-200 dark:hocus:bg-neutral-500 hocus:shadow-md hocus:text-neutral-700 rounded-md !px-2 !py-2 shadow-md',
+          'bg-app dark:bg-neutral-600 text-neutral-800 dark:text-neutral-300 hocus:bg-neutral-200 dark:hocus:bg-neutral-500 hocus:shadow-md hocus:text-neutral-700 dark:hocus:text-neutral-100 rounded-md !px-2 !py-2 shadow-md ',
         variant === 'routeType' &&
           'w-full p-1 text-neutral-700 hocus:bg-neutral-200 hocus:text-neutral-500 rounded-md transition-colors',
         variant === 'tile' &&

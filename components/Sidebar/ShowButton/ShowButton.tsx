@@ -20,8 +20,8 @@ const ShowButton = () => {
     <button
       className={clsx(
         'absolute p-2 rounded-full -left-6 top-1/2 bg-neutral-10 border-2 border-sidebar z-30 bg-neutral-100 text-neutral-400',
-        'transition-colors hocus:bg-neutral-200 hocus:text-neutral-500 active:!text-neutral-400',
-        'dark:bg-neutral-700 dark:text-neutral-300 dark:hocus:bg-neutral-500 dark:border-neutral-600',
+        'transition-colors hocus:text-neutral-500 hocus:!border-neutral-400',
+        'dark:bg-neutral-700 dark:text-neutral-300 dark:hocus:border-neutral-400 dark:border-neutral-600 dark:hocus:text-neutral-200',
         'max-sm:hidden max-hsm:-left-12 max-hsm:bottom-12 max-hsm:top-auto',
       )}
       onClick={handleSidebarResize}

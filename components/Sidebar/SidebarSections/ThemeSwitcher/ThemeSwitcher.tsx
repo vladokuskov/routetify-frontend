@@ -35,8 +35,8 @@ const ThemeSwitcher = () => {
   return isMounted ? (
     <button
       className={clsx(
-        'hocus:bg-neutral-200 text-neutral-600 hocus:text-neutral-800 p-3 rounded-md',
-        'dark:hocus:bg-neutral-600 dark:text-neutral-400 dark:hocus:text-neutral-200',
+        'focus:bg-neutral-200 text-neutral-600 hocus:text-neutral-800 p-3 rounded-md',
+        'dark:focus:bg-neutral-800 dark:text-neutral-400 dark:hocus:text-neutral-200',
       )}
       onClick={handleThemeChange}
       aria-label="Change theme"

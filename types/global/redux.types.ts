@@ -4,7 +4,6 @@ import { Layer } from './layer.types'
 import { LocationStatus } from './locationStatus.types'
 import * as L from 'leaflet'
 import { MovingPreferencesType } from './movingPreferencesType.types'
-import { Theme } from './theme.types'
 
 export type GeocoderState = {
   lat: number | null
@@ -29,7 +28,6 @@ export type ControlsState = {
   map: L.Map | null
   isSidebarOpen: boolean
   movingPreference: MovingPreferencesType
-  theme: Theme
 }
 
 export type FileUploadState = {

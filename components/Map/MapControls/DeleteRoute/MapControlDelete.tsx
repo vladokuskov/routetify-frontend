@@ -1,5 +1,5 @@
 import { Button } from '@/components/Button/Button'
-import DeleteIcon from '../../../../assets/icons/delete.svg'
+import DeleteIcon from '@/assets/icons/delete.svg'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { deleteDrawCoords, updateDrawInfo } from '@/redux/features/drawSlice'
 import Icon from '@/components/Icon/Icon'

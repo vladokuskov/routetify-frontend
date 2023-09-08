@@ -13,11 +13,11 @@ import { DrawCoords } from '@/types/models/drawCoords.types'
 import clsx from 'clsx'
 import downloadjs from 'downloadjs'
 import { useEffect, useRef, useState } from 'react'
-import ArrowRightIcon from '../../../../assets/icons/arrow-right.svg'
-import ArrowDownIcon from '../../../../assets/icons/chevron-down.svg'
-import ArrowUpIcon from '../../../../assets/icons/chevron-up.svg'
-import DownloadIcon from '../../../../assets/icons/download.svg'
-import { TypeSelectionButton } from './TypeSelectionButton'
+import ArrowRightIcon from '@/assets/icons/arrow-right.svg'
+import ArrowDownIcon from '@/assets/icons/chevron-down.svg'
+import ArrowUpIcon from '@/assets/icons/chevron-up.svg'
+import DownloadIcon from '@/assets/icons/download.svg'
+import { TypeSelectionButton } from '@/components/Sidebar/SidebarSections/RouteExport/TypeSelectionButton'
 
 const RouteExport = () => {
   const selectionMenuRef = useRef(null)

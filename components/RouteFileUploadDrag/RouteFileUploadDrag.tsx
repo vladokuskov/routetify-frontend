@@ -4,7 +4,7 @@ import {
   updateRouteFile,
 } from '@/redux/features/fileUploadSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import FileImportIcon from '../../../assets/icons/file-import.svg'
+import FileImportIcon from '@/assets/icons/file-import.svg'
 
 const RouteFileUploadDrag = () => {
   const dispatch = useAppDispatch()
@@ -29,11 +29,11 @@ const RouteFileUploadDrag = () => {
       <div className="w-full h-full flex flex-col gap-2 items-center justify-center rounded-md border-neutral-200 border-dashed border-2 relative">
         <Icon
           svg={FileImportIcon}
-          className="text-neutral-100 pointer-events-none"
+          className="pointer-events-none text-neutral-50 dark:text-neutral-100"
           width="120"
           height="120"
         />
-        <p className="font-roboto text-lg font-semibold text-neutral-200  pointer-events-none">
+        <p className="font-roboto text-lg font-semibold text-neutral-50 dark:text-neutral-200  pointer-events-none">
           Drop file
         </p>
       </div>

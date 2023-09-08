@@ -1,7 +1,7 @@
 'use client'
 
 import { Map } from '@/components/Map/Map'
-import { RouteFileUploadDrag } from '@/components/Map/RouteFileUploadDrag/RouteFileUploadDrag'
+import { RouteFileUploadDrag } from '@/components/RouteFileUploadDrag/RouteFileUploadDrag'
 import { Sidebar } from '@/components/Sidebar/Sidebar'
 import { toggleFileDragging } from '@/redux/features/fileUploadSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'

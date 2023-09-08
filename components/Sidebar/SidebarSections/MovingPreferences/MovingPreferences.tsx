@@ -4,11 +4,11 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { MovingPreferencesType } from '@/types/global/movingPreferencesType.types'
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
-import ArrowRightIcon from '../../../../assets/icons/arrow-right.svg'
-import BikeIcon from '../../../../assets/icons/bike.svg'
-import CarIcon from '../../../../assets/icons/car.svg'
-import WalkIcon from '../../../../assets/icons/walk.svg'
-import { MovingPreferencesButton } from './MovingPreferencesButton'
+import ArrowRightIcon from '@/assets/icons/arrow-right.svg'
+import BikeIcon from '@/assets/icons/bike.svg'
+import CarIcon from '@/assets/icons/car.svg'
+import WalkIcon from '@/assets/icons/walk.svg'
+import { MovingPreferencesButton } from '@/components/Sidebar/SidebarSections/MovingPreferences/MovingPreferencesButton'
 
 const MovingPreferences = () => {
   const [isArrowAnimated, setIsArrowAnimated] = useState(false)

@@ -1,5 +1,4 @@
 import clsx from 'clsx'
-import Icon from '../Icon/Icon'
 
 type inputVariant = 'search'
 

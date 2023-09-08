@@ -3,7 +3,7 @@ import Icon from '@/components/Icon/Icon'
 import { undoDrawCoords } from '@/redux/features/drawSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { DrawType } from '@/types/global/drawType.types'
-import UndoIcon from '../../../../assets/icons/undo.svg'
+import UndoIcon from '@/assets/icons/undo.svg'
 import { useKeyDown } from '@/hooks/useKeyDown'
 
 const MapControlUndoAction = () => {

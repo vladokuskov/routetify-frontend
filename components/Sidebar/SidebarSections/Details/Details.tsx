@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { calculateRouteDetails } from '@/utils/getRouteDetails'
 import clsx from 'clsx'
 import { useEffect } from 'react'
-import { Detail } from './Detail/Detail'
+import { Detail } from '@/components/Sidebar/SidebarSections/Details/Detail/Detail'
 
 type DetailVariants = 'time' | 'dist'
 

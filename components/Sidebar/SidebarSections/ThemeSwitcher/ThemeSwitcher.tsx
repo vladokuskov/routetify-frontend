@@ -1,6 +1,6 @@
 import Icon from '@/components/Icon/Icon'
-import SunIcon from '../../../../assets/icons/sun.svg'
-import MoonIcon from '../../../../assets/icons/moon-filled.svg'
+import SunIcon from '@/assets/icons/sun.svg'
+import MoonIcon from '@/assets/icons/moon-filled.svg'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 import clsx from 'clsx'

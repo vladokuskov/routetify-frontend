@@ -1,8 +1,8 @@
 import { Button } from '@/components/Button/Button'
 import { changeDraw } from '@/redux/features/controlsSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import LineIcon from '../../../../assets/icons/line.svg'
-import ClearIcon from '../../../../assets/icons/x.svg'
+import LineIcon from '@/assets/icons/line.svg'
+import ClearIcon from '@/assets/icons/x.svg'
 
 import Icon from '@/components/Icon/Icon'
 import { useKeyDown } from '@/hooks/useKeyDown'

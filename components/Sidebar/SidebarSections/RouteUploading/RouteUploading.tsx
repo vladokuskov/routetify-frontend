@@ -84,7 +84,7 @@ const RouteUploading = () => {
         onClick={() => {
           if (!isUserConfirmed) {
             const isConfirmed = window.confirm(
-              'If you have route, it will be replaced, continue?',
+              'If you have active route, it will be replaced, continue?',
             )
 
             if (!isConfirmed) return
@@ -95,7 +95,8 @@ const RouteUploading = () => {
             inputRef.current?.click()
           }
         }}
-        aria-label="Choose a file"
+        aria-label="Choose a file to upload"
+        title="Choose a file to upload"
       >
         <span>
           <Icon svg={FileImportIcon} />

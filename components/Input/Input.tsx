@@ -1,19 +1,20 @@
 import clsx from 'clsx'
 import Icon from '../Icon/Icon'
-import { Input } from './Input.types'
 
-const Input = ({
-  variant = 'search',
-  className,
-  icon,
-  loading,
-  ...props
-}: Input) => {
+type inputVariant = 'search'
+
+export interface Input extends React.InputHTMLAttributes<HTMLInputElement> {
+  variant: inputVariant
+  className?: string
+  icon?: React.ReactNode
+}
+
+const Input = ({ variant = 'search', className, icon, ...props }: Input) => {
   return (
     <div className="w-full flex flex-col gap-1 relative">
       {icon && (
         <div className="absolute right-2 top-2 text-neutral-500 pointer-events-none z-40 cursor-none">
-          <Icon svg={icon} spin={loading} />
+          {icon}
         </div>
       )}
       <input

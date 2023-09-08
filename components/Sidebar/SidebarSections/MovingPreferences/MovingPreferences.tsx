@@ -73,6 +73,13 @@ const MovingPreferences = () => {
               key={index}
               aria-label={
                 preference === walk
+                  ? 'Walk moving preference'
+                  : preference === bike
+                  ? 'Bike moving preference'
+                  : 'Car moving preference'
+              }
+              title={
+                preference === walk
                   ? 'Walk'
                   : preference === bike
                   ? 'Bike'
@@ -110,7 +117,20 @@ const MovingPreferences = () => {
         )}
       >
         <button
-          aria-label="Change preference"
+          aria-label={
+            selectedPreference === walk
+              ? 'Walk moving preference'
+              : selectedPreference === bike
+              ? 'Bike moving preference'
+              : 'Car moving preference'
+          }
+          title={
+            selectedPreference === walk
+              ? 'Walk'
+              : selectedPreference === bike
+              ? 'Bike'
+              : 'Car'
+          }
           onClick={handleNextPreference}
           className={clsx(
             ' bg-lime-300 px-1 py-2 h-22 w-full rounded-md transition-colors text-neutral-700 relative pb-7 flex flex-col items-center justify-center',

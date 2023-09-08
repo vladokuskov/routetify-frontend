@@ -12,12 +12,18 @@ const ThemeSwitcher = () => {
   const { theme, systemTheme, setTheme } = useTheme()
 
   const handleThemeChange = () => {
+    const themeMetaTag = document.querySelector('meta[name="theme-color"]')
     const currentTheme = theme === 'system' ? systemTheme : theme
     const newTheme = currentTheme === 'light' ? 'dark' : 'light'
+    const themeColor = newTheme === 'dark' ? '#0A0A0A' : '#F8F6F6'
 
     setIsDark(newTheme === 'dark')
     setTheme(newTheme)
     localStorage.setItem('theme', newTheme)
+
+    if (themeMetaTag) {
+      themeMetaTag.setAttribute('content', themeColor)
+    }
   }
 
   useEffect(() => {
@@ -27,16 +33,24 @@ const ThemeSwitcher = () => {
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme')
     if (savedTheme) {
+      const themeMetaTag = document.querySelector('meta[name="theme-color"]')
+
       setIsDark(savedTheme === 'dark')
       setTheme(savedTheme)
+
+      const themeColor = savedTheme === 'dark' ? '#0A0A0A' : '#F8F6F6'
+
+      if (themeMetaTag) {
+        themeMetaTag.setAttribute('content', themeColor)
+      }
     }
   }, [])
 
   return isMounted ? (
     <button
       className={clsx(
-        'hocus:bg-neutral-200 text-neutral-600 hocus:text-neutral-800 p-3 rounded-md',
-        'dark:hocus:bg-neutral-600 dark:text-neutral-400 dark:hocus:text-neutral-200',
+        'focus:bg-neutral-200 text-neutral-600 hocus:text-neutral-800 p-3 rounded-md',
+        'dark:focus:bg-neutral-800 dark:text-neutral-400 dark:hocus:text-neutral-200',
       )}
       onClick={handleThemeChange}
       aria-label="Change theme"

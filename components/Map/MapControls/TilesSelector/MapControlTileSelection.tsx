@@ -32,6 +32,7 @@ const MapControlTileSelection = () => {
       }),
     )
     dispatch(changeLayer(layer))
+    setIsMenuOpen(false)
   }
 
   useKeyDown(() => {

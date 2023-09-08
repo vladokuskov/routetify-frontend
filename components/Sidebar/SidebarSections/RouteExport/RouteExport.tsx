@@ -83,7 +83,7 @@ const RouteExport = () => {
     setIsSelectionMenuOpen((prev) => !prev)
   }
 
-  const handleRouteTypeChange = (type: Route | null) => {
+  const handleRouteTypeChange = (type?: Route) => {
     if (!type) {
       setSelectedRouteType(selectedRouteType === GPX ? KML : GPX)
       setIsArrowAnimated(true)
@@ -108,7 +108,10 @@ const RouteExport = () => {
       <button
         onClick={handleRouteDownload}
         disabled={drawCoords.length === 0}
-        aria-label="Download route"
+        aria-label={`Export route in ${selectedRouteType} format`}
+        title={`Export route in ${
+          selectedRouteType === GPX ? 'GPX' : 'KML'
+        } format`}
         className="w-full inline-flex justify-center items-center gap-4 p-3 text-neutral-700 hocus:bg-neutral-200 hocus:text-neutral-500 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <span className={clsx('', 'max-sm:!block', !isSidebarOpen && 'hidden')}>
@@ -122,7 +125,7 @@ const RouteExport = () => {
           'max-sm:!inline-flex',
           !isSidebarOpen && 'hidden',
         )}
-        aria-label="Select route type"
+        aria-label="Open dropdown to choose route type"
         onClick={handleSelectionMenuOpen}
       >
         <span className={clsx('', 'max-sm:!block', !isSidebarOpen && 'hidden')}>
@@ -137,8 +140,13 @@ const RouteExport = () => {
           isSidebarOpen && 'hidden',
           'relative pb-8',
         )}
-        aria-label="Change route type"
-        onClick={() => handleRouteTypeChange(null)}
+        aria-label={
+          selectedRouteType === GPX ? 'GPX export format' : 'KML export format'
+        }
+        title={
+          selectedRouteType === GPX ? 'GPX export format' : 'KML export format'
+        }
+        onClick={() => handleRouteTypeChange()}
       >
         <span>{selectedRouteType === GPX ? 'GPX' : 'KML'}</span>
         <Icon
@@ -165,7 +173,12 @@ const RouteExport = () => {
                 handleRouteTypeChange={handleRouteTypeChange}
                 selectedType={selectedRouteType}
                 routeType={routeType}
-                aria-label={routeType === GPX ? 'GPX' : 'KML'}
+                aria-label={
+                  routeType === GPX ? 'GPX export format' : 'KML export format'
+                }
+                title={
+                  routeType === GPX ? 'GPX export format' : 'KML export format'
+                }
               >
                 {routeType === GPX ? 'GPX' : 'KML'}
               </TypeSelectionButton>

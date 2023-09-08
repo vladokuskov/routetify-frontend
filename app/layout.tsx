@@ -20,8 +20,8 @@ export const metadata = {
   ],
   creator: 'swappnet',
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f8f6f6' },
-    { media: '(prefers-color-scheme: dark)', color: '#262626' },
+    { media: '(prefers-color-scheme: light)', color: '#F8F6F6' },
+    { media: '(prefers-color-scheme: dark)', color: '#0A0A0A' },
   ],
   openGraph: {
     type: 'website',

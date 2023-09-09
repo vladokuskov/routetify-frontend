@@ -4,7 +4,7 @@ import { redoDrawCoords } from '@/redux/features/drawSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { DrawType } from '@/types/global/drawType.types'
 import RedoIcon from '@/assets/icons/redo.svg'
-import { useKeyDown } from '@/hooks/useKeyDown'
+import { useHotkeys } from 'react-hotkeys-hook'
 
 const MapControlRedoAction = () => {
   const dispatch = useAppDispatch()
@@ -25,14 +25,13 @@ const MapControlRedoAction = () => {
     }
   }
 
-  useKeyDown(() => {
-    handleRedo()
-  }, ['KeyX'])
+  useHotkeys('alt+x', handleRedo)
 
   return (
     <Button
       variant="map"
-      aria-label="Redo action [X]"
+      title="Redo action [ALT + X]"
+      aria-label="Redo action"
       onClick={handleRedo}
       disabled={
         (drawCoordsFuture.length === 0 && drawCoordsDeleted.length === 0) ||

@@ -25,6 +25,7 @@ const MapControlZoom = () => {
     >
       <Button
         variant="map"
+        title="Zoom in"
         aria-label="Zoom in"
         onClick={handleZoomIn}
         className="w-8 h-8 font-bold"
@@ -33,6 +34,7 @@ const MapControlZoom = () => {
       </Button>
       <Button
         variant="map"
+        title="Zoom out"
         aria-label="Zoom in"
         onClick={handleZoomOut}
         className="w-8 h-8 font-bold"

@@ -3,7 +3,7 @@ import DeleteIcon from '@/assets/icons/delete.svg'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { deleteDrawCoords, updateDrawInfo } from '@/redux/features/drawSlice'
 import Icon from '@/components/Icon/Icon'
-import { useKeyDown } from '@/hooks/useKeyDown'
+import { useHotkeys } from 'react-hotkeys-hook'
 
 const MapControlDeleteRoute = () => {
   const dispatch = useAppDispatch()
@@ -25,14 +25,13 @@ const MapControlDeleteRoute = () => {
     }
   }
 
-  useKeyDown(() => {
-    handleDelete()
-  }, ['Delete'])
+  useHotkeys('alt+d', handleDelete)
 
   return (
     <Button
       variant="map"
-      aria-label="Delete route [Del]"
+      title="Delete route [ALT + D]"
+      aria-label="Delete route"
       onClick={handleDelete}
       disabled={drawCoords.length === 0}
       status="danger"

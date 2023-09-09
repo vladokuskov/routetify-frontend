@@ -80,7 +80,7 @@ const RouteUploading = () => {
   return (
     <div className="relative w-full flex flex-col items-center justify-center gap-4">
       <button
-        className="inline-flex justify-center items-center gap-2 w-full p-2 bg-neutral-300 rounded-md font-sans font-semibold text-neutral-700 hocus:bg-neutral-200 hocus:text-neutral-500 transition-colors"
+        className="inline-flex justify-center items-center gap-2 w-full p-2 bg-neutral-300 rounded-md font-sans font-semibold text-neutral-800 hocus:bg-neutral-200 hocus:text-neutral-950 transition-colors"
         onClick={() => {
           if (!isUserConfirmed) {
             const isConfirmed = window.confirm(

@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import { ResizeSidebarButton } from './ResizeSidebarButton/ResizeSidebarButton'
 
 import { SidebarSections } from './SidebarSections/SidebarSections'
-import { ThemeSwitcher } from './SidebarSections/ThemeSwitcher/ThemeSwitcher'
+import { ThemeSwitcher } from '../ThemeSwitcher/ThemeSwitcher'
 
 const Sidebar = () => {
   const isSidebarOpen = useAppSelector(

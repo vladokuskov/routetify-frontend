@@ -30,7 +30,7 @@ const MapControlZoom = () => {
         onClick={handleZoomIn}
         className="w-8 h-8 font-bold"
       >
-        <Icon svg={PlusIcon} width="20" height="20" />
+        <Icon svg={PlusIcon} size={20} />
       </Button>
       <Button
         variant="map"
@@ -39,7 +39,7 @@ const MapControlZoom = () => {
         onClick={handleZoomOut}
         className="w-8 h-8 font-bold"
       >
-        <Icon svg={MinusIcon} width="20" height="20" />
+        <Icon svg={MinusIcon} size={20} />
       </Button>
     </div>
   )

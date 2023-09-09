@@ -5,7 +5,6 @@ import LineIcon from '@/assets/icons/line.svg'
 import ClearIcon from '@/assets/icons/x.svg'
 
 import Icon from '@/components/Icon/Icon'
-import { useKeyDown } from '@/hooks/useKeyDown'
 import { DrawType } from '@/types/global/drawType.types'
 import { useHotkeys } from 'react-hotkeys-hook'
 

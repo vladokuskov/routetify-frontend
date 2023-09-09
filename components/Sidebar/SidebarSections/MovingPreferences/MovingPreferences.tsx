@@ -55,6 +55,7 @@ const MovingPreferences = () => {
 
   return (
     <>
+      {/*Full sidebar */}
       {isSidebarOpen && (
         <div
           className={clsx(
@@ -75,6 +76,8 @@ const MovingPreferences = () => {
           })}
         </div>
       )}
+
+      {/*Compact sidebar */}
       {!isSidebarOpen && (
         <div
           className={clsx(

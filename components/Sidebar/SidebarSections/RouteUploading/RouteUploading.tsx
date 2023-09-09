@@ -13,6 +13,7 @@ import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import FileImportIcon from '@/assets/icons/file-import.svg'
 import { updateRouteFile } from '@/redux/features/fileUploadSlice'
+import { DrawCoords } from '@/types/models/drawCoords.types'
 
 const RouteUploading = () => {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -32,6 +33,19 @@ const RouteUploading = () => {
 
     dispatch(updateRouteFile(e.target.files[0]))
   }
+
+  useEffect(() => {
+    const route = localStorage.getItem('route')
+
+    if (route) {
+      const parsedRoute = JSON.parse(route) as DrawCoords[]
+
+      if (parsedRoute.length > 0) {
+        dispatch(putDrawCoords(parsedRoute))
+        fitBounds(map, parsedRoute)
+      }
+    }
+  }, [map])
 
   useEffect(() => {
     const handleRouteDisplaying = async () => {

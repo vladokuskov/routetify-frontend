@@ -1,13 +1,13 @@
+import ArrowRightIcon from '@/assets/icons/arrow-right.svg'
+import BikeIcon from '@/assets/icons/bike.svg'
+import CarIcon from '@/assets/icons/car.svg'
+import WalkIcon from '@/assets/icons/walk.svg'
 import Icon from '@/components/Icon/Icon'
 import { MovingPreferencesType } from '@/types/global/movingPreferencesType.types'
 import clsx from 'clsx'
 import { ButtonHTMLAttributes } from 'react'
-import BikeIcon from '@/assets/icons/bike.svg'
-import CarIcon from '@/assets/icons/car.svg'
-import WalkIcon from '@/assets/icons/walk.svg'
-import ArrowRightIcon from '@/assets/icons/arrow-right.svg'
 
-interface MovingPreferencesButton
+interface IMovingPreferencesButton
   extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: 'default' | 'compact'
   selectedPreference: MovingPreferencesType
@@ -21,7 +21,7 @@ const MovingPreferencesButton = ({
   preference,
   isArrow = false,
   ...props
-}: MovingPreferencesButton) => {
+}: IMovingPreferencesButton) => {
   const { walk, bike, car } = MovingPreferencesType
   return (
     <>

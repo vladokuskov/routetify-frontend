@@ -13,6 +13,7 @@ import { addLatLng } from '@/redux/features/geocoderSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { LocationStatus } from '@/types/global/locationStatus.types'
 import updateMapView from '@/lib/updateMapView'
+import { useHotkeys } from 'react-hotkeys-hook'
 
 const MapControlFindLocation = () => {
   const map = useAppSelector((state) => state.controlsReducer.map)
@@ -60,10 +61,13 @@ const MapControlFindLocation = () => {
     }
   }
 
+  useHotkeys('alt+j', getLocation)
+
   return (
     <Button
       variant="map"
-      aria-label={'Find location'}
+      title="Find location [ALT + J]"
+      aria-label="Find location"
       onClick={getLocation}
       status={
         locationStatus === LocationStatus.error

@@ -25,19 +25,21 @@ const MapControlZoom = () => {
     >
       <Button
         variant="map"
+        title="Zoom in"
         aria-label="Zoom in"
         onClick={handleZoomIn}
         className="w-8 h-8 font-bold"
       >
-        <Icon svg={PlusIcon} width="20" height="20" />
+        <Icon svg={PlusIcon} size={20} />
       </Button>
       <Button
         variant="map"
+        title="Zoom out"
         aria-label="Zoom in"
         onClick={handleZoomOut}
         className="w-8 h-8 font-bold"
       >
-        <Icon svg={MinusIcon} width="20" height="20" />
+        <Icon svg={MinusIcon} size={20} />
       </Button>
     </div>
   )

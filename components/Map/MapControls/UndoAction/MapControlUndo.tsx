@@ -1,10 +1,10 @@
+import UndoIcon from '@/assets/icons/undo.svg'
 import { Button } from '@/components/Button/Button'
 import Icon from '@/components/Icon/Icon'
 import { undoDrawCoords } from '@/redux/features/drawSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { DrawType } from '@/types/global/drawType.types'
-import UndoIcon from '@/assets/icons/undo.svg'
-import { useKeyDown } from '@/hooks/useKeyDown'
+import { useHotkeys } from 'react-hotkeys-hook'
 
 const MapControlUndoAction = () => {
   const dispatch = useAppDispatch()
@@ -17,14 +17,13 @@ const MapControlUndoAction = () => {
     }
   }
 
-  useKeyDown(() => {
-    handleUndo()
-  }, ['KeyZ'])
+  useHotkeys('alt+z', handleUndo)
 
   return (
     <Button
       variant="map"
-      aria-label="Undo action [Z]"
+      title="Undo action [ALT + Z]"
+      aria-label="Undo action"
       onClick={handleUndo}
       disabled={drawCoords.length === 0 || drawType === DrawType.None}
     >

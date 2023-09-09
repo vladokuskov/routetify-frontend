@@ -3,16 +3,14 @@ import React from 'react'
 
 type Icon = {
   svg: React.FC<React.SVGProps<SVGSVGElement>>
-  width?: string
-  height?: string
+  size?: number
   className?: string
   spin?: Boolean
 }
 
 const Icon: React.FC<Icon> = ({
   svg: Icon,
-  width = '24',
-  height = '24',
+  size = 24,
   className = '',
   spin = false,
 }) => {
@@ -24,7 +22,7 @@ const Icon: React.FC<Icon> = ({
         className,
       )}
     >
-      <Icon width={width} height={height} />
+      <Icon width={size} height={size} />
     </span>
   )
 }

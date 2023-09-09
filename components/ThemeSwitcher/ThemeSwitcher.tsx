@@ -1,6 +1,6 @@
 import Icon from '@/components/Icon/Icon'
 import SunIcon from '@/assets/icons/sun.svg'
-import MoonIcon from '@/assets/icons/moon-filled.svg'
+import MoonIcon from '@/assets/icons/moon-stars.svg'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 import clsx from 'clsx'
@@ -49,13 +49,13 @@ const ThemeSwitcher = () => {
   return isMounted ? (
     <button
       className={clsx(
-        'focus:bg-neutral-200 text-neutral-600 hocus:text-neutral-800 p-3 rounded-md',
-        'dark:focus:bg-neutral-800 dark:text-neutral-400 dark:hocus:text-neutral-200',
+        'focus-visible:bg-neutral-200 text-neutral-600 active:!text-neutral-950 hocus:text-neutral-800 p-1 rounded-md',
+        'dark:focus-visible:bg-neutral-800 dark:active:!text-neutral-50 dark:text-neutral-400 dark:hocus:text-neutral-200',
       )}
       onClick={handleThemeChange}
       aria-label="Change theme"
     >
-      <Icon svg={isDark ? SunIcon : MoonIcon} />
+      <Icon svg={isDark ? SunIcon : MoonIcon} size={24} />
     </button>
   ) : (
     <></>

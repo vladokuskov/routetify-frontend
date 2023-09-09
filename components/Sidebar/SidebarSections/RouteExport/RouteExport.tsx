@@ -112,7 +112,7 @@ const RouteExport = () => {
         title={`Export route in ${
           selectedRouteType === GPX ? 'GPX' : 'KML'
         } format`}
-        className="w-full inline-flex justify-center items-center gap-4 p-3 text-neutral-700 hocus:bg-neutral-200 hocus:text-neutral-500 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full inline-flex justify-center items-center gap-4 p-3 text-neutral-800 hocus:bg-neutral-200 hocus:text-neutral-950 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <span className={clsx('', 'max-sm:!block', !isSidebarOpen && 'hidden')}>
           Download
@@ -121,7 +121,7 @@ const RouteExport = () => {
       </button>
       <button
         className={clsx(
-          'w-full max-w-[7rem] inline-flex justify-center items-center gap-1 p-3 text-neutral-700 hocus:bg-neutral-200 hocus:text-neutral-500 rounded-md transition-colors',
+          'w-full max-w-[7rem] inline-flex justify-center items-center gap-1 p-3 text-neutral-800 hocus:bg-neutral-200 hocus:text-neutral-950 rounded-md transition-colors',
           'max-sm:!inline-flex',
           !isSidebarOpen && 'hidden',
         )}
@@ -135,7 +135,7 @@ const RouteExport = () => {
       </button>
       <button
         className={clsx(
-          'w-full flex flex-col justify-center items-center gap-1 p-3 text-neutral-700 hocus:bg-neutral-200 hocus:text-neutral-500 rounded-md transition-colors',
+          'w-full flex flex-col justify-center items-center gap-1 p-3 text-neutral-800 hocus:bg-neutral-200 hocus:text-neutral-950 rounded-md transition-colors',
           'max-sm:!hidden',
           isSidebarOpen && 'hidden',
           'relative pb-8',

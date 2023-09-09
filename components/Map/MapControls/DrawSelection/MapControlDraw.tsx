@@ -7,6 +7,7 @@ import ClearIcon from '@/assets/icons/x.svg'
 import Icon from '@/components/Icon/Icon'
 import { useKeyDown } from '@/hooks/useKeyDown'
 import { DrawType } from '@/types/global/drawType.types'
+import { useHotkeys } from 'react-hotkeys-hook'
 
 const MapControlDrawSelection = () => {
   const dispatch = useAppDispatch()
@@ -17,20 +18,23 @@ const MapControlDrawSelection = () => {
     dispatch(changeDraw(e))
   }
 
-  useKeyDown(() => {
+  useHotkeys('esc', () => {
     if (drawType !== DrawType.None) {
       dispatch(changeDraw(DrawType.None))
     }
-  }, ['Escape'])
+  })
 
-  useKeyDown(() => {
-    handleDrawChange(drawType !== DrawType.None ? DrawType.None : DrawType.Line)
-  }, ['KeyL'])
+  useHotkeys('alt+l', () =>
+    handleDrawChange(
+      drawType !== DrawType.None ? DrawType.None : DrawType.Line,
+    ),
+  )
 
   return (
     <Button
       variant="map"
-      aria-label={drawType === DrawType.Line ? 'Stop drawing' : 'Draw line [L]'}
+      title="Draw line [ALT + L]"
+      aria-label={drawType === DrawType.Line ? 'Stop drawing' : 'Draw line'}
       onClick={() =>
         handleDrawChange(
           drawType !== DrawType.None ? DrawType.None : DrawType.Line,

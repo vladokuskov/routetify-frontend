@@ -169,7 +169,7 @@ const Geocoder = () => {
                 <button
                   key={i}
                   className={clsx(
-                    'w-full p-2 text-neutral-700 hocus:bg-neutral-200 hocus:text-neutral-500 rounded-md transition-colors font-semibold',
+                    'w-full p-2 text-neutral-600 hocus:bg-neutral-200 hocus:text-neutral-950 rounded-md transition-colors font-semibold',
                   )}
                   aria-label={display_name}
                   onClick={() => handleResultSelect({ lat, lon, display_name })}

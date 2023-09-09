@@ -30,8 +30,7 @@ const RouteFileUploadDrag = () => {
         <Icon
           svg={FileImportIcon}
           className="pointer-events-none text-neutral-50 dark:text-neutral-100"
-          width="120"
-          height="120"
+          size={120}
         />
         <p className="font-roboto text-lg font-semibold text-neutral-50 dark:text-neutral-200  pointer-events-none">
           Drop file

@@ -1,7 +1,6 @@
 import { Button } from '@/components/Button/Button'
 import Icon from '@/components/Icon/Icon'
 import { useClickOutside } from '@/hooks/useClickOutside'
-import { useKeyDown } from '@/hooks/useKeyDown'
 import { changeLayer } from '@/redux/features/controlsSlice'
 import { addLatLng } from '@/redux/features/geocoderSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
@@ -10,6 +9,7 @@ import clsx from 'clsx'
 import { useRef } from 'react'
 import LayersIcon from '@/assets/icons/layers.svg'
 import { TileButton } from './TileButton'
+import { useHotkeys } from 'react-hotkeys-hook'
 
 const MapControlTileSelection = () => {
   const ref = useRef(null)
@@ -34,18 +34,13 @@ const MapControlTileSelection = () => {
     dispatch(changeLayer(layer))
     setIsMenuOpen(false)
   }
-
-  useKeyDown(() => {
-    if (layer !== Layer.default) {
+  useHotkeys('alt+t', () => {
+    if (layer === Layer.default) {
+      handleTileSelect(Layer.satellite)
+    } else {
       handleTileSelect(Layer.default)
     }
-  }, ['KeyN'])
-
-  useKeyDown(() => {
-    if (layer !== Layer.satellite) {
-      handleTileSelect(Layer.satellite)
-    }
-  }, ['KeyM'])
+  })
 
   const handleMenuOpen = () => {
     setIsMenuOpen((prev) => !prev)
@@ -53,7 +48,12 @@ const MapControlTileSelection = () => {
 
   return (
     <div className="relative" ref={ref}>
-      <Button variant="map" title={'Change map tile'} onClick={handleMenuOpen}>
+      <Button
+        variant="map"
+        title="Select map tile [ALT + T]"
+        aria-label="Select map tile layer"
+        onClick={handleMenuOpen}
+      >
         <Icon svg={LayersIcon} />
       </Button>
       {isMenuOpen && (
@@ -71,9 +71,7 @@ const MapControlTileSelection = () => {
                 handleTileSelect={handleTileSelect}
                 selectedLayer={layer}
                 tile={tile}
-                aria-label={
-                  tile === Layer.default ? 'Default [N]' : 'Satellite [M]'
-                }
+                aria-label={tile === Layer.default ? 'Default' : 'Satellite'}
               >
                 {tile === Layer.default ? 'Default' : 'Satellite'}
               </TileButton>

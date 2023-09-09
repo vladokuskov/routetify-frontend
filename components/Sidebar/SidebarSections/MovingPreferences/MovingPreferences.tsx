@@ -1,13 +1,8 @@
-import Icon from '@/components/Icon/Icon'
 import { changeMovingPreferences } from '@/redux/features/controlsSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { MovingPreferencesType } from '@/types/global/movingPreferencesType.types'
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
-import ArrowRightIcon from '@/assets/icons/arrow-right.svg'
-import BikeIcon from '@/assets/icons/bike.svg'
-import CarIcon from '@/assets/icons/car.svg'
-import WalkIcon from '@/assets/icons/walk.svg'
 import { MovingPreferencesButton } from '@/components/Sidebar/SidebarSections/MovingPreferences/MovingPreferencesButton'
 
 const MovingPreferences = () => {
@@ -60,111 +55,41 @@ const MovingPreferences = () => {
 
   return (
     <>
-      <div
-        className={clsx(
-          'flex items-center justify-center gap-2',
-          'max-sm:!flex',
-          !isSidebarOpen && 'hidden',
-        )}
-      >
-        {preferences.map((preference, index) => {
-          return (
-            <MovingPreferencesButton
-              key={index}
-              aria-label={
-                preference === walk
-                  ? 'Walk moving preference'
-                  : preference === bike
-                  ? 'Bike moving preference'
-                  : 'Car moving preference'
-              }
-              title={
-                preference === walk
-                  ? 'Walk'
-                  : preference === bike
-                  ? 'Bike'
-                  : 'Car'
-              }
-              handlePreferenceChange={() => handlePreferenceChange(preference)}
-              selectedPreference={selectedPreference}
-              preference={preference}
-            >
-              <Icon
-                svg={
-                  preference === walk
-                    ? WalkIcon
-                    : preference === bike
-                    ? BikeIcon
-                    : CarIcon
-                }
-              />
-              <span className=" text-neutral-700 text-sm">
-                {preference === walk
-                  ? 'Walk'
-                  : preference === bike
-                  ? 'Bike'
-                  : 'Car'}
-              </span>
-            </MovingPreferencesButton>
-          )
-        })}
-      </div>
-      <div
-        className={clsx(
-          'flex items-center justify-center gap-2 w-full',
-          'max-sm:!hidden',
-          isSidebarOpen && 'hidden',
-        )}
-      >
-        <button
-          aria-label={
-            selectedPreference === walk
-              ? 'Walk moving preference'
-              : selectedPreference === bike
-              ? 'Bike moving preference'
-              : 'Car moving preference'
-          }
-          title={
-            selectedPreference === walk
-              ? 'Walk'
-              : selectedPreference === bike
-              ? 'Bike'
-              : 'Car'
-          }
-          onClick={handleNextPreference}
+      {isSidebarOpen && (
+        <div
           className={clsx(
-            ' bg-lime-300 px-1 py-2 h-22 w-full rounded-md transition-colors text-neutral-700 relative pb-7 flex flex-col items-center justify-center',
-            'hocus:bg-lime-200',
+            'flex items-center justify-center gap-2',
+            'max-sm:!flex',
           )}
         >
-          <span className=" flex flex-col justify-center items-center">
-            <Icon
-              svg={
-                selectedPreference === walk
-                  ? WalkIcon
-                  : selectedPreference === bike
-                  ? BikeIcon
-                  : CarIcon
-              }
-            />
-          </span>
-          <span className="font-roboto font-semibold text-sm">
-            {selectedPreference === walk
-              ? 'Walk'
-              : selectedPreference === bike
-              ? 'Bike'
-              : 'Car'}
-          </span>
-          <Icon
-            svg={ArrowRightIcon}
-            className={clsx(
-              'absolute bottom-4 h-1',
-              'transform transition-transform',
-              isArrowAnimated && 'animate-moveRight',
-            )}
+          {preferences.map((preference, index) => {
+            return (
+              <MovingPreferencesButton
+                variant="default"
+                key={index}
+                onClick={() => handlePreferenceChange(preference)}
+                selectedPreference={selectedPreference}
+                preference={preference}
+              />
+            )
+          })}
+        </div>
+      )}
+      {!isSidebarOpen && (
+        <div
+          className={clsx(
+            'flex items-center justify-center gap-2 w-full',
+            'max-sm:!hidden',
+          )}
+        >
+          <MovingPreferencesButton
+            variant="compact"
+            onClick={handleNextPreference}
+            selectedPreference={selectedPreference}
+            isArrow={isArrowAnimated}
           />
-        </button>
-      </div>
+        </div>
+      )}
     </>
   )
 }

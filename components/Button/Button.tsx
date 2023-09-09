@@ -31,18 +31,18 @@ const Button = ({
   return (
     <button
       className={clsx(
-        'rounded focus:outline-none font-roboto transition-colors',
+        'rounded focus:outline-none font-roboto transition-colors ',
         'inline-flex gap-3 justify-center items-center text-center flex-nowrap whitespace-nowrap',
         'disabled:cursor-not-allowed disabled:opacity-50',
         variant === 'map' &&
-          'bg-app dark:bg-neutral-600 text-neutral-800 dark:text-neutral-300 hocus:bg-neutral-200 dark:hocus:bg-neutral-500 hocus:shadow-md hocus:text-neutral-700 dark:hocus:text-neutral-100 rounded-md !px-2 !py-2 shadow-md ',
+          'bg-app border-2 border-transparent text-neutral-800 hocus:bg-neutral-200 hocus:border-neutral-300 active:!border-neutral-400 hocus:shadow-md hocus:text-neutral-700 rounded-md !p-[0.35rem] shadow-md dark:bg-neutral-600 dark:hocus:text-neutral-100 dark:active:!border-neutral-300 dark:hocus:border-neutral-500 dark:text-neutral-300',
         variant === 'routeType' &&
-          'w-full p-1 text-neutral-700 hocus:bg-neutral-200 hocus:text-neutral-500 rounded-md transition-colors',
+          'w-full p-1 text-neutral-800 hocus:bg-neutral-200 hocus:text-neutral-950 rounded-md transition-colors',
         variant === 'tile' &&
-          'w-full cursor-pointer p-1 rounded-md inline-flex items-center justify-between gap-2 text-neutral-700 dark:text-neutral-200 hocus:text-neutral-600 dark:hocus:text-neutral-100 hocus:bg-neutral-200 dark:hocus:bg-neutral-500',
+          'w-full border-2 border-transparent cursor-pointer p-1 rounded-md inline-flex items-center justify-between gap-2 text-neutral-800  hocus:text-neutral-950 hocus:bg-neutral-200 hocus:border-neutral-300 active:!border-neutral-400 dark:hocus:bg-neutral-600 dark:hocus:border-neutral-500 dark:active:!border-neutral-400 dark:text-neutral-300 dark:hocus:text-neutral-100',
 
         sizesClass[size],
-        status === 'danger' && '!text-red-500',
+        status === 'danger' && '!text-red-400',
         status === 'success' && '!text-blue-500',
         className,
       )}

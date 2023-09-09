@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { LocationStatus } from '@/types/global/locationStatus.types'
 import FitIcon from '@/assets/icons/fit.svg'
 import fitBounds from '@/lib/fitBounds'
-import { useKeyDown } from '@/hooks/useKeyDown'
+import { useHotkeys } from 'react-hotkeys-hook'
 
 const MapControlFitRoute = () => {
   const dispatch = useAppDispatch()
@@ -21,14 +21,13 @@ const MapControlFitRoute = () => {
     }
   }
 
-  useKeyDown(() => {
-    handleRouteFit()
-  }, ['KeyF'])
+  useHotkeys('alt+o', handleRouteFit)
 
   return (
     <Button
       variant="map"
-      aria-label="Fit route [F]"
+      title="Fit route [ALT + O]"
+      aria-label="Fit route"
       onClick={handleRouteFit}
       disabled={drawCoords.length === 0}
     >

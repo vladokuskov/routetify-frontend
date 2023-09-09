@@ -126,11 +126,12 @@ const RouteExport = () => {
       )}
 
       {/*Dropdown*/}
-      {isSelectionMenuOpen && isSidebarOpen && (
+      {isSelectionMenuOpen && (
         <div
           className={clsx(
             'absolute w-full max-w-[7rem] right-0 bottom-[-4.7rem] rounded-md p-1 bg-neutral-300 shadow',
             'max-sm:!block',
+            !isSidebarOpen && 'hidden',
           )}
         >
           {types.map((routeType, index) => {

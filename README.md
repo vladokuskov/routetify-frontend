@@ -1,17 +1,17 @@
-<img align='center' src="public/logo.svg" width="100px">
+<img align='center' src="client/public/logo.svg" width="100px">
 
 ![Commits](https://img.shields.io/github/commit-activity/m/swappnet/routetify)
 [![Website cycroute.netlify.app](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://routetify.vercel.app/)
 
-`routetify` - user-friendly web application that allows you to create routes effortlessly. With our application, you can easily export your routes in GPX/KML format, making it simple to share your favorite routes with others.
+`routetify` - a user-friendly web application that allows you to create routes effortlessly. With our application, you can easily export your routes in GPX/KML format, making it simple to share your favorite routes with others.
 
 Live - https://routetify.vercel.app/
 
 ### Features
 
-- Create routes and export them as GPX/KML file format;
+- Create routes and export them in GPX/KML file format;
 - Import routes to editor;
-- Save route and open in the future when you want;
+- Save the route and open it in the future when you want;
 - Search your location & create routes where you like;
 
 ### Technology Stack
@@ -21,11 +21,6 @@ Live - https://routetify.vercel.app/
     Tailwind
     TypeScript
     Leaflet
-
-<div style="display: flex; justify-content: center; gap: 1rem;">
-    <img src="public/previews/1.png" width="450px">
-    <img src="public/previews/2.png" width="300px">
-</div>
 
 
 ### How to start?
@@ -48,7 +43,7 @@ Contributions to 'routetify' are welcome! If you would like to contribute, pleas
 
 ### Acknowledgements
 
-`routetify` was created by Swappnet as a project for people who love outdoor and maps.
+`routetify` was created by Swappnet as a project for people who love outdoors and maps.
 
 <h4>Liked the work ?</h4>
 Give the repository a star :-)

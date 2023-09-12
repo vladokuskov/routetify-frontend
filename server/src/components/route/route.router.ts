@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import { verifyRoute } from './route.controller'
+import { parseRoute } from './route.controller'
 
 const router: Router = Router()
 
-router.get('/verify', verifyRoute)
+router.post('/parse', parseRoute)
 
 export default router

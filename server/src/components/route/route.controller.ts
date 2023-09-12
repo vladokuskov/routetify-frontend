@@ -1,21 +1,14 @@
 import { Request, Response } from 'express'
 import httpStatus from 'http-status'
 import ServerError from '@core/instances/ServerError'
-import { verify } from './route.service'
+import { parse } from './route.service'
 
-const verifyRoute = async (req: Request, res: Response) => {
+//TODO Handle file read from client
+
+const parseRoute = async (req: Request, res: Response) => {
   try {
-    const { file } = req.body
-
-    console.log(file)
-
-    const result = await verify(file)
-
-    if (result) {
-      res.status(httpStatus.OK)
-    } else {
-      res.status(httpStatus.NOT_ACCEPTABLE)
-    }
+    res.status(httpStatus.OK)
+    res.send([])
   } catch (error) {
     if (error instanceof ServerError) {
       res.status(error.code || 500)
@@ -24,4 +17,4 @@ const verifyRoute = async (req: Request, res: Response) => {
   }
 }
 
-export { verifyRoute }
+export { parseRoute }

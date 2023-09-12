@@ -1,0 +1,13 @@
+{
+  "root": true,
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "@next/next/no-html-link-for-pages": "off",
+    "react/jsx-key": "off"
+  },
+  "settings": {
+    "next": {
+      "rootDir": true
+    }
+  }
+}

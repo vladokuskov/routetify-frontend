@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "rootDir": "./",
+    "outDir": "dist",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "strict": true,
+    "allowJs": false,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "src",
+    "resolveJsonModule": true,
+    "paths": {
+      "@app": ["./app.ts"],
+      "@components/*": ["components/*"],
+      "@core/*": ["core/*"]
+    }
+  },
+  "exclude": ["node_modules"],
+  "compileOnSave": true,
+  "typeAcquisition": {
+    "enable": true
+  },
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  }
+}

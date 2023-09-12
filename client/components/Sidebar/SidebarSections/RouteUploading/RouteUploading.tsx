@@ -1,11 +1,5 @@
 import Icon from '@/components/Icon/Icon'
 import fitBounds from '@/lib/fitBounds'
-import { parseFile } from '@/lib/routeFileParses'
-import {
-  checkFileExtension,
-  getFileExtension,
-  validateFileStructure,
-} from '@/lib/validations/routeFileValidation'
 import { putDrawCoords } from '@/redux/features/drawSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import clsx from 'clsx'
@@ -14,6 +8,7 @@ import { toast } from 'react-hot-toast'
 import FileImportIcon from '@/assets/icons/file-import.svg'
 import { updateRouteFile } from '@/redux/features/fileUploadSlice'
 import { DrawCoords } from '@/types/models/drawCoords.types'
+import { parseFile, verifyFile } from '@/utils/fileOperations'
 
 const RouteUploading = () => {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -35,19 +30,6 @@ const RouteUploading = () => {
   }
 
   useEffect(() => {
-    const route = localStorage.getItem('route')
-
-    if (route) {
-      const parsedRoute = JSON.parse(route) as DrawCoords[]
-
-      if (parsedRoute.length > 0) {
-        dispatch(putDrawCoords(parsedRoute))
-        fitBounds(map, parsedRoute)
-      }
-    }
-  }, [map])
-
-  useEffect(() => {
     const handleRouteDisplaying = async () => {
       if (!routeFile) return
 
@@ -56,28 +38,13 @@ const RouteUploading = () => {
         return
       }
 
-      const fileName = routeFile.name
-
       try {
-        // Checking file extension if it GPX or KML
-        const isCorrectFileExtension = await checkFileExtension(fileName)
+        const isFileValid = await verifyFile(routeFile)
+        const route: DrawCoords[] = await parseFile(routeFile)
 
-        if (isCorrectFileExtension) {
-          const isFileStructureValid = await validateFileStructure(routeFile)
+        dispatch(putDrawCoords(route))
 
-          if (isFileStructureValid) {
-            const extension = await getFileExtension(fileName)
-
-            const route = await parseFile(
-              routeFile,
-              extension ? extension : null,
-            )
-
-            dispatch(putDrawCoords(route))
-
-            fitBounds(map, route)
-          }
-        }
+        fitBounds(map, route)
       } catch (err) {
         if (err instanceof Error) toast.error(err.message)
       }
@@ -90,6 +57,19 @@ const RouteUploading = () => {
 
     handleRouteDisplaying()
   }, [routeFile])
+
+  useEffect(() => {
+    const route = localStorage.getItem('route')
+
+    if (route) {
+      const parsedRoute = JSON.parse(route) as DrawCoords[]
+
+      if (parsedRoute.length > 0) {
+        dispatch(putDrawCoords(parsedRoute))
+        fitBounds(map, parsedRoute)
+      }
+    }
+  }, [map])
 
   return (
     <div className="relative w-full flex flex-col items-center justify-center gap-4">

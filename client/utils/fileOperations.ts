@@ -22,7 +22,11 @@ const parseFile = async (file: File) => {
 
     return data
   } catch (err) {
-    throw err
+    if (err instanceof TypeError && err.message === 'Failed to fetch') {
+      throw new Error('Services currently shut down. Try again later.')
+    } else {
+      throw err
+    }
   }
 }
 

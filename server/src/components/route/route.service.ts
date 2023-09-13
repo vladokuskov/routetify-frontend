@@ -1,16 +1,9 @@
 import ServerError from '@core/instances/ServerError'
-import fs from 'fs'
+import { allowedExtensions } from 'config'
+import httpStatus from 'http-status'
 
-const parse = async (file: string): Promise<boolean> => {
-  try {
-    return true
-  } catch (error) {
-    if (error instanceof ServerError) {
-      throw new ServerError(error.message, error.code || 501)
-    }
-
-    return false
-  }
+const parse = async (file: Express.Multer.File, extension: string) => {
+  return []
 }
 
 export { parse }

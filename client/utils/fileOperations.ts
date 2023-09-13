@@ -8,9 +8,6 @@ const parseFile = async (file: File) => {
 
     const response = await fetch(`${Envs.ORIGIN}/route/parse`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
       body,
     })
 

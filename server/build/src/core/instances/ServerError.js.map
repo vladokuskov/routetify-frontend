@@ -1,1 +1,0 @@
-{"version":3,"file":"ServerError.js","sourceRoot":"","sources":["../../../../src/core/instances/ServerError.ts"],"names":[],"mappings":";;AAAA,MAAqB,WAAY,SAAQ,KAAK;IAG5C,YAAY,OAAe,EAAE,IAAY;QACvC,KAAK,CAAC,OAAO,CAAC,CAAC;QACf,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC;IACnB,CAAC;CACF;AAPD,8BAOC"}

@@ -17,8 +17,8 @@ Thumbs.db
 # Typing #
 typings/
 
-# Dist #
-dist/
+# Build #
+build/
 
 # IDE #
 .idea/

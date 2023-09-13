@@ -43,6 +43,7 @@ const verifyFileRequest = async (
             res.status(error.code || httpStatus.INTERNAL_SERVER_ERROR)
             res.json({ error: error.message || 'Internal server error' })
           } else {
+            console.log(error)
             res.status(httpStatus.INTERNAL_SERVER_ERROR)
             res.json({ error: 'Internal server error' })
           }

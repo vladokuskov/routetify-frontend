@@ -1,6 +1,6 @@
-import ServerError from '@core/instances/ServerError'
-import { allowedExtensions } from 'config'
+import ServerError from 'core/instances/ServerError'
 import httpStatus from 'http-status'
+import config from 'config/index'
 import { Extension } from 'types/extensions.types'
 
 const getFileExtension = async (filename: string) => {
@@ -13,7 +13,7 @@ const getFileExtension = async (filename: string) => {
   }
 
   const extension = parts[1].toLowerCase()
-  if (!allowedExtensions.includes(extension as Extension)) {
+  if (!config.allowedExtensions.includes(extension as Extension)) {
     throw new ServerError(
       'Provide a file with a correct extension.',
       httpStatus.NOT_ACCEPTABLE,

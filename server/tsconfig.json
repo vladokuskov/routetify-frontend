@@ -1,22 +1,21 @@
 {
   "compilerOptions": {
     "target": "es2020",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "commonjs",
+    "moduleResolution": "node",
     "rootDir": "./",
-    "outDir": "dist",
+    "outDir": "./build",
     "esModuleInterop": true,
     "sourceMap": true,
     "strict": true,
-    "allowJs": false,
+    "allowJs": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
     "baseUrl": "src",
     "resolveJsonModule": true,
     "paths": {
-      "@app": ["./app.ts"],
-      "@components/*": ["components/*"],
-      "@core/*": ["core/*"]
+      "@/*": ["./src/*"]
     }
   },
   "exclude": ["node_modules"],
@@ -24,6 +23,7 @@
   "typeAcquisition": {
     "enable": true
   },
+  "include": ["./src/**/*"],
   "ts-node": {
     "require": ["tsconfig-paths/register"]
   }

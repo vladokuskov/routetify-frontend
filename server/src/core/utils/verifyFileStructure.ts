@@ -1,4 +1,4 @@
-import ServerError from '@core/instances/ServerError'
+import ServerError from 'core/instances/ServerError'
 import httpStatus from 'http-status'
 import { Extension } from 'types/extensions.types'
 

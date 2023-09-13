@@ -1,14 +1,15 @@
-import ServerError from '@core/instances/ServerError'
+import ServerError from 'core/instances/ServerError'
 import { Request, Response } from 'express'
 import httpStatus from 'http-status'
 import { parse } from './route.service'
+import { Extension } from 'types/extensions.types'
 
 const parseRoute = async (req: Request, res: Response) => {
   try {
     const {
       file,
       extension,
-    }: { file: Express.Multer.File; extension: string } = req.body
+    }: { file: Express.Multer.File; extension: Extension } = req.body
 
     const result = await parse(file, extension)
 

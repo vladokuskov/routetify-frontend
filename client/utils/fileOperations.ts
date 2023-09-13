@@ -11,6 +11,10 @@ const parseFile = async (file: File) => {
       body,
     })
 
+    if (response.status === 405) {
+      throw new Error('Services currently shut down.')
+    }
+
     if (!response.ok) {
       const errorData = await response.json()
       throw new Error(

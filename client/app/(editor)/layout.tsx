@@ -11,7 +11,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head />
-      <body suppressHydrationWarning={true}>
+      <body>
         <Toaster />
         <NextThemeProvider>
           <StoreProvider>{children}</StoreProvider>

@@ -1,23 +1,17 @@
+import FileImportIcon from '@/assets/icons/file-import.svg'
 import Icon from '@/components/Icon/Icon'
 import fitBounds from '@/lib/fitBounds'
-import { parseFile } from '@/lib/routeFileParses'
-import {
-  checkFileExtension,
-  getFileExtension,
-  validateFileStructure,
-} from '@/lib/validations/routeFileValidation'
 import { putDrawCoords } from '@/redux/features/drawSlice'
+import { updateRouteFile } from '@/redux/features/fileUploadSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { DrawCoords } from '@/types/models/drawCoords.types'
+import { parseFile } from '@/utils/fileOperations'
 import clsx from 'clsx'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { toast } from 'react-hot-toast'
-import FileImportIcon from '@/assets/icons/file-import.svg'
-import { updateRouteFile } from '@/redux/features/fileUploadSlice'
-import { DrawCoords } from '@/types/models/drawCoords.types'
 
 const RouteUploading = () => {
   const inputRef = useRef<HTMLInputElement>(null)
-
   const [isUserConfirmed, setIsUserConfirmed] = useState<boolean>(false)
 
   const map = useAppSelector((state) => state.controlsReducer.map)
@@ -34,7 +28,32 @@ const RouteUploading = () => {
     dispatch(updateRouteFile(e.target.files[0]))
   }
 
-  useEffect(() => {
+  const handleRouteDisplaying = async () => {
+    if (!routeFile) return
+
+    if (!map) {
+      toast.error('Map is not initialized.')
+      return
+    }
+
+    try {
+      const route = await parseFile(routeFile)
+
+      dispatch(putDrawCoords(route))
+
+      fitBounds(map, route)
+    } catch (err) {
+      if (err instanceof Error) toast.error(err.message)
+    }
+
+    dispatch(updateRouteFile(null))
+
+    if (inputRef.current) {
+      inputRef.current.value = ''
+    }
+  }
+
+  const getRouteFromLocalStorage = () => {
     const route = localStorage.getItem('route')
 
     if (route) {
@@ -45,51 +64,15 @@ const RouteUploading = () => {
         fitBounds(map, parsedRoute)
       }
     }
-  }, [map])
+  }
 
   useEffect(() => {
-    const handleRouteDisplaying = async () => {
-      if (!routeFile) return
-
-      if (!map) {
-        toast.error('Map is not initialized.')
-        return
-      }
-
-      const fileName = routeFile.name
-
-      try {
-        // Checking file extension if it GPX or KML
-        const isCorrectFileExtension = await checkFileExtension(fileName)
-
-        if (isCorrectFileExtension) {
-          const isFileStructureValid = await validateFileStructure(routeFile)
-
-          if (isFileStructureValid) {
-            const extension = await getFileExtension(fileName)
-
-            const route = await parseFile(
-              routeFile,
-              extension ? extension : null,
-            )
-
-            dispatch(putDrawCoords(route))
-
-            fitBounds(map, route)
-          }
-        }
-      } catch (err) {
-        if (err instanceof Error) toast.error(err.message)
-      }
-
-      dispatch(updateRouteFile(null))
-      if (inputRef.current) {
-        inputRef.current.value = ''
-      }
-    }
-
     handleRouteDisplaying()
   }, [routeFile])
+
+  useEffect(() => {
+    getRouteFromLocalStorage()
+  }, [map])
 
   return (
     <div className="relative w-full flex flex-col items-center justify-center gap-4">

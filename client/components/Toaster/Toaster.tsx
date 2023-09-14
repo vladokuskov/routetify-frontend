@@ -21,6 +21,12 @@ const Toaster = () => {
             opacity: '70%',
           },
         },
+        loading: {
+          style: {
+            color: '#000000',
+            opacity: '50%',
+          },
+        },
       }}
     />
   )

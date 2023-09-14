@@ -17,36 +17,37 @@ const RenderMarkers = ({ map }: { map: L.Map | null }) => {
     if (map) {
       drawCoords.forEach((coords, i) => {
         let lastIndex = drawCoords.length - 1
-        let iconUrl = ''
-        let iconSize: [number, number] = [0, 0]
-        let iconAnchor: [number, number] = [0, 0]
 
-        if (i === 0) {
-          iconUrl = 'map/start-marker.svg'
-          iconSize = [33, 33]
-          iconAnchor = [6, 25]
-        } else if (i > 0 && i < lastIndex) {
-          iconUrl = 'map/mid-marker.svg'
-          iconSize = [12, 12]
-          iconAnchor = [5, 5]
-        } else if (i === lastIndex && drawCoords.length > 1) {
-          iconUrl = 'map/finish-marker.svg'
-          iconSize = [33, 33]
-          iconAnchor = [13, 32]
+        let markerOptions: L.MarkerOptions = {
+          alt: '',
+          title: `Waypoint ${i}`,
+          draggable: drawType === DrawType.Line,
         }
 
-        const marker = L.marker(coords, {
-          alt: '',
-          title: `Marker ${i}`,
-          icon: L.icon({
-            iconUrl,
-            iconSize,
-            iconAnchor,
+        if (i === 0) {
+          markerOptions.icon = L.icon({
+            iconUrl: 'map/start-marker.svg',
+            iconSize: [33, 33],
+            iconAnchor: [6, 25],
             className: `${drawType === DrawType.None && 'cursorCrosshair'}`,
-          }),
+          })
+        } else if (i > 0 && i < lastIndex) {
+          markerOptions.icon = L.divIcon({
+            html: '<div class="bg-neutral-50 border-2 border-neutral-300 p-1 rounded-full"></div>',
+            iconSize: [12, 12],
+            iconAnchor: [6, 6],
+            className: `${drawType === DrawType.None && 'cursorCrosshair'}`,
+          })
+        } else if (i === lastIndex && drawCoords.length > 1) {
+          markerOptions.icon = L.icon({
+            iconUrl: 'map/finish-marker.svg',
+            iconSize: [33, 33],
+            iconAnchor: [13, 32],
+            className: `${drawType === DrawType.None && 'cursorCrosshair'}`,
+          })
+        }
 
-          draggable: drawType === DrawType.Line,
-        }).addTo(markersLayer)
+        const marker = L.marker(coords, markerOptions).addTo(markersLayer)
 
         if (drawType === DrawType.Line) {
           marker.on('dragstart', () => {

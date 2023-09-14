@@ -1,6 +1,5 @@
 import { Extension } from 'types/extensions.types'
-// @ts-ignore
-import toGeoJSON from '@mapbox/togeojson'
+const toGeoJSON = require('@mapbox/togeojson')
 import { DOMParser } from 'xmldom'
 
 const parse = async (file: Express.Multer.File, extension: Extension) => {

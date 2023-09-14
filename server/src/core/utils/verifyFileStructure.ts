@@ -1,7 +1,7 @@
 import ServerError from 'core/instances/ServerError'
 import httpStatus from 'http-status'
 import { Extension } from 'types/extensions.types'
-import toGeoJSON from '@mapbox/togeojson'
+const toGeoJSON = require('@mapbox/togeojson')
 import { DOMParser } from 'xmldom'
 
 const verifyFileStructure = async (

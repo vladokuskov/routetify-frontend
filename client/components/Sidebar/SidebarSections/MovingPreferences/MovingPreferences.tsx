@@ -56,26 +56,25 @@ const MovingPreferences = () => {
   return (
     <>
       {/*Full sidebar */}
-      {isSidebarOpen && (
-        <div
-          className={clsx(
-            'flex items-center justify-center gap-2',
-            'max-sm:!flex',
-          )}
-        >
-          {preferences.map((preference, index) => {
-            return (
-              <MovingPreferencesButton
-                variant="default"
-                key={index}
-                onClick={() => handlePreferenceChange(preference)}
-                selectedPreference={selectedPreference}
-                preference={preference}
-              />
-            )
-          })}
-        </div>
-      )}
+      <div
+        className={clsx(
+          'flex items-center justify-center gap-2',
+          !isSidebarOpen && 'hidden',
+          'max-sm:!flex',
+        )}
+      >
+        {preferences.map((preference, index) => {
+          return (
+            <MovingPreferencesButton
+              variant="default"
+              key={index}
+              onClick={() => handlePreferenceChange(preference)}
+              selectedPreference={selectedPreference}
+              preference={preference}
+            />
+          )
+        })}
+      </div>
 
       {/*Compact sidebar */}
       {!isSidebarOpen && (

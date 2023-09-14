@@ -3,7 +3,7 @@
 ![Commits](https://img.shields.io/github/commit-activity/m/swappnet/routetify)
 [![Website cycroute.netlify.app](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://routetify.vercel.app/)
 
-`routetify` - a user-friendly web application that allows you to create routes effortlessly. With our application, you can easily export your routes in GPX/KML format, making it simple to share your favorite routes with others.
+`routetify` - a user-friendly full-stack web application that allows you to create routes effortlessly. With our application, you can easily export/import your routes in GPX/KML format, making it simple to share your favorite routes with others.
 
 Live - https://routetify.vercel.app/
 
@@ -21,15 +21,16 @@ Live - https://routetify.vercel.app/
     Tailwind
     TypeScript
     Leaflet
-
+    Express.js
 
 ### How to start?
 
 1.  Clone the repository: `git clone https://github.com/swappnet/routetify.git`.
-2.  Install dependencies: `npm install`.
-3.  To set up `.env` file in the root directory. You can use the `.env.example` file as a template.
+2.  Install dependencies in each folder (root, server, client): `npm install`.
+3.  To set up `.env` file in the (server, client) directory. You can use the `.env.example` file as a template.
 4.  Start the development server: `npm run dev`.
 5.  Open http://localhost:3000 in your browser to view the app.
+6.  Server by default runs on port 5000.
 
 ### Contributing
 

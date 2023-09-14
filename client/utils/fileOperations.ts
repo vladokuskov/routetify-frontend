@@ -6,6 +6,10 @@ const parseFile = async (file: File) => {
     const body = new FormData()
     body.append('file', file)
 
+    if (file.size > 5 * 1024 * 1024) {
+      throw new Error('File size exceeds the maximum allowed size. (5 mb)')
+    }
+
     const response = await fetch(`${Envs.ORIGIN}/route/parse`, {
       method: 'POST',
       body,

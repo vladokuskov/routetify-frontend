@@ -28,14 +28,13 @@ const verifyFileStructure = async (
 
   if (!hasCoordinates(converted)) {
     throw new ServerError(
-      `Provide a ${extension.toUpperCase()} file with coordinates inside.`,
+      `Provide a ${extension.toUpperCase()} file with coordinates inside or check structure.`,
       httpStatus.NOT_ACCEPTABLE,
     )
   }
 }
 
 const hasCoordinates = (converted: any) => {
-  // Fix types for 'converted'
   return converted && converted.features && converted.features.length > 0
 }
 

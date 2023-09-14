@@ -12,8 +12,6 @@ import { toast } from 'react-hot-toast'
 
 const RouteUploading = () => {
   const inputRef = useRef<HTMLInputElement>(null)
-  const [isFileParsing, setIsFileParsing] = useState<boolean>(false)
-
   const [isUserConfirmed, setIsUserConfirmed] = useState<boolean>(false)
 
   const map = useAppSelector((state) => state.controlsReducer.map)
@@ -30,39 +28,32 @@ const RouteUploading = () => {
     dispatch(updateRouteFile(e.target.files[0]))
   }
 
-  useEffect(() => {
-    const handleRouteDisplaying = async () => {
-      if (!routeFile) return
+  const handleRouteDisplaying = async () => {
+    if (!routeFile) return
 
-      if (!map) {
-        toast.error('Map is not initialized.')
-        return
-      }
-
-      try {
-        setIsFileParsing(true)
-        const route = await parseFile(routeFile)
-
-        dispatch(putDrawCoords(route))
-
-        fitBounds(map, route)
-      } catch (err) {
-        if (err instanceof Error) toast.error(err.message)
-      }
-
-      dispatch(updateRouteFile(null))
-
-      if (inputRef.current) {
-        inputRef.current.value = ''
-      }
-
-      setIsFileParsing(false)
+    if (!map) {
+      toast.error('Map is not initialized.')
+      return
     }
 
-    handleRouteDisplaying()
-  }, [routeFile])
+    try {
+      const route = await parseFile(routeFile)
 
-  useEffect(() => {
+      dispatch(putDrawCoords(route))
+
+      fitBounds(map, route)
+    } catch (err) {
+      if (err instanceof Error) toast.error(err.message)
+    }
+
+    dispatch(updateRouteFile(null))
+
+    if (inputRef.current) {
+      inputRef.current.value = ''
+    }
+  }
+
+  const getRouteFromLocalStorage = () => {
     const route = localStorage.getItem('route')
 
     if (route) {
@@ -73,11 +64,18 @@ const RouteUploading = () => {
         fitBounds(map, parsedRoute)
       }
     }
+  }
+
+  useEffect(() => {
+    handleRouteDisplaying()
+  }, [routeFile])
+
+  useEffect(() => {
+    getRouteFromLocalStorage()
   }, [map])
 
   return (
     <div className="relative w-full flex flex-col items-center justify-center gap-4">
-      {isFileParsing && <p>File is parsing ...</p>}
       <button
         className="inline-flex justify-center items-center gap-2 w-full p-2 bg-neutral-300 rounded-md font-sans font-semibold text-neutral-800 hocus:bg-neutral-200 hocus:text-neutral-950 transition-colors"
         onClick={() => {

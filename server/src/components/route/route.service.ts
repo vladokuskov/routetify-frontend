@@ -1,4 +1,5 @@
 import { Extension } from 'types/extensions.types'
+// @ts-ignore
 import toGeoJSON from '@mapbox/togeojson'
 import { DOMParser } from 'xmldom'
 

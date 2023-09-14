@@ -22,17 +22,17 @@ const RouteFileUploadDrag = () => {
 
   return (
     <aside
-      className="absolute r-0 top-0 w-full h-full z-50 p-6 bg-neutral-400 bg-opacity-30 transition-all"
+      className="absolute r-0 top-0 w-full h-full z-50 bg-neutral-900 bg-opacity-30 transition-all"
       aria-label="Drop file"
       onDrop={handleDrop}
     >
-      <div className="w-full h-full flex flex-col gap-2 items-center justify-center rounded-md border-neutral-200 border-dashed border-2 relative">
+      <div className="w-full h-6 flex gap-2 items-center justify-center relative bg-green-400">
         <Icon
           svg={FileImportIcon}
-          className="pointer-events-none text-neutral-50 dark:text-neutral-100"
-          size={120}
+          className="pointer-events-none text-white"
+          size={20}
         />
-        <p className="font-roboto text-lg font-semibold text-neutral-50 dark:text-neutral-200  pointer-events-none">
+        <p className="font-roboto text-lg font-semibold text-white pointer-events-none">
           Drop file
         </p>
       </div>

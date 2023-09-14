@@ -37,13 +37,19 @@ const RouteUploading = () => {
     }
 
     try {
+      toast.loading('Loading route...', { duration: 0 })
+
       const route = await parseFile(routeFile)
 
       dispatch(putDrawCoords(route))
 
       fitBounds(map, route)
+
+      toast.dismiss()
     } catch (err) {
       if (err instanceof Error) toast.error(err.message)
+
+      toast.dismiss()
     }
 
     dispatch(updateRouteFile(null))

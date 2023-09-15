@@ -1,4 +1,5 @@
 import { siteConfig } from '@/config/site'
+import { NextThemeProvider } from '@/providers/ThemeProvider'
 import '@/styles/globals.css'
 import { Roboto } from 'next/font/google'
 
@@ -53,7 +54,7 @@ export default function RootLayout({
     <html lang="en">
       <head />
       <body className={`${roboto.variable}`} suppressHydrationWarning={true}>
-        {children}
+        <NextThemeProvider>{children}</NextThemeProvider>
       </body>
     </html>
   )

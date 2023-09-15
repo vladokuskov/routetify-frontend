@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button'
 import { siteConfig } from '@/config/site'
 import Link from 'next/link'
 
@@ -14,12 +15,10 @@ export default function NotFound() {
         trying to access doesn`t exist. Don`t worry; it happens to the best of
         us.
       </p>
-      <Link
-        href="/"
-        className="p-1 px-2 bg-green-400 hocus:bg-green-300 active:!bg-green-400 transition-all rounded-md font-roboto font-semibold text-black"
-        aria-label="Back to Homepage"
-      >
-        Back to Homepage
+      <Link href="/" passHref>
+        <Button variant="default" aria-label="Back to Homepage">
+          Back to Homepage
+        </Button>
       </Link>
     </main>
   )

@@ -1,4 +1,4 @@
-import { Button } from '@/components/Button/Button'
+import { Button } from '@/components/ui/button'
 import Icon from '@/components/Icon/Icon'
 import { changeLocationStatus } from '@/redux/features/controlsSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
@@ -26,6 +26,7 @@ const MapControlFitRoute = () => {
   return (
     <Button
       variant="map"
+      size="cube"
       title="Fit route [ALT + O]"
       aria-label="Fit route"
       onClick={handleRouteFit}

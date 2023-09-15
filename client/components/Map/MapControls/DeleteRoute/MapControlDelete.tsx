@@ -1,4 +1,4 @@
-import { Button } from '@/components/Button/Button'
+import { Button } from '@/components/ui/button'
 import DeleteIcon from '@/assets/icons/delete.svg'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { deleteDrawCoords, updateDrawInfo } from '@/redux/features/drawSlice'
@@ -30,6 +30,7 @@ const MapControlDeleteRoute = () => {
   return (
     <Button
       variant="map"
+      size="cube"
       title="Delete route [ALT + D]"
       aria-label="Delete route"
       onClick={handleDelete}

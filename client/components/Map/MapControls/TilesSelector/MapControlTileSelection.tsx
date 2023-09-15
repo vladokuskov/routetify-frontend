@@ -1,4 +1,4 @@
-import { Button } from '@/components/Button/Button'
+import { Button } from '@/components/ui/button'
 import Icon from '@/components/Icon/Icon'
 import { useClickOutside } from '@/hooks/useClickOutside'
 import { changeLayer } from '@/redux/features/controlsSlice'
@@ -8,7 +8,6 @@ import { Layer } from '@/types/global/layer.types'
 import clsx from 'clsx'
 import { useRef } from 'react'
 import LayersIcon from '@/assets/icons/layers.svg'
-import { TileButton } from './TileButton'
 import { useHotkeys } from 'react-hotkeys-hook'
 
 const MapControlTileSelection = () => {
@@ -50,6 +49,7 @@ const MapControlTileSelection = () => {
     <div className="relative" ref={ref}>
       <Button
         variant="map"
+        size="cube"
         title="Select map tile [ALT + T]"
         aria-label="Select map tile layer"
         onClick={handleMenuOpen}
@@ -59,22 +59,34 @@ const MapControlTileSelection = () => {
       {isMenuOpen && (
         <div
           className={clsx(
-            'absolute font-roboto font-semibold gap-1 right-11 bottom-0 rounded-md p-1 bg-app shadow flex flex-col items-center justify-center',
+            'bg-map absolute font-roboto font-semibold gap-1 right-11 bottom-0 rounded-md p-1 shadow flex flex-col items-center justify-center shadow-md',
             'max-hsm:bottom-auto max-hsm:top-11 max-hsm:!right-0',
-            'dark:bg-neutral-700',
           )}
         >
           {layers.map((tile, index) => {
             return (
-              <TileButton
+              <Button
+                variant="map"
+                className="!shadow-none"
                 key={index}
-                handleTileSelect={handleTileSelect}
-                selectedLayer={layer}
-                tile={tile}
+                onClick={() => handleTileSelect(tile)}
                 aria-label={tile === Layer.default ? 'Default' : 'Satellite'}
               >
+                <img
+                  src={`/icons/${
+                    tile === Layer.default
+                      ? 'default'
+                      : tile === Layer.satellite
+                      ? 'satellite'
+                      : null
+                  }.webp`}
+                  alt=""
+                  width={30}
+                  height={30}
+                  style={{ borderRadius: '4px' }}
+                />
                 {tile === Layer.default ? 'Default' : 'Satellite'}
-              </TileButton>
+              </Button>
             )
           })}
         </div>

@@ -1,4 +1,4 @@
-import { Button } from '@/components/Button/Button'
+import { Button } from '@/components/ui/button'
 import LoadingIcon from '@/assets/icons/loader.svg'
 import LocationFilledIcon from '@/assets/icons/location-filled.svg'
 import LocationIconOff from '@/assets/icons/location-off.svg'
@@ -66,6 +66,7 @@ const MapControlFindLocation = () => {
   return (
     <Button
       variant="map"
+      size="cube"
       title="Find location [ALT + J]"
       aria-label="Find location"
       onClick={getLocation}
@@ -73,8 +74,8 @@ const MapControlFindLocation = () => {
         locationStatus === LocationStatus.error
           ? 'danger'
           : locationStatus === LocationStatus.success
-          ? 'success'
-          : 'default'
+          ? 'service'
+          : undefined
       }
     >
       <Icon

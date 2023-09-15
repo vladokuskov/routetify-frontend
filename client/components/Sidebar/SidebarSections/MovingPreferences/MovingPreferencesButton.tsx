@@ -39,9 +39,10 @@ const MovingPreferencesButton = ({
             preference === walk ? 'Walk' : preference === bike ? 'Bike' : 'Car'
           }
           className={clsx(
-            'flex flex-col items-center justify-center gap-1 p-2 h-18 min-w-[4rem] bg-lime-200 text-neutral-800 border-2 border-transparent font-roboto rounded-md font-semibold transition-colors',
+            'flex flex-col items-center justify-center gap-1 p-2 h-18 min-w-[4rem] bg-lime-100 text-neutral-800 border-2 border-transparent font-roboto rounded-md font-semibold transition-colors',
             'disabled:border-lime-400 disabled:bg-lime-300',
             'hocus:bg-lime-300 hocus:!text-neutral-950',
+            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background',
           )}
           {...props}
         >
@@ -82,6 +83,7 @@ const MovingPreferencesButton = ({
           className={clsx(
             ' bg-lime-300 px-1 py-2 h-22 w-full rounded-md transition-colors text-neutral-800 relative pb-7 flex flex-col items-center justify-center',
             'hocus:bg-lime-200 hocus:text-neutral-950',
+            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background',
           )}
           {...props}
         >

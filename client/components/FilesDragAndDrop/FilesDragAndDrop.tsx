@@ -6,7 +6,7 @@ import {
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import FileImportIcon from '@/assets/icons/file-import.svg'
 
-const RouteFileUploadDrag = () => {
+const FilesDragAndDrop = () => {
   const dispatch = useAppDispatch()
   const map = useAppSelector((state) => state.controlsReducer.map)
 
@@ -40,4 +40,4 @@ const RouteFileUploadDrag = () => {
   )
 }
 
-export { RouteFileUploadDrag }
+export { FilesDragAndDrop }

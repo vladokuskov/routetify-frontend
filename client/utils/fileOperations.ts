@@ -16,7 +16,7 @@ const parseFile = async (file: File) => {
     })
 
     if (response.status === 405) {
-      throw new Error('Services currently shut down.')
+      throw new Error('Services currently shut down. Try again later.')
     }
 
     if (!response.ok) {

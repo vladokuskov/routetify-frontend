@@ -1,7 +1,7 @@
 'use client'
 
 import { Map } from '@/components/Map/Map'
-import { RouteFileUploadDrag } from '@/components/RouteFileUploadDrag/RouteFileUploadDrag'
+import { FilesDragAndDrop } from '@/components/FilesDragAndDrop/FilesDragAndDrop'
 import { Sidebar } from '@/components/Sidebar/Sidebar'
 import { toggleFileDragging } from '@/redux/features/fileUploadSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
@@ -54,7 +54,7 @@ export default function Editor() {
     >
       <Sidebar />
       <Map />
-      {isDragging && <RouteFileUploadDrag />}
+      {isDragging && <FilesDragAndDrop />}
     </main>
   )
 }

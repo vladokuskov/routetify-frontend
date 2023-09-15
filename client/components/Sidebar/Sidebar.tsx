@@ -4,6 +4,7 @@ import { ResizeSidebarButton } from './ResizeSidebarButton/ResizeSidebarButton'
 
 import { SidebarSections } from './SidebarSections/SidebarSections'
 import { ThemeSwitcher } from '../ThemeSwitcher/ThemeSwitcher'
+
 const Sidebar = () => {
   const isSidebarOpen = useAppSelector(
     (state) => state.controlsReducer.isSidebarOpen,

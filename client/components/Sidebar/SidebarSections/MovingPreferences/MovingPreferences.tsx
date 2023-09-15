@@ -3,7 +3,12 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { MovingPreferencesType } from '@/types/global/movingPreferencesType.types'
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
-import { MovingPreferencesButton } from '@/components/Sidebar/SidebarSections/MovingPreferences/MovingPreferencesButton'
+import { Button } from '@/components/ui/button'
+import Icon from '@/components/Icon/Icon'
+import ArrowRightIcon from '@/assets/icons/arrow-right.svg'
+import BikeIcon from '@/assets/icons/bike.svg'
+import CarIcon from '@/assets/icons/car.svg'
+import WalkIcon from '@/assets/icons/walk.svg'
 
 const MovingPreferences = () => {
   const [isArrowAnimated, setIsArrowAnimated] = useState(false)
@@ -65,13 +70,44 @@ const MovingPreferences = () => {
       >
         {preferences.map((preference, index) => {
           return (
-            <MovingPreferencesButton
+            <Button
               variant="default"
+              className="flex-col p-2 h-18 min-w-[4rem] bg-primary-muted disabled:bg-primary disabled:opacity-100"
+              disabled={selectedPreference === preference}
               key={index}
               onClick={() => handlePreferenceChange(preference)}
-              selectedPreference={selectedPreference}
-              preference={preference}
-            />
+              aria-label={
+                preference === walk
+                  ? 'Walk moving preference'
+                  : preference === bike
+                  ? 'Bike moving preference'
+                  : 'Car moving preference'
+              }
+              title={
+                preference === walk
+                  ? 'Walk'
+                  : preference === bike
+                  ? 'Bike'
+                  : 'Car'
+              }
+            >
+              <Icon
+                svg={
+                  preference === walk
+                    ? WalkIcon
+                    : preference === bike
+                    ? BikeIcon
+                    : CarIcon
+                }
+              />
+              <span className="text-sm">
+                {preference === walk
+                  ? 'Walk'
+                  : preference === bike
+                  ? 'Bike'
+                  : 'Car'}
+              </span>
+            </Button>
           )
         })}
       </div>
@@ -84,12 +120,52 @@ const MovingPreferences = () => {
             'max-sm:!hidden',
           )}
         >
-          <MovingPreferencesButton
-            variant="compact"
+          <Button
+            variant="default"
+            className="flex-col justify-start relative px-1 py-2 h-22 pb-8 w-full "
             onClick={handleNextPreference}
-            selectedPreference={selectedPreference}
-            isArrow={isArrowAnimated}
-          />
+            aria-label={
+              selectedPreference === walk
+                ? 'Walk moving preference'
+                : selectedPreference === bike
+                ? 'Bike moving preference'
+                : 'Car moving preference'
+            }
+            title={
+              selectedPreference === walk
+                ? 'Walk'
+                : selectedPreference === bike
+                ? 'Bike'
+                : 'Car'
+            }
+          >
+            <span className=" flex flex-col justify-center items-center">
+              <Icon
+                svg={
+                  selectedPreference === walk
+                    ? WalkIcon
+                    : selectedPreference === bike
+                    ? BikeIcon
+                    : CarIcon
+                }
+              />
+            </span>
+            <span className="font-roboto font-semibold text-sm">
+              {selectedPreference === walk
+                ? 'Walk'
+                : selectedPreference === bike
+                ? 'Bike'
+                : 'Car'}
+            </span>
+            <Icon
+              svg={ArrowRightIcon}
+              className={clsx(
+                'absolute bottom-4 h-1',
+                'transform transition-transform',
+                isArrowAnimated && 'animate-move-right',
+              )}
+            />
+          </Button>
         </div>
       )}
     </>

@@ -3,7 +3,6 @@ import SunIcon from '@/assets/icons/sun.svg'
 import MoonIcon from '@/assets/icons/moon-stars.svg'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
-import clsx from 'clsx'
 import { Button } from '../ui/button'
 
 const ThemeSwitcher = () => {
@@ -50,6 +49,7 @@ const ThemeSwitcher = () => {
   return isMounted ? (
     <Button
       variant="ghost"
+      className="active:scale-90 transition-all"
       size="cube"
       onClick={handleThemeChange}
       aria-label="Change theme"

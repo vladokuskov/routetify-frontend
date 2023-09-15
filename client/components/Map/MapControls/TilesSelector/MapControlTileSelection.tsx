@@ -59,7 +59,7 @@ const MapControlTileSelection = () => {
       {isMenuOpen && (
         <div
           className={clsx(
-            'bg-map absolute font-roboto font-semibold gap-1 right-11 bottom-0 rounded-md p-1 shadow flex flex-col items-center justify-center shadow-md',
+            'bg-map absolute font-roboto font-semibold gap-1 right-11 bottom-0 rounded-md p-1 flex flex-col items-center justify-center shadow-md',
             'max-hsm:bottom-auto max-hsm:top-11 max-hsm:!right-0',
           )}
         >
@@ -67,10 +67,11 @@ const MapControlTileSelection = () => {
             return (
               <Button
                 variant="map"
-                className="!shadow-none"
+                className="!shadow-none hover:bg-neutral-200 dark:hover:bg-neutral-500"
                 key={index}
                 onClick={() => handleTileSelect(tile)}
                 aria-label={tile === Layer.default ? 'Default' : 'Satellite'}
+                disabled={tile === layer}
               >
                 <img
                   src={`/icons/${

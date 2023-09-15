@@ -1,6 +1,5 @@
 import Icon from '@/components/Icon/Icon'
 import { useClickOutside } from '@/hooks/useClickOutside'
-import fitBounds from '@/lib/fitBounds'
 import {
   currentDate,
   generateGPX,
@@ -14,7 +13,8 @@ import { useRef, useState } from 'react'
 import ArrowDownIcon from '@/assets/icons/chevron-down.svg'
 import ArrowUpIcon from '@/assets/icons/chevron-up.svg'
 import DownloadIcon from '@/assets/icons/download.svg'
-import { RouteExportButton } from '@/components/Sidebar/SidebarSections/RouteExport/RouteExportButton'
+import { Button } from '@/components/ui/button'
+import ArrowRightIcon from '@/assets/icons/arrow-right.svg'
 
 const RouteExport = () => {
   const selectionMenuRef = useRef(null)
@@ -80,32 +80,31 @@ const RouteExport = () => {
   return (
     <div
       className={clsx(
-        'w-full relative bg-neutral-300 rounded font-roboto font-semibold flex justify-center items-center',
+        'w-full relative flex justify-center items-center gap-2',
         'max-sm:!flex-row',
         !isSidebarOpen && 'flex-col',
       )}
       ref={selectionMenuRef}
     >
-      <button
+      <Button
+        variant="secondary"
         onClick={handleRouteDownload}
         disabled={drawCoords.length === 0}
         aria-label={`Export route in ${selectedRouteType} format`}
         title={`Export route in ${
           selectedRouteType === GPX ? 'GPX' : 'KML'
         } format`}
-        className="w-full inline-flex justify-center items-center gap-4 p-3 text-neutral-800 hocus:bg-neutral-200 hocus:text-neutral-950 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full"
       >
+        <Icon svg={DownloadIcon} />
         <span className={clsx('', 'max-sm:!block', !isSidebarOpen && 'hidden')}>
           Download
         </span>
-        <Icon svg={DownloadIcon} />
-      </button>
-      <button
-        className={clsx(
-          'w-full max-w-[7rem] inline-flex justify-center items-center gap-1 p-3 text-neutral-800 hocus:bg-neutral-200 hocus:text-neutral-950 rounded-md transition-colors',
-          'max-sm:!inline-flex',
-          !isSidebarOpen && 'hidden',
-        )}
+      </Button>
+
+      <Button
+        variant="secondary"
+        className={clsx('max-sm:!inline-flex w-20', !isSidebarOpen && 'hidden')}
         aria-label="Open dropdown to choose route type"
         onClick={handleSelectionMenuOpen}
       >
@@ -113,36 +112,57 @@ const RouteExport = () => {
           {selectedRouteType === GPX ? 'GPX' : 'KML'}
         </span>
         <Icon svg={isSelectionMenuOpen ? ArrowUpIcon : ArrowDownIcon} />
-      </button>
+      </Button>
 
       {/*Compact sidebar */}
       {!isSidebarOpen && (
-        <RouteExportButton
-          variant="compact"
+        <Button
+          className="w-full h-16 flex-col justify-start relative max-sm:hidden"
+          variant="secondary"
           onClick={() => handleRouteTypeChange()}
-          selectedType={selectedRouteType}
-          isArrow={isArrowAnimated}
-        />
+          aria-label={
+            selectedRouteType === GPX
+              ? 'GPX export format'
+              : 'KML export format'
+          }
+          title={
+            selectedRouteType === GPX
+              ? 'GPX export format'
+              : 'KML export format'
+          }
+        >
+          <span>{selectedRouteType === GPX ? 'GPX' : 'KML'}</span>
+          <Icon
+            svg={ArrowRightIcon}
+            className={clsx(
+              'absolute bottom-5 h-1',
+              'transform transition-transform',
+              isArrowAnimated && 'animate-move-right',
+            )}
+          />
+        </Button>
       )}
 
       {/*Dropdown*/}
       {isSelectionMenuOpen && (
         <div
           className={clsx(
-            'absolute w-full max-w-[7rem] right-0 bottom-[-4.7rem] rounded-md p-1 bg-neutral-300 shadow',
+            'absolute w-full flex flex-col items-center justify-start gap-1 max-w-[7rem] right-0 top-11 rounded-md p-1 bg-popover shadow',
             'max-sm:!block',
             !isSidebarOpen && 'hidden',
           )}
         >
           {types.map((routeType, index) => {
             return (
-              <RouteExportButton
-                variant="type"
+              <Button
+                variant="ghost"
+                className="w-full text-popover-foreground dark:hover:bg-neutral-400"
+                disabled={routeType === selectedRouteType}
                 key={index}
                 onClick={() => handleRouteTypeChange(routeType)}
-                selectedType={selectedRouteType}
-                routeType={routeType}
-              />
+              >
+                {routeType === GPX ? 'GPX' : 'KML'}
+              </Button>
             )
           })}
         </div>

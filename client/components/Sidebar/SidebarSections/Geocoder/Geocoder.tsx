@@ -15,6 +15,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { LocationStatus } from '@/types/global/locationStatus.types'
 import clsx from 'clsx'
 import { toast } from 'react-hot-toast'
+import { Button } from '@/components/ui/button'
 
 interface TGeoResponse {
   lat: number
@@ -183,11 +184,12 @@ const Geocoder = () => {
         )}
       </div>
 
-      <button
+      <Button
+        variant="secondary"
         className={clsx(
-          'bg-neutral-300 w-full-h-full p-3 rounded-md text-neutral-500 hocus:bg-neutral-200 hocus:text-neutral-400 transition-colors',
+          'w-full',
           'max-sm:hidden',
-          !isSidebarOpen ? 'block' : 'hidden',
+          !isSidebarOpen ? 'inline-flex' : 'hidden',
         )}
         aria-label={
           lastSelectedResult ? 'Last selected location' : 'Location search'
@@ -207,7 +209,7 @@ const Geocoder = () => {
         }}
       >
         <Icon svg={SearchIcon} />
-      </button>
+      </Button>
     </>
   )
 }

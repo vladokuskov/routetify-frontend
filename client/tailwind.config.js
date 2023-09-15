@@ -79,7 +79,6 @@ module.exports = {
           border: 'hsl(var(--map-border))',
           foreground: 'hsl(var(--map-foreground))',
         },
-        'sidebar-border': 'hsl(var(--sidebar-border))',
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -105,7 +104,7 @@ module.exports = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'move-right': 'moveRight 0.5s backwards',
+        'move-right': 'move-right 0.5s backwards',
       },
     },
   },

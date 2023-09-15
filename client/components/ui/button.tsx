@@ -13,16 +13,16 @@ const buttonVariants = cva(
         destructive:
           'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         outline:
-          'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
+          'border border-input bg-background hover:bg-accent hover:text-accent-foreground hover:border-accent',
         secondary:
           'bg-secondary text-secondary-foreground hover:bg-secondary/80',
         ghost: 'hover:bg-accent hover:text-accent-foreground',
         link: 'text-primary underline-offset-4 hover:underline',
-        map: 'bg-map gap-2 text-map-foreground border-2 border-transparent hover:border-map-border hover:!text-map-foreground/80 !shadow-md',
+        map: 'bg-map gap-2 text-map-foreground border-2 border-transparent hover:border-map-border hover:text-map-foreground/80 !shadow-md',
       },
       status: {
-        danger: 'text-red-500',
-        service: 'text-blue-500',
+        danger: 'text-red-500 hover:!text-red-500',
+        service: 'text-blue-500 hover:!text-blue-600',
       },
       size: {
         default: 'h-10 px-4 py-2',

@@ -17,9 +17,27 @@ export default function NotFound() {
       </p>
       <Link href="/" passHref>
         <Button variant="default" aria-label="Back to Homepage">
-          Back to Homepage
+          Default
         </Button>
       </Link>
+      <Button variant="destructive" aria-label="Back to Homepage">
+        Destructive
+      </Button>
+      <Button variant="ghost" aria-label="Back to Homepage">
+        Ghost
+      </Button>
+      <Button variant="secondary" aria-label="Back to Homepage">
+        Secondary
+      </Button>
+      <Button variant="link" aria-label="Back to Homepage">
+        Link
+      </Button>
+      <Button variant="outline" aria-label="Back to Homepage">
+        Outline
+      </Button>
+      <Button variant="map" aria-label="Back to Homepage">
+        Map
+      </Button>
     </main>
   )
 }

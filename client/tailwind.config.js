@@ -41,9 +41,9 @@ module.exports = {
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
-        ring: 'var(--ring)',
-        background: 'var(--background)',
-        foreground: 'var(--foreground)',
+        ring: 'hsl(var(--ring))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
@@ -73,11 +73,11 @@ module.exports = {
           foreground: 'hsl(var(--card-foreground))',
         },
         map: {
-          DEFAULT: 'var(--map)',
-          border: 'var(--map-border)',
-          foreground: 'var(--map-foreground)',
+          DEFAULT: 'hsl(var(--map))',
+          border: 'hsl(var(--map-border))',
+          foreground: 'hsl(var(--map-foreground))',
         },
-        'sidebar-border': 'var(--sidebar-border)',
+        'sidebar-border': 'hsl(var(--sidebar-border))',
       },
       borderRadius: {
         lg: 'var(--radius)',

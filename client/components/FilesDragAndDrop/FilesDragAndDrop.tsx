@@ -28,7 +28,7 @@ const FilesDragAndDrop = () => {
     >
       <div className="w-full h-8 flex gap-2 items-center justify-center relative bg-primary text-black">
         <Icon svg={FileImportIcon} className="pointer-events-none " size={20} />
-        <p className="font-roboto text-lg font-semibold pointer-events-none">
+        <p className="font-roboto font-semibold pointer-events-none text-sm">
           Drop file
         </p>
       </div>

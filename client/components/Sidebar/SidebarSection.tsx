@@ -24,17 +24,12 @@ const SidebarSection = ({
         )}
       >
         {title && (
-          <h2
-            className={clsx(
-              'text-xl font-semibold text-neutral-600 tracking-tight',
-              'dark:text-neutral-300',
-            )}
-          >
+          <h2 className="text-xl font-semibold text-title tracking-tight">
             {title}
           </h2>
         )}
         {description && (
-          <p className=" text-base leading-4 font-normal text-neutral-400">
+          <p className="text-base leading-4 font-normal text-paragraph">
             {description}
           </p>
         )}

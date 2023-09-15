@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import Icon from '@/components/Icon/Icon'
+import Icon from '@/components/ui/icon'
 import { useClickOutside } from '@/hooks/useClickOutside'
 import { changeLayer } from '@/redux/features/controlsSlice'
 import { addLatLng } from '@/redux/features/geocoderSlice'

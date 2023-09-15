@@ -1,5 +1,5 @@
 import FileImportIcon from '@/assets/icons/file-import.svg'
-import Icon from '@/components/Icon/Icon'
+import Icon from '@/components/ui/icon'
 import { Button } from '@/components/ui/button'
 import fitBounds from '@/lib/fitBounds'
 import { putDrawCoords } from '@/redux/features/drawSlice'

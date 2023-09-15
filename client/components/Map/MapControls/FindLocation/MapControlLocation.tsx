@@ -4,7 +4,7 @@ import LocationFilledIcon from '@/assets/icons/location-filled.svg'
 import LocationIconOff from '@/assets/icons/location-off.svg'
 import LocationIconBroken from '@/assets/icons/location-broken.svg'
 
-import Icon from '@/components/Icon/Icon'
+import Icon from '@/components/ui/icon'
 import {
   changeCurrentCoords,
   changeLocationStatus,

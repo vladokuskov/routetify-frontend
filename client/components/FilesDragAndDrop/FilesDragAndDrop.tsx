@@ -1,4 +1,4 @@
-import Icon from '@/components/Icon/Icon'
+import Icon from '@/components/ui/icon'
 import {
   toggleFileDragging,
   updateRouteFile,
@@ -22,17 +22,13 @@ const FilesDragAndDrop = () => {
 
   return (
     <aside
-      className="absolute r-0 top-0 w-full h-full z-50 bg-neutral-900 bg-opacity-30 transition-all"
+      className="absolute r-0 top-0 w-full h-full z-50 bg-neutral-900/30 transition-all"
       aria-label="Drop file"
       onDrop={handleDrop}
     >
-      <div className="w-full h-6 flex gap-2 items-center justify-center relative bg-green-400">
-        <Icon
-          svg={FileImportIcon}
-          className="pointer-events-none text-white"
-          size={20}
-        />
-        <p className="font-roboto text-lg font-semibold text-white pointer-events-none">
+      <div className="w-full h-8 flex gap-2 items-center justify-center relative bg-primary text-black">
+        <Icon svg={FileImportIcon} className="pointer-events-none " size={20} />
+        <p className="font-roboto text-lg font-semibold pointer-events-none">
           Drop file
         </p>
       </div>

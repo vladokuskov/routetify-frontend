@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import Icon from '@/components/Icon/Icon'
+import Icon from '@/components/ui/icon'
 import { changeLocationStatus } from '@/redux/features/controlsSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { LocationStatus } from '@/types/global/locationStatus.types'

@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import LineIcon from '@/assets/icons/line.svg'
 import ClearIcon from '@/assets/icons/x.svg'
 
-import Icon from '@/components/Icon/Icon'
+import Icon from '@/components/ui/icon'
 import { DrawType } from '@/types/global/drawType.types'
 import { useHotkeys } from 'react-hotkeys-hook'
 

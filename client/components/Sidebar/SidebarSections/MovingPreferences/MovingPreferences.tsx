@@ -1,14 +1,14 @@
+import ArrowRightIcon from '@/assets/icons/arrow-right.svg'
+import BikeIcon from '@/assets/icons/bike.svg'
+import CarIcon from '@/assets/icons/car.svg'
+import WalkIcon from '@/assets/icons/walk.svg'
+import Icon from '@/components/ui/icon'
+import { Button } from '@/components/ui/button'
 import { changeMovingPreferences } from '@/redux/features/controlsSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { MovingPreferencesType } from '@/types/global/movingPreferencesType.types'
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
-import { Button } from '@/components/ui/button'
-import Icon from '@/components/Icon/Icon'
-import ArrowRightIcon from '@/assets/icons/arrow-right.svg'
-import BikeIcon from '@/assets/icons/bike.svg'
-import CarIcon from '@/assets/icons/car.svg'
-import WalkIcon from '@/assets/icons/walk.svg'
 
 const MovingPreferences = () => {
   const [isArrowAnimated, setIsArrowAnimated] = useState(false)

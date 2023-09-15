@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button'
 import DeleteIcon from '@/assets/icons/delete.svg'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { deleteDrawCoords, updateDrawInfo } from '@/redux/features/drawSlice'
-import Icon from '@/components/Icon/Icon'
+import Icon from '@/components/ui/icon'
 import { useHotkeys } from 'react-hotkeys-hook'
 
 const MapControlDeleteRoute = () => {

@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import Icon from '@/components/Icon/Icon'
+import Icon from '@/components/ui/icon'
 import { useAppSelector } from '@/redux/hooks'
 import MinusIcon from '@/assets/icons/minus.svg'
 import PlusIcon from '@/assets/icons/plus.svg'

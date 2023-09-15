@@ -1,5 +1,5 @@
 import UndoIcon from '@/assets/icons/undo.svg'
-import Icon from '@/components/Icon/Icon'
+import Icon from '@/components/ui/icon'
 import { Button } from '@/components/ui/button'
 import { undoDrawCoords } from '@/redux/features/drawSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'

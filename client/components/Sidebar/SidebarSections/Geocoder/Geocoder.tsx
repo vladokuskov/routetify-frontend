@@ -2,8 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import SpinnerIcon from '@/assets/icons/loader.svg'
 import SearchIcon from '@/assets/icons/search.svg'
-import Icon from '@/components/Icon/Icon'
-import { Input } from '@/components/Input/Input'
+import Icon from '@/components/ui/icon'
 import { useClickOutside } from '@/hooks/useClickOutside'
 import updateMapView from '@/lib/updateMapView'
 import {
@@ -16,6 +15,7 @@ import { LocationStatus } from '@/types/global/locationStatus.types'
 import clsx from 'clsx'
 import { toast } from 'react-hot-toast'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 
 interface TGeoResponse {
   lat: number
@@ -141,25 +141,13 @@ const Geocoder = () => {
       >
         <Input
           placeholder="Search location"
-          variant="search"
           onClick={() => geocoderResponse && setIsResultsOpen(true)}
           value={geocoderValue}
           onChange={handleChangeGeocoder}
-          icon={
-            isGeocoderLoading ? (
-              <Icon svg={SpinnerIcon} spin />
-            ) : (
-              <Icon svg={SearchIcon} />
-            )
-          }
-          className={isResultsOpen ? 'rounded-b-none' : ''}
-          aria-haspopup="listbox"
-          aria-expanded={isResultsOpen}
-          aria-owns="geocoder-results"
         />
         {geocoderResponse && isResultsOpen && (
           <div
-            className="w-full top-[2.5rem] absolute rounded-t-none rounded-md z-20 bg-neutral-300 shadow p-1"
+            className="w-full top-[2.8rem] flex flex-col items-center justify-start gap-1 absolute rounded-md z-20 bg-popover shadow p-1"
             role="listbox"
             aria-expanded={isResultsOpen}
             id="geocoder-results"
@@ -167,17 +155,16 @@ const Geocoder = () => {
             {geocoderResponse.slice(0, 3).map((data: TGeoResponse, i) => {
               let { lat, lon, display_name } = data
               return (
-                <button
+                <Button
+                  variant="ghost"
+                  className="w-full h-auto text-popover-foreground dark:hover:bg-neutral-400 text-base"
                   key={i}
-                  className={clsx(
-                    'w-full p-2 text-neutral-600 hocus:bg-neutral-200 hocus:text-neutral-950 rounded-md transition-colors font-semibold',
-                  )}
                   aria-label={display_name}
                   onClick={() => handleResultSelect({ lat, lon, display_name })}
                   id={`geocoder-option-${i}`}
                 >
                   {display_name}
-                </button>
+                </Button>
               )
             })}
           </div>

@@ -1,4 +1,4 @@
-import Icon from '@/components/Icon/Icon'
+import Icon from '@/components/ui/icon'
 import { Button } from '@/components/ui/button'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import RepeatIcon from '@/assets/icons/repeat.svg'

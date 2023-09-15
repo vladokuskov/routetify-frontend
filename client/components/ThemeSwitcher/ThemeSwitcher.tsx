@@ -1,4 +1,4 @@
-import Icon from '@/components/Icon/Icon'
+import Icon from '@/components/ui/icon'
 import SunIcon from '@/assets/icons/sun.svg'
 import MoonIcon from '@/assets/icons/moon-stars.svg'
 import { useTheme } from 'next-themes'
@@ -49,7 +49,7 @@ const ThemeSwitcher = () => {
   return isMounted ? (
     <Button
       variant="ghost"
-      className="active:scale-90 transition-all"
+      className="active:scale-90"
       size="cube"
       onClick={handleThemeChange}
       aria-label="Change theme"

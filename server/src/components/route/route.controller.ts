@@ -1,4 +1,3 @@
-import ServerError from 'core/instances/ServerError'
 import { Request, Response } from 'express'
 import httpStatus from 'http-status'
 import { parse } from './route.service'
@@ -18,12 +17,9 @@ const parseRoute = async (req: Request, res: Response) => {
       res.json(result)
     }
   } catch (error) {
-    if (error instanceof ServerError) {
-      res.status(error.code || 502)
-      res.json({ error: error.message })
-    } else {
+    if (error instanceof Error) {
       res.status(httpStatus.INTERNAL_SERVER_ERROR)
-      res.json({ error: 'Internal server error' })
+      res.json({ message: 'Internal server error' })
     }
   }
 }

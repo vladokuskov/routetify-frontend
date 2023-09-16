@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { parseRoute } from './route.controller'
-import { verifyFileRequest } from 'core/middleware/route.middleware'
+import { verifyFileRequest } from './route.middleware'
 
 const router: Router = Router()
 

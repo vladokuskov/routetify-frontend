@@ -22,7 +22,7 @@ const parseFile = async (file: File) => {
     if (!response.ok) {
       const errorData = await response.json()
       throw new Error(
-        errorData.error || 'Something happened when parsing your file.',
+        errorData.message || 'Something happened when parsing your file.',
       )
     }
 

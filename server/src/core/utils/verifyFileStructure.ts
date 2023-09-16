@@ -1,5 +1,3 @@
-import ServerError from 'core/instances/ServerError'
-import httpStatus from 'http-status'
 import { Extension } from 'types/extensions.types'
 const toGeoJSON = require('@mapbox/togeojson')
 import { DOMParser } from 'xmldom'
@@ -11,10 +9,7 @@ const verifyFileStructure = async (
   const fileContent = file.buffer.toString()
 
   if (fileContent.length === 0) {
-    throw new ServerError(
-      'Provide a file with content inside.',
-      httpStatus.NOT_ACCEPTABLE,
-    )
+    throw new Error('Provide a file with content inside.')
   }
 
   const doc = new DOMParser().parseFromString(fileContent, 'text/xml')
@@ -27,9 +22,8 @@ const verifyFileStructure = async (
   }
 
   if (!hasCoordinates(converted)) {
-    throw new ServerError(
+    throw new Error(
       `Provide a ${extension.toUpperCase()} file with coordinates inside or check structure.`,
-      httpStatus.NOT_ACCEPTABLE,
     )
   }
 }

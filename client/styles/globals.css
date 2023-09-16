@@ -41,8 +41,11 @@
     --title: 0 0% 4%;
     --paragraph: 0 0% 34%;
 
-    --border: 214.3 31.8% 91.4%;
     --input: 0 0% 25%;
+    --input-map: 0 0% 92.1%;
+    --input-map-foreground: 0 0% 5%;
+
+    --border: 214.3 31.8% 91.4%;
     --ring: 56 87% 55%;
 
     --radius: 0.5rem;
@@ -81,8 +84,11 @@
     --title: 0 0% 97%;
     --paragraph: 0 0% 87%;
 
-    --border: 0 32.6% 17.5%;
     --input: 0 0% 35%;
+    --input-map: 0 0% 83%;
+    --input-map-foreground: 0 0% 5%;
+
+    --border: 0 32.6% 17.5%;
   }
 }
 

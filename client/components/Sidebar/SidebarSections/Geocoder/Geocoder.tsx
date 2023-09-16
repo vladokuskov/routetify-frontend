@@ -140,6 +140,7 @@ const Geocoder = () => {
         ref={ref}
       >
         <Input
+          variant="map"
           placeholder="Search location"
           onClick={() => geocoderResponse && setIsResultsOpen(true)}
           value={geocoderValue}

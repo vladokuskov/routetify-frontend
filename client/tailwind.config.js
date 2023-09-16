@@ -40,7 +40,6 @@ module.exports = {
       },
       colors: {
         border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
@@ -79,6 +78,11 @@ module.exports = {
           DEFAULT: 'hsl(var(--map))',
           border: 'hsl(var(--map-border))',
           foreground: 'hsl(var(--map-foreground))',
+        },
+        input: {
+          DEFAULT: 'hsl(var(--input))',
+          map: 'hsl(var(--input-map))',
+          'map-foreground': 'hsl(var(--input-map-foreground))',
         },
       },
       borderRadius: {

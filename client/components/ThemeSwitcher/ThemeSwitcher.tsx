@@ -1,20 +1,27 @@
+'use client'
+
 import Icon from '@/components/ui/icon'
 import SunIcon from '@/assets/icons/sun.svg'
 import MoonIcon from '@/assets/icons/moon-stars.svg'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
-import { Button } from '../ui/button'
+import { Button } from '@/components/ui/button'
+import { useRouter } from 'next/navigation'
 
 const ThemeSwitcher = () => {
   const [isMounted, setIsMounted] = useState<boolean>(false)
   const [isDark, setIsDark] = useState<boolean>(false)
 
-  const { theme, systemTheme, setTheme } = useTheme()
+  const router = useRouter()
+
+  const { theme, setTheme } = useTheme()
 
   const handleThemeChange = () => {
     const themeMetaTag = document.querySelector('meta[name="theme-color"]')
-    const currentTheme = theme === 'system' ? systemTheme : theme
+    const currentTheme = theme
+
     const newTheme = currentTheme === 'light' ? 'dark' : 'light'
+
     const themeColor = newTheme === 'dark' ? '#0A0A0A' : '#F8F6F6'
 
     setIsDark(newTheme === 'dark')
@@ -46,7 +53,11 @@ const ThemeSwitcher = () => {
     }
   }, [])
 
-  return isMounted ? (
+  if (!isMounted) {
+    return null
+  }
+
+  return (
     <Button
       variant="ghost"
       className="active:scale-90"
@@ -56,8 +67,6 @@ const ThemeSwitcher = () => {
     >
       <Icon svg={isDark ? SunIcon : MoonIcon} size={24} />
     </Button>
-  ) : (
-    <></>
   )
 }
 

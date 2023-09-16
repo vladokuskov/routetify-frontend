@@ -53,11 +53,7 @@ const ThemeSwitcher = () => {
     }
   }, [])
 
-  if (!isMounted) {
-    return null
-  }
-
-  return (
+  return isMounted ? (
     <Button
       variant="ghost"
       className="active:scale-90"
@@ -67,6 +63,8 @@ const ThemeSwitcher = () => {
     >
       <Icon svg={isDark ? SunIcon : MoonIcon} size={24} />
     </Button>
+  ) : (
+    <div className="bg-neutral-200 dark:bg-neutral-800 animate-pulse h-8 w-8 rounded-md" />
   )
 }
 

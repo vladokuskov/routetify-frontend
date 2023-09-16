@@ -6,7 +6,7 @@ export const metadata = { title: `${siteConfig.name} - Not found` }
 
 export default function NotFound() {
   return (
-    <main className="flex flex-col gap-4 items-center justify-center h-screen">
+    <main className="flex flex-col gap-4 items-center justify-center h-screen p-2">
       <h1 className="font-roboto text-title font-bold">
         Ooops, page not found
       </h1>

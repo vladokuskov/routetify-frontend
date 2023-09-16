@@ -1,5 +1,5 @@
-import { Button } from '@/components/Button/Button'
-import Icon from '@/components/Icon/Icon'
+import { Button } from '@/components/ui/button'
+import Icon from '@/components/ui/icon'
 import { useAppSelector } from '@/redux/hooks'
 import MinusIcon from '@/assets/icons/minus.svg'
 import PlusIcon from '@/assets/icons/plus.svg'
@@ -25,6 +25,7 @@ const MapControlZoom = () => {
     >
       <Button
         variant="map"
+        size="cube"
         title="Zoom in"
         aria-label="Zoom in"
         onClick={handleZoomIn}
@@ -34,6 +35,7 @@ const MapControlZoom = () => {
       </Button>
       <Button
         variant="map"
+        size="cube"
         title="Zoom out"
         aria-label="Zoom in"
         onClick={handleZoomOut}

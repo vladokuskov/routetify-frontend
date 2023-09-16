@@ -1,4 +1,3 @@
-import { NextThemeProvider } from '@/providers/ThemeProvider'
 import { StoreProvider } from '@/providers/StoreProvider'
 import 'leaflet/dist/leaflet.css'
 import { Toaster } from '@/components/Toaster/Toaster'
@@ -16,9 +15,7 @@ export default function RootLayout({
       <head />
       <body>
         <Toaster />
-        <NextThemeProvider>
-          <StoreProvider>{children}</StoreProvider>
-        </NextThemeProvider>
+        <StoreProvider>{children}</StoreProvider>
       </body>
     </html>
   )

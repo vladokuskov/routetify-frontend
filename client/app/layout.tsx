@@ -1,4 +1,5 @@
 import { siteConfig } from '@/config/site'
+import { NextThemeProvider } from '@/providers/ThemeProvider'
 import '@/styles/globals.css'
 import { Roboto } from 'next/font/google'
 
@@ -12,26 +13,10 @@ export const metadata = {
   title: siteConfig.name,
   description: siteConfig.description,
   keywords: ['Routetify', 'Bike', 'Route', 'GPX', 'KML'],
-  authors: [
-    {
-      name: 'swappnet',
-      url: 'https://vladokuskov.xyz/',
-    },
-  ],
-  creator: 'swappnet',
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#F8F6F6' },
-    { media: '(prefers-color-scheme: dark)', color: '#0A0A0A' },
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#141414' },
   ],
-  openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: siteConfig.url,
-    title: siteConfig.name,
-    description: siteConfig.description,
-    siteName: siteConfig.name,
-    images: '',
-  },
   icons: {
     icon: [
       { url: '/favicon-16x16.png' },
@@ -53,7 +38,7 @@ export default function RootLayout({
     <html lang="en">
       <head />
       <body className={`${roboto.variable}`} suppressHydrationWarning={true}>
-        {children}
+        <NextThemeProvider>{children}</NextThemeProvider>
       </body>
     </html>
   )

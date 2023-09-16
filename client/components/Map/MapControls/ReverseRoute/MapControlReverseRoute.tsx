@@ -1,5 +1,5 @@
-import { Button } from '@/components/Button/Button'
-import Icon from '@/components/Icon/Icon'
+import Icon from '@/components/ui/icon'
+import { Button } from '@/components/ui/button'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import RepeatIcon from '@/assets/icons/repeat.svg'
 import { reverseRoute } from '@/redux/features/drawSlice'
@@ -21,6 +21,7 @@ const MapControlReverseRoute = () => {
   return (
     <Button
       variant="map"
+      size="cube"
       title="Reverse route [ALT + R]"
       aria-label="Reverse route"
       onClick={handleRouteReverse}

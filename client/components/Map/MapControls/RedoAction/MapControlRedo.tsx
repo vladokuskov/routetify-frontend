@@ -1,5 +1,5 @@
-import { Button } from '@/components/Button/Button'
-import Icon from '@/components/Icon/Icon'
+import { Button } from '@/components/ui/button'
+import Icon from '@/components/ui/icon'
 import { redoDrawCoords } from '@/redux/features/drawSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { DrawType } from '@/types/global/drawType.types'
@@ -30,6 +30,7 @@ const MapControlRedoAction = () => {
   return (
     <Button
       variant="map"
+      size="cube"
       title="Redo action [ALT + X]"
       aria-label="Redo action"
       onClick={handleRedo}

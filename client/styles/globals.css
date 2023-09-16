@@ -7,16 +7,92 @@
     clip-path: inset(0.6px);
   }
 }
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 82%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0, 0%, 87%;
+    --popover-foreground: 0, 0%, 19%;
+
+    --primary: 81.972 85% 67%;
+    --primary-foreground: 0 0% 0%;
+    --primary-muted: 80 89% 89%;
+
+    --map: 0 0% 99%;
+    --map-border: 0 0% 83%;
+    --map-foreground: 0 0% 19%;
+
+    --secondary: 0 0% 90.1%;
+    --secondary-foreground: 0 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --title: 0 0% 4%;
+    --paragraph: 0 0% 34%;
+
+    --input: 0 0% 25%;
+    --input-map: 0 0% 92.1%;
+    --input-map-foreground: 0 0% 5%;
+
+    --border: 214.3 31.8% 91.4%;
+    --ring: 56 87% 55%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 8%;
+    --foreground: 0 0% 29%;
+
+    --card: 0 84% 4.9%;
+    --card-foreground: 0 40% 98%;
+
+    --popover: 0 0% 81%;
+    --popover-foreground: 0 0% 10%;
+
+    --primary: 81.972 85% 67%;
+    --primary-foreground: 0 0% 0%;
+    --primary-muted: 80 89% 89%;
+
+    --map: 0 0% 25%;
+    --map-border: 0 0% 52%;
+    --map-foreground: 0 0% 95%;
+
+    --secondary: 0 40% 96.1%;
+    --secondary-foreground: 0 47.4% 11.2%;
+
+    --muted: 0 32.6% 17.5%;
+    --muted-foreground: 0 20.2% 65.1%;
+
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 95%;
+
+    --destructive: 0 90% 40.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --title: 0 0% 97%;
+    --paragraph: 0 0% 87%;
+
+    --input: 0 0% 35%;
+    --input-map: 0 0% 83%;
+    --input-map-foreground: 0 0% 5%;
+
+    --border: 0 32.6% 17.5%;
+  }
+}
 
 @layer base {
-  * {
-    @apply focus-visible:ring-2 focus-visible:ring-yellow-400;
-  }
-
-  button,
-  a {
-    @apply focus-visible:ring-2 focus-visible:ring-yellow-400;
-  }
   html {
     -webkit-tap-highlight-color: transparent;
   }
@@ -30,13 +106,13 @@
     @apply text-lg;
   }
   body {
-    @apply dark:bg-neutral-800 bg-[#f8f6f6];
+    @apply bg-background;
   }
   :root {
-    @apply dark:bg-neutral-800 bg-[#f8f6f6];
+    @apply bg-background;
   }
   #map {
-    @apply dark:bg-neutral-700 bg-[#eeeeee];
+    @apply bg-background;
     @apply dark:grid-bg-dark grid-bg;
   }
 }

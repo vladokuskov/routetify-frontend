@@ -13,7 +13,7 @@ import useGetPositionByDrag from '@/hooks/map/useGetPositionByDrag'
 import RenderLocationMarker from './RenderLocationMarker'
 import RenderMarkers from './RenderMarkers'
 import RenderPolyline from './RenderPolyline'
-import { useAppDispatch } from '@/redux/hooks'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { loadMap } from '@/redux/features/controlsSlice'
 
 const LeafletMap = () => {

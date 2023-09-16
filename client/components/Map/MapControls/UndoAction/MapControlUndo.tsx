@@ -1,6 +1,6 @@
 import UndoIcon from '@/assets/icons/undo.svg'
-import { Button } from '@/components/Button/Button'
-import Icon from '@/components/Icon/Icon'
+import Icon from '@/components/ui/icon'
+import { Button } from '@/components/ui/button'
 import { undoDrawCoords } from '@/redux/features/drawSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { DrawType } from '@/types/global/drawType.types'
@@ -22,6 +22,7 @@ const MapControlUndoAction = () => {
   return (
     <Button
       variant="map"
+      size="cube"
       title="Undo action [ALT + Z]"
       aria-label="Undo action"
       onClick={handleUndo}

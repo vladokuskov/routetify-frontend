@@ -23,7 +23,6 @@
     "http-status": "^1.6.2",
     "jsonwebtoken": "^9.0.1",
     "multer": "^1.4.5-lts.1",
-    "rm": "^0.1.8",
     "uuid": "^9.0.0",
     "winston": "^3.10.0",
     "xmldom": "^0.6.0",

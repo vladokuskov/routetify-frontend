@@ -1,4 +1,3 @@
-import ServerError from 'core/instances/ServerError'
 import { getFileExtension } from 'core/utils/getFileExtension'
 import { verifyFileStructure } from 'core/utils/verifyFileStructure'
 import { NextFunction, Request, Response } from 'express'
@@ -10,6 +9,17 @@ const verifyFileRequest = async (
   res: Response,
   next: NextFunction,
 ) => {
+  const header = req.headers['content-type']?.split(';')
+
+  if (!header || header[0] !== 'multipart/form-data') {
+    res.status(httpStatus.NOT_ACCEPTABLE)
+    res.json({
+      message: 'Provide request with a correct content type.',
+    })
+
+    return
+  }
+
   try {
     const upload = multer({
       limits: {
@@ -21,8 +31,7 @@ const verifyFileRequest = async (
       if (err || !req.file) {
         res.status(httpStatus.EXPECTATION_FAILED)
         res.json({
-          error:
-            err.message ||
+          message:
             'Provide request with correct fields in form. ("file": content)',
         })
       } else {
@@ -34,25 +43,20 @@ const verifyFileRequest = async (
 
           await verifyFileStructure(file, extension)
 
-          // All checks passed
           req.body = { file, extension }
 
           next()
         } catch (error) {
-          if (error instanceof ServerError) {
-            res.status(error.code || httpStatus.INTERNAL_SERVER_ERROR)
-            res.json({ error: error.message || 'Internal server error' })
-          } else {
-            console.log(error)
-            res.status(httpStatus.INTERNAL_SERVER_ERROR)
-            res.json({ error: 'Internal server error' })
+          if (error instanceof Error) {
+            res.status(httpStatus.NOT_ACCEPTABLE)
+            res.json({ message: error.message || 'Internal server error' })
           }
         }
       }
     })
   } catch (error) {
     res.status(httpStatus.INTERNAL_SERVER_ERROR)
-    res.json({ error: 'Internal server error' })
+    res.json({ message: 'Internal server error' })
   }
 }
 

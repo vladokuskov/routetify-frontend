@@ -1,11 +1,18 @@
-import express from 'express'
+import config from 'config'
 import cors from 'cors'
-import helmet from 'helmet'
 import 'dotenv/config'
+import express from 'express'
+import helmet from 'helmet'
 
 const app: express.Application = express()
 
 app.use(helmet())
-app.use(cors({ origin: process.env.ORIGIN, methods: ['GET', 'POST'] }))
+app.use(
+  cors({
+    origin: config.origin,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+  }),
+)
 
 export default app

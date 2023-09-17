@@ -1,5 +1,3 @@
-import ServerError from 'core/instances/ServerError'
-import httpStatus from 'http-status'
 import { Extension } from 'types/extensions.types'
 const toGeoJSON = require('@mapbox/togeojson')
 import { DOMParser } from 'xmldom'
@@ -8,29 +6,31 @@ const verifyFileStructure = async (
   file: Express.Multer.File,
   extension: Extension,
 ) => {
-  const fileContent = file.buffer.toString()
+  try {
+    const fileContent = file.buffer.toString()
 
-  if (fileContent.length === 0) {
-    throw new ServerError(
-      'Provide a file with content inside.',
-      httpStatus.NOT_ACCEPTABLE,
-    )
-  }
+    if (fileContent.length === 0) {
+      throw new Error('Provide a file with content inside.')
+    }
 
-  const doc = new DOMParser().parseFromString(fileContent, 'text/xml')
+    const doc = new DOMParser().parseFromString(fileContent, 'text/xml')
 
-  let converted
-  if (extension === 'gpx') {
-    converted = toGeoJSON.gpx(doc)
-  } else if (extension === 'kml') {
-    converted = toGeoJSON.kml(doc)
-  }
+    let converted
+    if (extension === 'gpx') {
+      converted = toGeoJSON.gpx(doc)
+    } else if (extension === 'kml') {
+      converted = toGeoJSON.kml(doc)
+    }
 
-  if (!hasCoordinates(converted)) {
-    throw new ServerError(
-      `Provide a ${extension.toUpperCase()} file with coordinates inside or check structure.`,
-      httpStatus.NOT_ACCEPTABLE,
-    )
+    if (!hasCoordinates(converted)) {
+      throw new Error(
+        `Provide a ${extension.toUpperCase()} file with coordinates inside or check structure.`,
+      )
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message)
+    }
   }
 }
 

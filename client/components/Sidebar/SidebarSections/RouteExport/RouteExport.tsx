@@ -5,20 +5,22 @@ import DownloadIcon from '@/assets/icons/download.svg'
 import Icon from '@/components/ui/icon'
 import { Button } from '@/components/ui/button'
 import { useClickOutside } from '@/hooks/useClickOutside'
-import {
-  currentDate,
-  generateGPX,
-  generateKML,
-} from '@/lib/generateRouteString'
+import { generateGPX, generateKML } from '@/lib/generateRouteString'
 import { useAppSelector } from '@/redux/hooks'
 import { Route } from '@/types/global/export.types'
 import clsx from 'clsx'
 import downloadjs from 'downloadjs'
 import { useRef, useState } from 'react'
+import format from 'date-fns/format'
+
+const date = new Date()
+const currentDate = format(date, 'yyyy-MM-dd HH:mm:ss')
+
+const defaultName = `route_${currentDate}`
 
 const RouteExport = () => {
   const selectionMenuRef = useRef(null)
-  const [filename, setFilename] = useState<string>('')
+  const [filename, setFilename] = useState<string>(defaultName)
   const [selectedRouteType, setSelectedRouteType] = useState<Route>(Route.GPX)
   const [isSelectionMenuOpen, setIsSelectionMenuOpen] = useClickOutside(
     selectionMenuRef,
@@ -46,11 +48,7 @@ const RouteExport = () => {
     if (route) {
       downloadjs(
         route,
-        `${
-          filename.length === 0 || !filename
-            ? `new_route_${currentDate}`
-            : filename
-        }${selectedRouteType === GPX ? '.gpx' : '.kml'}`,
+        `${filename}${selectedRouteType === GPX ? '.gpx' : '.kml'}`,
         `application/${
           selectedRouteType === GPX
             ? 'application/gpx+xml'

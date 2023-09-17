@@ -1,21 +1,28 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import geocoderReducer from './features/geocoderSlice'
 import controlsReducer from './features/controlsSlice'
 import drawReducer from './features/drawSlice'
 import fileUploadReducer from './features/fileUploadSlice'
+import type { PreloadedState } from '@reduxjs/toolkit'
 
-export const store = configureStore({
-  reducer: {
-    geocoderReducer,
-    controlsReducer,
-    drawReducer,
-    fileUploadReducer,
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
+const rootReducer = combineReducers({
+  geocoderReducer,
+  controlsReducer,
+  drawReducer,
+  fileUploadReducer,
 })
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: false,
+      }),
+  })
+}
+
+export type RootState = ReturnType<typeof rootReducer>
+export type AppStore = ReturnType<typeof setupStore>
+export type AppDispatch = AppStore['dispatch']

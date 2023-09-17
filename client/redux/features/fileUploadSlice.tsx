@@ -3,7 +3,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const initialState = {
   routeFile: null,
-  isDragging: false,
 } as FileUploadState
 
 export const controlsReducer = createSlice({
@@ -16,14 +15,8 @@ export const controlsReducer = createSlice({
         routeFile: action.payload,
       }
     },
-    toggleFileDragging: (state, action: PayloadAction<boolean>) => {
-      return {
-        ...state,
-        isDragging: action.payload,
-      }
-    },
   },
 })
 
-export const { updateRouteFile, toggleFileDragging } = controlsReducer.actions
+export const { updateRouteFile } = controlsReducer.actions
 export default controlsReducer.reducer

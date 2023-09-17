@@ -37,19 +37,29 @@ const FilesDragAndDrop = () => {
     }
   }
 
-  const handleDragLeave = () => {
-    setIsDragging(false)
+  const handleDragLeave = (e: DragEvent) => {
+    e.preventDefault()
+    if (dragLeaveTimeoutRef.current) {
+      clearTimeout(dragLeaveTimeoutRef.current)
+      dragLeaveTimeoutRef.current = null
+    }
+
+    dragLeaveTimeoutRef.current = setTimeout(() => {
+      setIsDragging(false)
+    }, 200)
   }
 
   useEffect(() => {
     window.addEventListener('dragstart', (e) => handleDragEnter(e))
-    window.addEventListener('dragend', (e) => handleDragLeave())
+    window.addEventListener('dragend', (e) => handleDragLeave(e))
     window.addEventListener('dragover', (e) => handleDragOver(e))
+    window.addEventListener('dragleave', (e) => handleDragLeave(e))
 
     return () => {
       window.removeEventListener('dragstart', (e) => handleDragEnter(e))
-      window.removeEventListener('dragend', () => handleDragLeave())
+      window.removeEventListener('dragend', (e) => handleDragLeave(e))
       window.removeEventListener('dragover', (e) => handleDragOver(e))
+      window.removeEventListener('dragleave', (e) => handleDragLeave(e))
     }
   }, [])
 

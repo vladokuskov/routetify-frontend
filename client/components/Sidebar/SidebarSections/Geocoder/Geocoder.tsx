@@ -36,7 +36,6 @@ const Geocoder = () => {
   >(null)
   const [lastSelectedResult, setLastSelectedResult] =
     useState<GeoCoords | null>(null)
-  const [isGeocoderLoading, setIsGeocoderLoading] = useState<boolean>(false)
   const [isResultsOpen, setIsResultsOpen] = useClickOutside(ref, false)
   const [hasUserTyped, setHasUserTyped] = useState(false)
 
@@ -46,6 +45,9 @@ const Geocoder = () => {
   )
 
   const dispatch = useAppDispatch()
+
+  const handleFocus = (e: React.ChangeEvent<HTMLInputElement>) =>
+    e.target.select()
 
   const handleChangeGeocoder = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -80,6 +82,7 @@ const Geocoder = () => {
     window.scrollTo(0, 0)
     setIsResultsOpen(false)
     setHasUserTyped(false)
+    setGeocoderResponse(null)
   }
 
   const fetchGeoData = async () => {
@@ -90,8 +93,6 @@ const Geocoder = () => {
 
     try {
       let url = `https://geocode.maps.co/search?q=${geocoderValue}`
-
-      setIsGeocoderLoading(true)
 
       const response = await fetch(url)
 
@@ -104,8 +105,6 @@ const Geocoder = () => {
         setGeocoderResponse(data)
         setIsResultsOpen(true)
       }
-
-      setIsGeocoderLoading(false)
     } catch (error) {
       toast.error(`An error occurred`)
     }
@@ -120,7 +119,7 @@ const Geocoder = () => {
         timer = setTimeout(() => {
           fetchGeoData()
         }, 400)
-      } else if (geocoderValue.length < 3) {
+      } else if (geocoderValue.length === 0) {
         setGeocoderResponse(null)
         setIsResultsOpen(false)
       }
@@ -142,7 +141,7 @@ const Geocoder = () => {
         <Input
           variant="map"
           placeholder="Search location"
-          onClick={() => geocoderResponse && setIsResultsOpen(true)}
+          onFocus={handleFocus}
           value={geocoderValue}
           onChange={handleChangeGeocoder}
         />

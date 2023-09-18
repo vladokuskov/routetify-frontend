@@ -1,6 +1,6 @@
 import express, { Router } from 'express'
 import routeRoutes from 'components/route/route.router'
-import healthRoutes from 'components/healthcheck/healthcheck.router'
+import healthRoutes from 'components/health/health.router'
 
 const router: Router = Router()
 

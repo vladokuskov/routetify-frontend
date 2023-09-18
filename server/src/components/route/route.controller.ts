@@ -14,7 +14,7 @@ const parseRoute = async (req: Request, res: Response) => {
 
     if (result) {
       res.status(httpStatus.OK)
-      res.json(result)
+      res.json({ coords: result })
     }
   } catch (error) {
     if (error instanceof Error) {

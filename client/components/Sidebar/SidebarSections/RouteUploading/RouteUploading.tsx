@@ -6,10 +6,10 @@ import { putDrawCoords } from '@/redux/features/drawSlice'
 import { updateRouteFile } from '@/redux/features/fileUploadSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { DrawCoords } from '@/types/models/drawCoords.types'
-import { parseFile } from '@/utils/fileOperations'
 import clsx from 'clsx'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { toast } from 'react-hot-toast'
+import { getRoute } from '@/lib/api/route'
 
 const RouteUploading = () => {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -40,7 +40,7 @@ const RouteUploading = () => {
     try {
       toast.loading('Loading route...', { duration: 0, id: 'loading' })
 
-      const route = await parseFile(routeFile)
+      const route = await getRoute(routeFile)
 
       dispatch(putDrawCoords(route))
 

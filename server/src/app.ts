@@ -1,10 +1,10 @@
-import config from 'config'
+import config from './config/index'
 import cors from 'cors'
 import 'dotenv/config'
 import express from 'express'
 import helmet from 'helmet'
 
-const app: express.Application = express()
+const app = express()
 
 app.use(helmet())
 app.use(

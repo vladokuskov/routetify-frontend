@@ -38,7 +38,7 @@ const RouteUploading = () => {
     }
 
     try {
-      toast.loading('Loading route...', { duration: 0, id: 'loading' })
+      toast.loading('File parsing', { duration: 0, id: 'loading' })
 
       const route = await getRoute(routeFile)
 

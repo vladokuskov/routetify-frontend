@@ -1,9 +1,6 @@
-import app from 'app'
-import api from 'api'
+const app = require('app')
 import config from 'config/index'
 import Logger from 'core/helpers/logger'
-
-app.use(api)
 
 app
   .listen(config.port, (): void => {
@@ -13,7 +10,7 @@ app
   ################################################
 `)
   })
-  .on('error', (err) => {
+  .on('error', (err: Express.Application) => {
     Logger.error(err)
     process.exit(1)
   })

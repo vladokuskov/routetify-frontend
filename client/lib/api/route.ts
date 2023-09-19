@@ -22,7 +22,7 @@ const getRoute = async (file: File) => {
 
     const { coords } = parsedData
 
-    return coords
+    return data.coords
   } catch (err) {
     if (axios.isAxiosError(err) && err.response) {
       throw new Error(err.response.data.message)

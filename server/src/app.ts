@@ -1,8 +1,9 @@
-import config from './config/index'
+import config from 'config'
 import cors from 'cors'
 import 'dotenv/config'
 import express from 'express'
 import helmet from 'helmet'
+import api from 'api'
 
 const app = express()
 
@@ -15,4 +16,6 @@ app.use(
   }),
 )
 
-export default app
+app.use(api)
+
+module.exports = app

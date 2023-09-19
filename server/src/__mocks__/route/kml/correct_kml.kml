@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <kml xmlns="http://www.opengis.net/kml/2.2">
+      <Document>
+        <name>route</name>
+        <Placemark>
+          <name>Start</name>
+          <description>Start Waypoint</description>
+          <Point>
+            <coordinates>30.396423339843754,50.42076890510627,0</coordinates>
+          </Point>
+        </Placemark>
+        <Placemark>
+          <name>End</name>
+          <description>End Waypoint</description>
+          <Point>
+            <coordinates>30.363464355468754,50.419018902737065,0</coordinates>
+          </Point>
+        </Placemark>
+        <Placemark>
+          <name>route_2023-09-19 15:00:21</name>
+          <LineString>
+            <tessellate>1</tessellate>
+            <coordinates>
+            30.396423339843754,50.42076890510627,0
+30.363464355468754,50.419018902737065,0
+            </coordinates>
+          </LineString>
+        </Placemark>
+      </Document>
+    </kml>

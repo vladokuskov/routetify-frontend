@@ -40,7 +40,7 @@ const RouteUploading = () => {
     try {
       toast.loading('File parsing', { duration: 0, id: 'loading' })
 
-      const route = await getRoute(routeFile)
+      const route: DrawCoords[] = await getRoute(routeFile)
 
       dispatch(putDrawCoords(route))
 

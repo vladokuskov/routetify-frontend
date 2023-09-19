@@ -1,6 +1,7 @@
 {
   "name": "server",
   "main": "app.ts",
+  "license": "MIT",
   "scripts": {
     "build": "tsc",
     "dev": "ts-node-dev -r tsconfig-paths/register src/server.ts",
@@ -10,10 +11,6 @@
     "lint:js": "npm run lint:eslint src/",
     "lint:fix": "npm run lint:js -- --fix"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
     "@mapbox/togeojson": "^0.16.1",
     "@prisma/client": "^5.3.1",

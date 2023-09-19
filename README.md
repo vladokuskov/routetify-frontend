@@ -23,6 +23,7 @@ Live - https://routetify.vercel.app/
     Leaflet
     Express.js
     Jest
+    Prisma
 
 ### How to start?
 

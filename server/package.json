@@ -1,6 +1,7 @@
 {
   "name": "server",
   "main": "app.ts",
+  "license": "MIT",
   "scripts": {
     "build": "tsc",
     "dev": "ts-node-dev -r tsconfig-paths/register src/server.ts",
@@ -10,12 +11,9 @@
     "lint:js": "npm run lint:eslint src/",
     "lint:fix": "npm run lint:js -- --fix"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
     "@mapbox/togeojson": "^0.16.1",
+    "@prisma/client": "^5.3.1",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
@@ -51,6 +49,7 @@
     "eslint-plugin-prettier": "^5.0.0",
     "nodemon": "^3.0.1",
     "prettier": "^3.0.3",
+    "prisma": "^5.3.1",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
     "tslint": "^6.1.3",

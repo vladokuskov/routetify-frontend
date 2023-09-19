@@ -6,6 +6,6 @@ export default {
   origin: process.env.ORIGIN || 'http://localhost:3000',
   allowedExtensions: ['gpx', 'kml'],
   logs: {
-    level: process.env.LOG_LEVEL || 'silly',
+    level: process.env.LOG_LEVEL || 'info',
   },
 }

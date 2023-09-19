@@ -22,6 +22,7 @@ Live - https://routetify.vercel.app/
     TypeScript
     Leaflet
     Express.js
+    Jest
 
 ### How to start?
 

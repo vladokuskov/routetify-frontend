@@ -4,7 +4,7 @@ import httpStatus from 'http-status'
 const getHealth = async (req: Request, res: Response) => {
   const healthcheck = {
     uptime: process.uptime(),
-    responsetime: process.hrtime(),
+    responseTime: process.hrtime(),
     message: 'OK',
     timestamp: Date.now(),
   }

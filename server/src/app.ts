@@ -3,8 +3,9 @@ import cors from 'cors'
 import 'dotenv/config'
 import express from 'express'
 import helmet from 'helmet'
+import api from 'api'
 
-const app: express.Application = express()
+const app = express()
 
 app.use(helmet())
 app.use(
@@ -15,4 +16,6 @@ app.use(
   }),
 )
 
-export default app
+app.use(api)
+
+module.exports = app

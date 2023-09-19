@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 
-import SpinnerIcon from '@/assets/icons/loader.svg'
 import SearchIcon from '@/assets/icons/search.svg'
 import Icon from '@/components/ui/icon'
 import { useClickOutside } from '@/hooks/useClickOutside'
@@ -16,6 +15,7 @@ import clsx from 'clsx'
 import { toast } from 'react-hot-toast'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { getPlace } from '@/lib/api/geocoder'
 
 interface TGeoResponse {
   lat: number
@@ -92,21 +92,16 @@ const Geocoder = () => {
     }
 
     try {
-      let url = `https://geocode.maps.co/search?q=${geocoderValue}`
-
-      const response = await fetch(url)
-
-      if (!response.ok) {
-        toast.error(`HTTP error! Status: ${response.status}`)
-      }
-      const data = await response.json()
+      const data = await getPlace(geocoderValue)
 
       if (data.length > 0) {
         setGeocoderResponse(data)
         setIsResultsOpen(true)
       }
-    } catch (error) {
-      toast.error(`An error occurred`)
+    } catch (err) {
+      if (err instanceof Error) {
+        toast.error(err.message)
+      }
     }
   }
 

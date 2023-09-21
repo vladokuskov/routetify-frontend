@@ -30,6 +30,7 @@ model User {
   id          Int         @id @unique @default(autoincrement())
   username    String      @db.VarChar(35) @default("User")
   email       String      @unique 
+  password    String      @db.VarChar(190)
 
   routes      Route[]
 

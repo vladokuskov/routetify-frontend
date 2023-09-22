@@ -54,6 +54,49 @@ const register = async (email: string, password: string) => {
   }
 }
 
-const login = async () => {}
+const login = async (email: string, password: string) => {
+  const existedUser = await db.user.findUnique({
+    where: {
+      email,
+    },
+  })
+
+  if (!existedUser) {
+    throw new ServerError(
+      'Invalid user information. Please check and try again',
+      CONFLICT,
+    )
+  }
+
+  const isPasswordValid = await bcrypt.compare(password, existedUser.password)
+
+  if (!isPasswordValid) {
+    throw new ServerError(
+      'Invalid user information. Please check and try again',
+      CONFLICT,
+    )
+  }
+
+  const secret = process.env.AUTH_SECRET || ' '
+  const token = jwt.sign({ id: existedUser.id }, secret, {
+    expiresIn: 60 * 60 * 24 * 30,
+  })
+
+  const serialized = serialize('token', token, {
+    httpOnly: true,
+    sameSite: 'strict',
+    maxAge: 60 * 60 * 24 * 30,
+    path: '/',
+  })
+
+  return {
+    user: {
+      id: existedUser.id,
+      email: existedUser.email,
+      username: existedUser.username,
+    },
+    token: serialized,
+  }
+}
 
 export { register, login }

@@ -3,7 +3,7 @@ import { validateEmail, validatePassword } from 'core/utils/validation'
 import { NextFunction, Request, Response } from 'express'
 import { INTERNAL_SERVER_ERROR, NOT_ACCEPTABLE } from 'http-status'
 
-const validateRegistrationBody = async (
+const validateAuthBody = async (
   req: Request,
   res: Response,
   next: NextFunction,
@@ -33,4 +33,4 @@ const validateRegistrationBody = async (
   }
 }
 
-export { validateRegistrationBody }
+export { validateAuthBody }

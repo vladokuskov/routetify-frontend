@@ -21,7 +21,7 @@ const validatePassword = async (password: string) => {
     return true
   }
 
-  throw new ServerError('Provide secure password.', CONFLICT)
+  throw new ServerError('Provide correct password.', CONFLICT)
 }
 
 export { validateEmail, validatePassword }

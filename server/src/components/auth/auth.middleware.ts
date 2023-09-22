@@ -13,7 +13,7 @@ const validateRegistrationBody = async (
 
     if (!email || !password) {
       res.status(NOT_ACCEPTABLE)
-      res.json({ message: 'Provide email and password for registration.' })
+      res.json({ message: 'Request missing email or password' })
     }
 
     const isEmailValid = await validateEmail(email)

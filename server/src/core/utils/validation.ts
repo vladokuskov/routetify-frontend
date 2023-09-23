@@ -9,7 +9,7 @@ const validateEmail = async (email: string) => {
     return true
   }
 
-  throw new ServerError('Provide correct email.', CONFLICT)
+  throw new ServerError('Provide correct email', CONFLICT)
 }
 
 const validatePassword = async (password: string) => {
@@ -21,7 +21,7 @@ const validatePassword = async (password: string) => {
     return true
   }
 
-  throw new ServerError('Provide correct password.', CONFLICT)
+  throw new ServerError('Provide correct password', CONFLICT)
 }
 
 export { validateEmail, validatePassword }

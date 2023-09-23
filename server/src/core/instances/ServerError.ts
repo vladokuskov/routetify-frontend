@@ -1,8 +1,8 @@
 export default class ServerError extends Error {
-  code: number | null;
+  status: number
 
-  constructor(message: string, code: number) {
-    super(message);
-    this.code = code;
+  constructor(message: string, status: number) {
+    super(message)
+    this.status = status
   }
 }

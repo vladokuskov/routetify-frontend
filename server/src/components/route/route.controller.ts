@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import httpStatus from 'http-status'
+import { INTERNAL_SERVER_ERROR, OK } from 'http-status'
 import { parse } from './route.service'
 import { Extension } from 'types/extensions.types'
 
@@ -13,13 +13,13 @@ const parseRoute = async (req: Request, res: Response) => {
     const result = await parse(file, extension)
 
     if (result) {
-      res.status(httpStatus.OK)
-      res.json({ coords: result })
+      res.status(OK).json({ coords: result })
     }
   } catch (error) {
     if (error instanceof Error) {
-      res.status(httpStatus.INTERNAL_SERVER_ERROR)
-      res.json({ message: 'Internal server error' })
+      res
+        .status(INTERNAL_SERVER_ERROR)
+        .json({ message: 'Internal server error' })
     }
   }
 }

@@ -1,7 +1,7 @@
 import { getFileExtension } from 'core/utils/getFileExtension'
 import { verifyFileStructure } from 'core/utils/verifyFileStructure'
 import { NextFunction, Request, Response } from 'express'
-import httpStatus from 'http-status'
+import httpStatus, { INTERNAL_SERVER_ERROR, NOT_ACCEPTABLE } from 'http-status'
 import multer from 'multer'
 
 const verifyFileRequest = async (
@@ -12,8 +12,7 @@ const verifyFileRequest = async (
   const header = req.headers['content-type']?.split(';')
 
   if (!header || header[0] !== 'multipart/form-data') {
-    res.status(httpStatus.NOT_ACCEPTABLE)
-    res.json({
+    res.status(httpStatus.NOT_ACCEPTABLE).json({
       message: 'Provide request with a correct content type.',
     })
 
@@ -29,8 +28,7 @@ const verifyFileRequest = async (
 
     upload(req, res, async (err) => {
       if (err || !req.file) {
-        res.status(httpStatus.EXPECTATION_FAILED)
-        res.json({
+        res.status(httpStatus.EXPECTATION_FAILED).json({
           message:
             'Provide request with correct fields in form. ("file": content)',
         })
@@ -48,15 +46,15 @@ const verifyFileRequest = async (
           next()
         } catch (error) {
           if (error instanceof Error) {
-            res.status(httpStatus.NOT_ACCEPTABLE)
-            res.json({ message: error.message || 'Internal server error' })
+            res
+              .status(NOT_ACCEPTABLE)
+              .json({ message: error.message || 'Internal server error' })
           }
         }
       }
     })
   } catch (error) {
-    res.status(httpStatus.INTERNAL_SERVER_ERROR)
-    res.json({ message: 'Internal server error' })
+    res.status(INTERNAL_SERVER_ERROR).json({ message: 'Internal server error' })
   }
 }
 

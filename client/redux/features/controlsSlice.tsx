@@ -7,7 +7,7 @@ import { ControlsState } from '@/types/global/redux.types'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import * as L from 'leaflet'
 
-const initialState = {
+const initialState: ControlsState = {
   draw: DrawType.None,
   layer: Layer.default,
   location: LocationStatus.idle,
@@ -16,7 +16,7 @@ const initialState = {
   map: null,
   isSidebarOpen: true,
   movingPreference: MovingPreferencesType.bike,
-} as ControlsState
+}
 
 export const controlsReducer = createSlice({
   name: 'controls',

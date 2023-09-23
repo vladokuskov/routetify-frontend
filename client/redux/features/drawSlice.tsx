@@ -2,12 +2,12 @@ import { DrawState } from '@/types/global/redux.types'
 import { DrawCoords } from '@/types/models/drawCoords.types'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-const initialState = {
+const initialState: DrawState = {
   drawInfo: { time: '0', dist: '0' },
   drawCoords: [], // Coords that used for rendering Markers & polyline
   drawCoordsDeleted: [], // Coords that are deleted
   drawCoordsFuture: [], // Coords that can be recovered
-} as DrawState
+}
 
 export const drawReducer = createSlice({
   name: 'draw',

@@ -4,6 +4,7 @@ import { Layer } from './layer.types'
 import { LocationStatus } from './locationStatus.types'
 import * as L from 'leaflet'
 import { MovingPreferencesType } from './movingPreferencesType.types'
+import { User } from './user.types'
 
 export type GeocoderState = {
   lat: number | null
@@ -23,7 +24,6 @@ export type ControlsState = {
   layer: Layer
   isMarkerDragging: boolean
   location: LocationStatus
-  colorPicker: { color: string; isOpen: boolean }
   currentCoords: { lat: number; lng: number; zoom: number }
   map: L.Map | null
   isSidebarOpen: boolean
@@ -32,5 +32,9 @@ export type ControlsState = {
 
 export type FileUploadState = {
   routeFile: File | null
-  isDragging: boolean
+}
+
+export type UserState = {
+  user: User | null
+  isProfileSidebarOpen: boolean
 }

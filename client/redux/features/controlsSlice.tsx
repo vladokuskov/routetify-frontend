@@ -37,11 +37,17 @@ export const controlsReducer = createSlice({
         isSidebarOpen: action.payload,
       }
     },
-    toggleIsSidebarOpen: (state, action: PayloadAction<void>) => {
-      return {
-        ...state,
-        isSidebarOpen: !state.isSidebarOpen,
-      }
+    toggleIsSidebarOpen: (state, action) => {
+      if (action.payload) {
+        return {
+          ...state,
+          isSidebarOpen: action.payload,
+        }
+      } else
+        return {
+          ...state,
+          isSidebarOpen: !state.isSidebarOpen,
+        }
     },
     loadMap: (state, action: PayloadAction<L.Map | null>) => {
       return {

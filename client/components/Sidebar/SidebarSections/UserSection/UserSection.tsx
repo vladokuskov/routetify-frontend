@@ -10,6 +10,7 @@ import LoginIcon from '@/assets/icons/login.svg'
 import { getUser } from '@/lib/api/user'
 import { useEffect, useState } from 'react'
 import clsx from 'clsx'
+import { toggleIsSidebarOpen } from '@/redux/features/controlsSlice'
 
 const UserSection = () => {
   const user = useAppSelector((state) => state.userReducer.user)
@@ -29,6 +30,8 @@ const UserSection = () => {
       router.push('/login')
     } else {
       dispatch(toggleUserSidebar(!isUserSidebarOpen))
+
+      dispatch(toggleIsSidebarOpen(!isUserSidebarOpen))
     }
   }
 

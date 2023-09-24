@@ -187,7 +187,7 @@ const Geocoder = () => {
               lon: lastSelectedResult.lon,
             })
           } else {
-            dispatch(toggleIsSidebarOpen())
+            dispatch(toggleIsSidebarOpen(true))
           }
         }}
       >

@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const getPlace = async (value: string) => {
   try {
+    axios.defaults.withCredentials = false
     const url = `https://geocode.maps.co/search?q=${value}`
 
     const response = await axios.get(url)

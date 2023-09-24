@@ -41,7 +41,9 @@ export default function RootLayout({
       <head />
       <body className={`${roboto.variable}`} suppressHydrationWarning={true}>
         <Toaster />
-        <StoreProvider>{children}</StoreProvider>
+        <NextThemeProvider>
+          <StoreProvider>{children}</StoreProvider>
+        </NextThemeProvider>
       </body>
     </html>
   )

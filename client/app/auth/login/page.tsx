@@ -2,34 +2,33 @@
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { auth } from '@/lib/api/user'
-import { useAppDispatch } from '@/redux/hooks'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { FormEvent, useState } from 'react'
 import toast from 'react-hot-toast'
+import { auth } from '@/lib/api/user'
 
-export default function Register() {
+export default function Login() {
   const router = useRouter()
-  const [registerState, setRegisterState] = useState({
+  const [loginState, setLoginState] = useState({
     email: '',
     password: '',
   })
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
 
-    setRegisterState((prev) => ({
+    setLoginState((prev) => ({
       ...prev,
       [name]: value,
     }))
   }
 
-  const handleRegistration = async (e: FormEvent) => {
+  const handleLogin = async (e: FormEvent) => {
     e.preventDefault()
 
     try {
-      const response = await auth('register', registerState)
+      const response = await auth('login', loginState)
 
       if (response) router.push('/')
     } catch (err) {
@@ -42,8 +41,8 @@ export default function Register() {
   return (
     <main>
       <div>
-        <h1>Register</h1>
-        <form onSubmit={handleRegistration}>
+        <h1>Login</h1>
+        <form onSubmit={handleLogin}>
           <Input
             type="email"
             aria-label="Account email"
@@ -59,9 +58,9 @@ export default function Register() {
             onChange={handleInputChange}
             required
           />
-          <Button type="submit">Register</Button>
+          <Button type="submit">Log in</Button>
         </form>
-        <Link href="/register">Already have an account? Log in</Link>
+        <Link href="/auth/register">Don`t have an account? Register</Link>
       </div>
     </main>
   )

@@ -27,7 +27,7 @@ const UserSection = () => {
 
   const handleSidebarOpen = () => {
     if (!user) {
-      router.push('/login')
+      router.push('/auth/login')
     } else {
       dispatch(toggleUserSidebar(!isUserSidebarOpen))
 

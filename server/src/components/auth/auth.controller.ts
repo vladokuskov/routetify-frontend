@@ -66,7 +66,7 @@ const logoutUser = async (req: Request, res: Response) => {
 
     const serialized = serialize('token', '', {
       httpOnly: true,
-      sameSite: 'strict',
+      sameSite: false,
       maxAge: -1,
       path: '/',
     })

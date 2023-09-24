@@ -2,16 +2,15 @@
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { useAppDispatch } from '@/redux/hooks'
-import { useRouter } from 'next/navigation'
+import { auth } from '@/lib/api/user'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { FormEvent, useState } from 'react'
 import toast from 'react-hot-toast'
-import { auth } from '@/lib/api/user'
 
-export default function Login() {
+export default function Register() {
   const router = useRouter()
-  const [loginState, setLoginState] = useState({
+  const [registerState, setRegisterState] = useState({
     email: '',
     password: '',
   })
@@ -19,17 +18,17 @@ export default function Login() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
 
-    setLoginState((prev) => ({
+    setRegisterState((prev) => ({
       ...prev,
       [name]: value,
     }))
   }
 
-  const handleLogin = async (e: FormEvent) => {
+  const handleRegistration = async (e: FormEvent) => {
     e.preventDefault()
 
     try {
-      const response = await auth('login', loginState)
+      const response = await auth('register', registerState)
 
       if (response) router.push('/')
     } catch (err) {
@@ -42,8 +41,8 @@ export default function Login() {
   return (
     <main>
       <div>
-        <h1>Login</h1>
-        <form onSubmit={handleLogin}>
+        <h1>Register</h1>
+        <form onSubmit={handleRegistration}>
           <Input
             type="email"
             aria-label="Account email"
@@ -59,9 +58,9 @@ export default function Login() {
             onChange={handleInputChange}
             required
           />
-          <Button type="submit">Log in</Button>
+          <Button type="submit">Register</Button>
         </form>
-        <Link href="/register">Don`t have an account? Register</Link>
+        <Link href="/auth/login">Already have an account? Log in</Link>
       </div>
     </main>
   )

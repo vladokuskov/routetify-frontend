@@ -33,7 +33,7 @@ const ResizeSidebarButton = () => {
   return (
     <button
       className={clsx(
-        'absolute py-2 w-7 rounded-l-md -left-7 top-1/2 border-2 border-foreground z-30 bg-background text-paragraph !bg-opacity-90',
+        'absolute py-2 w-7 rounded-l-md -left-7 top-1/2 border-2 border-foreground z-30 bg-background text-paragraph !bg-opacity-90 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
         'transition-colors hocus:!border-neutral-400',
         'max-sm:hidden max-dsm:bottom-12 max-dsm:top-auto',
       )}

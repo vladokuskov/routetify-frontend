@@ -71,7 +71,7 @@ const FilesDragAndDrop = () => {
 
   return (
     <aside
-      className="absolute r-0 top-0 w-full h-full z-50 bg-neutral-900/30 transition-all"
+      className="fixed l-0 top-0 w-full min-w-full h-full z-50 bg-neutral-900/30 transition-all"
       aria-label="Drop file"
       onDrop={(e) => handleDrop(e)}
     >

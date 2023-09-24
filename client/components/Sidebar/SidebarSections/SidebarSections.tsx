@@ -1,6 +1,5 @@
 'use client'
 
-import { ThemeSwitcher } from '@/components/ThemeSwitcher/ThemeSwitcher'
 import { SidebarSection } from '../SidebarSection'
 import { Details } from './Details/Details'
 import { Geocoder } from './Geocoder/Geocoder'
@@ -45,7 +44,6 @@ const SidebarSections = () => {
       >
         <RouteExport />
       </SidebarSection>
-      <ThemeSwitcher />
     </>
   )
 }

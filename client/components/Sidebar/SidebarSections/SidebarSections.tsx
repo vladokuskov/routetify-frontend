@@ -1,13 +1,19 @@
+'use client'
+
 import { SidebarSection } from '../SidebarSection'
 import { Details } from './Details/Details'
 import { Geocoder } from './Geocoder/Geocoder'
 import { MovingPreferences } from './MovingPreferences/MovingPreferences'
 import { RouteExport } from './RouteExport/RouteExport'
 import { RouteUploading } from './RouteUploading/RouteUploading'
+import { UserSection } from './UserSection/UserSection'
 
 const SidebarSections = () => {
   return (
     <>
+      <SidebarSection>
+        <UserSection />
+      </SidebarSection>
       <SidebarSection
         title="Your location"
         description="Here you can find location"

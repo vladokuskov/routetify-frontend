@@ -1,3 +1,5 @@
+'use client'
+
 import Icon from '@/components/ui/icon'
 import { updateRouteFile } from '@/redux/features/fileUploadSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'

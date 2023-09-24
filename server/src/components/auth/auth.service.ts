@@ -30,23 +30,22 @@ const register = async (email: string, password: string) => {
 
   if (newUser) {
     const secret = process.env.AUTH_SECRET || ' '
-    const token = jwt.sign({ id: newUser.id }, secret, {
-      expiresIn: 60 * 60 * 24 * 30,
-    })
+    const token = jwt.sign(
+      { id: newUser.id, email: newUser.email, username: newUser.username },
+      secret,
+      {
+        expiresIn: 60 * 60 * 24 * 15,
+      },
+    )
 
     const serialized = serialize('token', token, {
       httpOnly: true,
       sameSite: 'strict',
-      maxAge: 60 * 60 * 24 * 30,
+      maxAge: 60 * 60 * 24 * 15,
       path: '/',
     })
 
     return {
-      user: {
-        id: newUser.id,
-        email: newUser.email,
-        username: newUser.username,
-      },
       token: serialized,
     }
   } else {
@@ -78,23 +77,26 @@ const login = async (email: string, password: string) => {
   }
 
   const secret = process.env.AUTH_SECRET || ' '
-  const token = jwt.sign({ id: existedUser.id }, secret, {
-    expiresIn: 60 * 60 * 24 * 30,
-  })
-
-  const serialized = serialize('token', token, {
-    httpOnly: true,
-    sameSite: 'strict',
-    maxAge: 60 * 60 * 24 * 30,
-    path: '/',
-  })
-
-  return {
-    user: {
+  const token = jwt.sign(
+    {
       id: existedUser.id,
       email: existedUser.email,
       username: existedUser.username,
     },
+    secret,
+    {
+      expiresIn: 60 * 60 * 24 * 15,
+    },
+  )
+
+  const serialized = serialize('token', token, {
+    httpOnly: true,
+    sameSite: 'strict',
+    maxAge: 60 * 60 * 24 * 15,
+    path: '/',
+  })
+
+  return {
     token: serialized,
   }
 }

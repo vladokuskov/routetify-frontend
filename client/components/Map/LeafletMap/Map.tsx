@@ -28,7 +28,13 @@ const LeafletMap = () => {
     if (map) {
       dispatch(loadMap(map))
     }
-  }, [map])
+
+    return () => {
+      if (map) {
+        dispatch(loadMap(null))
+      }
+    }
+  }, [map, dispatch])
 
   return (
     <>

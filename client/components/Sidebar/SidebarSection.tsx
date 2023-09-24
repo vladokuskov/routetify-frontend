@@ -1,3 +1,5 @@
+'use client'
+
 import { useAppSelector } from '@/redux/hooks'
 import clsx from 'clsx'
 import { ReactNode } from 'react'

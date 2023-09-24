@@ -29,7 +29,7 @@
     "leaflet": "^1.9.3",
     "leaflet-polylinedecorator": "^1.6.0",
     "lucide-react": "^0.277.0",
-    "next": "13.4.1",
+    "next": "^13.5.2",
     "next-themes": "^0.2.1",
     "postcss": "^8.4.24",
     "react": "18.2.0",

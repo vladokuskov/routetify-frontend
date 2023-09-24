@@ -36,5 +36,5 @@ export type FileUploadState = {
 
 export type UserState = {
   user: User | null
-  isProfileSidebarOpen: boolean
+  isUserSidebarOpen: boolean
 }

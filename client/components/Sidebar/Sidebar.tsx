@@ -1,3 +1,5 @@
+'use client'
+
 import { useAppSelector } from '@/redux/hooks'
 import clsx from 'clsx'
 import { ResizeSidebarButton } from './ResizeSidebarButton/ResizeSidebarButton'
@@ -33,9 +35,6 @@ const Sidebar = () => {
         )}
       >
         <SidebarSections />
-        <div className="flex flex-col items-center justify-center gap-5 mt-auto mb-4 max-sm:mt-12">
-          <ThemeSwitcher />
-        </div>
       </div>
     </aside>
   )

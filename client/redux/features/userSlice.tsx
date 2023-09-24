@@ -4,17 +4,17 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const initialState: UserState = {
   user: null,
-  isProfileSidebarOpen: false,
+  isUserSidebarOpen: false,
 }
 
 export const userReducer = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    toggleProfileSidebar: (state, action) => {
+    toggleUserSidebar: (state, action: PayloadAction<boolean>) => {
       return {
         ...state,
-        isProfileSidebarOpen: !state.isProfileSidebarOpen,
+        isUserSidebarOpen: action.payload,
       }
     },
     updateUser: (state, action: PayloadAction<User>) => {
@@ -27,7 +27,7 @@ export const userReducer = createSlice({
         },
       }
     },
-    deleteUser: (state, action) => {
+    deleteUser: (state, action: PayloadAction<void>) => {
       return {
         ...state,
         user: null,
@@ -36,6 +36,5 @@ export const userReducer = createSlice({
   },
 })
 
-export const { toggleProfileSidebar, updateUser, deleteUser } =
-  userReducer.actions
+export const { toggleUserSidebar, updateUser, deleteUser } = userReducer.actions
 export default userReducer.reducer

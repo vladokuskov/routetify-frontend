@@ -20,8 +20,6 @@ const getRoute = async (file: File) => {
 
     const parsedData = routeSchema.parse(data)
 
-    const { coords } = parsedData
-
     return data.coords
   } catch (err) {
     if (axios.isAxiosError(err) && err.response) {

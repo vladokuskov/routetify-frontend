@@ -43,7 +43,7 @@ export const controlsReducer = createSlice({
         isSidebarOpen: !state.isSidebarOpen,
       }
     },
-    loadMap: (state, action: PayloadAction<L.Map>) => {
+    loadMap: (state, action: PayloadAction<L.Map | null>) => {
       return {
         ...state,
         map: action.payload,

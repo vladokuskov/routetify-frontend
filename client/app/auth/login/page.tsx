@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { FormEvent, useState } from 'react'
 import toast from 'react-hot-toast'
 import { auth } from '@/lib/api/user'
+import { isAxiosError } from 'axios'
 
 export default function Login() {
   const router = useRouter()
@@ -32,7 +33,7 @@ export default function Login() {
 
       if (response) router.push('/')
     } catch (err) {
-      if (err instanceof Error) {
+      if (err instanceof Error || isAxiosError(err)) {
         toast.error(err.message)
       }
     }

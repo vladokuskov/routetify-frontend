@@ -2,94 +2,47 @@ const request = require('supertest')
 import { describe, expect, it } from '@jest/globals'
 const app = require('app')
 
-// GPX
+const testCases = [
+  { file: 'correct_gpx.gpx', description: 'GPX with coordinates', status: 200 },
+  {
+    file: 'empty_coords_gpx.gpx',
+    description: 'GPX without coordinates',
+    status: 406,
+  },
+  { file: 'correct_kml.kml', description: 'KML with coordinates', status: 200 },
+  {
+    file: 'empty_coords_kml.kml',
+    description: 'KML without coordinates',
+    status: 406,
+  },
+  { file: 'empty.gpx', description: 'Empty file', status: 406 },
+  {
+    file: 'extension_wrong.gpxt',
+    description: 'Wrong file extension',
+    status: 406,
+  },
+  {
+    file: 'extension_double.gpx.gpx',
+    description: 'Double extension',
+    status: 406,
+  },
+]
 
-describe('POST /route/parse (1)', () => {
-  it('Should return coordinates from response, GPX', async () => {
+describe.each(testCases)('POST /route/parse (%#) - %s', ({ file, status }) => {
+  it(`Should return ${
+    status === 200 ? 'coordinates' : 'an error'
+  } from response`, async () => {
+    const filePath = `src/__mocks__/route/${file}`
+
     const response = await request(app)
       .post('/route/parse')
-      .attach('file', 'src/__mocks__/route/gpx/correct_gpx.gpx')
+      .attach('file', filePath)
 
-    expect(response.status).toBe(200)
-    expect(response.body).toHaveProperty('coords')
-  })
-})
-
-describe('POST /route/parse (2)', () => {
-  it('Should return error about file without coordinates', async () => {
-    const response = await request(app)
-      .post('/route/parse')
-      .attach('file', 'src/__mocks__/route/gpx/empty_coords_gpx.gpx')
-
-    expect(response.status).toBe(406)
-    expect(response.body).toHaveProperty('message')
-  })
-})
-
-// KML
-
-describe('POST /route/parse (3)', () => {
-  it('Should return coordinates from response, KML', async () => {
-    const response = await request(app)
-      .post('/route/parse')
-      .attach('file', 'src/__mocks__/route/kml/correct_kml.kml')
-
-    expect(response.status).toBe(200)
-    expect(response.body).toHaveProperty('coords')
-  })
-})
-
-describe('POST /route/parse (4)', () => {
-  it('Should return error about file without coordinates', async () => {
-    const response = await request(app)
-      .post('/route/parse')
-      .attach('file', 'src/__mocks__/route/kml/empty_coords_kml.kml')
-
-    expect(response.status).toBe(406)
-    expect(response.body).toHaveProperty('message')
-  })
-})
-
-// GENERAL
-
-describe('POST /route/parse (5)', () => {
-  it('Should return error about empty file', async () => {
-    const response = await request(app)
-      .post('/route/parse')
-      .attach('file', 'src/__mocks__/route/empty.gpx')
-
-    expect(response.status).toBe(406)
-    expect(response.body).toHaveProperty('message')
-  })
-})
-
-describe('POST /route/parse (6)', () => {
-  it('Should return error about extension', async () => {
-    const response = await request(app)
-      .post('/route/parse')
-      .attach('file', 'src/__mocks__/route/extension_wrong.gpxt')
-
-    expect(response.status).toBe(406)
-    expect(response.body).toHaveProperty('message')
-  })
-})
-
-describe('POST /route/parse (7)', () => {
-  it('Should return error about single extension', async () => {
-    const response = await request(app)
-      .post('/route/parse')
-      .attach('file', 'src/__mocks__/route/extension_double.gpx.gpx')
-
-    expect(response.status).toBe(406)
-    expect(response.body).toHaveProperty('message')
-  })
-})
-
-describe('POST /route/parse (8)', () => {
-  it('Should return error about content type', async () => {
-    const response = await request(app).post('/route/parse')
-
-    expect(response.status).toBe(406)
-    expect(response.body).toHaveProperty('message')
+    expect(response.status).toBe(status)
+    if (status === 200) {
+      expect(response.body).toHaveProperty('coords')
+    } else {
+      expect(response.body).toHaveProperty('message')
+    }
   })
 })

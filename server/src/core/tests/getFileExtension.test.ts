@@ -1,36 +1,35 @@
-import { describe } from '@jest/globals'
 import { getFileExtension } from 'core/utils/getFileExtension'
 import config from 'config/index'
 
-describe('Get allowed file extension', () => {
-  it('Should return allowed extension', () => {
-    const extensions = config.allowedExtensions
-    extensions.forEach(async (ext) => {
-      const result = await getFileExtension(`test.${ext}`)
+test.each(config.allowedExtensions.map((ext) => [ext, ext]))(
+  'Get allowed file extension - %s',
+  async (input, expected) => {
+    const result = await getFileExtension(`test.${input}`)
+    expect(result).toBe(expected)
+  },
+)
 
-      expect(result).toBe(ext)
-    })
-  })
-})
+// Invalid Extensions
+const invalidExtensions = [
+  {
+    input: 'test.ext',
+    expectedErrorMessage: 'Provide a file with a correct extension',
+  },
+  {
+    input: 'test.ext.ext',
+    expectedErrorMessage: 'Provide a file with a single extension',
+  },
+]
 
-describe('Get not allowed file extension (1)', () => {
-  it('Should return error about wrong extension', async () => {
+test.each(invalidExtensions)(
+  'Get not allowed file extension - %s',
+  async ({ input, expectedErrorMessage }) => {
     try {
-      await getFileExtension(`test.ext`)
+      await getFileExtension(input)
     } catch (error) {
-      if (error instanceof Error)
-        expect(error.message).toBe('Provide a file with a correct extension')
+      if (error instanceof Error) {
+        expect(error.message).toBe(expectedErrorMessage)
+      }
     }
-  })
-})
-
-describe('Get not allowed file extension (2)', () => {
-  it('Should return error about double extension', async () => {
-    try {
-      await getFileExtension(`test.ext.ext`)
-    } catch (error) {
-      if (error instanceof Error)
-        expect(error.message).toBe('Provide a file with a single extension')
-    }
-  })
-})
+  },
+)

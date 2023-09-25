@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { auth } from '@/lib/api/user'
+import { isAxiosError } from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { FormEvent, useState } from 'react'
@@ -32,7 +33,7 @@ export default function Register() {
 
       if (response) router.push('/')
     } catch (err) {
-      if (err instanceof Error) {
+      if (err instanceof Error || isAxiosError(err)) {
         toast.error(err.message)
       }
     }

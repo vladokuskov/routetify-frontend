@@ -17,7 +17,7 @@ const getPlace = async (value: string) => {
 
     return data
   } catch (err) {
-    throw new Error('Something happened while we were looking for your place.')
+    throw new Error('Something happened while we were searching location')
   }
 }
 

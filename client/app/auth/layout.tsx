@@ -3,6 +3,7 @@
 import { getUser } from '@/lib/api/user'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 
 export default function AuthLayout({
   children,
@@ -13,11 +14,15 @@ export default function AuthLayout({
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const getUserStatus = async () => {
-    const isLogged = await getUser()
+    try {
+      const isLogged = await getUser()
 
-    if (isLogged) {
-      router.push('/')
-    } else {
+      if (isLogged) {
+        router.push('/')
+      } else {
+        setIsLoading(false)
+      }
+    } catch (err) {
       setIsLoading(false)
     }
   }

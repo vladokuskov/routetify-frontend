@@ -11,6 +11,7 @@ import { getUser } from '@/lib/api/user'
 import { useEffect, useState } from 'react'
 import clsx from 'clsx'
 import { toggleIsSidebarOpen } from '@/redux/features/controlsSlice'
+import toast from 'react-hot-toast'
 
 const UserSection = () => {
   const user = useAppSelector((state) => state.userReducer.user)
@@ -76,7 +77,7 @@ const UserSection = () => {
                 !isSidebarOpen && 'hidden',
               )}
             >
-              {user?.email}
+              {user ? user.email : 'Email'}
             </span>
           </Button>
         </div>

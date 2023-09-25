@@ -21,8 +21,14 @@ const auth = async (method: AuthMethod, credentials: Credentials) => {
       return true
     }
   } catch (err) {
-    if (axios.isAxiosError(err) && err.response) {
-      throw new Error(err.response.data.message)
+    if (axios.isAxiosError(err)) {
+      if (err.response) {
+        throw new Error(err.response.data.message)
+      } else if (err.code === 'ERR_NETWORK') {
+        throw new Error(
+          'Failed to connect to the server. Please try again later.',
+        )
+      }
     } else if (err instanceof Error) {
       throw new Error(err.message)
     }

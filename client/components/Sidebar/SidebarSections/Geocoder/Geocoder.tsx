@@ -135,6 +135,7 @@ const Geocoder = () => {
       >
         <Input
           variant="map"
+          disabled={!map}
           placeholder="Search location"
           onFocus={handleFocus}
           value={geocoderValue}
@@ -186,7 +187,7 @@ const Geocoder = () => {
               lon: lastSelectedResult.lon,
             })
           } else {
-            dispatch(toggleIsSidebarOpen())
+            dispatch(toggleIsSidebarOpen(true))
           }
         }}
       >

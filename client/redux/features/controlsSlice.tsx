@@ -7,7 +7,7 @@ import { ControlsState } from '@/types/global/redux.types'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import * as L from 'leaflet'
 
-const initialState = {
+const initialState: ControlsState = {
   draw: DrawType.None,
   layer: Layer.default,
   location: LocationStatus.idle,
@@ -16,7 +16,7 @@ const initialState = {
   map: null,
   isSidebarOpen: true,
   movingPreference: MovingPreferencesType.bike,
-} as ControlsState
+}
 
 export const controlsReducer = createSlice({
   name: 'controls',
@@ -37,13 +37,19 @@ export const controlsReducer = createSlice({
         isSidebarOpen: action.payload,
       }
     },
-    toggleIsSidebarOpen: (state, action: PayloadAction<void>) => {
-      return {
-        ...state,
-        isSidebarOpen: !state.isSidebarOpen,
-      }
+    toggleIsSidebarOpen: (state, action) => {
+      if (action.payload) {
+        return {
+          ...state,
+          isSidebarOpen: action.payload,
+        }
+      } else
+        return {
+          ...state,
+          isSidebarOpen: !state.isSidebarOpen,
+        }
     },
-    loadMap: (state, action: PayloadAction<L.Map>) => {
+    loadMap: (state, action: PayloadAction<L.Map | null>) => {
       return {
         ...state,
         map: action.payload,

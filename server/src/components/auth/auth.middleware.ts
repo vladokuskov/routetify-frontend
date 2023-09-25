@@ -12,23 +12,22 @@ const validateAuthBody = async (
     const { email, password } = req.body
 
     if (!email || !password) {
-      res.status(NOT_ACCEPTABLE)
-      res.json({ message: 'Request missing email or password' })
+      return res
+        .status(NOT_ACCEPTABLE)
+        .json({ message: 'Request missing email or password' })
     }
 
     const isEmailValid = await validateEmail(email)
     const isPasswordValid = await validatePassword(password)
 
     if (isEmailValid && isPasswordValid) {
-      next()
+      return next()
     }
   } catch (error) {
     if (error instanceof ServerError) {
-      res.status(error.status)
-      res.json({ message: error.message })
+      return res.status(error.status).json({ message: error.message })
     } else if (error instanceof Error) {
-      res.status(INTERNAL_SERVER_ERROR)
-      res.json({ message: 'Internal server error' })
+     return res.status(INTERNAL_SERVER_ERROR).json({ message: 'Internal server error' })
     }
   }
 }

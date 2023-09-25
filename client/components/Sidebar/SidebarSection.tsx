@@ -1,3 +1,5 @@
+'use client'
+
 import { useAppSelector } from '@/redux/hooks'
 import clsx from 'clsx'
 import { ReactNode } from 'react'
@@ -29,7 +31,7 @@ const SidebarSection = ({
           </h2>
         )}
         {description && (
-          <p className="text-base leading-4 font-normal text-paragraph">
+          <p className="text-base leading-4 font-normal text-muted-foreground">
             {description}
           </p>
         )}

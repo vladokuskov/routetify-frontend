@@ -1,3 +1,4 @@
+import { getTokenFromCookie } from 'core/utils/getTokenFromCookie'
 import { NextFunction, Request, Response } from 'express'
 import { BAD_REQUEST, INTERNAL_SERVER_ERROR, UNAUTHORIZED } from 'http-status'
 import jwt from 'jsonwebtoken'
@@ -5,6 +6,7 @@ import jwt from 'jsonwebtoken'
 interface TokenBody {
   id: number
   email: string
+  username: string
 }
 
 const verifyAuthorization = async (
@@ -23,23 +25,31 @@ const verifyAuthorization = async (
   try {
     const secret = process.env.AUTH_SECRET || ' '
 
-    const token = cookie.split('=')[1]
+    const token = getTokenFromCookie(cookie)
 
-    jwt.verify(token, secret, (err) => {
+    if (!token) {
+      return res
+        .status(BAD_REQUEST)
+        .json({ message: 'Token not found in the cookie' })
+    }
+
+    jwt.verify(token, secret, (err: any) => {
       if (err)
         return res
           .status(BAD_REQUEST)
-          .json({ error: 'Failed to authenticate token' })
+          .json({ message: 'Failed to authenticate token' })
 
-      const { id, email } = jwt.decode(token, { json: true }) as TokenBody
+      const { id, email, username } = jwt.decode(token, {
+        json: true,
+      }) as TokenBody
 
-      ;(req as any).user = { id, email }
+      req.body = { id, email, username }
 
-      next()
+      return next()
     })
   } catch (error) {
     if (error instanceof Error) {
-      res.status(INTERNAL_SERVER_ERROR).json({ message: error.message })
+      return res.status(INTERNAL_SERVER_ERROR).json({ message: error.message })
     }
   }
 }

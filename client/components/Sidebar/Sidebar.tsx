@@ -1,9 +1,10 @@
+'use client'
+
 import { useAppSelector } from '@/redux/hooks'
 import clsx from 'clsx'
 import { ResizeSidebarButton } from './ResizeSidebarButton/ResizeSidebarButton'
-
 import { SidebarSections } from './SidebarSections/SidebarSections'
-import { ThemeSwitcher } from '../ThemeSwitcher/ThemeSwitcher'
+import { ThemeSwitcher } from '@/components/ThemeSwitcher/ThemeSwitcher'
 
 const Sidebar = () => {
   const isSidebarOpen = useAppSelector(
@@ -13,7 +14,7 @@ const Sidebar = () => {
   return (
     <aside
       className={clsx(
-        'absolute bg-background border-foreground z-20 overflow-y-visible no-scrollbar max-w-sidebar min-w-sidebarSmall right-0 top-0 mt-0 h-[100lvh] border-l-2 sidebarAnimation',
+        'absolute bg-background border-foreground z-20 overflow-y-visible no-scrollbar max-w-sidebar min-w-sidebarSmall right-0 top-0 mt-0 h-[100lvh] border-l-2 sidebar-animation',
         isSidebarOpen ? 'w-sidebar p-4' : 'w-sidebarSmall p-1',
         'max-sm:!overflow-y-hidden max-sm:relative max-sm:p-4 max-sm:w-full max-sm:min-w-full max-sm:max-w-full max-sm:mt-[70vh] max-sm:shadow max-sm:border-t-2 max-sm:border-l-0 max-sm:min-h-[100lvh] max-sm:!h-full',
       )}
@@ -33,7 +34,8 @@ const Sidebar = () => {
         )}
       >
         <SidebarSections />
-        <div className="flex flex-col items-center justify-center gap-5 mt-auto mb-4 max-sm:mt-12">
+
+        <div className="mt-auto">
           <ThemeSwitcher />
         </div>
       </div>

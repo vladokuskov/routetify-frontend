@@ -101,6 +101,7 @@ const RouteUploading = () => {
         }}
         aria-label="Choose a file to upload"
         title="Choose a file to upload"
+        disabled={!map}
       >
         <span>
           <Icon svg={FileImportIcon} />

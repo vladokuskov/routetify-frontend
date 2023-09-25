@@ -1,9 +1,9 @@
 import { FileUploadState } from '@/types/global/redux.types'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-const initialState = {
+const initialState: FileUploadState = {
   routeFile: null,
-} as FileUploadState
+}
 
 export const controlsReducer = createSlice({
   name: 'controls',

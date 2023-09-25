@@ -1,4 +1,6 @@
+import { Toaster } from '@/components/Toaster/Toaster'
 import { siteConfig } from '@/config/site'
+import { StoreProvider } from '@/providers/StoreProvider'
 import { NextThemeProvider } from '@/providers/ThemeProvider'
 import '@/styles/globals.css'
 import { Roboto } from 'next/font/google'
@@ -38,7 +40,12 @@ export default function RootLayout({
     <html lang="en">
       <head />
       <body className={`${roboto.variable}`} suppressHydrationWarning={true}>
-        <NextThemeProvider>{children}</NextThemeProvider>
+        <Toaster />
+        <NextThemeProvider>
+          <StoreProvider>
+            <div className="min-w-[18rem]">{children}</div>
+          </StoreProvider>
+        </NextThemeProvider>
       </body>
     </html>
   )

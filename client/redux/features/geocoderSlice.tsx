@@ -2,11 +2,11 @@ import { mapConfig } from '@/config/map'
 import { GeocoderState } from '@/types/global/redux.types'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-const initialState = {
+const initialState: GeocoderState = {
   lat: null,
   lng: mapConfig.initialCoords.lng,
   zoom: mapConfig.initialCoords.zoom,
-} as GeocoderState
+}
 
 export const geocoderReducer = createSlice({
   name: 'geocoder',

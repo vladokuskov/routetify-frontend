@@ -3,6 +3,7 @@ import geocoderReducer from './features/geocoderSlice'
 import controlsReducer from './features/controlsSlice'
 import drawReducer from './features/drawSlice'
 import fileUploadReducer from './features/fileUploadSlice'
+import userReducer from './features/userSlice'
 import type { PreloadedState } from '@reduxjs/toolkit'
 
 const rootReducer = combineReducers({
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   controlsReducer,
   drawReducer,
   fileUploadReducer,
+  userReducer,
 })
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {

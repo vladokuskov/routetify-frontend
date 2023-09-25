@@ -8,5 +8,5 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  return <main>{children}</main>
+  return <main className="min-w-[18rem]">{children}</main>
 }

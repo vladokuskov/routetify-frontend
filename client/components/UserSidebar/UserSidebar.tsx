@@ -17,15 +17,10 @@ const UserSidebar = ({ user }: { user: User }) => {
   }
 
   const handleLogOut = async () => {
-    const isLoggedOut = await logout()
+    await logout()
 
-    if (isLoggedOut) {
-      // Remove user from state
-      dispatch(deleteUser())
-
-      // Close sidebar
-      dispatch(toggleUserSidebar(false))
-    }
+    dispatch(deleteUser())
+    dispatch(toggleUserSidebar(false))
   }
 
   return (

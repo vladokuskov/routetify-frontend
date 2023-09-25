@@ -54,16 +54,6 @@ const loginUser = async (req: Request, res: Response) => {
 
 const logoutUser = async (req: Request, res: Response) => {
   try {
-    const cookie = req.headers.cookie
-
-    const token = getTokenFromCookie(cookie)
-
-    if (!token) {
-      return res
-        .status(BAD_REQUEST)
-        .json({ message: 'Token not found in the cookie' })
-    }
-
     const serialized = serialize('token', '', {
       httpOnly: true,
       sameSite: false,

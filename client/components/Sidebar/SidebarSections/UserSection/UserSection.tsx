@@ -77,7 +77,7 @@ const UserSection = () => {
                 !isSidebarOpen && 'hidden',
               )}
             >
-              {user ? user.email : 'Email'}
+              {user ? user.email : 'Log in'}
             </span>
           </Button>
         </div>

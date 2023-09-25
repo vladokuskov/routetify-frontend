@@ -1,6 +1,6 @@
 import { Envs } from '@/config'
 import { User } from '@/types/global/user.types'
-import axios from 'axios'
+import axios, { isAxiosError } from 'axios'
 
 type AuthMethod = 'login' | 'register'
 
@@ -21,7 +21,7 @@ const auth = async (method: AuthMethod, credentials: Credentials) => {
       return true
     }
   } catch (err) {
-    if (axios.isAxiosError(err)) {
+    if (isAxiosError(err)) {
       if (err.response) {
         throw new Error(err.response.data.message)
       } else if (err.code === 'ERR_NETWORK') {
@@ -43,11 +43,9 @@ const logout = async () => {
 
     if (response) {
       return true
-    } else {
-      return false
     }
   } catch (err) {
-    return false
+    return true
   }
 }
 

@@ -9,6 +9,14 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { FormEvent, useState } from 'react'
 import toast from 'react-hot-toast'
+import clsx from 'clsx'
+
+enum PasswordStrength {
+  Empty,
+  Week,
+  Medium,
+  Strong,
+}
 
 export default function Register() {
   const router = useRouter()
@@ -17,9 +25,17 @@ export default function Register() {
     password: '',
   })
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [passwordStrength, setPasswordStrength] = useState<PasswordStrength>(
+    PasswordStrength.Empty,
+  )
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
+
+    if (name === 'password') {
+      const newStrength = calculatePasswordStrength(value)
+      setPasswordStrength(newStrength)
+    }
 
     setRegisterState((prev) => ({
       ...prev,
@@ -32,9 +48,12 @@ export default function Register() {
 
     try {
       setIsLoading(true)
-      const response = await auth('register', registerState)
 
-      if (response) router.push('/')
+      if (passwordStrength === PasswordStrength.Strong) {
+        const response = await auth('register', registerState)
+
+        if (response) router.push('/')
+      }
 
       setIsLoading(false)
     } catch (err) {
@@ -72,6 +91,53 @@ export default function Register() {
             onChange={handleInputChange}
             required
           />
+
+          <p
+            className={clsx(
+              'font-semibold',
+              passwordStrength === PasswordStrength.Week
+                ? 'text-red-400'
+                : passwordStrength === PasswordStrength.Medium
+                ? 'text-yellow-400'
+                : passwordStrength === PasswordStrength.Strong
+                ? 'text-green-400'
+                : 'text-muted-foreground',
+            )}
+          >
+            {passwordStrength === PasswordStrength.Week
+              ? 'Week'
+              : passwordStrength === PasswordStrength.Medium
+              ? 'Medium'
+              : passwordStrength === PasswordStrength.Strong
+              ? 'Strong'
+              : 'Password strength'}
+          </p>
+          <div className="w-full flex items-center justify-center gap-2">
+            <div
+              className={clsx(
+                'h-1 w-1/3',
+                passwordStrength === PasswordStrength.Week
+                  ? 'bg-red-400'
+                  : 'bg-muted',
+              )}
+            />
+            <div
+              className={clsx(
+                'h-1 w-1/3',
+                passwordStrength === PasswordStrength.Medium
+                  ? 'bg-yellow-400'
+                  : 'bg-muted',
+              )}
+            />
+            <div
+              className={clsx(
+                'h-1 w-1/3',
+                passwordStrength === PasswordStrength.Strong
+                  ? 'bg-green-400'
+                  : 'bg-muted',
+              )}
+            />
+          </div>
         </div>
 
         <Button
@@ -91,4 +157,41 @@ export default function Register() {
       </Link>
     </div>
   )
+}
+
+const calculatePasswordStrength = (password: string) => {
+  if (password.length === 0) {
+    return PasswordStrength.Empty
+  } else if (password.length < 8) {
+    return PasswordStrength.Week
+  } else if (
+    /[A-Z]/.test(password) &&
+    /[0-9]/.test(password) &&
+    password.length >= 8 &&
+    /[a-z]/.test(password)
+  ) {
+    return PasswordStrength.Strong
+  } else if (
+    /[A-Z]/.test(password) &&
+    /[0-9]/.test(password) &&
+    password.length >= 8
+  ) {
+    return PasswordStrength.Medium
+  } else {
+    return PasswordStrength.Week
+  }
+}
+
+const strengthClasses = {
+  [PasswordStrength.Week]: 'text-red-400 bg-red-400',
+  [PasswordStrength.Medium]: 'text-yellow-400 bg-yellow-400',
+  [PasswordStrength.Strong]: 'text-green-400 bg-green-400',
+  default: 'text-muted-foreground bg-muted',
+}
+
+const strengthLabels = {
+  [PasswordStrength.Week]: 'Week',
+  [PasswordStrength.Medium]: 'Medium',
+  [PasswordStrength.Strong]: 'Strong',
+  default: 'Password strength',
 }

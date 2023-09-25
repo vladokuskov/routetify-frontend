@@ -1,9 +1,8 @@
 import { Request, Response } from 'express'
-import { BAD_REQUEST, INTERNAL_SERVER_ERROR, OK } from 'http-status'
+import { INTERNAL_SERVER_ERROR, OK } from 'http-status'
 import { login, register } from './auth.service'
 import ServerError from 'core/instances/ServerError'
 import { serialize } from 'cookie'
-import { getTokenFromCookie } from 'core/utils/getTokenFromCookie'
 
 const registerUser = async (req: Request, res: Response) => {
   try {
@@ -56,7 +55,7 @@ const logoutUser = async (req: Request, res: Response) => {
   try {
     const serialized = serialize('token', '', {
       httpOnly: true,
-      sameSite: false,
+      sameSite: 'none',
       maxAge: -1,
       path: '/',
     })

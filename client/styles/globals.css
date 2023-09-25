@@ -105,10 +105,10 @@
     @apply text-lg;
   }
   body {
-    @apply bg-background;
+    @apply bg-muted;
   }
   :root {
-    @apply bg-background;
+    @apply bg-muted;
   }
   #map {
     @apply bg-background;

@@ -42,7 +42,9 @@ export default function RootLayout({
       <body className={`${roboto.variable}`} suppressHydrationWarning={true}>
         <Toaster />
         <NextThemeProvider>
-          <StoreProvider>{children}</StoreProvider>
+          <StoreProvider>
+            <div className="min-w-[18rem]">{children}</div>
+          </StoreProvider>
         </NextThemeProvider>
       </body>
     </html>

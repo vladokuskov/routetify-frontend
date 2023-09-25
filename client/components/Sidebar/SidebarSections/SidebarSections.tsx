@@ -11,9 +11,7 @@ import { UserSection } from './UserSection/UserSection'
 const SidebarSections = () => {
   return (
     <>
-      <SidebarSection>
-        <UserSection />
-      </SidebarSection>
+      <UserSection />
       <SidebarSection
         title="Your location"
         description="Here you can find location"

@@ -40,7 +40,7 @@ const register = async (email: string, password: string) => {
 
     const serialized = serialize('token', token, {
       httpOnly: true,
-      sameSite: false,
+      sameSite: 'none',
       maxAge: 60 * 60 * 24 * 15,
       path: '/',
     })
@@ -91,7 +91,7 @@ const login = async (email: string, password: string) => {
 
   const serialized = serialize('token', token, {
     httpOnly: true,
-    sameSite: false,
+    sameSite: 'none',
     maxAge: 60 * 60 * 24 * 15,
     path: '/',
   })

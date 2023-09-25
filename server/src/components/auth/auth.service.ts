@@ -40,10 +40,11 @@ const register = async (email: string, password: string) => {
 
     const serialized = serialize('token', token, {
       httpOnly: true,
-      sameSite: 'none',
+      sameSite: 'lax',
       secure: true,
       maxAge: config.cookieExpiration,
       path: '/',
+      domain: config.origin,
     })
 
     return {
@@ -92,10 +93,11 @@ const login = async (email: string, password: string) => {
 
   const serialized = serialize('token', token, {
     httpOnly: true,
-    sameSite: 'none',
+    sameSite: 'lax',
     secure: true,
     maxAge: config.cookieExpiration,
     path: '/',
+    domain: config.origin,
   })
 
   return {

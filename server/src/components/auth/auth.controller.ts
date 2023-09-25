@@ -3,6 +3,7 @@ import { INTERNAL_SERVER_ERROR, OK } from 'http-status'
 import { login, register } from './auth.service'
 import ServerError from 'core/instances/ServerError'
 import { serialize } from 'cookie'
+import config from 'config'
 
 const registerUser = async (req: Request, res: Response) => {
   try {
@@ -59,6 +60,7 @@ const logoutUser = async (req: Request, res: Response) => {
       secure: true,
       maxAge: -1,
       path: '/',
+      domain: config.origin,
     })
 
     return res.setHeader('Set-Cookie', serialized).status(OK).json({

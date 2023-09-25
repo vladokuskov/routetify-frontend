@@ -34,7 +34,7 @@ const register = async (email: string, password: string) => {
       { id: newUser.id, email: newUser.email, username: newUser.username },
       secret,
       {
-        expiresIn: 60 * 60 * 24 * 15,
+        expiresIn: config.cookieExpiration,
       },
     )
 
@@ -42,7 +42,7 @@ const register = async (email: string, password: string) => {
       httpOnly: true,
       sameSite: 'none',
       secure: true,
-      maxAge: 60 * 60 * 24 * 15,
+      maxAge: config.cookieExpiration,
       path: '/',
     })
 
@@ -86,7 +86,7 @@ const login = async (email: string, password: string) => {
     },
     secret,
     {
-      expiresIn: 60 * 60 * 24 * 15,
+      expiresIn: config.cookieExpiration,
     },
   )
 
@@ -94,7 +94,7 @@ const login = async (email: string, password: string) => {
     httpOnly: true,
     sameSite: 'none',
     secure: true,
-    maxAge: 60 * 60 * 24 * 15,
+    maxAge: config.cookieExpiration,
     path: '/',
   })
 

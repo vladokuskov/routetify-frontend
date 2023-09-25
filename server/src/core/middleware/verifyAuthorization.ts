@@ -1,3 +1,5 @@
+import config from 'config'
+import { serialize } from 'cookie'
 import { getTokenFromCookie } from 'core/utils/getTokenFromCookie'
 import { NextFunction, Request, Response } from 'express'
 import { BAD_REQUEST, INTERNAL_SERVER_ERROR, UNAUTHORIZED } from 'http-status'
@@ -42,6 +44,21 @@ const verifyAuthorization = async (
       const { id, email, username } = jwt.decode(token, {
         json: true,
       }) as TokenBody
+
+      const updatedToken = jwt.sign({ id, email, username }, secret, {
+        expiresIn: config.cookieExpiration,
+      })
+
+      res.setHeader(
+        'Set-Cookie',
+        serialize('token', updatedToken, {
+          httpOnly: true,
+          sameSite: 'none',
+          secure: true,
+          maxAge: config.cookieExpiration,
+          path: '/',
+        }),
+      )
 
       req.body = { id, email, username }
 

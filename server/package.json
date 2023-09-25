@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "dev": "ts-node-dev -r tsconfig-paths/register src/server.ts",
+    "dev": "npx prisma generate && ts-node-dev -r tsconfig-paths/register src/server.ts",
     "test": "jest --detectOpenHandles",
     "lint": "npm run lint:js ",
     "lint:eslint": "eslint --ignore-path .gitignore --ext .ts",

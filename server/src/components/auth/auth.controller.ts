@@ -60,7 +60,6 @@ const logoutUser = async (req: Request, res: Response) => {
       secure: true,
       maxAge: -1,
       path: '/',
-      domain: config.origin,
     })
 
     return res.setHeader('Set-Cookie', serialized).status(OK).json({

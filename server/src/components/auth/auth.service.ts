@@ -44,7 +44,6 @@ const register = async (email: string, password: string) => {
       secure: true,
       maxAge: config.cookieExpiration,
       path: '/',
-      domain: config.origin,
     })
 
     return {
@@ -97,7 +96,6 @@ const login = async (email: string, password: string) => {
     secure: true,
     maxAge: config.cookieExpiration,
     path: '/',
-    domain: config.origin,
   })
 
   return {

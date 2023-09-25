@@ -27,12 +27,13 @@ model Route {
 
 
 model User {
-  id          Int         @id @unique @default(autoincrement())
-  username    String      @db.VarChar(35) @default("User")
-  email       String      @unique 
-  password    String      @db.VarChar(190)
+  id            Int         @id @unique @default(autoincrement())
+  username      String      @db.VarChar(35) @default("User")
+  email         String      @unique 
+  password      String      @db.VarChar(190)
+  emailVerified Boolean     @default(false)  
 
-  routes      Route[]
+  routes        Route[]
 
   @@map(name: "users")
 }

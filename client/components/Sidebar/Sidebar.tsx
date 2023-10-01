@@ -29,7 +29,7 @@ const Sidebar = () => {
       <div
         className={clsx(
           'w-full h-full flex flex-col items-center justify-start gap-6 mx-auto my-0 overflow-y-scroll no-scrollbar',
-          'max-sm:max-w-lg max-sm:p-2 max-sm:!overflow-y-hidden',
+          'max-sm:max-w-lg max-sm:p-2 max-sm:!overflow-y-hidden max-sm:min-h-[100lvh]',
           isSidebarOpen ? 'p-2' : 'p-1',
         )}
       >

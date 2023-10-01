@@ -2,7 +2,6 @@ import ChevronLeftIcon from '@/assets/icons/chevron-left.svg'
 import ChevronRightIcon from '@/assets/icons/chevron-right.svg'
 import Icon from '@/components/ui/icon'
 import { toggleIsSidebarOpen } from '@/redux/features/controlsSlice'
-import { toggleUserSidebar } from '@/redux/features/userSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import clsx from 'clsx'
 import { useEffect } from 'react'
@@ -18,10 +17,6 @@ const ResizeSidebarButton = () => {
 
   const handleSidebarResize = () => {
     dispatch(toggleIsSidebarOpen(null))
-
-    if (isSidebarOpen) {
-      dispatch(toggleUserSidebar(false))
-    }
   }
 
   useEffect(() => {

@@ -5,8 +5,6 @@ export default {
   port: parseInt(process.env.PORT || '5000', 10),
   origin: process.env.ORIGIN || 'http://localhost:3000',
   allowedExtensions: ['gpx', 'kml'],
-  saltRounds: process.env.SALT_ROUND || 12,
-  cookieExpiration: 60 * 60 * 24 * 7,
   logs: {
     level: process.env.LOG_LEVEL || 'info',
   },

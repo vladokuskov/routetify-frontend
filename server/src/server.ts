@@ -12,5 +12,4 @@ app
   })
   .on('error', (err: Express.Application) => {
     Logger.error(err)
-    process.exit(1)
   })

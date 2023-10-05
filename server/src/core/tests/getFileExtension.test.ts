@@ -1,5 +1,5 @@
-import { getFileExtension } from 'core/utils/getFileExtension'
-import config from 'config/index'
+import { getFileExtension } from '@/core/utils/getFileExtension'
+import config from '@/config/index'
 
 test.each(config.allowedExtensions.map((ext) => [ext, ext]))(
   'Get allowed file extension - %s',

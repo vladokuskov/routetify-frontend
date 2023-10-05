@@ -1,6 +1,6 @@
 const request = require('supertest')
 import { describe, expect, it } from '@jest/globals'
-const app = require('app')
+const app = require('@/app')
 
 const testCases = [
   { file: 'correct_gpx.gpx', description: 'GPX with coordinates', status: 200 },

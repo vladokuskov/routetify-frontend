@@ -1,6 +1,6 @@
 const request = require('supertest')
 import { describe, expect, it } from '@jest/globals'
-const app = require('app')
+const app = require('@/app')
 
 describe('GET /health/live', () => {
   it('Should return successful status for health', async () => {

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { INTERNAL_SERVER_ERROR, OK } from 'http-status'
 import { parse } from './route.service'
-import { Extension } from 'types/extensions.types'
+import { Extension } from '@/types/extensions.types'
 
 const parseRoute = async (req: Request, res: Response) => {
   try {

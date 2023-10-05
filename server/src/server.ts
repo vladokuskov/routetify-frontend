@@ -1,6 +1,6 @@
-const app = require('app')
-import config from 'config/index'
-import Logger from 'core/helpers/logger'
+const app = require('@/app')
+import config from '@/config/index'
+import Logger from '@/core/helpers/logger'
 
 app
   .listen(config.port, (): void => {

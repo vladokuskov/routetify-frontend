@@ -3,7 +3,7 @@
     "target": "es2020",
     "module": "commonjs",
     "moduleResolution": "node",
-    "rootDir": "./",
+    "rootDir": ".",
     "outDir": "./build",
     "esModuleInterop": true,
     "sourceMap": true,
@@ -12,10 +12,16 @@
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
-    "baseUrl": "src",
+    "baseUrl": ".",
     "resolveJsonModule": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/app": ["src/app.ts"],
+      "@/api": ["src/api.ts"],
+      "@/server": ["src/server.ts"],
+      "@/components/*": ["src/components/*"],
+      "@/core/*": ["src/core/*"],
+      "@/types/*": ["src/@types/*"],
+      "@/config/*": ["src/config/*"]
     }
   },
   "exclude": ["node_modules"],

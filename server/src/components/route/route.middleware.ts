@@ -1,5 +1,5 @@
-import { getFileExtension } from 'core/utils/getFileExtension'
-import { verifyFileStructure } from 'core/utils/verifyFileStructure'
+import { getFileExtension } from '@/core/utils/getFileExtension'
+import { verifyFileStructure } from '@/core/utils/verifyFileStructure'
 import { NextFunction, Request, Response } from 'express'
 import httpStatus, { INTERNAL_SERVER_ERROR, NOT_ACCEPTABLE } from 'http-status'
 import multer from 'multer'

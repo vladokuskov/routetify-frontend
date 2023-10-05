@@ -1,9 +1,9 @@
-import config from 'config'
+import config from '@/config/index'
 import cors from 'cors'
 import 'dotenv/config'
 import express from 'express'
 import helmet from 'helmet'
-import api from 'api'
+import api from '@/api'
 
 const app = express()
 

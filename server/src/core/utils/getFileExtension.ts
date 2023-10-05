@@ -1,5 +1,5 @@
-import config from 'config/index'
-import { Extension } from 'types/extensions.types'
+import config from '@/config/index'
+import { Extension } from '@/types/extensions.types'
 
 const getFileExtension = async (filename: string) => {
   const parts = filename.split('.')

@@ -1,4 +1,4 @@
-import { Extension } from 'types/extensions.types'
+import { Extension } from '@/types/extensions.types'
 const toGeoJSON = require('@mapbox/togeojson')
 import { DOMParser } from 'xmldom'
 

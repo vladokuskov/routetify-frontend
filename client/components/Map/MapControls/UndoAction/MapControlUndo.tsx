@@ -1,6 +1,13 @@
 import UndoIcon from '@/assets/icons/undo.svg'
-import Icon from '@/components/ui/icon'
 import { Button } from '@/components/ui/button'
+import Icon from '@/components/ui/icon'
+import { KeybindTooltip } from '@/components/ui/keybind-tooltip'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 import { undoDrawCoords } from '@/redux/features/drawSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { DrawType } from '@/types/global/drawType.types'
@@ -20,16 +27,26 @@ const MapControlUndoAction = () => {
   useHotkeys('alt+z', handleUndo)
 
   return (
-    <Button
-      variant="map"
-      size="cube"
-      title="Undo action [ALT + Z]"
-      aria-label="Undo action"
-      onClick={handleUndo}
-      disabled={drawCoords.length === 0 || drawType === DrawType.None}
-    >
-      <Icon svg={UndoIcon} />
-    </Button>
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            variant="map"
+            size="cube"
+            aria-label="Undo action"
+            onClick={handleUndo}
+            disabled={drawCoords.length === 0 || drawType === DrawType.None}
+          >
+            <Icon svg={UndoIcon} />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent sideOffset={5} side="left" avoidCollisions>
+          <p>
+            Undo action <KeybindTooltip>ALT+Z</KeybindTooltip>
+          </p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   )
 }
 

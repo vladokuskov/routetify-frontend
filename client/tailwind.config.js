@@ -74,6 +74,10 @@ module.exports = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        dropdown: {
+          DEFAULT: 'hsl(var(--dropdown))',
+          foreground: 'hsl(var(--dropdown-foreground))',
+        },
         map: {
           DEFAULT: 'hsl(var(--map))',
           border: 'hsl(var(--map-border))',

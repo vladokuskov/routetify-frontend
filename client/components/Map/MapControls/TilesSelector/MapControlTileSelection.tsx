@@ -1,15 +1,22 @@
+import LayersIcon from '@/assets/icons/layers.svg'
 import { Button } from '@/components/ui/button'
 import Icon from '@/components/ui/icon'
+import { KeybindTooltip } from '@/components/ui/keybind-tooltip'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
+import { mapConfig } from '@/config/map'
 import { useClickOutside } from '@/hooks/useClickOutside'
 import { changeLayer } from '@/redux/features/controlsSlice'
 import { addLatLng } from '@/redux/features/geocoderSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { Layer } from '@/types/global/mapConfig.types'
 import clsx from 'clsx'
 import { useRef } from 'react'
-import LayersIcon from '@/assets/icons/layers.svg'
 import { useHotkeys } from 'react-hotkeys-hook'
-import { mapConfig } from '@/config/map'
-import { Layer } from '@/types/global/mapConfig.types'
 
 const MapControlTileSelection = () => {
   const ref = useRef(null)
@@ -51,27 +58,38 @@ const MapControlTileSelection = () => {
 
   return (
     <div className="relative" ref={ref}>
-      <Button
-        variant="map"
-        size="cube"
-        title="Select map tile [ALT + T]"
-        aria-label="Select map tile layer"
-        onClick={handleMenuOpen}
-      >
-        <Icon svg={LayersIcon} />
-      </Button>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant="map"
+              size="cube"
+              aria-label="Select map tile layer"
+              onClick={handleMenuOpen}
+            >
+              <Icon svg={LayersIcon} />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent sideOffset={5} side="left" avoidCollisions>
+            <p>
+              Select map tile <KeybindTooltip>ALT+T</KeybindTooltip>
+            </p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+
       {isMenuOpen && (
         <div
           className={clsx(
-            'bg-map absolute font-roboto  font-semibold gap-1 right-11 bottom-0 rounded-md p-1 flex flex-col items-center justify-center shadow-md',
+            'bg-dropdown border-2 border-dropdown-foreground absolute font-roboto font-semibold gap-1 right-11 bottom-0 rounded-md p-1 flex flex-col items-center justify-center shadow-md',
             'max-hsm:bottom-auto max-hsm:top-11 max-hsm:!right-0 w-28',
           )}
         >
           {availableLayers.map((layer) => {
             return (
               <Button
-                variant="map"
-                className="!shadow-none hover:bg-neutral-200 dark:hover:bg-neutral-500 w-full"
+                variant="ghost"
+                className="!shadow-none w-full"
                 key={layer.url}
                 onClick={() => handleTileSelect(layer)}
                 aria-label={layer.title}

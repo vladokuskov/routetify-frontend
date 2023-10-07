@@ -1,10 +1,18 @@
-import { Button } from '@/components/ui/button'
 import LoadingIcon from '@/assets/icons/loader.svg'
+import LocationIconBroken from '@/assets/icons/location-broken.svg'
 import LocationFilledIcon from '@/assets/icons/location-filled.svg'
 import LocationIconOff from '@/assets/icons/location-off.svg'
-import LocationIconBroken from '@/assets/icons/location-broken.svg'
+import { Button } from '@/components/ui/button'
 
 import Icon from '@/components/ui/icon'
+import { KeybindTooltip } from '@/components/ui/keybind-tooltip'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
+import updateMapView from '@/lib/updateMapView'
 import {
   changeCurrentCoords,
   changeLocationStatus,
@@ -12,7 +20,6 @@ import {
 import { addLatLng } from '@/redux/features/geocoderSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { LocationStatus } from '@/types/global/locationStatus.types'
-import updateMapView from '@/lib/updateMapView'
 import { useHotkeys } from 'react-hotkeys-hook'
 
 const MapControlFindLocation = () => {
@@ -64,33 +71,43 @@ const MapControlFindLocation = () => {
   useHotkeys('alt+j', getLocation)
 
   return (
-    <Button
-      variant="map"
-      size="cube"
-      title="Find location [ALT + J]"
-      aria-label="Find location"
-      onClick={getLocation}
-      status={
-        locationStatus === LocationStatus.error
-          ? 'danger'
-          : locationStatus === LocationStatus.success
-          ? 'service'
-          : undefined
-      }
-    >
-      <Icon
-        svg={
-          locationStatus === LocationStatus.success
-            ? LocationFilledIcon
-            : locationStatus === LocationStatus.fetching
-            ? LoadingIcon
-            : locationStatus === LocationStatus.error
-            ? LocationIconBroken
-            : LocationIconOff
-        }
-        spin={locationStatus === LocationStatus.fetching}
-      />
-    </Button>
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            variant="map"
+            size="cube"
+            aria-label="Find location"
+            onClick={getLocation}
+            status={
+              locationStatus === LocationStatus.error
+                ? 'danger'
+                : locationStatus === LocationStatus.success
+                ? 'service'
+                : undefined
+            }
+          >
+            <Icon
+              svg={
+                locationStatus === LocationStatus.success
+                  ? LocationFilledIcon
+                  : locationStatus === LocationStatus.fetching
+                  ? LoadingIcon
+                  : locationStatus === LocationStatus.error
+                  ? LocationIconBroken
+                  : LocationIconOff
+              }
+              spin={locationStatus === LocationStatus.fetching}
+            />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent sideOffset={5} side="left" avoidCollisions>
+          <p>
+            Find location <KeybindTooltip>ALT+J</KeybindTooltip>
+          </p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   )
 }
 

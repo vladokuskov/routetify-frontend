@@ -4,22 +4,23 @@ import { useClickOutside } from '@/hooks/useClickOutside'
 import { changeLayer } from '@/redux/features/controlsSlice'
 import { addLatLng } from '@/redux/features/geocoderSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import { Layer } from '@/types/global/layer.types'
 import clsx from 'clsx'
 import { useRef } from 'react'
 import LayersIcon from '@/assets/icons/layers.svg'
 import { useHotkeys } from 'react-hotkeys-hook'
+import { mapConfig } from '@/config/map'
+import { Layer } from '@/types/global/mapConfig.types'
 
 const MapControlTileSelection = () => {
   const ref = useRef(null)
   const [isMenuOpen, setIsMenuOpen] = useClickOutside(ref, false)
 
-  const layer = useAppSelector((state) => state.controlsReducer.layer)
+  const selectedLayer = useAppSelector((state) => state.controlsReducer.layer)
   const currentCoords = useAppSelector(
     (state) => state.controlsReducer.currentCoords,
   )
 
-  const layers = [Layer.default, Layer.satellite]
+  const availableLayers = mapConfig.layers
 
   const dispatch = useAppDispatch()
 
@@ -33,12 +34,15 @@ const MapControlTileSelection = () => {
     dispatch(changeLayer(layer))
     setIsMenuOpen(false)
   }
+
   useHotkeys('alt+t', () => {
-    if (layer === Layer.default) {
-      handleTileSelect(Layer.satellite)
-    } else {
-      handleTileSelect(Layer.default)
-    }
+    const currentIndex = availableLayers.findIndex(
+      (layer) => layer === selectedLayer,
+    )
+    const nextIndex = (currentIndex + 1) % availableLayers.length
+    const nextLayer = availableLayers[nextIndex]
+
+    handleTileSelect(nextLayer)
   })
 
   const handleMenuOpen = () => {
@@ -59,34 +63,21 @@ const MapControlTileSelection = () => {
       {isMenuOpen && (
         <div
           className={clsx(
-            'bg-map absolute font-roboto font-semibold gap-1 right-11 bottom-0 rounded-md p-1 flex flex-col items-center justify-center shadow-md',
-            'max-hsm:bottom-auto max-hsm:top-11 max-hsm:!right-0',
+            'bg-map absolute font-roboto  font-semibold gap-1 right-11 bottom-0 rounded-md p-1 flex flex-col items-center justify-center shadow-md',
+            'max-hsm:bottom-auto max-hsm:top-11 max-hsm:!right-0 w-28',
           )}
         >
-          {layers.map((tile, index) => {
+          {availableLayers.map((layer) => {
             return (
               <Button
                 variant="map"
-                className="!shadow-none hover:bg-neutral-200 dark:hover:bg-neutral-500"
-                key={index}
-                onClick={() => handleTileSelect(tile)}
-                aria-label={tile === Layer.default ? 'Default' : 'Satellite'}
-                disabled={tile === layer}
+                className="!shadow-none hover:bg-neutral-200 dark:hover:bg-neutral-500 w-full"
+                key={layer.url}
+                onClick={() => handleTileSelect(layer)}
+                aria-label={layer.title}
+                disabled={selectedLayer === layer}
               >
-                <img
-                  src={`/icons/${
-                    tile === Layer.default
-                      ? 'default'
-                      : tile === Layer.satellite
-                      ? 'satellite'
-                      : null
-                  }.webp`}
-                  alt=""
-                  width={30}
-                  height={30}
-                  style={{ borderRadius: '4px' }}
-                />
-                {tile === Layer.default ? 'Default' : 'Satellite'}
+                {layer.title}
               </Button>
             )
           })}

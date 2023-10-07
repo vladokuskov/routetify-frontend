@@ -1,7 +1,7 @@
 import { mapConfig } from '@/config/map'
 import { DrawType } from '@/types/global/drawType.types'
-import { Layer } from '@/types/global/layer.types'
 import { LocationStatus } from '@/types/global/locationStatus.types'
+import { Layer } from '@/types/global/mapConfig.types'
 import { MovingPreferencesType } from '@/types/global/movingPreferencesType.types'
 import { ControlsState } from '@/types/global/redux.types'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
@@ -9,7 +9,7 @@ import * as L from 'leaflet'
 
 const initialState: ControlsState = {
   draw: DrawType.None,
-  layer: Layer.default,
+  layer: mapConfig.layers[0],
   location: LocationStatus.idle,
   isMarkerDragging: false,
   currentCoords: mapConfig.initialCoords,

@@ -1,9 +1,10 @@
 import { DrawCoords } from '../models/drawCoords.types'
 import { DrawType } from './drawType.types'
-import { Layer } from './layer.types'
+
 import { LocationStatus } from './locationStatus.types'
 import * as L from 'leaflet'
 import { MovingPreferencesType } from './movingPreferencesType.types'
+import { Layer } from './mapConfig.types'
 
 export type GeocoderState = {
   lat: number | null

@@ -7,9 +7,23 @@ export const mapConfig: MapConfig = {
     lng: 30.5241,
     zoom: 12,
   },
-  layer: {
-    default: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-    satellite:
-      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-  },
+  layers: [
+    {
+      name: 'default',
+      title: 'OSM',
+      url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+    },
+
+    {
+      name: 'cyclosm',
+      title: 'CyclOSM',
+      url: 'https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png',
+    },
+
+    {
+      name: 'satellite-1',
+      title: 'Satellite 1',
+      url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    },
+  ],
 }

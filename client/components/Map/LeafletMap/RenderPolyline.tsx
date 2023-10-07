@@ -22,6 +22,13 @@ const RenderPolyline = ({ map }: { map: L.Map | null }) => {
     lineJoin: 'round',
   })
 
+  const previewPolyline = L.polyline([], {
+    color: '#3520f570',
+    weight: 6,
+    dashArray: '15, 15',
+    className: 'cursorCrosshair',
+  })
+
   const decorator = L.polylineDecorator(polyline, {
     patterns: [
       {
@@ -38,13 +45,6 @@ const RenderPolyline = ({ map }: { map: L.Map | null }) => {
         }),
       },
     ],
-  })
-
-  const previewPolyline = L.polyline([], {
-    color: '#3520f570',
-    weight: 6,
-    dashArray: '15, 15',
-    className: 'cursorCrosshair',
   })
 
   const onMouseMove = (event: L.LeafletMouseEvent) => {

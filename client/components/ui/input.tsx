@@ -12,7 +12,7 @@ const inputVariants = cva(
       variant: {
         default:
           'bg-background border-2 border-input placeholder:!text-paragraph/80',
-        map: 'bg-input-map text-input-map-foreground placeholder:input-map-foreground/90 hover:bg-input-map/90 rounded-md !pr-10 !py-2 !pl-2 z-30',
+        map: 'bg-input-map text-input-map-foreground placeholder:input-map-foreground/90 rounded-md !pr-10 !py-2 !pl-2 z-30',
       },
     },
     defaultVariants: {

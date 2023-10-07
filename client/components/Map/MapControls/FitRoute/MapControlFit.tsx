@@ -1,10 +1,17 @@
+import FitIcon from '@/assets/icons/fit.svg'
 import { Button } from '@/components/ui/button'
 import Icon from '@/components/ui/icon'
+import { KeybindTooltip } from '@/components/ui/keybind-tooltip'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
+import fitBounds from '@/lib/fitBounds'
 import { changeLocationStatus } from '@/redux/features/controlsSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { LocationStatus } from '@/types/global/locationStatus.types'
-import FitIcon from '@/assets/icons/fit.svg'
-import fitBounds from '@/lib/fitBounds'
 import { useHotkeys } from 'react-hotkeys-hook'
 
 const MapControlFitRoute = () => {
@@ -24,16 +31,26 @@ const MapControlFitRoute = () => {
   useHotkeys('alt+o', handleRouteFit)
 
   return (
-    <Button
-      variant="map"
-      size="cube"
-      title="Fit route [ALT + O]"
-      aria-label="Fit route"
-      onClick={handleRouteFit}
-      disabled={drawCoords.length === 0}
-    >
-      <Icon svg={FitIcon} />
-    </Button>
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            variant="map"
+            size="cube"
+            aria-label="Fit route"
+            onClick={handleRouteFit}
+            disabled={drawCoords.length === 0}
+          >
+            <Icon svg={FitIcon} />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent sideOffset={5} side="left" avoidCollisions>
+          <p>
+            Fit route <KeybindTooltip>ALT+O</KeybindTooltip>
+          </p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   )
 }
 

@@ -25,22 +25,25 @@ const FilesDragAndDrop = () => {
 
   const handleDragOver = (e: DragEvent) => {
     e.preventDefault()
-    setIsDragging(true)
+
     if (dragLeaveTimeoutRef.current) {
       clearTimeout(dragLeaveTimeoutRef.current)
       dragLeaveTimeoutRef.current = null
     }
+
+    setIsDragging(true)
   }
 
   const handleDragEnter = (e: DragEvent) => {
     e.preventDefault()
-    if (!isDragging) {
+    if (e.dataTransfer && e.dataTransfer.types.includes('Files')) {
       setIsDragging(true)
     }
   }
 
   const handleDragLeave = (e: DragEvent) => {
     e.preventDefault()
+
     if (dragLeaveTimeoutRef.current) {
       clearTimeout(dragLeaveTimeoutRef.current)
       dragLeaveTimeoutRef.current = null
@@ -71,7 +74,7 @@ const FilesDragAndDrop = () => {
 
   return (
     <aside
-      className="fixed l-0 top-0 w-full min-w-full h-full z-50 bg-neutral-900/30 transition-all"
+      className="fixed inset-0 z-50 w-full min-w-full h-full bg-neutral-900/30 transition-all"
       aria-label="Drop file"
       onDrop={(e) => handleDrop(e)}
     >

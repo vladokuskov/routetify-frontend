@@ -100,18 +100,6 @@ const RouteExport = () => {
         </span>
       </Button>
 
-      <Button
-        variant="secondary"
-        className={clsx('max-sm:!inline-flex w-20', !isSidebarOpen && 'hidden')}
-        aria-label="Open dropdown to choose route type"
-        onClick={handleSelectionMenuOpen}
-      >
-        <span className={clsx('', 'max-sm:!block', !isSidebarOpen && 'hidden')}>
-          {selectedRouteType === GPX ? 'GPX' : 'KML'}
-        </span>
-        <Icon svg={isSelectionMenuOpen ? ArrowUpIcon : ArrowDownIcon} />
-      </Button>
-
       {/*Compact sidebar */}
       {!isSidebarOpen && (
         <Button
@@ -141,11 +129,22 @@ const RouteExport = () => {
         </Button>
       )}
 
-      {/*Dropdown*/}
+      <Button
+        variant="secondary"
+        className={clsx('max-sm:!inline-flex w-20', !isSidebarOpen && 'hidden')}
+        aria-label="Open dropdown to choose route type"
+        onClick={handleSelectionMenuOpen}
+      >
+        <span className={clsx('', 'max-sm:!block', !isSidebarOpen && 'hidden')}>
+          {selectedRouteType === GPX ? 'GPX' : 'KML'}
+        </span>
+        <Icon svg={isSelectionMenuOpen ? ArrowUpIcon : ArrowDownIcon} />
+      </Button>
+
       {isSelectionMenuOpen && (
         <div
           className={clsx(
-            'absolute w-full flex flex-col items-center justify-start gap-1 max-w-[7rem] right-0 top-11 rounded-md p-1 bg-popover shadow',
+            'absolute bg-dropdown border-2 border-dropdown-foreground w-full flex flex-col items-center justify-start gap-1 max-w-[7rem] right-0 top-11 rounded-md p-1  shadow',
             'max-sm:!block',
             !isSidebarOpen && 'hidden',
           )}
@@ -154,7 +153,7 @@ const RouteExport = () => {
             return (
               <Button
                 variant="ghost"
-                className="w-full text-popover-foreground dark:hover:bg-neutral-400"
+                className="w-full"
                 disabled={routeType === selectedRouteType}
                 key={index}
                 onClick={() => handleRouteTypeChange(routeType)}

@@ -143,7 +143,7 @@ const Geocoder = () => {
         />
         {geocoderResponse && isResultsOpen && (
           <div
-            className="w-full top-[2.8rem] flex flex-col items-center justify-start gap-1 absolute rounded-md z-20 bg-popover shadow p-1"
+            className="w-full bg-dropdown border-2 border-dropdown-foreground top-[2.8rem] flex flex-col items-center justify-start gap-1 absolute rounded-md z-20 shadow p-1"
             role="listbox"
             aria-expanded={isResultsOpen}
             id="geocoder-results"
@@ -153,7 +153,7 @@ const Geocoder = () => {
               return (
                 <Button
                   variant="ghost"
-                  className="w-full h-auto text-popover-foreground dark:hover:bg-neutral-400 text-base"
+                  className="w-full h-auto text-base"
                   key={i}
                   aria-label={display_name}
                   onClick={() => handleResultSelect({ lat, lon, display_name })}

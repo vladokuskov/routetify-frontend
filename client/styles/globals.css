@@ -15,12 +15,15 @@
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
 
-    --popover: 0, 0%, 87%;
-    --popover-foreground: 0, 0%, 19%;
+    --popover: 0, 0%, 94%;
+    --popover-foreground: 0, 0%, 5%;
 
     --primary: 81.972 85% 67%;
     --primary-foreground: 0 0% 0%;
     --primary-muted: 80 89% 89%;
+
+    --dropdown: 0 0% 100%;
+    --dropdown-foreground: 0 0% 82%;
 
     --map: 0 0% 99%;
     --map-border: 0 0% 83%;
@@ -57,12 +60,15 @@
     --card: 0 84% 4.9%;
     --card-foreground: 0 40% 98%;
 
-    --popover: 0 0% 81%;
-    --popover-foreground: 0 0% 10%;
+    --popover: 0 0% 78%;
+    --popover-foreground: 0 0% 5%;
 
     --primary: 81.972 85% 67%;
     --primary-foreground: 0 0% 0%;
     --primary-muted: 80 89% 89%;
+
+    --dropdown: 0 0% 12%;
+    --dropdown-foreground: 0 0% 30%;
 
     --map: 0 0% 25%;
     --map-border: 0 0% 52%;

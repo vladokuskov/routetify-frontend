@@ -10,6 +10,7 @@ import clsx from 'clsx'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { getRoute } from '@/lib/api/route'
+import { FilesDragAndDrop } from '@/components/FilesDragAndDrop/FilesDragAndDrop'
 
 const RouteUploading = () => {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -117,6 +118,8 @@ const RouteUploading = () => {
         onChange={handleFileSelection}
         className="hidden"
       />
+
+      <FilesDragAndDrop />
     </div>
   )
 }

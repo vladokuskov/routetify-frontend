@@ -5,10 +5,10 @@ type TDetail = {
   title: string | null
   subTitle: string | null
   metric: string | null
-  last: boolean
+  last?: boolean
 }
 
-const Detail = ({ title, subTitle, metric, last }: TDetail) => {
+const Detail = ({ title, subTitle, metric, last = false }: TDetail) => {
   const isSidebarOpen = useAppSelector(
     (state) => state.controlsReducer.isSidebarOpen,
   )

@@ -60,8 +60,11 @@ const Details = () => {
   }
 
   useEffect(() => {
-    if (drawCoords.length !== 0) {
+    if (drawCoords.length) {
       getElevationData()
+    } else {
+      setMaxElevation(null)
+      setMinElevation(null)
     }
   }, [drawCoords])
 

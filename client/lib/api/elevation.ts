@@ -10,8 +10,6 @@ type Response = {
 const getElevation = async (coords: DrawCoords[]) => {
   try {
     const elevations: number[] = []
-    let maxElevation = null
-    let minElevation = null
 
     const convertedCoords = coords.map((coord) => {
       return { latitude: coord.lat, longitude: coord.lng }
@@ -31,8 +29,8 @@ const getElevation = async (coords: DrawCoords[]) => {
       elevations.push(element.elevation)
     })
 
-    maxElevation = Math.max(...elevations).toString()
-    minElevation = Math.min(...elevations).toString()
+    const maxElevation = Math.max(...elevations).toString()
+    const minElevation = Math.min(...elevations).toString()
 
     return { maxElevation, minElevation }
   } catch (err) {}

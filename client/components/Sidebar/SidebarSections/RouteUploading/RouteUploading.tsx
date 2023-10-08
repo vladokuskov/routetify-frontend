@@ -11,10 +11,20 @@ import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { getRoute } from '@/lib/api/route'
 import { FilesDragAndDrop } from '@/components/FilesDragAndDrop/FilesDragAndDrop'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog'
 
 const RouteUploading = () => {
   const inputRef = useRef<HTMLInputElement>(null)
-  const [isUserConfirmed, setIsUserConfirmed] = useState<boolean>(false)
+  const [isConfirmationOpen, setIsConfirmationOpen] = useState<boolean>(false)
 
   const map = useAppSelector((state) => state.controlsReducer.map)
   const routeFile = useAppSelector((state) => state.fileUploadReducer.routeFile)
@@ -23,6 +33,12 @@ const RouteUploading = () => {
   )
 
   const dispatch = useAppDispatch()
+
+  const handleUpload = () => {
+    setIsConfirmationOpen(false)
+
+    inputRef.current?.click()
+  }
 
   const handleFileSelection = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return
@@ -87,18 +103,7 @@ const RouteUploading = () => {
         variant="secondary"
         className="w-full"
         onClick={() => {
-          if (!isUserConfirmed) {
-            const isConfirmed = window.confirm(
-              'If you have active route, it will be replaced, continue?',
-            )
-
-            if (!isConfirmed) return
-
-            setIsUserConfirmed(true)
-            inputRef.current?.click()
-          } else {
-            inputRef.current?.click()
-          }
+          setIsConfirmationOpen(true)
         }}
         aria-label="Choose a file to upload"
         title="Choose a file to upload"
@@ -120,6 +125,33 @@ const RouteUploading = () => {
       />
 
       <FilesDragAndDrop />
+
+      <AlertDialog open={isConfirmationOpen}>
+        <AlertDialogContent
+          onEscapeKeyDown={() => setIsConfirmationOpen(false)}
+        >
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              Are you sure you want to upload the file?
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              Your current route will be erased,
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel
+              onClick={() => {
+                setIsConfirmationOpen(false)
+              }}
+            >
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction onClick={handleUpload}>
+              Continue
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }

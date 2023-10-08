@@ -135,7 +135,7 @@ const RouteUploading = () => {
               Are you sure you want to upload the file?
             </AlertDialogTitle>
             <AlertDialogDescription>
-              Your current route will be erased,
+              Your current route will be erased.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

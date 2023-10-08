@@ -4,7 +4,7 @@ import { SidebarSection } from '../SidebarSection'
 import { Details } from './Details/Details'
 import { Geocoder } from './Geocoder/Geocoder'
 import { MovingPreferences } from './MovingPreferences/MovingPreferences'
-import { RouteExport } from './RouteExport/RouteExport'
+import { RouteExport } from './MovingPreferences/RouteExport/RouteExport'
 import { RouteUploading } from './RouteUploading/RouteUploading'
 
 const SidebarSections = () => {

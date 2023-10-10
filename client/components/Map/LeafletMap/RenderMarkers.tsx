@@ -20,7 +20,7 @@ const RenderMarkers = ({ map }: { map: L.Map | null }) => {
   useEffect(() => {
     const markersLayer = L.layerGroup()
 
-    if (map) {
+    if (map && drawCoords.length) {
       drawCoords.forEach((coords, i) => {
         let lastIndex = drawCoords.length - 1
 

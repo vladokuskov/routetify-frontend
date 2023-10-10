@@ -80,7 +80,7 @@ const RenderPolyline = ({ map }: { map: L.Map | null }) => {
       map.off('mousemove', onMouseMove)
       map.off('click', onMouseClick)
     }
-  }, [map, drawCoords])
+  }, [map, drawCoords, activeWaypointIndex])
 
   useEffect(() => {
     if (

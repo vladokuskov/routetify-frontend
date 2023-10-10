@@ -20,8 +20,6 @@ export const drawReducer = createSlice({
       return {
         ...state,
         drawCoords: [...state.drawCoords].reverse(),
-        drawCoordsFuture: [],
-        drawCoordsDeleted: [...state.drawCoordsDeleted].reverse(),
       }
     },
     updateDrawInfo: (state, action: PayloadAction<DrawInfo | null>) => {
@@ -39,7 +37,7 @@ export const drawReducer = createSlice({
         ...state,
         drawCoords: action.payload,
         drawCoordsDeleted: [],
-        drawCoordsFuture: [],
+        drawCoordsChanges: [],
       }
     },
     updateDrawCoords: (state, action: PayloadAction<DrawCoords>) => {
@@ -60,7 +58,6 @@ export const drawReducer = createSlice({
           ...state,
           drawCoords: updatedDrawCoords,
           drawCoordsDeleted: [],
-          drawCoordsFuture: [],
           drawCoordsChanges: [
             ...state.drawCoordsChanges,
             {
@@ -82,7 +79,6 @@ export const drawReducer = createSlice({
             },
           ],
           drawCoordsDeleted: [],
-          drawCoordsFuture: [],
           drawCoordsChanges: [
             ...state.drawCoordsChanges,
             {

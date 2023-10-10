@@ -1,12 +1,13 @@
-import { DrawState } from '@/types/global/redux.types'
+import { DrawInfo, DrawState } from '@/types/global/redux.types'
 import { DrawCoords } from '@/types/models/drawCoords.types'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const initialState: DrawState = {
-  drawInfo: { time: '0', dist: '0' },
-  drawCoords: [], // Coords that used for rendering Markers & polyline
-  drawCoordsDeleted: [], // Coords that are deleted
-  drawCoordsFuture: [], // Coords that can be recovered
+  drawInfo: { time: null, dist: null },
+  drawCoords: [], // Markers & polyline
+  drawCoordsDeleted: [], // Coords that are deleted using undo
+  drawCoordsChanges: [],
+  activeWaypointIndex: null,
 }
 
 export const drawReducer = createSlice({
@@ -23,16 +24,13 @@ export const drawReducer = createSlice({
         drawCoordsDeleted: [...state.drawCoordsDeleted].reverse(),
       }
     },
-    updateDrawInfo: (
-      state,
-      action: PayloadAction<{ time: string; dist: string }>,
-    ) => {
+    updateDrawInfo: (state, action: PayloadAction<DrawInfo | null>) => {
       return {
         ...state,
         drawInfo: {
           ...state.drawInfo,
-          time: action.payload.time,
-          dist: action.payload.dist,
+          time: action.payload?.time ? action.payload.time : null,
+          dist: action.payload?.dist ? action.payload.dist : null,
         },
       }
     },
@@ -45,56 +43,93 @@ export const drawReducer = createSlice({
       }
     },
     updateDrawCoords: (state, action: PayloadAction<DrawCoords>) => {
-      return {
-        ...state,
-        drawCoords: [
-          ...state.drawCoords,
-          {
-            lat: action.payload.lat,
-            lng: action.payload.lng,
-          },
-        ],
-        drawCoordsDeleted: [],
-        drawCoordsFuture: [],
-      }
-    },
-    undoDrawCoords: (state, index) => {
-      if (state.drawCoords.length === 0) return
-      if (state.drawCoords.length !== 0) {
+      if (
+        state.activeWaypointIndex !== null &&
+        state.activeWaypointIndex < state.drawCoords.length
+      ) {
+        let updatedActiveIndex = state.activeWaypointIndex + 1
+
+        const updatedDrawCoords = [...state.drawCoords]
+
+        updatedDrawCoords.splice(updatedActiveIndex, 0, {
+          lat: action.payload.lat,
+          lng: action.payload.lng,
+        })
+
         return {
           ...state,
-          drawCoordsFuture: [
-            ...state.drawCoordsFuture,
-            ...state.drawCoords.slice(-1),
+          drawCoords: updatedDrawCoords,
+          drawCoordsDeleted: [],
+          drawCoordsFuture: [],
+          drawCoordsChanges: [
+            ...state.drawCoordsChanges,
+            {
+              lat: action.payload.lat,
+              lng: action.payload.lng,
+              index: updatedActiveIndex,
+            },
           ],
-          drawCoords: state.drawCoords.filter(
-            (item, index) => index !== state.drawCoords.length - 1,
-          ),
+          activeWaypointIndex: updatedActiveIndex,
         }
-      }
-    },
-    redoDrawCoords: (state, index) => {
-      if (state.drawCoordsDeleted.length === 0) {
+      } else {
         return {
           ...state,
           drawCoords: [
             ...state.drawCoords,
-            ...state.drawCoordsFuture.slice(-1),
+            {
+              lat: action.payload.lat,
+              lng: action.payload.lng,
+            },
           ],
-          drawCoordsFuture: [
-            ...state.drawCoordsFuture.filter(
-              (item, index) => index !== state.drawCoordsFuture.length - 1,
-            ),
+          drawCoordsDeleted: [],
+          drawCoordsFuture: [],
+          drawCoordsChanges: [
+            ...state.drawCoordsChanges,
+            {
+              lat: action.payload.lat,
+              lng: action.payload.lng,
+              index: state.drawCoords.length,
+            },
           ],
         }
-      } else if (
-        state.drawCoordsFuture.length === 0 &&
-        state.drawCoordsDeleted.length > 0
-      ) {
+      }
+    },
+    undoDrawCoords: (state, action: PayloadAction<void>) => {
+      if (state.drawCoordsChanges.length === 0) return state
+      const updatedDrawCoords = [...state.drawCoords]
+      const updatedDrawCoordsChanges = [...state.drawCoordsChanges]
+      const lastChange = updatedDrawCoordsChanges.pop()
+
+      if (lastChange) {
+        updatedDrawCoords.splice(lastChange.index, 1)
+
         return {
           ...state,
-          drawCoords: [...state.drawCoordsDeleted],
-          drawCoordsDeleted: [],
+          drawCoords: updatedDrawCoords,
+          drawCoordsDeleted: [...state.drawCoordsDeleted, lastChange],
+          drawCoordsChanges: updatedDrawCoordsChanges,
+          activeWaypointIndex: lastChange.index - 1,
+        }
+      }
+    },
+    redoDrawCoords: (state, action: PayloadAction<void>) => {
+      if (state.drawCoordsDeleted.length === 0) return state
+      const updatedDrawCoords = [...state.drawCoords]
+      const updatedDrawCoordsDeleted = [...state.drawCoordsDeleted]
+      const lastDeletedChange = updatedDrawCoordsDeleted.pop()
+
+      if (lastDeletedChange) {
+        updatedDrawCoords.splice(lastDeletedChange.index, 0, {
+          lat: lastDeletedChange.lat,
+          lng: lastDeletedChange.lng,
+        })
+
+        return {
+          ...state,
+          drawCoords: updatedDrawCoords,
+          drawCoordsDeleted: updatedDrawCoordsDeleted,
+          drawCoordsChanges: [...state.drawCoordsChanges, lastDeletedChange],
+          activeWaypointIndex: lastDeletedChange.index,
         }
       }
     },
@@ -103,10 +138,9 @@ export const drawReducer = createSlice({
       if (state.drawCoords.length !== 0) {
         return {
           ...state,
-          drawCoordsDeleted: [...state.drawCoords],
+          drawCoordsDeleted: [],
           drawCoords: [],
-          drawCoordsFuture: [],
-          exportCoords: [],
+          drawCoordsChanges: [],
         }
       }
     },
@@ -134,6 +168,17 @@ export const drawReducer = createSlice({
         drawCoords: updatedCoords,
       }
     },
+    updateActiveWaypoint: (
+      state,
+      action: PayloadAction<{
+        newIndex: number
+      }>,
+    ) => {
+      return {
+        ...state,
+        activeWaypointIndex: action.payload.newIndex,
+      }
+    },
   },
 })
 
@@ -146,5 +191,6 @@ export const {
   updateDraggedMarkerCoords,
   putDrawCoords,
   reverseRoute,
+  updateActiveWaypoint,
 } = drawReducer.actions
 export default drawReducer.reducer

@@ -1,5 +1,8 @@
 import { toggleIsMarkerDragging } from '@/redux/features/controlsSlice'
-import { updateDraggedMarkerCoords } from '@/redux/features/drawSlice'
+import {
+  updateActiveWaypoint,
+  updateDraggedMarkerCoords,
+} from '@/redux/features/drawSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { DrawType } from '@/types/global/drawType.types'
 import * as L from 'leaflet'
@@ -7,6 +10,9 @@ import { useEffect } from 'react'
 
 const RenderMarkers = ({ map }: { map: L.Map | null }) => {
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
+  const activeWaypointIndex = useAppSelector(
+    (state) => state.drawReducer.activeWaypointIndex,
+  )
   const drawType = useAppSelector((state) => state.controlsReducer.draw)
 
   const dispatch = useAppDispatch()
@@ -32,8 +38,10 @@ const RenderMarkers = ({ map }: { map: L.Map | null }) => {
             className: `${drawType === DrawType.None && 'cursorCrosshair'}`,
           })
         } else if (i > 0 && i < lastIndex) {
+          const borderColorClass =
+            activeWaypointIndex === i ? 'border-red-500' : 'border-neutral-300'
           markerOptions.icon = L.divIcon({
-            html: '<div class="bg-neutral-50 border-2 border-neutral-300 p-1 rounded-full"></div>',
+            html: `<div class="bg-neutral-50 border-2 ${borderColorClass} p-1 rounded-full"></div>`,
             iconSize: [12, 12],
             iconAnchor: [6, 6],
             className: `${drawType === DrawType.None && 'cursorCrosshair'}`,
@@ -61,6 +69,11 @@ const RenderMarkers = ({ map }: { map: L.Map | null }) => {
             dispatch(updateDraggedMarkerCoords({ i, newCoords }))
             dispatch(toggleIsMarkerDragging(false))
           })
+
+          marker.on('click', () => {
+            dispatch(updateActiveWaypoint({ newIndex: i }))
+            dispatch(toggleIsMarkerDragging(false))
+          })
         }
       })
 
@@ -70,7 +83,7 @@ const RenderMarkers = ({ map }: { map: L.Map | null }) => {
         map.removeLayer(markersLayer)
       }
     }
-  }, [map, drawCoords, drawType])
+  }, [map, drawCoords, drawType, activeWaypointIndex])
 
   return null
 }

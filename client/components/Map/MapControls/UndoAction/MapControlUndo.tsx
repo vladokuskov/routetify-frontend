@@ -17,10 +17,13 @@ const MapControlUndoAction = () => {
   const dispatch = useAppDispatch()
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
   const drawType = useAppSelector((state) => state.controlsReducer.draw)
+  const drawCoordsChanges = useAppSelector(
+    (state) => state.drawReducer.drawCoordsChanges,
+  )
 
   const handleUndo = () => {
     if (drawCoords.length > 0 && drawType !== DrawType.None) {
-      dispatch(undoDrawCoords(null))
+      dispatch(undoDrawCoords())
     }
   }
 
@@ -35,7 +38,9 @@ const MapControlUndoAction = () => {
             size="cube"
             aria-label="Undo action"
             onClick={handleUndo}
-            disabled={drawCoords.length === 0 || drawType === DrawType.None}
+            disabled={
+              drawCoordsChanges.length === 0 || drawType === DrawType.None
+            }
           >
             <Icon svg={UndoIcon} />
           </Button>

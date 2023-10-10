@@ -1,4 +1,4 @@
-import { DrawCoords } from '../models/drawCoords.types'
+import { DrawCoords, DrawCoordsChanges } from '../models/drawCoords.types'
 import { DrawType } from './drawType.types'
 
 import { LocationStatus } from './locationStatus.types'
@@ -12,11 +12,14 @@ export type GeocoderState = {
   zoom?: number
 }
 
+export type DrawInfo = { time: string | null; dist: string | null }
+
 export type DrawState = {
-  drawInfo: { time: string; dist: string }
+  drawInfo: DrawInfo
   drawCoords: DrawCoords[]
-  drawCoordsDeleted: DrawCoords[]
-  drawCoordsFuture: DrawCoords[]
+  drawCoordsDeleted: DrawCoordsChanges[]
+  drawCoordsChanges: DrawCoordsChanges[]
+  activeWaypointIndex: number | null
 }
 
 export type ControlsState = {

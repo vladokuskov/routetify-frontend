@@ -31,8 +31,12 @@ const RenderMarkers = ({ map }: { map: L.Map | null }) => {
         }
 
         if (i === 0) {
+          const iconURL =
+            activeWaypointIndex === i
+              ? 'map/start-marker-active.svg'
+              : 'map/start-marker.svg'
           markerOptions.icon = L.icon({
-            iconUrl: 'map/start-marker.svg',
+            iconUrl: iconURL,
             iconSize: [33, 33],
             iconAnchor: [6, 25],
             className: `${drawType === DrawType.None && 'cursorCrosshair'}`,
@@ -47,8 +51,12 @@ const RenderMarkers = ({ map }: { map: L.Map | null }) => {
             className: `${drawType === DrawType.None && 'cursorCrosshair'}`,
           })
         } else if (i === lastIndex && drawCoords.length > 1) {
+          const iconURL =
+            activeWaypointIndex === i
+              ? 'map/finish-marker-active.svg'
+              : 'map/finish-marker.svg'
           markerOptions.icon = L.icon({
-            iconUrl: 'map/finish-marker.svg',
+            iconUrl: iconURL,
             iconSize: [33, 33],
             iconAnchor: [13, 32],
             className: `${drawType === DrawType.None && 'cursorCrosshair'}`,

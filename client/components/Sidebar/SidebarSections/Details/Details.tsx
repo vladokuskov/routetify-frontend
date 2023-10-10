@@ -22,6 +22,10 @@ const Details = () => {
   const dispatch = useAppDispatch()
 
   const updateDetails = () => {
+    if (drawCoords.length === 0) {
+      dispatch(updateDrawInfo(null))
+    }
+
     const { time, distance } = calculateRouteDetails(
       drawCoords,
       movingPreference,
@@ -33,15 +37,6 @@ const Details = () => {
         dist: distance.toFixed(1).toString(),
       }),
     )
-
-    if (drawCoords.length === 0) {
-      dispatch(
-        updateDrawInfo({
-          time: '0',
-          dist: '0',
-        }),
-      )
-    }
   }
 
   useEffect(() => {
@@ -76,8 +71,8 @@ const Details = () => {
         !isSidebarOpen && 'flex-col',
       )}
     >
-      <Detail title={time} subTitle="TIME" metric="h" />
-      <Detail title={dist} subTitle="DIST" metric="km" />
+      <Detail title={time ? time : '0'} subTitle="TIME" metric="h" />
+      <Detail title={dist ? dist : '0'} subTitle="DIST" metric="km" />
       <Detail
         title={maxElevation ? maxElevation : '0'}
         subTitle="MAX"

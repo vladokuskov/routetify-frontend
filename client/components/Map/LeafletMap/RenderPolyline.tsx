@@ -9,6 +9,9 @@ const RenderPolyline = ({ map }: { map: L.Map | null }) => {
   const [drawPolyline, setDrawPolyline] = useState<L.Polyline | null>(null)
 
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
+  const activeWaypointIndex = useAppSelector(
+    (state) => state.drawReducer.activeWaypointIndex,
+  ) // null or number
   const drawType = useAppSelector((state) => state.controlsReducer.draw)
   const isMarkerDragging = useAppSelector(
     (state) => state.controlsReducer.isMarkerDragging,
@@ -48,7 +51,12 @@ const RenderPolyline = ({ map }: { map: L.Map | null }) => {
   })
 
   const onMouseMove = (event: L.LeafletMouseEvent) => {
-    const latestCoords = [...drawCoords, event.latlng].slice(-2)
+    let latestCoords = []
+    if (activeWaypointIndex !== null && drawCoords.length) {
+      latestCoords = [drawCoords[activeWaypointIndex], event.latlng]
+    } else {
+      latestCoords = [...drawCoords, event.latlng].slice(-2)
+    }
     previewPolyline.setLatLngs(latestCoords)
   }
 
@@ -72,7 +80,7 @@ const RenderPolyline = ({ map }: { map: L.Map | null }) => {
       map.off('mousemove', onMouseMove)
       map.off('click', onMouseClick)
     }
-  }, [map, drawCoords])
+  }, [map, drawCoords, activeWaypointIndex])
 
   useEffect(() => {
     if (

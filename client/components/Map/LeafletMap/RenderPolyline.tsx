@@ -52,7 +52,7 @@ const RenderPolyline = ({ map }: { map: L.Map | null }) => {
 
   const onMouseMove = (event: L.LeafletMouseEvent) => {
     let latestCoords
-    if (activeWaypointIndex) {
+    if (activeWaypointIndex !== null) {
       latestCoords = [drawCoords[activeWaypointIndex], event.latlng]
     } else {
       latestCoords = [...drawCoords, event.latlng].slice(-2)

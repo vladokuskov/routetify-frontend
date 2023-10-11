@@ -7,6 +7,20 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { DrawType } from '@/types/global/drawType.types'
 import * as L from 'leaflet'
 import { useEffect } from 'react'
+import '../../../styles/map.css'
+
+const getMarker = (isActive: boolean) =>
+  `<div class="marker ${isActive && 'marker-active'}"></div>`
+
+const getStartFlag = (isActive: boolean) =>
+  `<div class="flagpole ${isActive && 'flag-active'}">
+    <div class="flag flag-start"></div>
+  </div>`
+
+const getFinishFlag = (isActive: boolean) =>
+  `<div class="flagpole ${isActive && 'flag-active'}">
+    <div class="flag flag-finish"></div>
+  </div>`
 
 const RenderMarkers = ({ map }: { map: L.Map | null }) => {
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
@@ -31,34 +45,24 @@ const RenderMarkers = ({ map }: { map: L.Map | null }) => {
         }
 
         if (i === 0) {
-          const iconURL =
-            activeWaypointIndex === i
-              ? 'map/start-marker-active.svg'
-              : 'map/start-marker.svg'
-          markerOptions.icon = L.icon({
-            iconUrl: iconURL,
+          markerOptions.icon = L.divIcon({
+            html: getStartFlag(activeWaypointIndex === i),
             iconSize: [33, 33],
-            iconAnchor: [6, 25],
+            iconAnchor: [2, 20],
             className: `${drawType === DrawType.None && 'cursorCrosshair'}`,
           })
         } else if (i > 0 && i < lastIndex) {
-          const borderColorClass =
-            activeWaypointIndex === i ? 'border-red-500' : 'border-neutral-300'
           markerOptions.icon = L.divIcon({
-            html: `<div class="bg-neutral-50 border-2 ${borderColorClass} p-1 rounded-full"></div>`,
+            html: getMarker(activeWaypointIndex === i),
             iconSize: [12, 12],
             iconAnchor: [6, 6],
             className: `${drawType === DrawType.None && 'cursorCrosshair'}`,
           })
         } else if (i === lastIndex && drawCoords.length > 1) {
-          const iconURL =
-            activeWaypointIndex === i
-              ? 'map/finish-marker-active.svg'
-              : 'map/finish-marker.svg'
-          markerOptions.icon = L.icon({
-            iconUrl: iconURL,
+          markerOptions.icon = L.divIcon({
+            html: getFinishFlag(activeWaypointIndex === i),
             iconSize: [33, 33],
-            iconAnchor: [13, 32],
+            iconAnchor: [0, 20],
             className: `${drawType === DrawType.None && 'cursorCrosshair'}`,
           })
         }

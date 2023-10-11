@@ -172,7 +172,7 @@ export const drawReducer = createSlice({
     updateActiveWaypoint: (
       state,
       action: PayloadAction<{
-        newIndex: number
+        newIndex: number | null
       }>,
     ) => {
       return {

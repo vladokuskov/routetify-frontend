@@ -83,7 +83,12 @@ const RenderMarkers = ({ map }: { map: L.Map | null }) => {
           })
 
           marker.on('click', () => {
-            dispatch(updateActiveWaypoint({ newIndex: i }))
+            if (activeWaypointIndex === i) {
+              dispatch(updateActiveWaypoint({ newIndex: null }))
+            } else {
+              dispatch(updateActiveWaypoint({ newIndex: i }))
+            }
+
             dispatch(toggleIsMarkerDragging(false))
           })
         }

@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import DeleteIcon from '@/assets/icons/delete.svg'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
-import { deleteDrawCoords, updateDrawInfo } from '@/redux/features/drawSlice'
+import { deleteDrawCoords } from '@/redux/features/drawSlice'
 import Icon from '@/components/ui/icon'
 import { useHotkeys } from 'react-hotkeys-hook'
 import {
@@ -33,7 +33,6 @@ const MapControlDeleteRoute = () => {
   const handleDelete = () => {
     if (drawCoords.length > 0) {
       dispatch(deleteDrawCoords(null))
-      dispatch(updateDrawInfo({ time: '0', dist: '0' }))
     }
 
     setIsConfirmationOpen(false)

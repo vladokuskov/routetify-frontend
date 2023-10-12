@@ -12,10 +12,7 @@ export type GeocoderState = {
   zoom?: number
 }
 
-export type DrawInfo = { time: string | null; dist: string | null }
-
 export type DrawState = {
-  drawInfo: DrawInfo
   drawCoords: DrawCoords[]
   drawCoordsDeleted: DrawCoordsChanges[]
   drawCoordsChanges: DrawCoordsChanges[]

@@ -47,8 +47,8 @@ const RenderMarkers = ({ map }: { map: L.Map | null }) => {
         if (i === 0) {
           markerOptions.icon = L.divIcon({
             html: getStartFlag(activeWaypointIndex === i),
-            iconSize: [33, 33],
-            iconAnchor: [2, 20],
+            iconSize: [12, 18],
+            iconAnchor: [0, 22],
             className: `${drawType === DrawType.None && 'cursorCrosshair'}`,
           })
         } else if (i > 0 && i < lastIndex) {
@@ -61,8 +61,8 @@ const RenderMarkers = ({ map }: { map: L.Map | null }) => {
         } else if (i === lastIndex && drawCoords.length > 1) {
           markerOptions.icon = L.divIcon({
             html: getFinishFlag(activeWaypointIndex === i),
-            iconSize: [33, 33],
-            iconAnchor: [0, 20],
+            iconSize: [12, 18],
+            iconAnchor: [0, 22],
             className: `${drawType === DrawType.None && 'cursorCrosshair'}`,
           })
         }

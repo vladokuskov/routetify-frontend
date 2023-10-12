@@ -187,3 +187,11 @@
 .cursorCrosshair {
   cursor: crosshair !important;
 }
+
+.mainp {
+  z-index: 50 !important;
+}
+
+.borderp {
+  z-index: 30 !important;
+}

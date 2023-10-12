@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react'
 import { useAppSelector } from '@/redux/hooks'
 import { DrawType } from '@/types/global/drawType.types'
 import * as L from 'leaflet'
-import 'leaflet-polylinedecorator'
 
 const RenderPolyline = ({ map }: { map: L.Map | null }) => {
   const [drawPolyline, setDrawPolyline] = useState<L.Polyline | null>(null)
+  const [borderPolyline, setBorderPolyline] = useState<L.Polyline | null>(null)
 
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
   const activeWaypointIndex = useAppSelector(
@@ -17,9 +17,19 @@ const RenderPolyline = ({ map }: { map: L.Map | null }) => {
     (state) => state.controlsReducer.isMarkerDragging,
   )
 
-  const polyline = L.polyline(drawCoords, {
-    color: '#83f520',
-    weight: 6,
+  const mainPolyline = L.polyline(drawCoords, {
+    color: '#3471f5',
+    opacity: 1,
+    weight: 4,
+    className: 'cursorCrosshair',
+    lineCap: 'round',
+    lineJoin: 'round',
+  })
+
+  const border = L.polyline(drawCoords, {
+    color: '#1e51be',
+    opacity: 1,
+    weight: 7,
     className: 'cursorCrosshair',
     lineCap: 'round',
     lineJoin: 'round',
@@ -30,24 +40,6 @@ const RenderPolyline = ({ map }: { map: L.Map | null }) => {
     weight: 6,
     dashArray: '15, 15',
     className: 'cursorCrosshair',
-  })
-
-  const decorator = L.polylineDecorator(polyline, {
-    patterns: [
-      {
-        offset: 40,
-        repeat: '60px',
-        symbol: L.Symbol.arrowHead({
-          pixelSize: 12,
-          pathOptions: {
-            color: '#bde29c',
-            fillOpacity: 0.5,
-            opacity: 0.3,
-            className: 'cursorCrosshair',
-          },
-        }),
-      },
-    ],
   })
 
   const onMouseMove = (event: L.LeafletMouseEvent) => {
@@ -68,13 +60,15 @@ const RenderPolyline = ({ map }: { map: L.Map | null }) => {
   useEffect(() => {
     if (!map) return
 
-    setDrawPolyline(polyline)
-    polyline.addTo(map)
-    decorator.addTo(map)
+    setDrawPolyline(mainPolyline)
+    setBorderPolyline(borderPolyline)
+
+    mainPolyline.addTo(map).bringToFront()
+    border.addTo(map).bringToBack()
 
     return () => {
-      polyline.remove()
-      decorator.remove()
+      mainPolyline.remove()
+      border.remove()
       previewPolyline.remove()
 
       map.off('mousemove', onMouseMove)

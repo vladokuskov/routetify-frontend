@@ -1,9 +1,8 @@
-import { DrawInfo, DrawState } from '@/types/global/redux.types'
+import { DrawState } from '@/types/global/redux.types'
 import { DrawCoords } from '@/types/models/drawCoords.types'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const initialState: DrawState = {
-  drawInfo: { time: null, dist: null },
   drawCoords: [], // Markers & polyline
   drawCoordsDeleted: [], // Coords that are deleted using undo
   drawCoordsChanges: [],
@@ -24,17 +23,6 @@ export const drawReducer = createSlice({
         drawCoords: reversedCoords,
         drawCoordsDeleted: [],
         drawCoordsChanges: [],
-      }
-    },
-
-    updateDrawInfo: (state, action: PayloadAction<DrawInfo | null>) => {
-      return {
-        ...state,
-        drawInfo: {
-          ...state.drawInfo,
-          time: action.payload?.time ? action.payload.time : null,
-          dist: action.payload?.dist ? action.payload.dist : null,
-        },
       }
     },
     putDrawCoords: (state, action: PayloadAction<DrawCoords[]>) => {
@@ -142,6 +130,7 @@ export const drawReducer = createSlice({
           drawCoordsDeleted: [],
           drawCoords: [],
           drawCoordsChanges: [],
+          activeWaypointIndex: null,
         }
       }
     },
@@ -184,7 +173,6 @@ export const drawReducer = createSlice({
 })
 
 export const {
-  updateDrawInfo,
   updateDrawCoords,
   deleteDrawCoords,
   undoDrawCoords,

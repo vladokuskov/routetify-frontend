@@ -1,66 +1,74 @@
-import { updateDrawInfo } from '@/redux/features/drawSlice'
-import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { useAppSelector } from '@/redux/hooks'
 import { calculateRouteDetails } from '@/utils/getRouteDetails'
 import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 import { Detail } from '@/components/Sidebar/SidebarSections/Details/Detail/Detail'
 import { getElevation } from '@/lib/api/elevation'
 
-const Details = () => {
-  const [maxElevation, setMaxElevation] = useState<string | null>(null)
-  const [minElevation, setMinElevation] = useState<string | null>(null)
+interface DetailsState {
+  time: string | null
+  dist: string | null
+  maxElevation: string | null
+  minElevation: string | null
+}
 
+const Details = () => {
   const drawCoords = useAppSelector((state) => state.drawReducer.drawCoords)
   const isSidebarOpen = useAppSelector(
     (state) => state.controlsReducer.isSidebarOpen,
   )
-  const { time, dist } = useAppSelector((state) => state.drawReducer.drawInfo)
   const movingPreference = useAppSelector(
     (state) => state.controlsReducer.movingPreference,
   )
 
-  const dispatch = useAppDispatch()
+  const [details, setDetails] = useState<DetailsState>({
+    time: null,
+    dist: null,
+    maxElevation: null,
+    minElevation: null,
+  })
 
   const updateDetails = () => {
     if (drawCoords.length === 0) {
-      dispatch(updateDrawInfo(null))
+      setDetails({
+        time: null,
+        dist: null,
+        maxElevation: null,
+        minElevation: null,
+      })
+    } else {
+      const { time, distance } = calculateRouteDetails(
+        drawCoords,
+        movingPreference,
+      )
+      setDetails((prev) => {
+        return {
+          ...prev,
+          time: time.toFixed(2).toString(),
+          dist: distance.toFixed(2).toString(),
+        }
+      })
     }
-
-    const { time, distance } = calculateRouteDetails(
-      drawCoords,
-      movingPreference,
-    )
-
-    dispatch(
-      updateDrawInfo({
-        time: time.toFixed(1).toString(),
-        dist: distance.toFixed(1).toString(),
-      }),
-    )
   }
-
-  useEffect(() => {
-    if (drawCoords.length !== 0) {
-      updateDetails()
-    }
-  }, [drawCoords, movingPreference])
 
   const getElevationData = async () => {
-    const data = await getElevation(drawCoords)
-
-    if (data) {
-      setMaxElevation(data.maxElevation)
-      setMinElevation(data.minElevation)
+    if (drawCoords.length) {
+      const data = await getElevation(drawCoords)
+      if (data) {
+        setDetails((prev) => {
+          return {
+            ...prev,
+            maxElevation: data.maxElevation,
+            minElevation: data.minElevation,
+          }
+        })
+      }
     }
   }
 
   useEffect(() => {
-    if (drawCoords.length) {
-      getElevationData()
-    } else {
-      setMaxElevation(null)
-      setMinElevation(null)
-    }
+    updateDetails()
+    getElevationData()
   }, [drawCoords])
 
   return (
@@ -71,15 +79,23 @@ const Details = () => {
         !isSidebarOpen && 'flex-col',
       )}
     >
-      <Detail title={time ? time : '0'} subTitle="TIME" metric="h" />
-      <Detail title={dist ? dist : '0'} subTitle="DIST" metric="km" />
       <Detail
-        title={maxElevation ? maxElevation : '0'}
+        title={details.time ? details.time : '0'}
+        subTitle="TIME"
+        metric="h"
+      />
+      <Detail
+        title={details.dist ? details.dist : '0'}
+        subTitle="DIST"
+        metric="km"
+      />
+      <Detail
+        title={details.maxElevation ? details.maxElevation : '0'}
         subTitle="MAX"
         metric="m"
       />
       <Detail
-        title={minElevation ? minElevation : '0'}
+        title={details.minElevation ? details.minElevation : '0'}
         subTitle="MIN"
         metric="m"
         last

@@ -15,8 +15,8 @@
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
 
-    --popover: 0, 0%, 94%;
-    --popover-foreground: 0, 0%, 5%;
+    --popover: 0, 0%, 34%;
+    --popover-foreground: 0, 0%, 95%;
 
     --primary: 81.972 85% 67%;
     --primary-foreground: 0 0% 0%;
@@ -43,7 +43,7 @@
 
     --title: 0 0% 4%;
 
-    --input: 0 0% 25%;
+    --input: 0 0% 45%;
     --input-map: 0 0% 92.1%;
     --input-map-foreground: 0 0% 5%;
 
@@ -60,8 +60,8 @@
     --card: 0 84% 4.9%;
     --card-foreground: 0 40% 98%;
 
-    --popover: 0 0% 78%;
-    --popover-foreground: 0 0% 5%;
+    --popover: 0 0% 88%;
+    --popover-foreground: 0 0% 2%;
 
     --primary: 81.972 85% 67%;
     --primary-foreground: 0 0% 0%;

@@ -134,7 +134,7 @@ const Geocoder = () => {
         ref={ref}
       >
         <Input
-          variant="map"
+          variant="default"
           disabled={!map}
           placeholder="Search location"
           onFocus={handleFocus}

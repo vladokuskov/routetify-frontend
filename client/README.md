@@ -48,5 +48,12 @@ Contributions to 'routetify' are welcome! If you would like to contribute, pleas
 
 `routetify` was created by Swappnet as a project for people who love outdoors and maps.
 
+# TO-DO
+
+[] Move BE to separate repository
+[] Move to yarn
+[] Add roadmap
+[] Add proper architecture for BE (best practices)
+
 <h4>Liked the work ?</h4>
 Give the repository a star :-)

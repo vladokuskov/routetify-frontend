@@ -10,6 +10,7 @@
     "format:fix": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {
+    "@mapbox/togeojson": "^0.16.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-label": "~2.0.2",
     "@radix-ui/react-slot": "~1.0.2",

@@ -9,7 +9,6 @@ import { DrawCoords } from '@/types/models/drawCoords.types'
 import clsx from 'clsx'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { toast } from 'react-hot-toast'
-import { getRoute } from '@/lib/api/route'
 import { FilesDragAndDrop } from '@/components/FilesDragAndDrop/FilesDragAndDrop'
 import {
   AlertDialog,
@@ -21,6 +20,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
+import {getRoute} from "@/utils/parseRoute";
 
 const RouteUploading = () => {
   const inputRef = useRef<HTMLInputElement>(null)

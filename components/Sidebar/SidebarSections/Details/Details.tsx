@@ -21,6 +21,10 @@ const Details = () => {
     (state) => state.controlsReducer.movingPreference,
   )
 
+  const selectedPreference = useAppSelector(
+      (state) => state.controlsReducer.movingPreference,
+  )
+
   const [details, setDetails] = useState<DetailsState>({
     time: null,
     dist: null,
@@ -69,7 +73,7 @@ const Details = () => {
   useEffect(() => {
     updateDetails()
     getElevationData()
-  }, [drawCoords])
+  }, [drawCoords, selectedPreference])
 
   return (
     <div
